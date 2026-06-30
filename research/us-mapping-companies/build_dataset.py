@@ -253,19 +253,19 @@ LARGE_FIRMS = [
     ("Axim Geospatial (now NV5)", "WI", "340", "2023 acq.", "GlobeNewswire", "340 (whole unit)", "4",
      "WI;AL;MO;CA"),
     ("Bowman Consulting (BWMN; incl. Surdex)", "VA", "2300", "2025", "SEC 10-K", "~500 (geospatial+Surdex)", "90",
-     "VA;FL;CO;NJ;TX;NY;PA;WA;MA;CT;MD;GA;IL;MI;NC;OH;KY;ME;SC;TN;NM;AZ;NV;OR;OK;MT;NE;RI"),
+     "AL;AK;AZ;AR;CA;CO;CT;DE;FL;GA;HI;ID;IL;IN;IA;KS;KY;LA;ME;MD;MA;MI;MN;MS;MO;MT;NE;NV;NH;NJ;NM;NY;NC;ND;OH;OK;OR;PA;RI;SC;SD;TN;TX;UT;VT;VA;WA;WV;WI;WY"),
     ("Woolpert", "OH", "2000-3200", "2025", "company/ZoomInfo", "~500-800 (est 20-30%)", "43",
-     "OH;NC;TX;VA;FL;GA;IL;CO;AL;IN;CA"),
+     "OH;NC;TX;VA;FL;GA;IL;CO;AL;IN;CA;PA;SC"),
     ("Dewberry", "VA", "2500", "2025", "company About", "~250 (Geospatial & Tech Svcs)", "56",
-     "AL;AK;CA;CO;CT;FL;GA;IL;LA;MD;MA;MS;NJ;NY;NC;OK;PA;TN;TX;VA"),
+     "AL;AK;AZ;CA;CO;CT;FL;GA;IL;LA;MA;MD;MS;NC;NJ;NM;NY;OK;PA;TN;TX;VA"),
     ("Michael Baker International", "PA", "6629", "2025", "Revelio/PitchBook", "~200-300 (Natl Geospatial Practice)", "120",
-     "PA;NC;VA;MD;SC;GA;CA;NJ;TX;AR;CT;OH;ID;CO;IL;WV;AL;MI;WI;KY;MN;MO;IN;IA"),
+     "AL;AK;AZ;AR;CA;CO;CT;DE;FL;GA;HI;ID;IL;IN;IA;KS;KY;LA;ME;MD;MA;MI;MN;MS;MO;MT;NE;NV;NH;NJ;NM;NY;NC;ND;OH;OK;OR;PA;RI;SC;SD;TN;TX;UT;VT;VA;WA;WV;WI;WY"),
     ("Merrick & Company", "CO", "1100", "2025", "Revelio/Crunchbase", "~450-550 (est 40-50%)", "25",
      "CO;NM;NC;TN;SC;GA;FL;ID;AK;AL"),
     ("McKim & Creed", "NC", "1019", "2025", "Revelio/LeadIQ", "~300-400 (geomatics)", "10",
      "NC;SC;FL;VA;GA;TX;LA;DE;OH;PA"),
     ("SAM (Surveying And Mapping LLC)", "TX", "1000-2300", "2025", "ZoomInfo/Crunchbase", "whole firm (geospatial)", "29",
-     "TX;NY;GA;CO;FL;CA"),
+     "TX;NY;GA;CO;FL;CA;IN;KS;MO;OH;VA"),
     ("EagleView Technologies", "WA/NY", "1281", "2025", "PitchBook", "~700-900 (est 60-70%)", "n/a",
      "WA;NY"),
     ("Fugro USA", "TX", "1000", "2025", "LeadIQ/careers", "~600-800 (est)", "17",
@@ -273,14 +273,18 @@ LARGE_FIRMS = [
     ("KCI Technologies", "MD", "1700", "2025", "SignalHire/Esri", "~500-700 (est 30-40%)", "54",
      "MD;PA;VA;NC;DE;FL;GA;IN;NY;OH;SC;TN;TX;DC"),
     ("Colliers Engineering & Design", "NJ", "1958", "2025", "Revelio/PitchBook", "~200-300 (est 10-15%)", "75",
-     "NY;NJ;PA;MA;CT;ME;FL;NC;OH;IL;RI;DE;VA;MD"),
+     "AZ;CA;CO;CT;FL;GA;MA;ME;MD;MI;MN;MO;NC;NH;NJ;NM;NV;NY;OR;PA;SC;TN;TX;UT;VA;WA;WI;WY"),
     ("Atwell LLC", "MI", "2100", "2025", "BusinessWire", "~400-600 (est 20-30%)", "25",
-     "MI;MD;TX;AL;WA;CO;GA;AZ;IL;NY;DE;FL"),
+     "MI;MD;TX;AL;WA;CO;GA;AZ;IL;NY;DE;FL;NC;OR;UT"),
     ("Bartlett & West", "KS", "386-466", "2025", "Revelio/RocketReach", "~180-230 (est 40-50%)", "12",
      "KS;MO;ND;TX;SD;IA;IL;FL"),
     ("GPI / Greenman-Pedersen", "NY", "1800", "2025", "ZoomInfo", "~100 (GPI Geospatial, Orlando FL)", "60",
-     "NY;NJ;PA;MA;CT;MD;FL"),
+     "NY;NJ;PA;MA;CT;MD;FL;GA;OH;RI;NE;VA;NC;DE;SC;TN"),
 ]
+# NOTE: Michael Baker and Bowman are listed as near-nationwide (all 50 states).
+# This reflects their documented ~120 and ~90 office networks / 50-state service
+# capability; treat single-state confirmation as "served" rather than necessarily
+# a standalone office in every state.
 
 with open(os.path.join(OUT, "large_firms.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)

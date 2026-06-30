@@ -1,47 +1,52 @@
 State,Num_Major_Firms_With_Office,Firms
-FL,14,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Merrick & Company; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
-TX,12,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Dewberry; Fugro USA; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
-GA,10,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Dewberry; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
-VA,10,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); Woolpert
-PA,9,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE)
-NC,9,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; NV5 Global (NVEE); Woolpert
-NY,9,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; EagleView Technologies; GPI / Greenman-Pedersen; KCI Technologies; NV5 Global (NVEE); SAM (Surveying And Mapping LLC)
-CO,9,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Dewberry; Merrick & Company; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+FL,15,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+TX,13,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+GA,12,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+VA,12,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+NC,11,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; NV5 Global (NVEE); Woolpert
+CA,10,Axim Geospatial (now NV5); Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
+PA,10,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); Woolpert
+NY,10,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; EagleView Technologies; GPI / Greenman-Pedersen; KCI Technologies; Michael Baker International; NV5 Global (NVEE); SAM (Surveying And Mapping LLC)
+CO,10,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Merrick & Company; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
 MD,9,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; KCI Technologies; Michael Baker International; NV5 Geospatial
-CA,8,Axim Geospatial (now NV5); Dewberry; Fugro USA; Michael Baker International; NV5 Geospatial; NV5 Global (NVEE); SAM (Surveying And Mapping LLC); Woolpert
-IL,8,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Michael Baker International; NV5 Global (NVEE); Woolpert
-MA,6,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; NV5 Global (NVEE)
-AL,6,Atwell LLC; Axim Geospatial (now NV5); Dewberry; Merrick & Company; Michael Baker International; Woolpert
-OH,6,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; KCI Technologies; McKim & Creed; Michael Baker International; Woolpert
-TN,5,Bowman Consulting (BWMN; incl. Surdex); Dewberry; KCI Technologies; Merrick & Company; NV5 Global (NVEE)
-NJ,5,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; Michael Baker International
+TN,8,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; KCI Technologies; Merrick & Company; Michael Baker International; NV5 Global (NVEE)
+SC,8,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International; Woolpert
+MA,7,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Fugro USA; GPI / Greenman-Pedersen; Michael Baker International; NV5 Global (NVEE)
+IL,7,Atwell LLC; Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Dewberry; Michael Baker International; NV5 Global (NVEE); Woolpert
+MO,7,Axim Geospatial (now NV5); Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International; NV5 Global (NVEE); SAM (Surveying And Mapping LLC)
+AL,7,Atwell LLC; Axim Geospatial (now NV5); Bowman Consulting (BWMN; incl. Surdex); Dewberry; Merrick & Company; Michael Baker International; Woolpert
+OH,7,Bowman Consulting (BWMN; incl. Surdex); GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Michael Baker International; SAM (Surveying And Mapping LLC); Woolpert
+AZ,6,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Michael Baker International; NV5 Global (NVEE)
+NM,6,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; Merrick & Company; Michael Baker International; NV5 Global (NVEE)
+DE,6,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); GPI / Greenman-Pedersen; KCI Technologies; McKim & Creed; Michael Baker International
+OR,5,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International; NV5 Geospatial
+AK,5,Bowman Consulting (BWMN; incl. Surdex); Dewberry; Fugro USA; Merrick & Company; Michael Baker International
 CT,5,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; Michael Baker International
-SC,5,Bowman Consulting (BWMN; incl. Surdex); KCI Technologies; McKim & Creed; Merrick & Company; Michael Baker International
-MO,4,Axim Geospatial (now NV5); Bartlett & West; Michael Baker International; NV5 Global (NVEE)
-DE,4,Atwell LLC; Colliers Engineering & Design; KCI Technologies; McKim & Creed
-AZ,3,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); NV5 Global (NVEE)
-NM,3,Bowman Consulting (BWMN; incl. Surdex); Merrick & Company; NV5 Global (NVEE)
-ID,3,Merrick & Company; Michael Baker International; NV5 Global (NVEE)
-WA,3,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); EagleView Technologies
-MI,3,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
-IN,3,KCI Technologies; Michael Baker International; Woolpert
-AK,3,Dewberry; Fugro USA; Merrick & Company
-LA,3,Dewberry; Fugro USA; McKim & Creed
-OR,2,Bowman Consulting (BWMN; incl. Surdex); NV5 Geospatial
-WI,2,Axim Geospatial (now NV5); Michael Baker International
+IN,5,Bowman Consulting (BWMN; incl. Surdex); KCI Technologies; Michael Baker International; SAM (Surveying And Mapping LLC); Woolpert
+LA,5,Bowman Consulting (BWMN; incl. Surdex); Dewberry; Fugro USA; McKim & Creed; Michael Baker International
+NJ,5,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Dewberry; GPI / Greenman-Pedersen; Michael Baker International
+WA,5,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; EagleView Technologies; Michael Baker International
+ID,4,Bowman Consulting (BWMN; incl. Surdex); Merrick & Company; Michael Baker International; NV5 Global (NVEE)
+WI,4,Axim Geospatial (now NV5); Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+KS,4,Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Michael Baker International; SAM (Surveying And Mapping LLC)
+MI,4,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+SD,4,Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Fugro USA; Michael Baker International
+UT,4,Atwell LLC; Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+IA,3,Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
+ME,3,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+MN,3,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+MS,3,Bowman Consulting (BWMN; incl. Surdex); Dewberry; Michael Baker International
+NE,3,Bowman Consulting (BWMN; incl. Surdex); GPI / Greenman-Pedersen; Michael Baker International
+NV,3,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+NH,3,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+ND,3,Bartlett & West; Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
+OK,3,Bowman Consulting (BWMN; incl. Surdex); Dewberry; Michael Baker International
+RI,3,Bowman Consulting (BWMN; incl. Surdex); GPI / Greenman-Pedersen; Michael Baker International
+WY,3,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design; Michael Baker International
+AR,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
+HI,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
 KY,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
-ME,2,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design
-OK,2,Bowman Consulting (BWMN; incl. Surdex); Dewberry
-RI,2,Bowman Consulting (BWMN; incl. Surdex); Colliers Engineering & Design
-IA,2,Bartlett & West; Michael Baker International
-SD,2,Bartlett & West; Fugro USA
-NV,1,Bowman Consulting (BWMN; incl. Surdex)
-MT,1,Bowman Consulting (BWMN; incl. Surdex)
-NE,1,Bowman Consulting (BWMN; incl. Surdex)
-MS,1,Dewberry
-AR,1,Michael Baker International
-WV,1,Michael Baker International
-MN,1,Michael Baker International
+MT,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
+VT,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
+WV,2,Bowman Consulting (BWMN; incl. Surdex); Michael Baker International
 DC,1,KCI Technologies
-KS,1,Bartlett & West
-ND,1,Bartlett & West
