@@ -51,7 +51,7 @@ COMPANIES = [
     ("Ayres Associates", "WI", "AEC-division", "394-488", "300-500", "aerial;lidar;cartography", "active", "med"),
 
     # ---- 200-300 ----
-    ("Cyclomedia Technology (US ops)", "WI", "specialist", "~250", "200-300", "mobile;cartography", "active (NL parent)", "med"),
+    ("Cyclomedia Technology (US ops)", "WI", "specialist", "250-317", "300-500", "mobile;cartography", "active (NL parent)", "med"),
     ("Bohannan Huston, Inc.", "NM", "AEC-division", "216-260", "200-300", "aerial;lidar;mobile;cartography", "active", "med"),
     ("Control Point Associates", "NJ", "specialist", "~200", "200-300", "mobile;lidar", "active", "med"),
     ("GRW Engineers", "KY", "AEC-division", "~230", "200-300", "aerial;cartography", "active", "med"),
@@ -60,8 +60,8 @@ COMPANIES = [
 
     # ---- 100-200 ----
     ("The Sanborn Map Company", "CO", "specialist", "~180", "100-200", "aerial;lidar;mobile;cartography", "active", "med"),
-    ("TWM, Inc. (Thouvenot, Wade & Moerchen)", "IL", "AEC-division", "~181", "100-200", "mobile;cartography", "active", "high"),
-    ("Southeastern Surveying & Mapping (SSMC)", "FL", "specialist", "170-200", "100-200", "lidar;mobile;tomography;cartography", "active", "med"),
+    ("TWM, Inc. (Thouvenot, Wade & Moerchen)", "IL", "AEC-division", "~200", "200-300", "mobile;cartography", "active", "high"),
+    ("Southeastern Surveying & Mapping (SSMC)", "FL", "specialist", "~200+", "200-300", "lidar;mobile;tomography;cartography", "active", "med"),
     ("Pickett & Associates", "FL", "specialist", "119-160", "100-200", "aerial;lidar", "active (ESP sub)", "med"),
     ("GeoDigital", "GA", "specialist", "~131", "100-200", "lidar;cartography", "active", "med"),
     ("Sigma Space Corp.", "MD", "vendor", "~110", "100-200", "lidar", "active (Hexagon)", "med"),
@@ -174,6 +174,20 @@ COMPANIES = [
     ("ECS Limited", "VA", "AEC-division", "~3000", ">500", "tomography", "active", "high"),
     ("USIC", "IN", "specialist", "10000+", ">500", "tomography", "active", "high"),
     ("National Underground Group", "CA", "specialist", "650-857", ">500", "tomography", "active", "med"),
+
+    # ---- Added in round 2 (state-fill + broader keywords: lidar services / lidar survey / topographic mapping) ----
+    ("Bowman Consulting (BWMN; incl. Surdex)", "VA", "AEC-division", "2300", ">500", "aerial;lidar;mobile;cartography", "active", "high"),
+    ("Olsson", "NE", "AEC-division", "~1900", ">500", "mobile;lidar;cartography", "active", "high"),
+    ("VHB (Vanasse Hangen Brustlin)", "MA", "AEC-division", "~2000", ">500", "lidar;mobile;cartography", "active", "high"),
+    ("Weston & Sampson", "MA", "AEC-division", "~937", ">500", "aerial;lidar;cartography", "active", "high"),
+    ("ACI Corporation", "OH", "specialist", "~406", "300-500", "aerial;lidar;mobile", "active", "med"),
+    ("EPS Group", "AZ", "AEC-division", "~285", "200-300", "aerial;lidar;cartography", "active", "med"),
+    ("The Thrasher Group", "WV", "AEC-division", "200+", "200-300", "lidar;cartography", "active", "med"),
+    ("DJ&A, P.C.", "MT", "AEC-division", "~175", "100-200", "aerial;lidar;cartography", "active", "med"),
+    ("Sebago Technics", "ME", "AEC-division", "100+", "100-200", "lidar;cartography", "active", "med"),
+    ("Brosz Engineering", "SD", "AEC-division", "100+", "100-200", "lidar;cartography", "active", "med"),
+    ("Wightman", "MI", "AEC-division", "140-200", "100-200", "mobile;cartography", "active", "high"),
+    ("Darling Geomatics", "AZ", "specialist", "30-50", "30-100", "lidar;aerial", "active", "med"),
 ]
 
 # ---- write companies.csv ----
@@ -225,6 +239,71 @@ with open(os.path.join(OUT, "summary_by_category.csv"), "w", newline="", encodin
         counts = [cat_tot[c][b] for b in BUCKETS]
         w.writerow([c] + counts + [sum(counts)])
 
+# =====================================================================
+# ROUND-2 DEEP DIVE: large AEC + national geospatial firms (NV5/Axim model)
+# Precise total headcount + geospatial-division estimate + state office footprint
+# =====================================================================
+# (firm, hq_state, total_emp_precise, year, source_authority,
+#  geo_division_estimate, office_count, states_present_list)
+LARGE_FIRMS = [
+    ("NV5 Global (NVEE)", "FL", "5024", "2024 10-K", "SEC 10-K", "see NV5 Geospatial", "~100",
+     "CA;FL;TX;PA;GA;NC;VA;MA;NY;CO;IL;MO;AZ;NM;ID;TN"),
+    ("NV5 Geospatial", "FL", "711", "2026", "LeadIQ/SignalHire", "711 (whole unit)", "~100",
+     "FL;OR;CO;MD;CA;TX;PA;VA"),
+    ("Axim Geospatial (now NV5)", "WI", "340", "2023 acq.", "GlobeNewswire", "340 (whole unit)", "4",
+     "WI;AL;MO;CA"),
+    ("Bowman Consulting (BWMN; incl. Surdex)", "VA", "2300", "2025", "SEC 10-K", "~500 (geospatial+Surdex)", "90",
+     "VA;FL;CO;NJ;TX;NY;PA;WA;MA;CT;MD;GA;IL;MI;NC;OH;KY;ME;SC;TN;NM;AZ;NV;OR;OK;MT;NE;RI"),
+    ("Woolpert", "OH", "2000-3200", "2025", "company/ZoomInfo", "~500-800 (est 20-30%)", "43",
+     "OH;NC;TX;VA;FL;GA;IL;CO;AL;IN;CA"),
+    ("Dewberry", "VA", "2500", "2025", "company About", "~250 (Geospatial & Tech Svcs)", "56",
+     "AL;AK;CA;CO;CT;FL;GA;IL;LA;MD;MA;MS;NJ;NY;NC;OK;PA;TN;TX;VA"),
+    ("Michael Baker International", "PA", "6629", "2025", "Revelio/PitchBook", "~200-300 (Natl Geospatial Practice)", "120",
+     "PA;NC;VA;MD;SC;GA;CA;NJ;TX;AR;CT;OH;ID;CO;IL;WV;AL;MI;WI;KY;MN;MO;IN;IA"),
+    ("Merrick & Company", "CO", "1100", "2025", "Revelio/Crunchbase", "~450-550 (est 40-50%)", "25",
+     "CO;NM;NC;TN;SC;GA;FL;ID;AK;AL"),
+    ("McKim & Creed", "NC", "1019", "2025", "Revelio/LeadIQ", "~300-400 (geomatics)", "10",
+     "NC;SC;FL;VA;GA;TX;LA;DE;OH;PA"),
+    ("SAM (Surveying And Mapping LLC)", "TX", "1000-2300", "2025", "ZoomInfo/Crunchbase", "whole firm (geospatial)", "29",
+     "TX;NY;GA;CO;FL;CA"),
+    ("EagleView Technologies", "WA/NY", "1281", "2025", "PitchBook", "~700-900 (est 60-70%)", "n/a",
+     "WA;NY"),
+    ("Fugro USA", "TX", "1000", "2025", "LeadIQ/careers", "~600-800 (est)", "17",
+     "TX;LA;CA;MD;VA;AK;MA;FL;SD"),
+    ("KCI Technologies", "MD", "1700", "2025", "SignalHire/Esri", "~500-700 (est 30-40%)", "54",
+     "MD;PA;VA;NC;DE;FL;GA;IN;NY;OH;SC;TN;TX;DC"),
+    ("Colliers Engineering & Design", "NJ", "1958", "2025", "Revelio/PitchBook", "~200-300 (est 10-15%)", "75",
+     "NY;NJ;PA;MA;CT;ME;FL;NC;OH;IL;RI;DE;VA;MD"),
+    ("Atwell LLC", "MI", "2100", "2025", "BusinessWire", "~400-600 (est 20-30%)", "25",
+     "MI;MD;TX;AL;WA;CO;GA;AZ;IL;NY;DE;FL"),
+    ("Bartlett & West", "KS", "386-466", "2025", "Revelio/RocketReach", "~180-230 (est 40-50%)", "12",
+     "KS;MO;ND;TX;SD;IA;IL;FL"),
+    ("GPI / Greenman-Pedersen", "NY", "1800", "2025", "ZoomInfo", "~100 (GPI Geospatial, Orlando FL)", "60",
+     "NY;NJ;PA;MA;CT;MD;FL"),
+]
+
+with open(os.path.join(OUT, "large_firms.csv"), "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(["Firm", "HQ_State", "Total_Employees", "Figure_Year", "Source_Authority",
+                "Geospatial_Division_Estimate", "Office_Count", "States_With_Offices",
+                "States_Count"])
+    for (firm, hq, tot, yr, src, geo, noff, states_str) in LARGE_FIRMS:
+        slist = states_str.split(";")
+        w.writerow([firm, hq, tot, yr, src, geo, noff, states_str.replace(";", " "), len(slist)])
+
+# Office-presence-by-state: how many major firms have an office in each state
+presence = defaultdict(set)
+for (firm, hq, tot, yr, src, geo, noff, states_str) in LARGE_FIRMS:
+    for s in states_str.split(";"):
+        if s and s != "n/a":
+            presence[s].add(firm)
+
+with open(os.path.join(OUT, "large_firm_state_presence.csv"), "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(["State", "Num_Major_Firms_With_Office", "Firms"])
+    for s in sorted(presence, key=lambda x: -len(presence[x])):
+        w.writerow([s, len(presence[s]), "; ".join(sorted(presence[s]))])
+
 # ---- console summary ----
 print("Total companies in registry:", len(COMPANIES))
 print("\nBy size bucket:")
@@ -242,3 +321,17 @@ for s in state_tot[:12]:
 print("\nBy service category (counts; firms tagged with multiple):")
 for c in ["aerial", "lidar", "mobile", "tomography", "cartography"]:
     print(f"  {c:>11}: {sum(cat_tot[c].values())}")
+
+print("\n--- ROUND 2: large-firm office footprint ---")
+print("States with >=5 major-firm offices (coverage of 'all states'):")
+for s in sorted(presence, key=lambda x: -len(presence[x])):
+    if len(presence[s]) >= 5:
+        print(f"  {s}: {len(presence[s])} firms")
+print(f"\nStates touched by >=1 major firm office: {len(presence)} of 50")
+covered = set(presence)
+all_states = {"AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN",
+              "IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV",
+              "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN",
+              "TX","UT","VT","VA","WA","WV","WI","WY"}
+print("States with NO major-firm office in our data:",
+      ", ".join(sorted(all_states - covered)))

@@ -10,15 +10,15 @@ ESP Associates,SC,AEC-division,300-400,300-500,mobile;lidar;tomography,active,me
 ENGEO,CA,AEC-division,~400,300-500,tomography,active,high
 RETTEW,PA,AEC-division,321-600,300-500,tomography;cartography,active,med
 Ayres Associates,WI,AEC-division,394-488,300-500,aerial;lidar;cartography,active,med
-Cyclomedia Technology (US ops),WI,specialist,~250,200-300,mobile;cartography,active (NL parent),med
+Cyclomedia Technology (US ops),WI,specialist,250-317,300-500,mobile;cartography,active (NL parent),med
 "Bohannan Huston, Inc.",NM,AEC-division,216-260,200-300,aerial;lidar;mobile;cartography,active,med
 Control Point Associates,NJ,specialist,~200,200-300,mobile;lidar,active,med
 GRW Engineers,KY,AEC-division,~230,200-300,aerial;cartography,active,med
 The GEL Group (incl. GEL Geophysics),SC,AEC-division,201-500,200-300,tomography,active,med
 Vexcel Data Program,CO,specialist,183-500,200-300,aerial;lidar;cartography,active (Austria parent),low
 The Sanborn Map Company,CO,specialist,~180,100-200,aerial;lidar;mobile;cartography,active,med
-"TWM, Inc. (Thouvenot, Wade & Moerchen)",IL,AEC-division,~181,100-200,mobile;cartography,active,high
-Southeastern Surveying & Mapping (SSMC),FL,specialist,170-200,100-200,lidar;mobile;tomography;cartography,active,med
+"TWM, Inc. (Thouvenot, Wade & Moerchen)",IL,AEC-division,~200,200-300,mobile;cartography,active,high
+Southeastern Surveying & Mapping (SSMC),FL,specialist,~200+,200-300,lidar;mobile;tomography;cartography,active,med
 Pickett & Associates,FL,specialist,119-160,100-200,aerial;lidar,active (ESP sub),med
 GeoDigital,GA,specialist,~131,100-200,lidar;cartography,active,med
 Sigma Space Corp.,MD,vendor,~110,100-200,lidar,active (Hexagon),med
@@ -125,3 +125,15 @@ Timmons Group,VA,AEC-division,715-1000,>500,cartography,active,med
 ECS Limited,VA,AEC-division,~3000,>500,tomography,active,high
 USIC,IN,specialist,10000+,>500,tomography,active,high
 National Underground Group,CA,specialist,650-857,>500,tomography,active,med
+Bowman Consulting (BWMN; incl. Surdex),VA,AEC-division,2300,>500,aerial;lidar;mobile;cartography,active,high
+Olsson,NE,AEC-division,~1900,>500,mobile;lidar;cartography,active,high
+VHB (Vanasse Hangen Brustlin),MA,AEC-division,~2000,>500,lidar;mobile;cartography,active,high
+Weston & Sampson,MA,AEC-division,~937,>500,aerial;lidar;cartography,active,high
+ACI Corporation,OH,specialist,~406,300-500,aerial;lidar;mobile,active,med
+EPS Group,AZ,AEC-division,~285,200-300,aerial;lidar;cartography,active,med
+The Thrasher Group,WV,AEC-division,200+,200-300,lidar;cartography,active,med
+"DJ&A, P.C.",MT,AEC-division,~175,100-200,aerial;lidar;cartography,active,med
+Sebago Technics,ME,AEC-division,100+,100-200,lidar;cartography,active,med
+Brosz Engineering,SD,AEC-division,100+,100-200,lidar;cartography,active,med
+Wightman,MI,AEC-division,140-200,100-200,mobile;cartography,active,high
+Darling Geomatics,AZ,specialist,30-50,30-100,lidar;aerial,active,med
