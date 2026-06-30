@@ -1,0 +1,18 @@
+Firm,HQ_State,Total_Employees,Figure_Year,Source_Authority,Geospatial_Division_Estimate,Office_Count,States_With_Offices,States_Count
+NV5 Global (NVEE),FL,5024,2024 10-K,SEC 10-K,see NV5 Geospatial,~100,CA FL TX PA GA NC VA MA NY CO IL MO AZ NM ID TN,16
+NV5 Geospatial,FL,711,2026,LeadIQ/SignalHire,711 (whole unit),~100,FL OR CO MD CA TX PA VA,8
+Axim Geospatial (now NV5),WI,340,2023 acq.,GlobeNewswire,340 (whole unit),4,WI AL MO CA,4
+Bowman Consulting (BWMN; incl. Surdex),VA,2300,2025,SEC 10-K,~500 (geospatial+Surdex),90,AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY,50
+Woolpert,OH,2000-3200,2025,company/ZoomInfo,~500-800 (est 20-30%),43,OH NC TX VA FL GA IL CO AL IN CA PA SC,13
+Dewberry,VA,2500,2025,company About,~250 (Geospatial & Tech Svcs),56,AL AK AZ CA CO CT FL GA IL LA MA MD MS NC NJ NM NY OK PA TN TX VA,22
+Michael Baker International,PA,6629,2025,Revelio/PitchBook,~200-300 (Natl Geospatial Practice),120,AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY,50
+Merrick & Company,CO,1100,2025,Revelio/Crunchbase,~450-550 (est 40-50%),25,CO NM NC TN SC GA FL ID AK AL,10
+McKim & Creed,NC,1019,2025,Revelio/LeadIQ,~300-400 (geomatics),10,NC SC FL VA GA TX LA DE OH PA,10
+SAM (Surveying And Mapping LLC),TX,1000-2300,2025,ZoomInfo/Crunchbase,whole firm (geospatial),29,TX NY GA CO FL CA IN KS MO OH VA,11
+EagleView Technologies,WA/NY,1281,2025,PitchBook,~700-900 (est 60-70%),n/a,WA NY,2
+Fugro USA,TX,1000,2025,LeadIQ/careers,~600-800 (est),17,TX LA CA MD VA AK MA FL SD,9
+KCI Technologies,MD,1700,2025,SignalHire/Esri,~500-700 (est 30-40%),54,MD PA VA NC DE FL GA IN NY OH SC TN TX DC,14
+Colliers Engineering & Design,NJ,1958,2025,Revelio/PitchBook,~200-300 (est 10-15%),75,AZ CA CO CT FL GA MA ME MD MI MN MO NC NH NJ NM NV NY OR PA SC TN TX UT VA WA WI WY,28
+Atwell LLC,MI,2100,2025,BusinessWire,~400-600 (est 20-30%),25,MI MD TX AL WA CO GA AZ IL NY DE FL NC OR UT,15
+Bartlett & West,KS,386-466,2025,Revelio/RocketReach,~180-230 (est 40-50%),12,KS MO ND TX SD IA IL FL,8
+GPI / Greenman-Pedersen,NY,1800,2025,ZoomInfo,"~100 (GPI Geospatial, Orlando FL)",60,NY NJ PA MA CT MD FL GA OH RI NE VA NC DE SC TN,16
