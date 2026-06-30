@@ -1,0 +1,88 @@
+# Звіт з конкурентного аналізу: оптична навігація БпЛА в умовах відсутності GPS
+
+## Вступ
+
+Категорія «оптичної / GNSS-незалежної навігації для БпЛА» охоплює рішення, що дозволяють дронам визначати позицію та виконувати місії в умовах глушіння та спуфінгу GPS — від візуальної одометрії (VIO) і зіставлення з рельєфом (terrain-matching) до нейроморфних сенсорів, оптичних гіроскопів та квантово-магнітної навігації. Це безпосередній ринок продукту Flyby (оптична навігація для БпЛА в GPS-denied середовищах), де ключовими векторами конкуренції є точність, вартість одиниці, стійкість до РЕБ і готовність до масштабування. Найближчі прямі конкуренти Flyby — це vision-based / terrain-matching рішення (NILEQ, Daedalean, Spleenlab, Maxar/Vantor Raptor, Zero Industries) та українські бойово-перевірені аналоги (Twist Robotics OSCAR, The Fourth Law, Buntar Aerospace), які працюють у тих самих умовах фронту.
+
+## Велика порівняльна таблиця
+
+### Велика Британія
+
+| Компанія | Країна/Регіон | Рік засн. | Категорія/тех | Бізнес-модель та ціни | Залучені інвестиції | Інвестори | Трекшен | Стадія та стратегія |
+|---|---|---|---|---|---|---|---|---|
+| NILEQ | Велика Британія (Бристоль/Філтон) | н/д (внутрішній венчур MBDA UK) | Нейроморфна (event-based) terrain-fingerprint навігація | Оборонна/dual-use поставка; ціни непублічні | Зовнішніх раундів немає; фінансується MBDA UK | MBDA (СП Airbus/BAE/Leonardo) | MoU з Advanced Navigation (Австралія, лист. 2024); MALE/BVLOS; без названих клієнтів | Внутрішня R&D-інкубація; пре-дохід; AUKUS Pillar II |
+| Opteran | Велика Британія (Шеффілд) | 2019 | Нейроморфна (insect-brain) VIO/SLAM, ODK | B2B ліцензування ПЗ (Opteran Mind/ODK) OEM-ам; ціни непублічні | ~$14.8–15M (pre-seed/seed/2022) | IQ Capital, Join Capital, Northern Gritstone, Seraphim, Episode 1, Schauenburg | SAFELOG (AGV), Airbus/ESA Mars-rover; авіапродукт на демо-стадії | Startup→scale-up; диверсифікація (дрони/AGV/космос), без оборонного контракту |
+| Flare Bright | Велика Британія (Westcott) | 2015 | ML «digital twin» INS + terrain-ref (Tactera) | Оборонні контракти/гранти + OEM; ~30 од./міс ціль; ціни непублічні | ~£500K (~$613K) seed, 2021 + значні гранти DASA/Innovate UK | Britbots, Highland VC, OTM, High Growth Robotics | UK MOD/DASA (£226K+£425K), DSTL, US DoD sprint-контракти | Startup→growth; недилютивне держфінансування домінує |
+| Roke | Велика Британія (Romsey) | 1956 | Vision-aided INS (RENS) + anti-jam GNSS (Nav-Sync Armour) | Оборонні держконтракти; «low-cost» масове виробництво; ціни непублічні | Не застосовно (дочірня Chemring PLC) | Chemring Group PLC (LSE: CHG) | UK MOD (£16M, £251m STORM), AUKUS, JEF; ~£120M revenue FY24 | Enterprise; ціль >£250M revenue до 2028 |
+| Blue Bear (Saab) | Велика Британія (Бедфорд) | 2000 (реєстр. 1999) | Vision/sensor-fusion GPS-denied autonomy, swarm | Оборонні контракти/Saab R&D; ціни непублічні | ~$3.9M (грант ATI, 2021); викуплена Saab 2023 (сума н/д) | ATI/Innovate UK; власник Saab AB | UK MOD/Dstl; Project Convergence 2024 (AUKUS); RISER | Enterprise-субсидіарія Saab; scale-up через поглинання |
+| Animal Dynamics | Велика Британія (Оксфорд) | 2015 | Bio-inspired БпЛА (Skeeter/Stork) з GPS-denied autonomy | Оборонні/держпрограми; ціни непублічні | £6M (~$7.78M) Series A 2018; агрег. ~$10.3M (PitchBook $31.1M спірно) | Oxford Sciences, Kindred, Tanarra, Parkwalk, Seraphim | Royal Navy UASHLC Phase 2 (Stork, 2023); Orbital UAV | Startup/growth; без раундів після 2018, держпрограми |
+
+### Європа (крім Великої Британії та України)
+
+| Компанія | Країна/Регіон | Рік засн. | Категорія/тех | Бізнес-модель та ціни | Залучені інвестиції | Інвестори | Трекшен | Стадія та стратегія |
+|---|---|---|---|---|---|---|---|---|
+| Daedalean | Швейцарія (Цюрих) | 2016 | Vision-based VPS (VGPS+VMU), сертифіковані ШІ-авіоніка | OEM-ліцензування; ціни непублічні | ~$70–109M (бази розходяться) | Honeywell Ventures, Carthona, Redalpine, Innovation Endeavors | Avidyne, Honeywell, Reliable Robotics; CoDANN EASA | Scale-up; поглинута Destinus (серп. 2025, CHF 180M/~$225M) під БпЛА/оборону |
+| Spleenlab (Quantum-Systems) | Німеччина (Тюрингія) | 2016 (спірно 2018) | Visual SLAM/VIO (VISIONAIRY), GPS-denied | B2B/оборонне ліцензування ПЗ; ціни непублічні | Seed «7-значна сума EUR» (2020); тотал н/д (~€2.5M оцінка) | bm\|t, APEX Ventures, Carlo Velten | BMVg, інтегр. у Quantum Systems; партнерство XTEND | Поглинута Quantum Systems (жовт. 2025); AI Center of Excellence |
+| Exail Technologies | Франція | 2022 (ECA 1936/iXblue 2000) | FOG INS/IMU для GNSS-denied (UmiX-40) | Оборонні контракти/OEM; ціни непублічні | Не застосовно (Euronext: EXA); чистий борг ~€145M | Pelican Venture, Bpifrance | Airbus/GMV SIRTAP (Іспанія); 70+ флотів; беклог >€1.1млрд | Enterprise; ~€373M revenue 2024 |
+| Zero Industries | Франція (Тулуза) | 2025 (лип.) | Optical VPS (VINS) plug-and-play для оборони | B2B/B2G оборонна інтеграція; ціни непублічні | ~$200–234K (€200K) pre-seed | Project Europe, Heartfelt_, APX | Інкубація ISAE-SUPAERO; приз GALAXIE 2025; sub-50m тести | Very early-stage; TRL 5→9, без контрактів |
+| Lendurai | Естонія (Таллінн) | 2024 | Vision/AI autonomy для GPS- та radio-denied БпЛА | Оборонна поставка hardware+ПЗ; ціни непублічні | EUR 5.57M seed (~$6.9M cumul. з pre-seed) | Expeditions Fund, HCVC, Vsquared, Lemonade Stand | Бойові випробування в Україні; «NATO-ready»; ~6 співроб. | Early-stage seed; eastern-flank NATO позиціонування |
+| Auterion | Швейцарія/США (Арлінгтон) | 2017 | GNSS-denied vision nav, AuterionOS, Skynode | Open-source core + підписка + per-unit + держконтракти (Skynode «як смартфон») | ~$167M cumul. ($130M Series B, вер. 2025) | Bessemer, Lakestar, Mosaic, Costanoa; Rochefort ($25M) | ЗСУ (Skynode бойове); DoD $50M/33000 kits; DIU Artemis; Rheinmetall | Growth/scale-up; valuation >$600M, ~$100M revenue; «Android для дронів» |
+| Safran E&D | Франція | 2005 (Sagem 1925) | Vision-aided INS (METIS), HRG INS (GEONYX), anti-jam | Оборонні держконтракти; ціни непублічні | Не застосовно (Safran SA, CAC 40, ~€140млрд cap) | Французька держава ~10.9%; інституційні | Baykar (TB2), Theon JV, Egypt AOI, Greece Patroller; GEONYX ×7 виробництво | Enterprise large-cap; CAGR ~10% до 2028 |
+
+### Північна Америка
+
+| Компанія | Країна/Регіон | Рік засн. | Категорія/тех | Бізнес-модель та ціни | Залучені інвестиції | Інвестори | Трекшен | Стадія та стратегія |
+|---|---|---|---|---|---|---|---|---|
+| Shield AI | США (Сан-Дієго) | 2015 | GPS-denied autonomy (Hivemind), VIO, V-BAT/X-BAT | Оборонні контракти + Hivemind Enterprise ліцензування | ~$3.5млрд cumul.; valuation $12.7млрд (Series G, бер. 2026) | Advent, JPMorgan SIG, a16z, L3Harris, Hanwha, Blackstone ($500M) | USAF CCA; USCG $198M; India ~$35M; Україна (verified partner); Netherlands | Late-stage scale-up; revenue ~$300M (2025), ціль $540M+ |
+| Skydio | США (Hayward) | 2014 | Vision autonomy / VIO (X10D), «Autonomy Engine» | Per-unit hardware (~$15–20K+) + SaaS-підписка + держконтракти | ~$850M–966M cumul. ($110M Series F, кв. 2026) | a16z, Linse, Next47, IVP, UP.Partners | US Army $52M/~2500–3000 X10D; SRR; Blue UAS; ~$180M revenue 2024 | Late-stage/pre-IPO; $4.4млрд valuation; $3.5млрд US-виробництво (SkyForge) |
+| ANELLO Photonics | США (Santa Clara) | 2018 | Optical gyroscope (SiPhOG) / VINS, X3 IMU | Per-unit (request-a-quote) + держконтракти; ціни непублічні | ~$73M–90M+ (Series A $28M, B н/д, B-2 $25M, APFIT $20M) | Lockheed Martin Ventures, Catapult, In-Q-Tel, New Legacy, MESH | $20M APFIT (фікс-крило БпЛА); Navy/Army SBIR; Q-CTRL, Vatn | Growth/scale-up; перехід у масове виробництво |
+| SandboxAQ | США | 2022 (spin-off Alphabet) | Quantum/AI magnetic nav (AQNav, MagNav) | Держконтракти SBIR/TACFI + пілоти; ціни непублічні | >$950M cumul.; valuation $5.75млрд (Series E, кв. 2025) | Breyer, T. Rowe Price, Eric Schmidt, Benioff, Google, NVIDIA, IQT | USAF SBIR/TACFI; DIU; 200+ льотгодин; Boeing/Airbus Acubed | Growth/scale-up; AQNav на стадії пілоту, UAS-варіант у розробці |
+| Vantor (Raptor) | США | DigitalGlobe 1992; Raptor 2025 | Terrain-ref vision nav (Raptor, 3D scene-matching) | Enterprise/оборонне ліцензування/партнерства; ціни непублічні | Не застосовно (Advent International; ~$2.79млрд PitchBook) | Advent International, BCI | Taiwan AIDC, Saab (2025); NGA/NASA; точність <3–10m | Enterprise; нова продуктова лінія через канальних партнерів |
+| Near Earth Autonomy | США (Піттсбург) | 2012 | Vision dead-reckoning / aerial autonomy (Captain) | Оборонні OTA/SBIR + стратег. партнерства; ціни непублічні | ~$18–20.5M (Series A $8M 2017, Kaman $10M 2022) | Boeing HorizonX, Kaman, AE Industrial, Starburst | US Army+Honeywell $15M (RUC-60); NAVAIR; USMC MARV-EL | Growth; контракт-драйвен scale-up |
+| Inertial Labs | США | 2001 | Vision-aided INS (VINS) для GNSS-denied | Per-unit hardware + держконтракти (GSA); ціни непублічні | Спірно $13.6M–37.1M (борг + малі інвест.) | Reppert Capital, VIAVI; SBIR/DoD | US Army CAPSS/OptoWOM (programs of record) | Mature; поглинута VIAVI (Q1 2025, $150M + до $175M) |
+
+### Україна
+
+| Компанія | Країна/Регіон | Рік засн. | Категорія/тех | Бізнес-модель та ціни | Залучені інвестиції | Інвестори | Трекшен | Стадія та стратегія |
+|---|---|---|---|---|---|---|---|---|
+| The Fourth Law (TFL) | Україна (Київ) | 2023 (лист.) | AI terminal guidance + GPS-denied nav (TFL-1), Zerov-8 | Ліцензування модуля OEM-ам + прямий продаж (Lupynis ~$480, Brave1) | Сума н/д (2 раунди: венчур лип. 2025 + Axon лют. 2026) | HPI Ventures, Caesar Ventures, 1991 Ventures, Axon, HTGF | TFL-1 у 50+ підрозділах ЗСУ; десятки OEM; з берез. 2025 | Early-to-growth startup; швидке масштабування, mass-production ціль |
+| Sine.Engineering | Україна (Львів) | 2022 | Time-of-flight GPS-denied nav + REB-стійкий зв'язок (Pasika) | B2B компоненти/модулі для OEM; ціни непублічні | Сума н/д (URIF, перша інвестиція фонду, бер. 2026) | US-Ukraine Reconstruction Fund (DFC + Мінекономіки) | 150+ укр. виробників БпЛА; 70+ клієнтів; 5→~200 співроб. | Scale-up; вихід на союзницькі ринки 2026 |
+| Twist Robotics | Україна (Київ/Львів) | 2021 (реєстр.; бренд ~2016) | Optical scene-matching nav (OSCAR), симулятор Obriy | Держпродаж (Brave1); симулятор безкоштовно ЗСУ; ціни непублічні | Невідомо | Невідомо (TWiST500) | OSCAR 500000+ км; Obriy у 150+ підрозділах; Saker Hunter на Brave1 | Early/growth wartime scale-up; ймовірно держгранти/bootstrap |
+| Buntar Aerospace | Україна (Київ) | 2023 | Optical/AI visual nav + ISR autopilot (Buntar Copilot) | Hardware-продаж + оборонні контракти (Skyhopper ~$20K, Buntar-3 $250–400K) | ~$11.6M–12.6M (Seed $1M, Angel $0.2M, $10.4M бер. 2026) | Axon Enterprise, Daphni, Uklon-founders, Munkene AS | Buntar Copilot у багатьох підрозділах ЗСУ; бойові тести; GUR | Early-to-growth→scale-up; стратегічне партнерство Axon |
+| Fire Point | Україна (Київ) | 2022 | In-house optical map-matching guidance (FP-1/FP-5 Flamingo) | Прямі держконтракти (FP-1 ~$55K, Flamingo $0.5–1M); навігація вбудована | Немає VC-тоталу; угода EDGE (UAE) ~$760M/30% не закрита | Держконтракти; пендінг EDGE Group | ~60% довгих strike-дронів ЗСУ; revenue ~$4M→$100M→~$1млрд | Growth/scale-up prime; ⚠️ розслідування НАБУ (з серп. 2025) |
+| Odd Systems | Україна (Київ) | 2023 | EO/IR камери + auto-targeting (НЕ повна GPS-denied nav) | Per-unit hardware (камера ~$400–500, модуль ~$800) | Невідомо (sister-фірма TFL має розкриті раунди) | Самофінанс. (Azhnyuk/Petcube); Terma | Десятки тис. камер Kurbas/міс; 80% revenue з камер; Terma | Early-to-mid scale-up; фабрика сенсорів (до 1M/рік) |
+| Swarmer | Україна (Київ)/США | 2023 (трав.) | Swarm autonomy / C2 (sensor-agnostic, GPS-denied-capable) | Оборонні контракти + per-license (SkyKnight $2.86M/16000 ліц.) | $17.9M private + Nasdaq IPO ~$14.7M (бер. 2026) | Broadband Capital, R-G.AI, D3, Green Flag, UA1 VC | 100000+ місій; ~50 підрозділів ЗСУ; рої до 25 дронів | Growth/scale-up; перша укр. defense-tech на Nasdaq (SWMR) |
+
+## Ключові інсайти
+
+- **Найкраще профінансовані гравці** — це США-центричні платформні компанії: Shield AI (~$3.5млрд, valuation $12.7млрд), SandboxAQ (>$950M, $5.75млрд) і Skydio (~$850–966M, $4.4млрд). Вони грають у вищій ваговій категорії, ніж будь-який європейський чи український конкурент, і використовують недилютивний оборонний капітал (Blackstone, OSC, APFIT) як важіль масштабування виробництва.
+
+- **Найближчі прямі конкуренти Flyby** за технологією (оптичне зіставлення з рельєфом / vision-based positioning) — це **NILEQ** (terrain-fingerprint), **Daedalean VGPS**, **Spleenlab VISIONAIRY**, **Vantor Raptor** і **Zero Industries**. За операційним контекстом (бойова GPS-denied навігація на фронті) — українські **Twist Robotics (OSCAR)**, **The Fourth Law (TFL-1)** і **Buntar Aerospace**, які мають реальний battle-proven трекшен — вирішальну перевагу, якої бракує більшості західних vision-гравців, що досі на демо/пілотній стадії.
+
+- **Патерни ціноутворення**: майже ніхто не публікує прайс-листи. Домінують три моделі — (1) per-unit hardware (Skydio ~$15–20K, ANELLO, Inertial Labs, українські камери/дрони), (2) ліцензування ПЗ / модуля OEM-ам (Opteran, Daedalean, Spleenlab, TFL, Auterion), (3) великі оборонні держконтракти з фіксованою ціною. Українські рішення радикально дешевші: TFL-1 додає лише ~10–20% до вартості FPV, дрон Lupynis коштує ~$480 — порядок ціни на 1–2 величини нижчий за західні аналоги.
+
+- **Тренди фінансування**: західний ринок зрілий і консолідується через **M&A** (Daedalean→Destinus, Spleenlab→Quantum Systems, Blue Bear→Saab, Inertial Labs→VIAVI), тоді як українські стартапи — це нова, швидко зростаюча хвиля seed/Series A (2023–2026) зі стратегічними інвесторами США (Axon інвестував і в TFL, і в Buntar; URIF; Swarmer на Nasdaq). Помітна тенденція: недилютивні оборонні гранти (DASA, APFIT, Innovate UK, Brave1) часто заміняють або доповнюють VC для deep-tech оборони.
+
+- **Стадійна поляризація**: ринок розколотий на enterprise-інкумбентів (Safran, Exail, Roke, Saab, Vantor — без VC, масштаб через корпоративний капітал) та ранні стартапи. Середина («scale-up») найтонша і саме там точиться найгостріша конкуренція — там перебувають Auterion, ANELLO, Lendurai, Buntar, Sine.
+
+- **Біла пляма / можливість для Flyby**: західні vision-рішення сертифіковані й точні, але дорогі та переважно НЕ перевірені боєм у насиченому РЕБ-середовищі; українські — дешеві й battle-proven, але часто недофінансовані, з вузьким портфелем і без сертифікації/виходу на ринки NATO. **Незайнятий простір — low-cost, battle-proven оптична навігація з готовністю до експорту в NATO та масштабованим виробництвом.** Жоден гравець поки що переконливо не поєднує всі чотири властивості (низька ціна + бойова валідація + масштабованість + NATO-сумісність/сертифікація). Flyby може зайняти цю нішу, особливо як standalone-модуль для інтеграції в чужі планери (модель, яку валідують TFL, Lendurai, Sine, Zero, але ще ніхто не домінує).
+
+- **Стратегічний сигнал**: Axon Enterprise (US, public) інвестував у дві українські компанії (TFL, Buntar) за ~7 місяців — індикатор, що західний оборонний капітал активно шукає бойово-перевірену українську autonomy-технологію. Це і конкурентна загроза (конкуренти отримують західні гроші+канали), і потенційна модель залучення капіталу для Flyby.
+
+## Білі плями / обмеження даних
+
+- **Точні суми фінансування часто розходяться** між базами (Crunchbase/Tracxn/PitchBook/CB Insights). Найбільші розбіжності: Animal Dynamics (~$10.3M vs $31.1M), Daedalean (~$70M vs $109M), Inertial Labs ($13.6M vs $37.1M), Auterion ($140M vs $167M vs $181M), ANELLO ($28M vs $48M vs $73M+). У таблиці наведено верифіковані/найкраще обґрунтовані значення; для outlier-ів вказано діапазон.
+
+- **NILEQ**: відсутній публічний рік заснування та будь-яке зовнішнє фінансування — це не прогалина в дослідженні, а наслідок статусу внутрішнього венчуру MBDA (не окрема юрособа).
+
+- **Роки заснування з низькою впевненістю**: Spleenlab (2016 vs 2018 — конфлікт між пресою і власним сайтом), Twist Robotics (2021 реєстрація vs ~2016 бренд vs 2018 LinkedIn), Blue Bear (1999 реєстр. vs 2000 агрегатори).
+
+- **Непублічні суми угод/контрактів**: суми інвестицій TFL (обидва раунди), Sine (URIF), а також більшість оборонних контрактів (Roke STAR, Shield AI USAF CCA, Vantor Raptor) не розкриті. Угода EDGE/Fire Point (~$760M) НЕ закрита (повернена АМКУ) і не є «залученим фінансуванням».
+
+- **Ціни майже скрізь непублічні**: за винятком кількох українських прикладів (TFL, Buntar, Odd Systems, Swarmer SkyKnight) та орієнтовних діапазонів Skydio, прайсинг для оборонних/enterprise-угод не розкривається — наведені цифри часто оцінні (наприклад, ~$17–20K за одиницю Skydio виведено з обсягу контракту).
+
+- **Класифікаційні застереження**: Swarmer (sensor-agnostic swarm C2, а не оптична навігація), Odd Systems (камери/сенсори, а не nav-софт — реальна autonomy в sister-фірмі TFL), Exail/Safran/Inertial Labs (інерціальні/FOG, суміжні до оптичної категорії, а не camera-based). Ці гравці включені як суміжні, а не прямі конкуренти.
+
+- **Трекшен переважно якісний**: для більшості компаній відсутні підтверджені дані про дохід, кількість розгорнутих одиниць чи named-контракти у самій GPS-denied nav-лінійці (особливо для авіапродуктів Opteran, Blue Bear, Roke RENS, Inertial Labs VINS) — наявні докази здебільшого програмні/демонстраційні, а не польові розгортання.
+
+- **Fire Point**: значний ризик-оверхенг — активне розслідування НАБУ (з серпня 2025) щодо завищення витрат і обсягів постачання, заклики до націоналізації; фінансові показники (revenue ~$1млрд) слід трактувати обережно.
