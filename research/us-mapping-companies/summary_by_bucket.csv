@@ -1,0 +1,8 @@
+Size_Bucket,Company_Count,Is_Target_Bucket
+<30,38,no
+30-100,36,YES
+100-200,16,no
+200-300,6,YES
+300-500,6,YES
+>500,24,no
+ALL,126,
