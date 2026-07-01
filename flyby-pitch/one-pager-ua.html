@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>FLY BY — One-Pager</title>
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --ink:#1A1410;
+    --brown:#8B5A2B;
+    --line:#E7DECF;
+    --muted:#736A5E;
+    --soft:#F3ECE1;
+    --flag:#F0E4CE;
+    --flag-ink:#7A4E17;
+  }
+  @page{ size:A4; margin:0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--paper); color:var(--ink); }
+  body{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    width:210mm; height:297mm; overflow:hidden;
+    padding:6mm 16mm 5mm;
+    display:flex; flex-direction:column;
+  }
+  .mono{ font-family:"SFMono-Regular",Menlo,Consolas,monospace; }
+  .kicker{
+    font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:8pt; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--brown); margin-bottom:3mm;
+  }
+
+  /* ---------- header ---------- */
+  header{ display:flex; align-items:baseline; justify-content:space-between; }
+  .brand{ font-size:26pt; font-weight:800; letter-spacing:.02em; }
+  .brand span{ color:var(--brown); }
+  .brand small{ display:block; font-size:7.5pt; font-weight:500; letter-spacing:.24em;
+    color:var(--muted); margin-top:1.5mm; }
+  .stage{ text-align:right; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:8pt; letter-spacing:.14em; color:var(--muted); line-height:1.7; }
+  .stage b{ color:var(--ink); }
+
+  /* ---------- hook ---------- */
+  .hook{ margin:3.5mm 0 3mm; }
+  .hook h1{ font-size:26pt; font-weight:800; line-height:1.04; letter-spacing:-.02em; }
+  .hook h1 .a{ color:var(--brown); }
+  .hook .sub{ font-size:10.5pt; line-height:1.36; color:#3A322A; max-width:158mm; margin-top:3mm;
+    font-weight:400; }
+  .hook .sub b{ font-weight:700; color:var(--ink); }
+
+  hr.div{ border:none; border-top:1px solid var(--line); margin:0; }
+
+  section{ padding:1.4mm 0; }
+  section.tight{ padding:1.4mm 0; }
+  h2{ font-size:13pt; font-weight:700; line-height:1.16; letter-spacing:-.01em; margin-bottom:2mm; }
+  section p{ font-size:9.4pt; line-height:1.4; color:#332C25; max-width:165mm; }
+  section p b{ font-weight:700; color:var(--ink); }
+
+  /* ---------- pain numbers ---------- */
+  .pain-wrap{ display:flex; gap:12mm; align-items:flex-start; }
+  .pain-copy{ flex:1.4; }
+  .pain-nums{ flex:1; display:flex; gap:8mm; padding-top:1mm; }
+  .stat .v{ font-size:23pt; font-weight:800; line-height:1; letter-spacing:-.02em; color:var(--ink); }
+  .stat .v.br{ color:var(--brown); }
+  .stat .l{ font-size:7.6pt; color:var(--muted); line-height:1.35; margin-top:2mm; }
+
+  /* ---------- pipeline ---------- */
+  .pipe{ display:inline-block; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:8.5pt; letter-spacing:.06em; color:var(--ink);
+    background:var(--soft); border-left:3px solid var(--brown);
+    padding:2.6mm 5mm; margin:3mm 0 2.5mm; }
+  .pipe .ar{ color:var(--brown); font-weight:700; margin:0 1.5mm; }
+  .ship{ font-size:9pt; color:var(--muted); line-height:1.45; }
+  .ship b{ color:#332C25; font-weight:700; }
+
+  /* ---------- status callout ---------- */
+  .status{ background:var(--soft); padding:3.8mm 6mm; border-radius:1px; }
+  .status .milestone{ display:inline-block; margin-top:2.5mm; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:8pt; letter-spacing:.1em; background:var(--brown); color:var(--paper);
+    padding:1.4mm 3mm; border-radius:1px; text-transform:uppercase; }
+  .status .note{ font-size:8.4pt; color:var(--muted); margin-top:3mm; line-height:1.45; }
+
+  /* ---------- team ---------- */
+  .team{ display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; margin-top:1mm; }
+  .team .m .n{ font-size:10.5pt; font-weight:700; }
+  .team .m .role{ font-family:"SFMono-Regular",Menlo,Consolas,monospace; font-size:6.8pt;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--brown); margin:1mm 0 2mm; }
+  .team .m .d{ font-size:8.2pt; line-height:1.4; color:#3A322A; }
+  .team-note{ font-size:8pt; color:var(--muted); margin-top:1.5mm; font-style:italic; }
+
+  /* ---------- ask ---------- */
+  .ask{ margin-top:auto; }
+  .ask-top{ display:flex; justify-content:space-between; align-items:flex-end;
+    border-top:1.5px solid var(--ink); padding-top:3.5mm; gap:10mm; }
+  .ask .amount{ font-size:23pt; font-weight:800; letter-spacing:-.02em; line-height:.95; }
+  .ask .amount .cur{ color:var(--brown); }
+  .ask .amount small{ display:block; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:8pt; font-weight:500; letter-spacing:.12em; color:var(--muted); margin-top:2.5mm; }
+  .ask .use{ flex:1; }
+  .ask .use ul{ list-style:none; }
+  .ask .use li{ font-size:8.6pt; line-height:1.5; padding-left:4.5mm; position:relative; color:#332C25; }
+  .ask .use li::before{ content:"→"; position:absolute; left:0; color:var(--brown); font-weight:700; }
+  .ask .use .nd{ font-size:7.6pt; color:var(--muted); margin-top:1.5mm; line-height:1.4; }
+
+  .nextbar{ display:flex; justify-content:space-between; align-items:center;
+    margin-top:2.5mm; padding-top:2.5mm; border-top:1px solid var(--line); }
+  .nextbar .cta{ font-size:10.5pt; font-weight:700; }
+  .nextbar .cta span{ color:var(--brown); }
+  .nextbar .contact{ text-align:right; font-size:8pt; color:var(--muted); line-height:1.5; }
+
+  /* market micro-strip */
+  .mkt{ display:flex; gap:7mm; margin-top:2mm; font-size:7.8pt; color:var(--muted); }
+  .mkt b{ color:var(--ink); font-weight:700; }
+
+  footer{ margin-top:2.5mm; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:6.2pt; color:#9A9084; line-height:1.6; letter-spacing:.02em;
+    border-top:1px solid var(--line); padding-top:2.5mm; }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">FLY<span>BY</span>
+      <small>ПРОДУКТ GIS POINT · OPTICAL NAVIGATION</small>
+    </div>
+    <div class="stage">
+      <b>PRE-SEED</b><br>
+      $500K · SAFE
+    </div>
+  </header>
+
+  <div class="hook">
+    <h1>Коли зникає GPS —<br><span class="a">місія не зникає.</span></h1>
+    <p class="sub">FLY BY тримає дрон на курсі <b>без супутника і без сигналу, який можна заглушити.</b>
+      Пасивна камера дивиться на землю — і знає, де апарат насправді.</p>
+  </div>
+
+  <hr class="div">
+
+  <section>
+    <div class="pain-wrap">
+      <div class="pain-copy">
+        <div class="kicker">Проблема</div>
+        <h2>Глушіння GPS — це вже не форс-мажор. Це погода.</h2>
+        <p>Дрон, який довіряє лише супутнику, сліпне тієї ж секунди, коли поруч вмикають РЕБ.
+          Курс злітає, місія обривається, апарат не повертається — і клієнт платить за це щодня.</p>
+      </div>
+      <div class="pain-nums">
+        <div class="stat">
+          <div class="v br">46K+</div>
+          <div class="l">GNSS-EW подій у зонах<br>конфліктів, 2024</div>
+        </div>
+        <div class="stat">
+          <div class="v">~+300%</div>
+          <div class="l">зростання глушіння<br>рік-до-року</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <section>
+    <div class="kicker">Рішення</div>
+    <h2>Камера замість супутника.</h2>
+    <p>Пасивна камера зчитує рельєф, зливає його з інерційними сенсорами дрона —
+      і обчислює абсолютну позицію. Без супутника. Без RF-сліду, який противник міг би засікти чи заглушити.</p>
+    <div class="pipe">КАМЕРА <span class="ar">→</span> РЕЛЬЄФ <span class="ar">→</span> IMU FUSION <span class="ar">→</span> АБСОЛЮТНА ПОЗИЦІЯ</div>
+    <p class="ship">Постачається як <b>модуль, що вбудовується у стандартні автопілоти</b> (PX4, ArduPilot) —
+      OEM ставлять без перепроєктування. ~$2,500 за модуль; цінність — у software-IP, коробка — форма постачання.</p>
+  </section>
+
+  <hr class="div">
+
+  <section class="tight">
+    <div class="status">
+      <div class="kicker" style="margin-bottom:2mm">Де ми зараз — чесно</div>
+      <h2 style="margin-bottom:2.5mm">Алгоритм уже навігує в симуляції. Далі — політ.</h2>
+      <p>Ядро тримає позицію без супутника (5–30 m у симуляції). <b>Sub-10 m — наша ціль, ще не досягнута.</b>
+        Незалежні сторонні льотні тести оптичної навігації показують, що метод працює на великій дальності —
+        власна польова валідація FLY BY попереду.</p>
+      <span class="milestone">Наступний рубіж → валідований GPS-free політ · Q3 2026</span>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="kicker">Команда</div>
+    <h2 style="margin-bottom:4mm">Ті, хто вже будував і продавав UAV-компанію.</h2>
+    <div class="team">
+      <div class="m">
+        <div class="n">Eugene</div>
+        <div class="role">CEO · Co-founder</div>
+        <div class="d">Картографічна компанія національного масштабу. 20 років у геопросторовій інженерії.</div>
+      </div>
+      <div class="m">
+        <div class="n">Andrew</div>
+        <div class="role">CTO · Co-founder</div>
+        <div class="d">Ядро навігаційних алгоритмів: map-matching, IMU fusion, автопілот.</div>
+      </div>
+      <div class="m">
+        <div class="n">Dr. Alex</div>
+        <div class="role">Chief Scientist · Co-founder</div>
+        <div class="d">PhD, 30 років у навігації та UAV. Продав попередню UAV-компанію.</div>
+      </div>
+    </div>
+    <div class="team-note">Троє фаундерів, п'ять років разом.</div>
+  </section>
+
+  <div class="ask">
+    <div class="ask-top">
+      <div class="amount">
+        <span class="cur">$500K</span>
+        <small>SAFE · УМОВИ НА ЗАПИТ</small>
+      </div>
+      <div class="use">
+        <ul>
+          <li>Загартувати ядро й зібрати польовий прототип-модуль</li>
+          <li>Валідований GPS-free політ — Q3 2026</li>
+          <li>Перші OEM-LOI та customer development</li>
+        </ul>
+        <div class="nd">Non-dilutive паралельно: defence-innovation і dual-use гранти подовжують runway.</div>
+      </div>
+    </div>
+
+    <div class="mkt">
+      <div><b>$3.7B</b> TAM — assured-PNT і стійка навігація</div>
+      <div><b>~10,000/міс</b> GPS-вразливих UAV лише в Україні *</div>
+    </div>
+
+    <div class="nextbar">
+      <div class="cta">Наступний крок — <span>20 хвилин розмови</span> або доступ до data room.</div>
+      <div class="contact">invest@gispoint.co.uk<br>flyby.gis-point.com</div>
+    </div>
+  </div>
+
+  <footer>
+    Джерела: GNSS-EW події — GPS World, 2024 · зростання jamming — C4ADS · TAM — MarketsandMarkets, assured-PNT & resilient navigation, 2025 ·
+    * ~10,000/міс — оцінка фаундерів на основі обсягів закупівель UAV в Україні, підтвердити джерелом перед розсилкою.
+    Sub-10 m — цільовий показник, не досягнутий результат. Конфіденційно — під NDA · GIS Point, registered in England &amp; Wales · 2026
+  </footer>
+
+</body>
+</html>
