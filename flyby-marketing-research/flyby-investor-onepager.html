@@ -1,0 +1,297 @@
+<title>FlyBy — Pre-Seed Investor One-Pager</title>
+<style>
+  :root {
+    --ground: #F5F6F4;
+    --surface: #FFFFFF;
+    --surface-2: #EEF0ED;
+    --ink: #141C24;
+    --muted: #5C6873;
+    --hair: #D8DCD8;
+    --accent: #C77C08;
+    --accent-soft: #F6E6C8;
+    --good: #2F8F5B;
+    --bad: #C23B4E;
+    --grid: rgba(20,28,36,0.045);
+    --shadow: 0 1px 2px rgba(20,28,36,.06), 0 8px 24px rgba(20,28,36,.05);
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0E1620;
+      --surface: #16212E;
+      --surface-2: #1B2836;
+      --ink: #E8EDF2;
+      --muted: #94A3B2;
+      --hair: #263447;
+      --accent: #F2B143;
+      --accent-soft: #3A2E17;
+      --good: #46B37B;
+      --bad: #E06375;
+      --grid: rgba(232,237,242,0.05);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F5F6F4; --surface: #FFFFFF; --surface-2: #EEF0ED; --ink: #141C24;
+    --muted: #5C6873; --hair: #D8DCD8; --accent: #C77C08; --accent-soft: #F6E6C8;
+    --good: #2F8F5B; --bad: #C23B4E; --grid: rgba(20,28,36,0.045);
+    --shadow: 0 1px 2px rgba(20,28,36,.06), 0 8px 24px rgba(20,28,36,.05);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1620; --surface: #16212E; --surface-2: #1B2836; --ink: #E8EDF2;
+    --muted: #94A3B2; --hair: #263447; --accent: #F2B143; --accent-soft: #3A2E17;
+    --good: #46B37B; --bad: #E06375; --grid: rgba(232,237,242,0.05);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); line-height: 1.5;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 22px 64px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- header ---------- */
+  .hud {
+    position: relative; overflow: hidden; border-radius: 16px;
+    background:
+      linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--hair); box-shadow: var(--shadow);
+    padding: 30px 30px 26px;
+  }
+  .hud::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 26px 26px; mask-image: radial-gradient(120% 100% at 85% 0%, #000 30%, transparent 78%);
+  }
+  .hud > * { position: relative; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); font-weight: 600;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft); }
+  h1 {
+    font-size: clamp(30px, 6vw, 52px); line-height: 1.02; margin: 14px 0 6px;
+    letter-spacing: -0.02em; text-wrap: balance; font-weight: 800;
+  }
+  h1 .mark { color: var(--accent); }
+  .tag { font-size: clamp(15px, 2.4vw, 19px); color: var(--muted); max-width: 60ch; margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .02em;
+    padding: 6px 11px; border-radius: 999px; border: 1px solid var(--hair);
+    background: var(--ground); color: var(--ink); white-space: nowrap;
+  }
+  .chip b { color: var(--accent); }
+
+  /* ---------- KPI strip ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0; }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--hair); border-radius: 14px;
+    padding: 18px 16px; box-shadow: var(--shadow); position: relative;
+  }
+  .kpi::before { content:""; position:absolute; left:16px; top:16px; width:22px; height:3px;
+    border-radius:2px; background: var(--accent); }
+  .kpi .v { font-family: var(--mono); font-size: clamp(22px, 3.4vw, 30px); font-weight: 700;
+    letter-spacing: -0.01em; margin-top: 16px; }
+  .kpi .l { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.35; }
+
+  /* ---------- section grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 6px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--hair); border-radius: 14px;
+    padding: 20px; box-shadow: var(--shadow); grid-column: span 12;
+  }
+  .col6 { grid-column: span 6; } .col5 { grid-column: span 5; } .col7 { grid-column: span 7; }
+  .col4 { grid-column: span 4; } .col8 { grid-column: span 8; }
+  @media (max-width: 860px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .col6, .col5, .col7, .col4, .col8 { grid-column: span 12; }
+  }
+  .h {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 14px; display: flex; align-items: center; gap: 9px;
+  }
+  .h .idx { color: var(--accent); font-weight: 700; }
+  h3 { margin: 0 0 8px; font-size: 17px; letter-spacing: -0.01em; }
+  p { margin: 0 0 10px; }
+  .lead { font-size: 14.5px; }
+  .muted { color: var(--muted); }
+  small { font-size: 12px; }
+
+  /* evidence tags */
+  .ev { font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding: 1px 5px;
+    border-radius: 4px; vertical-align: middle; letter-spacing: .03em; }
+  .ev.p { background: color-mix(in srgb, var(--good) 16%, transparent); color: var(--good); }
+  .ev.s { background: var(--accent-soft); color: var(--accent); }
+  .ev.m { background: color-mix(in srgb, var(--muted) 18%, transparent); color: var(--muted); }
+
+  ul.clean { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  ul.clean li { display: flex; gap: 10px; font-size: 14px; }
+  ul.clean li::before { content: "▸"; color: var(--accent); flex: none; }
+
+  /* bars */
+  .bar-row { display: grid; grid-template-columns: 118px 1fr 78px; align-items: center; gap: 12px;
+    margin-bottom: 11px; font-size: 13px; }
+  .bar-row .lab { font-weight: 600; }
+  .track { height: 10px; background: var(--surface-2); border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--hair); }
+  .fill { height: 100%; background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, var(--surface))); border-radius: 6px; }
+  .bar-row .val { font-family: var(--mono); text-align: right; color: var(--muted); }
+
+  /* funnel */
+  .funnel { display: flex; flex-direction: column; gap: 8px; }
+  .fstage { border-radius: 10px; padding: 12px 14px; color: #fff; position: relative;
+    background: var(--accent); }
+  .fstage.sam { background: color-mix(in srgb, var(--accent) 72%, #4a3a1a); width: 74%; }
+  .fstage.som { background: color-mix(in srgb, var(--accent) 46%, #2a2a2a); width: 46%; }
+  .fstage .t { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; opacity: .95; text-transform: uppercase; }
+  .fstage .n { font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .fstage small { opacity: .9; }
+
+  /* table */
+  .tscroll { overflow-x: auto; margin: 0 -4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 460px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; }
+  td.money { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--accent); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+
+  /* milestones */
+  .ms { counter-reset: ms; display: flex; flex-direction: column; gap: 10px; }
+  .ms li { list-style: none; display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; }
+  .ms li::before { counter-increment: ms; content: counter(ms); font-family: var(--mono); font-weight: 700;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 7px; width: 24px; height: 24px;
+    display: grid; place-items: center; flex: none; font-size: 12px; }
+
+  .note { font-size: 12px; color: var(--muted); border-top: 1px solid var(--hair); margin-top: 22px; padding-top: 16px; }
+  a { color: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hud, .kpi, .card { animation: rise .5s cubic-bezier(.2,.7,.2,1) both; }
+    .kpi:nth-child(2){animation-delay:.04s}.kpi:nth-child(3){animation-delay:.08s}.kpi:nth-child(4){animation-delay:.12s}
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hud">
+    <div class="eyebrow"><span class="dot"></span> FlyBy · by GIS-Point · Pre-Seed Research Brief · Jul 2026</div>
+    <h1>Turn a drone's camera into a&nbsp;<span class="mark">GPS</span>.</h1>
+    <p class="tag">Passive optical navigation that gives military UAVs absolute positioning in GPS-denied
+      airspace — immune to jamming and spoofing, because it emits nothing and trusts no external signal.</p>
+    <div class="chips">
+      <span class="chip">Category · <b>Assured / alt-PNT</b></span>
+      <span class="chip">Users · <b>ISR + deep-strike UAVs</b></span>
+      <span class="chip">Stage · <b>Pre-revenue / MVP</b></span>
+      <span class="chip">Ask · <b>$750K SAFE</b> + $0.5–1M non-dilutive</span>
+      <span class="chip">Geo · <b>Ukraine → NATO/allied</b></span>
+    </div>
+  </header>
+
+  <section class="kpis" aria-label="Key numbers">
+    <div class="kpi"><div class="v num">~10,000</div><div class="l">drones lost <b>per month</b> in Ukraine, mainly to jamming <span class="ev p">P</span></div></div>
+    <div class="kpi"><div class="v num">60–80%</div><div class="l">of FPV drones fail to reach target under EW <span class="ev p">P</span></div></div>
+    <div class="kpi"><div class="v num">$846M→$10.2B</div><div class="l">Assured-PNT market, 2025→2035 · 28.4% CAGR <span class="ev s">S</span></div></div>
+    <div class="kpi"><div class="v num">$750K</div><div class="l">pre-seed to reach TRL 6–7 + field proof <span class="ev m">M</span></div></div>
+  </section>
+
+  <div class="grid">
+
+    <!-- Problem -->
+    <div class="card col6">
+      <div class="h"><span class="idx">01</span> The problem</div>
+      <h3>GNSS is the single point of failure in drone warfare</h3>
+      <p class="lead muted">In contested airspace, satellite navigation is jammed (signal denied) or spoofed
+        (drone silently walked off-course). GPS-denial is now the default battlefield condition — and the
+        front is already reaching for optical navigation to survive it.</p>
+      <ul class="clean">
+        <li>~10,000 drones/month lost, mainly to Russian electronic jamming <span class="ev p">P&nbsp;RUSI '23</span></li>
+        <li>60–80% of FPVs miss their target on parts of the front <span class="ev p">P&nbsp;RUSI '25</span></li>
+        <li>Ukraine fielding neural-net optical nav since Dec 2024 <span class="ev p">P&nbsp;IEEE</span></li>
+      </ul>
+    </div>
+
+    <!-- Solution / moat -->
+    <div class="card col6">
+      <div class="h"><span class="idx">02</span> The solution &amp; edge</div>
+      <h3>Camera-as-GPS, on a georeferenced base map</h3>
+      <p class="lead muted">VIO dead-reckons from camera + IMU but drifts without bound; FlyBy's core layer
+        matches live imagery to a georeferenced map to reset drift and output absolute lat/long.</p>
+      <ul class="clean">
+        <li><b>Map-matching pipeline</b> — GIS-Point's core competence; hard to copy, compounds with data</li>
+        <li><b>Battle-tested dataset</b> from the only live GPS-denied proving ground on earth</li>
+        <li><b>OEM design-ins</b> at low SWaP-C &amp; FPV-attach price — a module, not a platform</li>
+      </ul>
+    </div>
+
+    <!-- Market TAM/SAM/SOM -->
+    <div class="card col5">
+      <div class="h"><span class="idx">03</span> Market — bottom-up <span class="ev m" style="margin-left:auto">M</span></div>
+      <div class="funnel">
+        <div class="fstage"><div class="t">TAM · base attach</div><div class="n num">$600M / yr</div><small>1.5M UAVs × $400 blended nav license</small></div>
+        <div class="fstage sam"><div class="t">SAM · 3-yr reachable</div><div class="n num">$60–90M / yr</div><small>UA OEMs + early allied</small></div>
+        <div class="fstage som"><div class="t">SOM · Yr-3 capture</div><div class="n num">$1–3M</div><small>1–3% of SAM</small></div>
+      </div>
+      <p class="note" style="margin-top:14px">Top-down proxy <span class="ev s">S</span>: Assured PNT
+        $846M→$10.2B (28.4% CAGR), military ~46%. Lead with bottom-up; syndicated figures are vendor estimates.</p>
+    </div>
+
+    <!-- Competition -->
+    <div class="card col7">
+      <div class="h"><span class="idx">04</span> Competitive landscape — investors are funding this thesis <span class="ev p" style="margin-left:auto">P</span></div>
+      <div class="tscroll">
+        <table>
+          <thead><tr><th>Company</th><th>Approach</th><th>Recent raise</th><th>Gap FlyBy owns</th></tr></thead>
+          <tbody>
+            <tr><td><b>Auterion</b></td><td>Autonomy OS + visual nav</td><td class="money">$130M</td><td>Platform, not a drop-in module · $50M Pentagon deal, 33k kits</td></tr>
+            <tr><td><b>Advanced Nav</b></td><td>Inertial multi-sensor fusion</td><td class="money">$110M</td><td>Drifts without absolute fix</td></tr>
+            <tr><td><b>ANELLO</b></td><td>Optical-<i>gyro</i> INS (no camera)</td><td class="money">$25M</td><td>IMU, not vision · drift-bounded</td></tr>
+            <tr><td><b>Shield AI / Anduril</b></td><td>Big-defense autonomy</td><td class="money">$B+</td><td>Platform-locked, costly</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px">The funded winners solve <i>relative</i> drift or sell
+        platforms. Few deliver a cheap, passive, camera-based <b>absolute</b> fix — FlyBy's lane.</p>
+    </div>
+
+    <!-- Use of funds -->
+    <div class="card col5">
+      <div class="h"><span class="idx">05</span> Use of $750K · 18-mo runway</div>
+      <div class="bar-row"><span class="lab">Engineering</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">55%</span></div>
+      <div class="bar-row"><span class="lab">Field &amp; HW</span><span class="track"><span class="fill" style="width:27%"></span></span><span class="val">15%</span></div>
+      <div class="bar-row"><span class="lab">Map / data</span><span class="track"><span class="fill" style="width:22%"></span></span><span class="val">12%</span></div>
+      <div class="bar-row"><span class="lab">GTM / grants</span><span class="track"><span class="fill" style="width:18%"></span></span><span class="val">10%</span></div>
+      <div class="bar-row"><span class="lab">G&amp;A / legal</span><span class="track"><span class="fill" style="width:15%"></span></span><span class="val">8%</span></div>
+      <p class="note" style="margin-top:10px">Stack with Brave1 / NATO Innovation Fund / EU non-dilutive →
+        ~$1.3–1.75M effective budget, minimal dilution.</p>
+    </div>
+
+    <!-- Milestones -->
+    <div class="card col7">
+      <div class="h"><span class="idx">06</span> Milestones this round must hit → unlocks $3–5M seed</div>
+      <ol class="ms">
+        <li><b>TRL 6–7</b> — nav stack flown on a real UAV, on a real AO, under active/simulated jamming.</li>
+        <li><b>Hard metric</b> — ≤10 m absolute error &amp; high mission-completion under EW (beat the ~11–20 m published benchmarks in harder conditions).</li>
+        <li><b>3 design-partner OEMs</b> + ≥1 paid integration / strike-program LOI.</li>
+        <li><b>≥1 non-dilutive grant secured</b> (Brave1 / NIF / EDF) + Brave1 codification.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <p class="note">
+    <b>Evidence key —</b> <span class="ev p">P</span> primary source (RUSI, NATO STO, peer-reviewed, company PR, Federal Register) ·
+    <span class="ev s">S</span> secondary syndicated market research (vendor estimate, ~1.6× cross-firm variance) ·
+    <span class="ev m">M</span> founder model / assumption. &nbsp; Refuted in verification and excluded: loitering-munition &amp; "GNSS-independent PNT constellation" market figures.
+    Sources: RUSI (2023/2025) · IEEE Spectrum · GMInsights Assured-PNT · Advanced Navigation / Auterion / ANELLO press · NATO STO MP-SET-275 · arXiv 2510.01348 (ICRA '26) · MDPI Drones · Brave1 / Kyiv Post · Federal Register 2025-16382.
+  </p>
+</div>
