@@ -15,6 +15,7 @@
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
+| gis-point-capabilities | Стратегія / GTM | active | Перевірка запиту клієнта проти реального портфоліо GIS-Point + маркетингові описи продуктів (catalog.yaml) |
 
 ## Агенти (agents)
 | Агент | Зона | Статус | Коли викликати |

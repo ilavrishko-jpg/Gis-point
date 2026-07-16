@@ -1,0 +1,1031 @@
+# GIS-Point capability catalog — source of truth for the capability-finder skill.
+# One entry per project or capability. Anonymized: no client/customer names.
+#
+# Fields:
+#   id            stable slug
+#   name          project/capability name
+#   area          internal grouping (gis-point | seven | allgis | ons | external)
+#   type          product | microservices-platform | oss-integration | tool | website | scoped-engagement
+#   status        active | experimental | third-party | scoped
+#   client_facing yes | no | unknown  (client engagement vs GIS-Point own product)
+#   industry      primary vertical
+#   what_it_is    one plain sentence
+#   what_its_for  business value / who benefits
+#   frontend / backend / mobile / devops / database   headline tech only
+#   capabilities  demonstrable, matchable capabilities
+#   integrations  notable third-party services/APIs
+#   repos         source repos (for internal reference)
+#
+# Maintenance: add/edit an entry when a project changes; keep names out; bump plugin version.
+
+meta:
+  owner: GIS-Point
+  entries: 45
+  note: >
+    "status: scoped" means architected/estimated but not necessarily shipped — present
+    as experience, not a delivered product. "type: oss-integration" means GIS-Point
+    integrates/hosts that open-source tool, not that it wrote it.
+
+projects:
+
+  # ============================================================
+  # GEOSPATIAL / GIS PLATFORMS (gis-point)
+  # ============================================================
+
+  - id: ancestral-trees
+    name: AncestralTrees
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: Geospatial — interactive mapping & virtual tours
+    what_it_is: >
+      An interactive map and virtual-tour platform where points of interest are plotted,
+      grouped, and enriched with 360° panoramic tours, photo galleries, and details —
+      on both web and mobile.
+    what_its_for: >
+      Lets an organization publish an explorable digital map of physical places or assets
+      for the public or staff, with immersive 360 tours. Multi-tenant with custom branding,
+      so it can be sold as a hosted service to many clients.
+    frontend: [Angular 19, ABP Angular UI, Leaflet, esri-leaflet, MapTiler SDK, Photo Sphere Viewer, "three.js + 3d-tiles-renderer", Tailwind]
+    backend: ["ASP.NET Core (.NET 9)", ABP Framework 9.2, DDD, OpenIddict]
+    mobile: [Flutter, Riverpod, flutter_map, arcgis_maps, panorama_viewer]
+    devops: [Docker, Helm/Kubernetes, Azure Pipelines, nginx]
+    database: [SQL Server, EF Core, ABP BLOB storage]
+    capabilities: [Interactive web & mobile maps, Map/asset inventory with grouping, 360° virtual tours with info spots, Photo galleries, 3D tiles / point-cloud rendering, Multi-tenant SaaS, White-label branding, RBAC, Localization, Geocoding, GDPR & audit logging]
+    integrations: [MapTiler, Esri/ArcGIS, GeoServer, Mapbox geocoding]
+    repos: [AncestralTrees.angular.web, AncestralTrees.netcore.api, AncestralTrees.netcore.flutter]
+
+  - id: eagle-eye
+    name: EagleEye
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: Geospatial — GIS mapping & 360° street-view imagery
+    what_it_is: >
+      An interactive 2D/3D map platform where users "step into" locations to look around in
+      immersive 360° street-level photos — like Google Street View, but for an organization's
+      own imagery and data.
+    what_its_for: >
+      Helps teams that manage roads, utilities and public infrastructure survey and inspect
+      assets remotely — capture panoramic imagery, pin info markers, overlay map layers, and
+      explore from web or mobile without site visits.
+    frontend: [Angular 18, ABP UI, Leaflet, Cesium, ArcGIS JS SDK, MapTiler, Mapbox GL, OpenLayers, photo-sphere-viewer, Turf.js]
+    backend: ["ASP.NET Core (.NET 9)", ABP 9.2, EF Core, "NetTopologySuite/ProjNet/SharpKml (geo)", SkiaSharp, Serilog]
+    mobile: [Flutter, Riverpod, ArcGIS SDK, panorama_viewer, Mapbox navigation]
+    devops: [Azure Pipelines, nginx, Docker]
+    database: [SQL Server, Elasticsearch, Redis, AWS S3]
+    capabilities: [360° street-view viewer with markers, 2D & 3D mapping, LiDAR / point-cloud support, Map layer management & styling, Info-spot annotations, Road mapping & turn-by-turn navigation, "GIS formats (Shapefile, KML/GML, GeoJSON, WMTS)", Full-text/geo search, Multi-tenant SaaS, White-label, Excel import/export, Cloud image storage]
+    integrations: [Esri/ArcGIS, MapTiler, Mapbox, Google/Microsoft/Twitter login, AWS S3, Elasticsearch]
+    repos: [EagleEyeApp.api.aspnet-core, EagleEyeApp.web.angular, EagleEyeApp.web.angular.Admin, EagleEyeApp.web.flutter]
+
+  - id: makani
+    name: Makani
+    area: gis-point
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Location services / GovTech — digital addressing
+    what_it_is: >
+      A digital addressing platform that turns any point on a map into a short, unique
+      location code so places without a proper street address can still be found and shared.
+    what_its_for: >
+      Solves hard-to-find locations: create a location code, attach photos and access notes,
+      and share with family, delivery drivers or emergency services. Includes an admin console
+      for users, plans, branding and shared addresses across organizations.
+    frontend: [Angular 19, ABP Angular UI, Angular Material, chart.js]
+    backend: ["ASP.NET Core (.NET 9)", ABP 9.2, OpenIddict, "H3Lib (Uber H3)", QRCoder]
+    mobile: [Flutter, Riverpod, go_router]
+    devops: [Docker, Helm, nginx]
+    database: [SQL Server, "Elasticsearch 8", ABP BlobStoring]
+    capabilities: [Coordinate-to-address code generation, H3 hexagonal geospatial indexing, Elasticsearch address search, Address sharing links, QR code generation, Location photos + access notes, Multi-tenant SaaS, RBAC, Phone/SMS verification, Driver management, Subscription plans, White-label, OAuth/OIDC identity]
+    integrations: [Elasticsearch, OpenIddict, Email/SMS verification]
+    repos: [Makani, MakaniApp.Api.Abp.NetCore, MakaniApp.BusinessWeb, MakaniApp.PublicUser]
+
+  - id: mangrove
+    name: Mangrove
+    area: gis-point
+    type: product
+    status: active
+    client_facing: unknown
+    industry: GIS — interactive web mapping / data portal
+    what_it_is: >
+      An interactive online mapping platform where an organization publishes its geographic
+      data — layers, base maps, points of interest, 360° tours, galleries and charts — and
+      controls who sees each layer from an admin dashboard.
+    what_its_for: >
+      Turns location data into a rich, branded, self-service map portal for staff or the public
+      — sites, assets, infrastructure or environmental features — without building mapping tech
+      from scratch. Non-technical admins add and style content; multi-tenant with role-based access.
+    frontend: [Angular 19, NGXS, Leaflet, OpenLayers, MapTiler, esri-leaflet, Photo Sphere Viewer, Chart.js, D3.js, Tailwind]
+    backend: ["ASP.NET Core (.NET 9)", ABP 9.2, DDD, OpenIddict, "NetTopologySuite (spatial)"]
+    devops: [Docker, Helm/Kubernetes, Azure Pipelines, nginx]
+    database: [SQL Server, Elasticsearch, ABP BLOB storage]
+    capabilities: [Multi-layer interactive web map, Configurable base maps, Custom layer styling & legends, Map pins / POIs, 360° virtual tours, Image galleries, On-map charts, Per-layer access control, Multi-tenancy, RBAC, White-label, Data source management (GeoServer/ArcGIS), Multi-language, Full-text search]
+    integrations: [GeoServer, Esri/ArcGIS, MapTiler, Elasticsearch, OpenIddict]
+    repos: [Mangrove.abp.netcore.api, Mangrove.angular.web]
+
+  - id: orange-gis
+    name: OrangeGIS
+    area: gis-point
+    type: product
+    status: active
+    client_facing: no
+    industry: GIS — self-serve web mapping platform
+    what_it_is: >
+      A web-based mapping platform where organizations upload geographic data, build interactive
+      styled maps, and publish them online for staff or the public.
+    what_its_for: >
+      One online workspace to store map files, design layered maps, and share them via a link —
+      no desktop GIS expertise needed. Each org gets a private, branded workspace with its own
+      users and permissions.
+    frontend: [React 19, TypeScript, Vite, "Leaflet + react-leaflet", OpenLayers, proj4, MUI, framer-motion, i18next]
+    backend: ["Python 3.12", FastAPI, "SQLAlchemy 2.0", GeoAlchemy2, Alembic, "OWSLib (OGC)", "Fiona/pyproj (GDAL)", JWT]
+    devops: [Docker, "GitHub Actions", GHCR, Sentry]
+    database: [PostgreSQL, PostGIS, GeoServer]
+    capabilities: [Multi-tenant orgs with per-org subdomains, RBAC (Admin/Editor/Viewer), Custom org branding, Drag-and-drop multi-layer map editor, Layer styling with classification & color ramps, "Geospatial file mgmt (GeoJSON, Shapefile, GeoPackage, CSV, KML)", "External sources via WMS/WFS/XYZ", Public/private shareable map links, JWT auth, Internationalization]
+    integrations: [GeoServer, WMS/WFS/XYZ tile services, SMTP, Sentry]
+    repos: [OrangeGIS, OrangeGIS-backend]
+
+  - id: point-cloud
+    name: PointCloud
+    area: gis-point
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Geospatial — LiDAR surveying & mapping
+    what_it_is: >
+      A web platform for uploading large LiDAR laser-scan datasets and exploring them as
+      interactive 3D point clouds in the browser, with a map showing where each was captured.
+    what_its_for: >
+      Lets surveying, engineering and mapping teams store multi-gigabyte 3D scan files in one
+      place and view, navigate and measure them online without specialist desktop software —
+      heavy processing runs automatically in the background.
+    frontend: [Angular 14, Angular Material, "Potree (3D point cloud viewer)", Leaflet, ngx-translate]
+    backend: ["Python 3.10", "Django 4 + DRF", "Channels/Daphne (WebSockets)", "Celery", "Entwine (EPT tiling)", "laspy/lazrs (LAS/LAZ)", SciPy, JWT]
+    devops: [Docker, Azure Pipelines, Traefik, nginx, "MinIO (S3)", "on-prem Windows + WSL2"]
+    database: [PostgreSQL, Redis, MinIO]
+    capabilities: [3D point cloud rendering in browser (Potree), LAS/LAZ ingestion & processing, Entwine EPT tiling for multi-GB streaming, Background processing pipeline, Interactive coverage map, Real-time processing updates (WebSockets), Polygon/area selection, JWT auth with refresh rotation, Request/response encryption, On-premise single-server deployment]
+    integrations: [Potree, Entwine, "MinIO (S3)", OpenStreetMap]
+    repos: [PointCloud-backend-python, PointCloud-frontend-angular]
+
+  - id: suitability
+    name: Site Suitability
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: GIS — land & site selection, planning
+    what_it_is: >
+      An interactive web mapping platform that scores and ranks locations to show how suitable
+      each area is for a given purpose (where to build, invest, or place a facility).
+    what_its_for: >
+      Helps planners, developers and analysts make location decisions by weighing many factors
+      at once (terrain, proximity, zoning, environmental buffers) and visualizing best/worst
+      areas on a map — replacing slow manual analysis. Supports selling suitability reports.
+    frontend: [Angular 17, ABP UI, "Leaflet + leaflet-draw + esri-leaflet", "ArcGIS SDK (@arcgis/core)", MapTiler, OpenLayers, Turf.js, "h3-js", "Chart.js/D3", Tailwind]
+    backend: ["ASP.NET Core (.NET 9)", ABP 9.0, "NetTopologySuite (spatial)", "pocketken.H3", DDD]
+    devops: [Docker, nginx, Azure Pipelines]
+    database: [SQL Server, Elasticsearch, ABP BlobStoring]
+    capabilities: [Multi-criteria decision analysis (MCDA) scoring, Weighted configurable suitability models, H3 hexagonal grid analysis, Interactive map drawing & AOI selection, Layer styling & base maps, "Shapefile/KML/GeoJSON import", Address geocoding, White-label, Multi-language, RBAC, Paid order/report workflow, Full-text search, Result charting]
+    integrations: [ArcGIS/Esri, MapTiler, GeoServer, OSM Nominatim, Elasticsearch, OpenIddict, SMTP]
+    repos: [Suitability-api, Suitability-web]
+
+  - id: skypulse
+    name: SkyPulse
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: Geospatial — satellite Earth-observation imagery
+    what_it_is: >
+      An online platform to search, preview, and order satellite images of any location on
+      Earth, drawing the exact area of interest on an interactive map.
+    what_its_for: >
+      Lets organizations that need satellite imagery (mapping, land monitoring, agriculture,
+      infrastructure, planning) browse imagery from multiple providers in one place, order and
+      pay, and track it — without dealing with each supplier separately.
+    frontend: [Angular 18, ABP UI, Leaflet, leaflet-draw, Turf.js, ng-zorro-antd, SignalR client]
+    backend: ["ASP.NET Core 9", ABP 9.2, SignalR, OpenIddict, Serilog]
+    devops: [Docker, Azure Pipelines, nginx, "SSH deploy to Linux VM/EC2", HealthChecks UI]
+    database: [SQL Server, Redis]
+    capabilities: [Satellite imagery archive search, Interactive AOI drawing, Multi-provider imagery ordering, Order & product management, Wallet/payments, Real-time notifications (SignalR), Multi-tenancy, RBAC, Social login, Geocoding, GDPR/cookie consent]
+    integrations: [SkyFi API, SkyWatch EarthCache API, Omeo Search API, OSM Nominatim, Google/Microsoft/Twitter login, SMTP]
+    repos: [skypulse.api.aspnet-core, skypulse.web.angular]
+
+  - id: weather
+    name: Weather
+    area: gis-point
+    type: product
+    status: active
+    client_facing: no
+    industry: Weather / meteorology (GIS)
+    what_it_is: >
+      An interactive web app that shows live weather forecasts on a map — click any location
+      for detailed wind, temperature, rainfall and gust predictions over time.
+    what_its_for: >
+      Helps weather-dependent organizations (agriculture, marine, events, aviation, energy) plan
+      ahead by turning professional forecast data into an easy-to-read map with charts. Multi-tenant
+      with logins and branding, so it can be a subscription service.
+    frontend: [Angular 14, Angular Material, Leaflet, ABP UI, ngx-color, ngx-editor]
+    backend: ["ASP.NET Core 6", ABP 6, EF Core, Serilog, Swagger]
+    devops: [Azure Pipelines, Azure Web App, Docker, HealthChecks UI]
+    database: [SQL Server, ABP BLOB storage]
+    capabilities: [Interactive weather map with point forecasts, Wind/temperature/rainfall/gust surface forecasts, Forecast tables & time-series charts, Customizable map layers, Unit conversion (metric/imperial), Multi-tenant SaaS, RBAC, API key management, White-label, Localization]
+    integrations: [Windy.com Point Forecast API, Google/Microsoft/Twitter login, SMTP, OpenIddict]
+    repos: [weather.api.aspnet-core, weather.web.angular]
+
+  - id: subsidence
+    name: Subsidence Monitoring Portal
+    area: gis-point
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Geospatial — geodetic ground/structure movement monitoring
+    what_it_is: >
+      A web app that shows survey measurement points on a map and highlights how much each has
+      moved over time, using colour codes so anyone can spot problem areas at a glance.
+    what_its_for: >
+      Helps organizations watching for ground sinking or structures shifting track every monitored
+      location: movement in three directions, readings by date, field photos per point, Excel export,
+      and access control.
+    frontend: ["Vue 3", Vuetify 3, TypeScript, Vite, Pinia, Vue I18n, Leaflet, ApexCharts, "CASL (RBAC)"]
+    backend: ["(separate REST API backend, external host)"]
+    devops: [Bitbucket Pipelines, "AWS S3 static hosting", "AWS CloudFront CDN"]
+    database: []
+    capabilities: [Interactive map of monitoring points, Colour-coded displacement by magnitude, X/Y/Z deformation tracking, Historical readings by date, Per-point photo gallery, Excel export, RBAC (CASL), Multi-language, Real-time updates (WebSockets), Charts & dashboards]
+    integrations: ["Laravel Echo + Socket.IO (real-time)", "REST API backend", AWS S3/CloudFront]
+    repos: [subsidence-boot-frontend]
+
+  - id: site-monitoring
+    name: SiteMonitoring
+    area: gis-point
+    type: product
+    status: active
+    client_facing: no
+    industry: Agriculture & environmental remote sensing — satellite land/vegetation monitoring
+    what_it_is: >
+      A web platform that lets organisations watch how their land and crops change over time using
+      satellite imagery, interactive maps, and easy-to-read charts.
+    what_its_for: >
+      Helps farms, land managers and agencies monitor field health and vegetation across seasons —
+      drawing field boundaries, tracking greenness and growth from satellite data, factoring in
+      weather, and getting alerts and reports — so they can spot problems early. Brandable and
+      multi-tenant.
+    frontend: [Angular 17, ABP UI + LeptonX, "Leaflet (+draw, markercluster)", esri-leaflet, MapTiler, leaflet-geoserver-request, Turf.js, "shapefile + togeojson", ECharts, "Monaco Editor (script editor)", SignalR client, Tailwind]
+    backend: ["ASP.NET Core (.NET 8)", ABP 8.0, DDD, SignalR]
+    devops: [Docker, Azure Pipelines, nginx, OpenIddict]
+    database: ["SQL Server 2019 (EF Core)", Redis]
+    capabilities: [Satellite imagery vegetation-index analysis, "Custom vegetation-index scripting via in-browser code editor", Field/parcel drawing & editing, "Shapefile & KML/GeoJSON import", H3 hexagon-grid aggregation, Time-series statistics & charts per field/index, Seasonal monitoring & calendars, Weather reporting, Real-time notifications (SignalR), Satellite imagery product ordering, Multi-tenant SaaS, RBAC, Audit & GDPR, Localization, White-label, Configurable base maps]
+    integrations: [MapTiler, Esri/ArcGIS, "GeoServer (WMS/WFS)", "OSM Nominatim geocoding", "Satellite imagery providers (configurable)", SMTP]
+    repos: [SiteMonitoring-backend-abp, SiteMonitoring-frontend-angular]
+
+  - id: soil-hub
+    name: SoilHub
+    area: gis-point
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Agriculture / soil science — agri-tech geospatial
+    what_it_is: >
+      An interactive web platform that puts soil data on a map, letting people explore soil types
+      and quality across an area by clicking around a visual, color-coded map.
+    what_its_for: >
+      Helps farmers, agronomists and land advisors understand soil and its properties to make better
+      decisions about crops, land use and treatments. Lets the operator organize soil-data providers,
+      publish soil info per region in multiple languages, and offer related products or reports.
+    frontend: [Angular 17.3, ABP UI 9 (Lepton-X), "Leaflet + Leaflet-Draw", esri-leaflet, MapTiler, Turf.js, "h3-js", leaflet-geoserver-request, "Chart.js", ng-zorro-antd, Angular Material, ngx-quill]
+    backend: ["ASP.NET Core (.NET 9)", "ABP 9.0.4 (Identity Pro, SaaS, OpenIddict Pro)", EF Core 9]
+    devops: [Docker, Helm, nginx, Azure DevOps]
+    database: [SQL Server, Redis, Elasticsearch]
+    capabilities: [Interactive soil maps, Soil property visualization with color-coded legends, H3 hexagonal grid analysis, Map drawing/geometry tools, Base map & layer management, GeoServer & Esri/ArcGIS layers, Address geocoding (OSM Nominatim), Multi-tenancy, RBAC, Multi-language content, Product ordering / catalog, Charts, White-label, Audit & GDPR, Email notifications]
+    integrations: [GeoServer, Esri/ArcGIS, MapTiler, "OSM Nominatim", Elasticsearch, SMTP]
+    repos: [SoilHub.api.abp, SoilHub.web.angular]
+
+  # ============================================================
+  # OSS INTEGRATIONS & VIEWER TOOLS (gis-point)
+  # ============================================================
+
+  - id: esignature
+    name: E-Signature Integrations
+    area: gis-point
+    type: oss-integration
+    status: third-party
+    client_facing: no
+    industry: Legal / document automation — electronic signatures
+    what_it_is: >
+      Capability to set up and run self-hosted electronic-signature systems (Documenso, DocuSeal)
+      so people fill, send, and legally sign documents online instead of printing and scanning.
+    what_its_for: >
+      Lets an organization collect signatures on contracts, agreements and forms fully digitally
+      and keep control by self-hosting rather than paying per-signature to a SaaS like DocuSign.
+    frontend: ["React (Remix)", Vue, TailwindCSS, TipTap editor]
+    backend: ["Node.js/TypeScript", "Ruby on Rails", Prisma, Devise]
+    devops: [Docker, "Caddy reverse proxy", Turborepo]
+    database: [PostgreSQL]
+    capabilities: [Electronic document signing, Document filling & form fields, Signature request workflows, PDF generation, Audit trail / signing certificates, i18n, API integrations for embedded signing, Self-hosted deployment, Cloud file storage, EU eID / qualified e-signature (eID Easy)]
+    integrations: [AWS S3, Azure Blob, eID Easy, Trigger.dev/Inngest]
+    repos: [documenso, docuseal]
+
+  - id: geo-oss
+    name: Geospatial OSS Stack
+    area: gis-point
+    type: oss-integration
+    status: third-party
+    client_facing: no
+    industry: Geospatial — mapping & location intelligence
+    what_it_is: >
+      A toolbox of proven open-source mapping technologies GIS-Point can integrate and host for a
+      client instead of paying for commercial map services like Google Maps.
+    what_its_for: >
+      Lets an organization run its own maps, routing/directions, address search, 3D terrain and
+      point-cloud viewing, and location-data aggregation on its own infrastructure — no per-request
+      licensing fees, full data control, no vendor lock-in.
+    frontend: ["React 18/19", OpenLayers, "Leaflet + react-leaflet", "h3-js", Vite]
+    backend: ["FastAPI (Python)", "GeoServer (Java)", "OSRM routing (C++)", "gocesiumtiler (Go)"]
+    devops: [Docker, GitHub Actions, nginx, "CMake/Conan (OSRM build)"]
+    database: [PostgreSQL/PostGIS]
+    capabilities: [Self-hosted map tile serving (switch2osm/OSM), "Routing: nearest/route/table/match/trip + vector tiles (OSRM)", LAS point-cloud to Cesium 3D Tiles conversion, H3 hexagonal aggregation, GeoServer WMS/WFS publishing, PostGIS spatial storage & querying, Interactive web maps, REST API layer over GIS services]
+    integrations: [OpenStreetMap data, Cesium.js 3D Tiles, GeoServer, Mapbox Vector Tiles]
+    repos: [geoserver-test, gocesiumtiler, h3-tree-agg, osrm-backend, switch2osm]
+
+  - id: viewers-3d
+    name: 3D / Point-Cloud Viewers
+    area: gis-point
+    type: tool
+    status: experimental
+    client_facing: no
+    industry: Geospatial — 3D visualization
+    what_it_is: >
+      Browser-based viewers to open and explore 3D content on the web with nothing to install:
+      one for LiDAR survey scans (point clouds) and one for 3D models.
+    what_its_for: >
+      Lets clients inspect 3D scans and models directly in a browser — spin, zoom, and colour
+      LiDAR scans by height, intensity or feature — for surveying, construction, inspection and
+      3D-asset presentation without shipping a heavy desktop program.
+    frontend: ["React 19", "three.js", "@react-three/fiber", "@react-three/drei", "PlayCanvas engine", TypeScript]
+    devops: [Rollup, Create React App]
+    capabilities: [LAS LiDAR file parsing, 3D point-cloud rendering (WebGL), Point coloring by elevation/intensity/classification/RGB, Orbit/pan/zoom navigation, glTF 2.0 & GLB model viewing, Drag-and-drop model & HDR loading, Equirectangular/cube-map backgrounds, WebGL2/WebGPU rendering]
+    integrations: [PlayCanvas engine, Khronos glTF 2.0]
+    repos: [lidar-viwer, model-viewer]
+
+  - id: web-presence
+    name: GIS-Point Web Presence
+    area: gis-point
+    type: website
+    status: active
+    client_facing: no
+    industry: Corporate web & marketing
+    what_it_is: >
+      The company's own marketing website and content, presenting GIS-Point's services and
+      capturing sales enquiries.
+    what_its_for: >
+      A modern, multi-language public website the marketing team can update themselves, showcasing
+      what the company does and capturing leads. Also holds ready-to-publish sales copy for an
+      open-source setup & customization service offering.
+    frontend: ["Next.js 16 (App Router)", "React 19", "Tailwind 4", Radix UI, "next-intl (en/de/en-CA)"]
+    backend: ["Payload CMS 3 (headless)", "Node.js 20+", GraphQL]
+    devops: [Docker, "Coolify / Hetzner", "Playwright E2E", Vitest, "automated SEO checks"]
+    database: [PostgreSQL, "S3-compatible storage (Hetzner/MinIO)"]
+    capabilities: [CMS-driven pages/blog/case studies, Multi-language localized site, "SEO tooling (metadata, hreflang, JSON-LD, redirects, monitoring)", Product analytics (PostHog), Block-based page building, Lead capture]
+    integrations: [PostHog, Hetzner Object Storage/MinIO, Coolify]
+    repos: [web-site, open-source-integration-page]
+
+  # ============================================================
+  # BUSINESS PLATFORMS (seven)
+  # ============================================================
+
+  - id: athlo
+    name: Athlo
+    area: seven
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Fitness & wellness — gym/studio management SaaS
+    what_it_is: >
+      A complete online platform for fitness studios and gyms to manage classes, memberships and
+      payments, while members discover studios, book classes and pay from a web app.
+    what_its_for: >
+      Helps gym owners run the business (schedules, bookings, member accounts, card payments and
+      payouts, reporting) and gives members an easy way to find and book classes. Automatically
+      pulls schedule/booking data from other booking systems so a studio already using another tool
+      can still be discovered and booked.
+    frontend: ["Angular 15 (member + admin)", Angular Material, NGXS, NgRx, "Stripe.js/ngx-stripe", Google Maps, D3.js, "Firebase", "PWA"]
+    backend: ["Spring Boot 3.1 (Java 17)", "AWS Lambda webhook processor", "Python AI browser-agent (LangChain, LangGraph, FastAPI)", "Spring Security + JWT", "Stripe Connect", WebSocket]
+    mobile: ["Versioned mobile REST API (native apps supported)"]
+    devops: [Docker, "AWS Elastic Beanstalk", "AWS Lambda + API Gateway", Bitbucket Pipelines, SonarCloud]
+    database: [PostgreSQL, Liquibase, "Redis (Redisson)", "OpenSearch"]
+    capabilities: [Multi-tenant gym/studio management, Real-time class scheduling & booking, Online payments & automated payouts (Stripe Connect), RBAC, Membership management, Push notifications (Firebase), Analytics & reporting, Advanced search (OpenSearch), Serverless webhook processing, "AI browser agent that auto-extracts schedules & confirms bookings across ~198 third-party gym platforms", Transactional email templates, PWA, Studio discovery maps]
+    integrations: [Stripe/Stripe Connect, MindBody, BSport, Glofox, Firebase, Google Maps, AWS S3/SQS, OpenAI, Anthropic Claude]
+    repos: [athlo-core-java, athlo-frontend-angular, athlo-gym-admin-angular, athlo-lambda, athlo-super-agent, athlo_email_templates_html_css]
+
+  - id: curriculum
+    name: Curriculum
+    area: seven
+    type: microservices-platform
+    status: active
+    client_facing: yes
+    industry: Education / EdTech — school LMS
+    what_it_is: >
+      An online platform for schools that manages the whole teaching cycle — courses and lessons,
+      students and teachers, and tests — with automatic marking and performance tracking.
+    what_its_for: >
+      Helps schools run academic operations in one place: teachers set and grade assessments, track
+      attendance and progress; admins oversee multiple schools and classes. Auto-syncs student/staff
+      records from existing school systems, sends reminders, and supports in-platform document work.
+    backend: ["Java 11", "Spring Boot 2.2", "Spring Cloud (Config, Zuul gateway, OpenFeign)", "Spring Data JPA", "Spring Batch", "Spring Security OAuth2", "Quartz", "Apache POI"]
+    devops: [Docker, "AWS ECS", Bitbucket Pipelines]
+    database: [PostgreSQL (primary/replica), MongoDB, RabbitMQ]
+    capabilities: [Curriculum/course/lesson management, "Assessment & testing with automated grading and statistics", Attendance/absence tracking, Multi-school / multi-tenant RBAC (Hub Admin/School Admin/Teacher/Student), OAuth2 auth with 2FA, "Bulk import/export via Excel", "Office document viewing/editing via WOPI", Email & push notifications, Online payments, AI-assisted question recognition, Scheduled sync jobs]
+    integrations: ["ISAMS (school MIS) sync", "Wonde (school MIS)", AWS S3/SES/CloudWatch, Firebase Cloud Messaging, Stripe, Microsoft/Office WOPI]
+    repos: [curriculum-auth-java, curriculum-config-java, curriculum-database, curriculum-gateway-java, curriculum-import-export-java, curriculum-main-java, curriculum-notifications-java, curriculum-properties-java, curriculum-wopi-java]
+
+  - id: instacare
+    name: Instacare
+    area: seven
+    type: microservices-platform
+    status: active
+    client_facing: unknown
+    industry: Healthcare / digital patient care
+    what_it_is: >
+      A digital healthcare platform that lets a care provider manage patients, appointments,
+      medications, health goals and billing in one connected system.
+    what_its_for: >
+      Helps clinics and care organizations run patient care end to end — bookings, treatment goals
+      and medications, reminders and notifications, payments, and organized records/documents — so
+      staff spend less time on admin and patients stay on top of their care plan.
+    backend: ["Spring Boot 2.4/2.5 (Java 11)", "Modular monolith + companion services", MapStruct, Liquibase, Quartz, "JWT + 2FA", "FreeMarker + flying-saucer PDF"]
+    devops: [Docker, "LocalStack", "AWS (SQS, S3, SES)"]
+    database: [PostgreSQL 11, Redis]
+    capabilities: [Patient/user management, Auth with 2FA & RBAC, Appointment scheduling & calendar, Health goals tracking with reminders, Medication management, Questionnaires/assessments, Billing & online payments, Document management, Real-time & email notifications, PDF report generation, Localization]
+    integrations: [Stripe, AWS SES/MailHog, "AWS SQS + ActiveMQ", AWS S3, WebSocket]
+    repos: [instacare-core-java, instacare-admin-module-java, instacare-goals, instacare-medicines-java]
+
+  - id: acumen
+    name: Acumen — Global Payroll Cost Calculator
+    area: seven
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Fintech / HR-tech — global payroll cost
+    what_it_is: >
+      An engine that instantly works out the true cost of employing someone in different countries,
+      including all local employer and employee taxes and mandatory contributions.
+    what_its_for: >
+      Helps companies hiring across borders understand what a salary actually costs per country
+      before they hire, with downloadable reports or an embeddable calculator widget. For global
+      employers, HR/payroll firms, and relocation/expansion advisors.
+    backend: ["Spring Boot 2.2 (Java 11)", "Spring Security OAuth2", "Spring Data JPA", "Apache POI"]
+    devops: [Docker, Bitbucket Pipelines, "AWS ECR", "docker-compose deploy via SSH"]
+    database: ["PostgreSQL (stored functions for tax calc)"]
+    capabilities: [Multi-country payroll tax calculation, Country-specific tax rules (resident vs expatriate), 13th/14th salary & holiday accrual, Currency conversion via live rates, PDF report generation, Excel/CSV import/export, Tiered licensing & tariffs, Embeddable calculator widgets, OAuth2-secured REST API]
+    integrations: ["Fixer.io (FX rates)", "Zoho (CRM)", External PDF service, AWS]
+    repos: [acumen-backend-java]
+
+  # ============================================================
+  # SPAIRO / ONS
+  # ============================================================
+
+  - id: allgis
+    name: AllGIS
+    area: allgis
+    type: product
+    status: active
+    client_facing: no
+    industry: Geospatial — LiDAR & GIS data management SaaS
+    what_it_is: >
+      A cloud platform where survey and mapping teams upload, process, view in 3D, and
+      quality-check large geospatial datasets — LiDAR point clouds, aerial imagery, terrain,
+      and CAD drawings.
+    what_its_for: >
+      Solves handling huge, awkward survey, drone and CAD files: one secure workspace to store them,
+      auto-convert to fast web-viewable formats, inspect in an interactive 3D viewer, flag and track
+      data-quality issues, and share with colleagues or clients. Org roles, quotas and share links
+      make it fit for professional surveying and geospatial firms.
+    frontend: ["Next.js 16", "React 19", "Tailwind 4", Radix UI, Giro3D, "Three.js", "3d-tiles-renderer", "Spark (3D Gaussian Splatting)", "MapLibre GL", OpenLayers, XState, "TUS resumable upload"]
+    backend: ["NestJS (Node/TS)", Prisma, "Trigger.dev orchestration", BullMQ, "TUS server", "3dgs-ply-3dtiles-converter", "Python (ezdxf, pyproj) CAD/CRS tooling", "Anthropic AI SDK"]
+    devops: [Docker, "GitHub Actions CI/CD", OpenTelemetry, Sentry, "Jest (80% coverage gate)"]
+    database: [PostgreSQL + PostGIS, Redis, MinIO/S3]
+    capabilities: [3D point cloud visualization in browser, "LiDAR LAS/LAZ to COPC conversion", GeoTIFF/orthophoto raster tiling, "DXF/CAD to GeoJSON conversion", "CRS transformation & automatic coordinate-system detection", DEM & 3D mesh layers, "Resumable chunked uploads (TUS)", "Drag-and-drop file/folder upload", "COPC/COG range-request streaming", "QC annotations (misclassification, noise, density, alignment)", Measurement tools, Multi-layer dataset viewer, Multi-tenant orgs, RBAC, Storage quotas, Public share links, Background job processing]
+    integrations: [Clerk, "authentik (self-hosted SSO)", Resend, Trigger.dev, AWS S3/MinIO, PostHog, Sentry, Anthropic]
+    repos: [spairo/app-backend, spairo/app-frontend, spairo/spairo-ai-frontend, spairo/authentik, allgis/clerk-react, allgis/dfx-geojson]
+
+  - id: ons-landing
+    name: ONS Landing (FLY BY)
+    area: ons
+    type: website
+    status: active
+    client_facing: no
+    industry: Defence & autonomous systems — dual-use navigation (marketing site)
+    what_it_is: >
+      A polished marketing and lead-capture website for a navigation software product aimed at
+      defence and autonomous-drone buyers and investors.
+    what_its_for: >
+      Presents a specialised product (navigation that works where GPS is jammed or unavailable) to
+      defence procurement teams and investors, explains the problem and offering, and captures
+      qualified enquiries via a contact form that routes leads to sales.
+    frontend: ["Next.js 16", "React 19", "Tailwind 4", TypeScript, "(prototype: TanStack Start + shadcn/ui, react-hook-form, zod)"]
+    backend: ["Next.js Server Actions (form intake & validation)"]
+    devops: [Vercel, "Cloudflare Workers (prototype)"]
+    capabilities: ["SEO-optimised marketing site (sitemap, robots, JSON-LD)", Dual-path lead capture (defence vs investor), Server-side form validation, "Outbound webhook lead delivery (Slack/Zapier/Make/email)", Bot honeypot spam protection, Scroll-reveal animations, Configurable brand/contact config]
+    integrations: ["Configurable outbound webhook (Slack/Zapier/Make)", mailto fallback]
+    repos: [ons/ons-landing]
+
+  # ============================================================
+  # AI / COMPUTER VISION / 3D (external volume)
+  # ============================================================
+
+  - id: aerial-georef
+    name: Aerial Georeferencing Platform
+    area: external
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Geospatial — aerial & drone imagery mapping (AI-assisted)
+    what_it_is: >
+      A web platform that takes old scanned aerial photographs and drone imagery and automatically
+      pins them to their correct real-world location on a map — turning loose pictures into precise,
+      map-ready imagery.
+    what_its_for: >
+      Saves surveyors, mapping teams and archives the slow, manual work of aligning aerial photos by
+      hand. The software figures out location automatically, shows accuracy, and outputs standard map
+      files that drop straight into any GIS, so historical and new aerial imagery can be searched,
+      compared and overlaid on modern maps.
+    frontend: ["React 19", "Vite 6", TypeScript, TanStack Query, maplibre-gl, proj4]
+    backend: ["Python 3.12", FastAPI, "SQLAlchemy 2.0 (async)", "arq (Redis worker)", rasterio, "rio-cogeo", GDAL, OpenCV, scikit-image, "kornia LoFTR + PyTorch", pyrosm/osmium]
+    devops: [Docker, "MinIO (S3)"]
+    database: [PostgreSQL/PostGIS 16, Redis, MinIO]
+    capabilities: [Automatic georeferencing of scanned aerial photos, Automatic control-point generation (classical CV), "AI/deep-learning image matching (LoFTR neural matcher)", Matching against reference orthophotos & OSM, "Live accuracy/error feedback (RMS, outlier detection)", Image warping & clipping to Cloud-Optimized GeoTIFF, Interactive control-point editing, Place-name geocoding, Async background jobs, Batch folder processing, Coordinate reprojection]
+    integrations: ["OpenStreetMap (data + Nominatim)", ESRI World Imagery, "reference orthophoto (DOP)"]
+    repos: [aerial-georef]
+
+  - id: ai-hemaya
+    name: AI Hemaya
+    area: external
+    type: product
+    status: active
+    client_facing: yes
+    industry: Physical security & surveillance — indoor positioning & 3D monitoring
+    what_it_is: >
+      A site safety and security monitoring platform that shows a facility as an interactive 3D
+      model, tracks where people and equipment are in real time using wearable tags, and unifies
+      live security-camera views in one screen.
+    what_its_for: >
+      Helps operators of large sites (facilities, campuses, industrial locations) keep people safe
+      and secure by seeing at a glance who is where, watching live camera feeds, and understanding
+      which areas cameras actually cover — all on a single 3D map of the site.
+    frontend: ["React 18", Redux Toolkit, Cesium, Resium, OpenLayers, Google Maps, Turf.js, Ant Design, "HLS.js", geotiff]
+    backend: ["Django 4.2 + DRF", "GeoDjango", Gunicorn, JWT]
+    database: [PostgreSQL, PostGIS]
+    capabilities: [3D site visualization & tileset rendering, Live indoor tracking of people/assets via wearable tags, CCTV camera management with 3D positioning, "Camera field-of-view coverage analysis (overlap/gap)", "Live camera feeds (HLS & MJPEG)", Real-time location updates (WebSockets), Site/floor/tag/device management, Multi-tenant RBAC, User approval workflow, Interactive 2D/3D mapping]
+    integrations: ["Cesium Ion (3D tiles)", Google Maps, "LocalSense indoor-positioning API", HLS/MJPEG camera streams, SMTP]
+    repos: [ai-hemaya/AiHemaya, ai-hemaya/ai-hemaya-app-dev-frontend]
+
+  - id: lidar-ai-cluster
+    name: LiDAR AI Classification
+    area: external
+    type: tool
+    status: experimental
+    client_facing: no
+    industry: Geospatial — LiDAR point-cloud AI processing
+    what_it_is: >
+      An AI-powered system that automatically sorts 3D laser-scan (LiDAR) point clouds into
+      categories such as ground, buildings, vegetation, roads and power lines, and turns detected
+      features into clean map-ready drawings.
+    what_its_for: >
+      Lets surveyors, GIS teams and planners process aerial and vehicle-mounted laser-scan data
+      automatically instead of paying for expensive proprietary desktop software — saving licensing
+      cost and manual cleanup while producing accurate elevation models, building heights and
+      infrastructure maps.
+    backend: ["Python 3.10+", PyTorch, "Open3D-ML (KPConv, RandLA-Net)", "myria3d (PyTorch Lightning + Hydra + PyG)", PDAL, laspy, scikit-learn]
+    devops: [Docker, "conda/Miniforge"]
+    capabilities: ["Semantic classification into ASPRS classes (ground, buildings, vegetation, water, noise)", "Deep-learning point-cloud segmentation (KPConv, RandLA-Net, myria3d)", "Ground filtering (PDAL CSF)", Vegetation height-above-ground analysis, Powerline vectorization, Utility pole detection, Road-boundary vectorization, DXF/CAD export, Per-class IoU accuracy metrics, Automated report generation, Interactive 3D viewers, "LAS/LAZ I/O & tiling for large files", "CPU-only inference on Apple Silicon"]
+    integrations: [Open3D-ML model zoo, "IGNF myria3d framework", PDAL, "benchmark datasets (Toronto-3D, Semantic3D, SemanticKITTI)"]
+    repos: [lidar-ai-clusterization]
+
+  - id: splat-3dtiles
+    name: Gaussian Splat to 3D Tiles
+    area: external
+    type: tool
+    status: experimental
+    client_facing: no
+    industry: 3D geospatial visualization / digital twins / reality capture
+    what_it_is: >
+      A tool that takes 3D scans captured as "Gaussian splat" files and converts them into a
+      streamable format viewable smoothly inside an interactive web map.
+    what_its_for: >
+      Lets organizations display high-detail, photorealistic 3D captures of real-world places and
+      objects directly in a browser on a 3D globe, so anyone can explore them online without special
+      software.
+    frontend: ["Cesium (forked splat-shader build)", "HTML/JS viewer"]
+    backend: ["Python 3 converter (numpy, pygltflib, pyproj)", "Node.js/Express tile server"]
+    capabilities: ["Gaussian splat (.splat) to Cesium 3D Tiles conversion", "Quadtree spatial tiling with level-of-detail", "glTF generation with KHR_gaussian_splatting", Coordinate reprojection to geographic coordinates, Web-based 3D splat rendering on a globe, Streaming of large 3D scenes]
+    integrations: [CesiumGS 3D Tiles, Khronos glTF / KHR_gaussian_splatting]
+    repos: [splat-3dtiles]
+
+  - id: object-detection
+    name: Object Detection / CV MLOps
+    area: external
+    type: oss-integration
+    status: experimental
+    client_facing: yes
+    industry: AI / computer vision (cross-industry — inspection, monitoring, security, retail)
+    what_it_is: >
+      A service capability for building, training and running "smart camera" software that
+      automatically finds and identifies objects in images and video.
+    what_its_for: >
+      Helps organizations turn image and video data into automated detection — spotting people,
+      vehicles, products, defects or other objects — and keeps accuracy high over time with
+      continuous data collection and retraining, so staff no longer review footage manually.
+    backend: ["Python (PyTorch)", YOLOv7, "ONNX Runtime 1.16"]
+    capabilities: [Object detection on images & video, Model training & iterative fine-tuning, Image preprocessing pipeline, Exploratory data analysis & dataset cleaning, "Model deployment/inference via ONNX Runtime", MLOps CI/CD pipeline for models, Automated data collection & retraining, Front-end integration of inference results, Full lifecycle delivery with documentation]
+    integrations: [YOLOv7, ONNX Runtime]
+    repos: ["object dection"]
+
+  - id: rt-object-detection-web
+    name: Real-time Object Detection Web App
+    area: external
+    type: oss-integration
+    status: third-party
+    client_facing: no
+    industry: Computer vision — AI-powered web apps
+    what_it_is: >
+      A web app that uses your device's camera to automatically spot and label objects in a live
+      video feed, running entirely inside the browser with no app to install.
+    what_its_for: >
+      Lets a business add "smart camera" object recognition to a website or kiosk to identify people,
+      vehicles, products or other items in real time. All AI runs on the user's own device, keeping
+      it private, fast and cheap to host.
+    frontend: ["Next.js 13", "React 18", TypeScript, Tailwind, react-webcam, "onnxruntime-web", "next-pwa"]
+    devops: [Vercel]
+    capabilities: [Real-time object detection from webcam/video, "In-browser AI inference (fully client-side)", YOLOv7-tiny & YOLOv10 support, "ONNX model deployment to browser (WebAssembly)", Bounding-box overlay & labeling, "Installable PWA (offline)", Multiple input resolutions]
+    integrations: [ONNX Runtime Web, YOLOv7/YOLOv10, Ultralytics]
+    repos: ["tec solution/real-time-object-detection-web-app"]
+
+  - id: h3-hexagons
+    name: H3 Spatial Indexing
+    area: external
+    type: tool
+    status: experimental
+    client_facing: no
+    industry: Geospatial analytics — environmental & land-suitability mapping
+    what_it_is: >
+      Prototypes that divide a map into a uniform grid of hexagons and colour each hexagon by the
+      data it contains, turning raw location data into an easy-to-read map.
+    what_its_for: >
+      Helps teams analyze large areas at a glance by summarizing environmental and location data
+      (soil moisture, vegetation health, wind, ocean conditions) into consistent hexagon zones —
+      easier to spot patterns, compare regions, and assess where land is most suitable.
+    frontend: ["React 18", "Angular 18", Leaflet, Mapbox GL, Google Maps, Turf.js, "h3-js", geojson2h3]
+    backend: ["Node.js/Express", "Uber h3-java"]
+    database: [Elasticsearch, MongoDB]
+    capabilities: [H3 hexagonal spatial indexing (multi-resolution), Interactive hexagon overlays, Aggregating geospatial data into hexagon cells, "Weather data conversion from NOAA GRIB2 (wind, waves, currents)", Soil moisture / NDVI / land-suitability visualization, GeoJSON-to-hexagon conversion, Bulk indexing into Elasticsearch, Coordinate reprojection, Wind velocity animation layers]
+    integrations: ["NOAA GFS/NCEP GRIB2 feeds", Elasticsearch, MongoDB, Google Maps, Mapbox, Uber H3]
+    repos: ["tec solution/hexagons"]
+
+  # ============================================================
+  # SCOPED ENGAGEMENTS — architected/estimated, doc-derived
+  # (present as experience, not shipped products)
+  # ============================================================
+
+  - id: digital-wallet
+    name: Digital Wallet (Fintech)
+    area: external
+    type: scoped-engagement
+    status: scoped
+    client_facing: yes
+    industry: Fintech — digital wallets & payments
+    what_it_is: >
+      A fully architected and estimated digital wallet and payments platform: end users hold a
+      stored-value balance, load and cash out via bank transfers, pay bills and merchants, and get
+      refunds, with a full admin portal for operations and reconciliation.
+    what_its_for: >
+      Solves how a bank or financial institution launches a regulated e-wallet: wallet lifecycle,
+      moving money via a national bank's payment APIs, an auditable double-entry ledger, statement
+      reconciliation, and central-bank compliance (tiered KYC, transaction limits, AML). Designed as
+      a multi-bank, multi-tenant platform.
+    frontend: ["Angular 17+ (ABP UI)", "Arabic/English RTL"]
+    backend: ["ASP.NET Core (C#)", "ABP.io (Pro modules)", OpenIddict]
+    devops: [Nginx, "Load balancer (HTTPS)", "Serilog + Seq", "SQL Server primary/replica"]
+    database: [SQL Server, Redis, "BLOB storage (KYC docs)"]
+    capabilities: [Digital wallet / e-wallet architecture, "Stored-value balance (load, deduct, hold, reversal)", "Bank payment API integration (single, bulk, payroll)", Multi-bank / pluggable gateway, Double-entry ledger & bank reconciliation, End-of-day settlement, Refund workflow & approvals, "Payroll-to-wallet & WPS compliance", "Bill & government payments (SADAD, MOI)", Tiered KYC, "AML monitoring & regulatory reporting", Transaction limit engine, Multi-tenancy, RBAC & audit, Reconciliation dashboards, Effort estimation & phased roadmap]
+    integrations: ["National bank payment APIs", "SADAD bill payment", "MOI payments", "WPS/Mudad wage protection", Twilio SMS, SMTP]
+    repos: ["tec solution/DigitalWallet-Research (docs)"]
+
+  - id: eload
+    name: E-Load / Freight Marketplace
+    area: external
+    type: scoped-engagement
+    status: scoped
+    client_facing: yes
+    industry: Transportation & logistics — road freight / trucking
+    what_it_is: >
+      A multi-portal digital freight marketplace ("load board") connecting shippers/brokers, trucking
+      carriers, and drivers — load posting, bidding, fleet and driver management, live shipment
+      tracking, proof-of-delivery, finance/invoicing, and government e-waybill compliance.
+    what_its_for: >
+      Lets shippers/brokers post loads, carriers discover and bid and post available truck capacity,
+      and drivers execute deliveries with GPS tracking and proof-of-delivery — while a super-admin
+      back office handles onboarding/KYC, subscriptions, payments and regulatory reporting. Digitizes
+      matching freight to available trucks while keeping every trip compliant with national e-waybill rules.
+    frontend: ["Angular 17+"]
+    backend: [".NET 8", "ABP.IO", OpenIddict, "SignalR (real-time)", "RabbitMQ (GPS events)"]
+    mobile: ["Flutter (iOS & Android driver app)"]
+    devops: [Docker]
+    database: [SQL Server, Redis, "Elasticsearch (geo/search)"]
+    capabilities: [Multi-sided logistics marketplace (shipper + carrier + driver portals), Freight load board with bidding workflows, Geolocation-based load discovery, Truck posting & capacity management, Fleet & driver management, "Real-time GPS tracking, geofencing, route history", "Proof-of-delivery (photo, signature, OTP)", "Offline-capable driver app with delta sync", "Government e-waybill integration", Multi-tenant RBAC, Subscription & feature gating, "Finance: invoicing, payments, refunds, disputes", KYC/document verification, "Multi-channel notifications (email, SMS, WhatsApp, push)", Bilingual AR/EN RTL]
+    integrations: ["National e-waybill compliance system", Stripe, SendGrid, SMS gateway, WhatsApp Business API, Google Maps/Mapbox, Firebase Cloud Messaging, Azure Blob]
+    repos: ["tec solution/Eload (docs)"]
+
+  - id: riyadh-pano-ai
+    name: Street Panorama AI Processing
+    area: external
+    type: scoped-engagement
+    status: scoped
+    client_facing: yes
+    industry: Geospatial — smart-city mobile mapping / street-level imagery
+    what_it_is: >
+      A large-scale pipeline that AI-processes street-level 360° spherical panorama imagery captured
+      by vehicle-mounted mapping cameras and exports it in geolocated, ready-to-serve batches.
+    what_its_for: >
+      Turns hundreds of thousands of raw street-drive panorama frames into a searchable, map-anchored
+      image library — each panorama tagged with GPS position, altitude and camera orientation and
+      linked to a web viewer — so teams can virtually navigate a city, inspect assets, and feed
+      downstream AI analysis without revisiting the field.
+    frontend: ["Web-based 360 panorama viewer"]
+    devops: ["Wasabi (S3-compatible object storage)"]
+    capabilities: [Large-scale street-level 360 panorama AI processing pipeline, "Batch export of geolocated spherical imagery (~950K+ frames)", "Mobile-mapping metadata capture (lat/lon, altitude, orientation)", "Spherical camera (Ladybug) ingestion", Cloud object-storage image hosting at scale, Web-based 360 panorama viewer integration, Capture-run organization & per-frame indexing]
+    integrations: ["Wasabi (S3)", "Ladybug spherical camera imagery"]
+    repos: ["tec solution/Riyadh_Pano_AI_Process (docs)"]
+
+  - id: agrizone
+    name: AgriZone
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: Precision agriculture / AgTech — enterprise GIS
+    what_it_is: >
+      A web and mobile platform that automatically turns satellite imagery into field-ready
+      "management zones", so an agronomist can click a field and get data-driven productivity
+      zones in minutes with no manual GIS work.
+    what_its_for: >
+      For large agribusinesses scaling precision farming across thousands of fields. Replaces slow,
+      specialist-dependent manual zone-drawing with automated full-coverage zones, and consolidates
+      fragmented agro-data (rotation, soil chemistry, operations, inventory) into one geo-referenced
+      hub for evidence-based input planning and investment decisions.
+    frontend: ["Next.js 16", "React 19", TypeScript, "Tailwind 4", OpenLayers, deck.gl, Zustand, Recharts, Radix UI, next-intl]
+    backend: ["Python 3.12", "FastAPI (async)", "SQLAlchemy + GeoAlchemy2", Alembic, "Celery (worker + beat)", "rasterio / GDAL / GEOS / PROJ", "scikit-learn (K-means)", "H3 tessellation", shapely]
+    mobile: ["React Native 0.81", "MapLibre Native", "TanStack Query (offline)", "SQLite offline store", "geotagged field scouting", Sentry]
+    devops: ["Docker Compose (dev/QA/prod)", "Caddy auto-HTTPS/TLS", Makefile, "GeoServer auto-provisioning", "pytest + Hypothesis", "Maestro mobile E2E", healthchecks]
+    database: ["PostgreSQL 17 + PostGIS 3.5", "GeoServer 2.28 (OGC WMS/WFS)", "Redis 7"]
+    capabilities: ["Automated management-zone generation from Sentinel-2 NDVI/SBI + terrain via H3 + K-means", Interactive field map with satellite basemap & toggleable layers, "On-demand per-field zone calculation with per-zone stats & versioned history", NDVI heatmap overlays, "Terrain (elevation/slope/aspect) analysis from DEM/SRTM", Agrochemical soil sampling & import, Crop rotation & sowing history, Cover-crop (siderata) planning, "Geotagged field scouting (mobile, offline-capable)", "Full agro-inventory (products, suppliers, warehouses, stock, applications)", Zone-level cost allocation & profitability, Analytics dashboards, Land-parcel management, "Multi-tenant SaaS (orgs, RBAC, MFA, audit, impersonation)", "Import/export incl. Shapefile & ISOXML", Weather integration, Internationalization]
+    integrations: ["Sentinel Hub / Copernicus (Sentinel-2 L2A via STAC/COG)", "SRTM/DEM elevation", "GeoServer OGC (WMS/WFS)", "Shapefile & GeoJSON import", "ISOXML (farm-machinery task data)", "Weather service", SMTP]
+    repos: [gis-point/AgriZone]
+
+  - id: site-infra-eval
+    name: Site Infrastructure Evaluation (Wind)
+    area: external
+    type: scoped-engagement
+    status: scoped
+    client_facing: yes
+    industry: Renewable energy (wind) — construction & installation logistics
+    what_it_is: >
+      A software solution scoped from a client RFP that analyzes drone photographs of a wind-farm
+      construction site to automatically compare as-built infrastructure against the contractual
+      "to-be" specifications and flag deviations on a map or report.
+    what_its_for: >
+      Replaces slow manual on-site inspection before oversized wind-turbine components can be
+      transported and installed. Detects where site roads, crane pads, storage and turning areas fail
+      required width, gradient, radius, surface and geometry criteria, so operators fix problem spots
+      in advance and guarantee safe delivery and erection.
+    capabilities: [Drone/aerial imagery analysis, As-built vs as-designed comparison, Geospatial deviation detection & pain-point mapping, Wind-farm construction site infrastructure evaluation, "Road & crane-pad geometry analysis (width, gradient, radius, turning areas)", Automated CAD/PDF deviation reporting, Installation-area layout verification]
+    integrations: ["CAD (deviation map export)", "PDF reporting", "UAV/drone photography"]
+    repos: ["client RFP docs (internal)"]
+
+  - id: uav-drone
+    name: GPS-Denied UAV Navigation & Remote Sensing
+    area: external
+    type: scoped-engagement
+    status: scoped
+    client_facing: yes
+    industry: Defence / aerospace — UAV / drones
+    what_it_is: >
+      A navigation solution that lets a drone keep flying its mission when its GPS signal is jammed
+      or spoofed, using onboard cameras plus motion sensors to recognize the ground and match it
+      against satellite maps to figure out where it is.
+    what_its_for: >
+      Helps drone operators and manufacturers fly reliably through areas where GPS cannot be trusted
+      (contested or interference-heavy zones) so reconnaissance, delivery and other missions complete
+      and the aircraft returns safely. For defence forces and commercial drone makers needing
+      near-GPS accuracy without depending on the GPS signal.
+    capabilities: [GPS/GNSS-denied UAV navigation, "Inertial-optical (visual-inertial) navigation", "UAV image geo-registration / map-matching against satellite imagery", "Electronic-warfare (jamming/spoofing) resilience & detection", Real-time in-flight map-based position correction, "UAV flight & mission planning (ArduPilot/Mission Planner)", "MAVLink telemetry & dataflash log analysis", "Geospatial AI assistant research (GeoGPT)", Aerial remote-sensing data processing]
+    integrations: ["ArduPilot / Mission Planner", "MAVLink", "Google Satellite Maps", "onboard optical/thermal camera + IMU"]
+    repos: ["uav (research/brochure/logs)"]
+
+  # ============================================================
+  # ADDITIONAL PROJECTS & TOOLS (PycharmProjects)
+  # ============================================================
+
+  - id: geo-ai
+    name: AI Geospatial Query Agent
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: GIS — geospatial analytics via natural language
+    what_it_is: >
+      A web app that lets users query and explore geospatial map data by typing plain-language
+      questions instead of writing spatial database queries.
+    what_its_for: >
+      Lets non-technical staff filter, count and locate features across many geospatial data sources
+      through natural-language chat — cutting the need for GIS specialists and speeding up spatial
+      decisions, with processing kept on a self-hosted local LLM.
+    frontend: ["React 19", TypeScript, Vite, "Leaflet + react-leaflet"]
+    backend: ["Python", FastAPI, "strands-agents", "Ollama (self-hosted LLM)", Shapely, Pydantic]
+    devops: [Docker, "reverse-proxy deployment"]
+    database: [PostGIS, Elasticsearch, "SQLite (in-memory)"]
+    capabilities: ["Natural-language to spatial query translation", "Auto SQL WHERE / CQL / Lucene filter generation", "Spatial ops (filter, count, distinct, NEAR, WITHIN)", Interactive map visualization, Chat interface, "GeoJSON/CSV export", "Time-slice queries for time-enabled layers", "Local/self-hosted LLM inference"]
+    integrations: ["ArcGIS REST", WFS, WMS, "OGC API Features", PostGIS, Elasticsearch, "GeoJSON/CSV upload"]
+    repos: [geo-ai]
+
+  - id: custom-map
+    name: Self-Hosted Interactive Map Platform
+    area: gis-point
+    type: product
+    status: active
+    client_facing: yes
+    industry: GIS — mapping & navigation
+    what_it_is: >
+      A self-hosted web mapping platform that serves custom vector map tiles with turn-by-turn
+      routing, indoor navigation, and switchable 2D/3D map styles.
+    what_its_for: >
+      Lets an organization run its own branded, fully self-hosted maps and navigation without paying
+      for third-party map APIs — full control over styling, data layers and routing for a region.
+    frontend: ["React 18", "Vite 6", "MapLibre GL JS"]
+    backend: ["TileServer GL (tiles)", "Valhalla (routing)", "Maputnik (style editor)", "Python tooling"]
+    devops: [Docker, "Docker Compose (dev/test/prod)", "Caddy (HTTPS/CORS/cache)", nginx, Playwright]
+    database: ["MBTiles (SQLite tile store)", "GeoJSON data"]
+    capabilities: ["Vector & raster map rendering with OSM/CARTO fallback", "Switchable Base/Dark/3D styles with extruded buildings & terrain", "Turn-by-turn routing", "Indoor floor plans with room-to-room pathfinding", "Custom data layers (routes, POIs, zones)", "Location search", "Live map style editing (Maputnik)", "Geolocation & POI popups"]
+    integrations: ["OpenStreetMap tiles", "CARTO basemap", "Geofabrik OSM extracts", Maputnik]
+    repos: [custom-map]
+
+  - id: custom-route
+    name: Custom Routing Map Studio
+    area: gis-point
+    type: tool
+    status: active
+    client_facing: yes
+    industry: Logistics & transportation — routing
+    what_it_is: >
+      A self-hosted road-routing platform that lets users edit the underlying map, rebuild the
+      routing graph, and get turn-by-turn directions on an interactive map.
+    what_its_for: >
+      Lets teams add or correct roads (private access roads, closures, custom paths) that public maps
+      miss, then instantly recompute accurate driving routes and travel times for delivery, fleet and
+      field-operations planning.
+    frontend: ["OSRM Frontend (Leaflet UI)", "HTML/JS", "Server-Sent Events"]
+    backend: ["Python", Flask, "OSRM routing engine", "osmium-tool"]
+    devops: [Docker, "Docker Compose", "Docker Engine SDK (Python)"]
+    capabilities: ["Interactive route planning & turn-by-turn directions", "Upload custom OSM road/route edits", "Merge edits into base OSM data", "Automated routing-graph rebuild (extract/partition/customize)", "Live streaming progress during remap", "Auto routing-engine restart", "Shared-memory dataset preloading"]
+    integrations: ["OpenStreetMap / Geofabrik extracts"]
+    repos: [custom-route]
+
+  - id: geoserver-mini
+    name: GeoserverGIS Mini
+    area: gis-point
+    type: product
+    status: experimental
+    client_facing: yes
+    industry: Geospatial — mapping
+    what_it_is: >
+      A compact web mapping application that publishes spatial data through GeoServer and displays it
+      in an interactive browser map.
+    what_its_for: >
+      Demonstrates a full geospatial stack for serving, styling and exploring map layers so teams can
+      visualize location data over base maps and query features on click.
+    frontend: ["React", TypeScript, OpenLayers, Vite]
+    backend: [FastAPI, Python]
+    devops: [Docker, "Docker Compose"]
+    database: [PostgreSQL, PostGIS]
+    capabilities: ["Interactive base map", "WMS layer overlay", "Map legend & scale bar", "GetFeatureInfo click popups", "Automated layer publishing via REST", "SLD layer styling", "Spatial data storage & serving"]
+    integrations: ["GeoServer (WMS/REST)", "SLD styling"]
+    repos: [geo-server-test]
+
+  - id: road-damage-detection
+    name: Road Damage Detection
+    area: external
+    type: product
+    status: active
+    client_facing: yes
+    industry: Infrastructure maintenance & road safety — computer vision
+    what_it_is: >
+      A computer-vision system that automatically detects and classifies road-surface damage such as
+      potholes and cracks from images, video and live camera feeds.
+    what_its_for: >
+      Helps road authorities and maintenance teams inspect roads faster and more consistently,
+      prioritize repairs and improve safety by replacing manual surveys with automated detection.
+    frontend: [Streamlit, streamlit-webrtc]
+    backend: ["Python", PyTorch, "YOLOv8 (Ultralytics)", "TensorFlow Object Detection API", OpenCV]
+    mobile: ["Android (on-device detection with GPS geotagging)"]
+    devops: ["Streamlit Community Cloud", "CUDA/GPU inference"]
+    capabilities: ["Image-based damage detection", "Video-based detection", "Real-time webcam/live detection", "Classification of damage types (cracks, potholes)", "On-device mobile detection with GPS logging", "Custom model training (RDD2022)"]
+    integrations: ["WebRTC / STUN (live video)", "Streamlit Cloud"]
+    repos: [RoadDamageDetection, RoadDamageDetector]
+
+  - id: slope-detection
+    name: Slope Detection
+    area: external
+    type: tool
+    status: experimental
+    client_facing: no
+    industry: Road & infrastructure inspection — computer vision
+    what_it_is: >
+      A computer-vision tool that detects cracks and slopes in road-survey images using a YOLOv7
+      object-detection model.
+    what_its_for: >
+      Automates visual inspection of road and pavement condition from vehicle-mounted survey imagery,
+      flagging cracks and slope defects so maintenance and safety issues are found faster and at scale.
+    backend: ["Python", PyTorch, YOLOv7, OpenCV, "TensorFlow/Keras", NumPy]
+    capabilities: ["Object detection of cracks & slopes", "Batch image inference", "Model training & export (ONNX, CoreML, TFLite)", "Classic OpenCV edge/contour crack detection"]
+    repos: [SlopeDetection]
+
+  - id: 3d-model-viewer
+    name: 3D Model Viewer
+    area: external
+    type: tool
+    status: active
+    client_facing: yes
+    industry: Geospatial — 3D visualization
+    what_it_is: >
+      An Angular web app that converts large 3D models into streamable 3D Tiles and renders them
+      interactively in the browser using Three.js.
+    what_its_for: >
+      Lets teams view, inspect and measure very large geolocated 3D models directly in a browser with
+      level-of-detail streaming, so heavy meshes can be shared and explored without desktop software.
+    frontend: ["Angular 18", TypeScript, "Three.js", "3d-tiles-renderer", RxJS]
+    backend: ["Angular SSR (Node)", "Python conversion (trimesh, py3dtiles, pygltflib, Pillow)"]
+    capabilities: ["OBJ to 3D Tiles conversion", "Level-of-detail tile streaming", "Batch model conversion", "Tileset validation & inspection", "Orbit/pan/zoom controls", "Distance measurement", "Wireframe/grid/axes toggles", "Screenshot export", "Geolocation of tiles"]
+    integrations: ["glTF/GLB models", "OBJ models", "3D Tiles (tileset.json)"]
+    repos: [3dmodel-viwer]
+
+  - id: soil-raster-processing
+    name: Soil Raster Processing Pipeline
+    area: external
+    type: tool
+    status: experimental
+    client_facing: unknown
+    industry: Agriculture / geospatial — soil data engineering
+    what_it_is: >
+      A collection of Python scripts that read, clean and merge soil GeoTIFF/VRT rasters and index the
+      extracted soil values into Elasticsearch as H3 hexagons.
+    what_its_for: >
+      Turns raw satellite/soil raster datasets into a searchable, map-ready spatial database so soil
+      properties can be queried and visualized by location.
+    backend: ["Python", GDAL, rasterio, pyproj, shapely, "h3", NumPy]
+    database: [Elasticsearch]
+    capabilities: ["GeoTIFF/VRT raster reading", "SoilGrids download & mosaicking", "GeoJSON masking & cropping", "Raster gap filling", "TIFF merging", "Coordinate reprojection", "Colormap legend parsing", "Point-value pixel sampling", "H3 hexagon generation with color mapping", "Bulk resumable indexing to Elasticsearch"]
+    integrations: ["SoilGrids (GDAL /vsicurl)", Elasticsearch]
+    repos: [SoilWebDav]
+
+  - id: geo-data-utils
+    name: Geospatial & Data Conversion Toolkit
+    area: external
+    type: tool
+    status: active
+    client_facing: no
+    industry: Geospatial — data conversion & ETL
+    what_it_is: >
+      A collection of command-line utilities that convert and reproject geospatial and tabular data
+      between raster, vector, point-cloud, spreadsheet and 3D-tile formats.
+    what_its_for: >
+      Lets teams quickly move data between incompatible GIS and reporting formats, standardize
+      coordinate systems, and prepare datasets for web maps, 3D viewers, analytics and search indexes
+      without manual reprocessing.
+    backend: ["Python"]
+    database: [Elasticsearch]
+    capabilities: ["GeoTIFF / raster conversion", "GeoPackage to GeoJSON conversion", "Coordinate reprojection (CRS transforms)", "JSON to Excel / spreadsheet export", "LiDAR LAS/LAZ conversion & point-cloud analysis", "PLY point-cloud to 3D Tiles / GLB / splat tiling", "OpenStreetMap data extraction & processing", "H3 spatial indexing & search ingestion"]
+    integrations: ["GDAL/OGR", pyproj, GeoPandas, "pandas / openpyxl", laspy, "Open3D / trimesh / pygltflib", "OSM tools (osmium/osmconvert)", Elasticsearch, "Uber H3"]
+    repos: [TifConverter, gpks-to-geojson, json-to-excel, lidar-converter, ply_tiles, osm-map]
+
+  - id: telegram-accountant
+    name: Telegram Accountant Bot
+    area: external
+    type: product
+    status: active
+    client_facing: unknown
+    industry: Field-services operations — reporting & cash-flow accounting
+    what_it_is: >
+      A Telegram bot for daily field reporting and cash-flow accounting across field units.
+    what_its_for: >
+      Lets field workers submit daily contract reports (meters, days) and unit managers do monthly
+      planning, then tracks plan-versus-actual cash flow with dashboards, forecasts and automated
+      reminders and risk alerts.
+    backend: ["Python", "python-telegram-bot", asyncio, APScheduler]
+    mobile: [Telegram]
+    devops: ["GitHub Actions", systemd, "SSH deploy"]
+    database: [SQLite, SQLAlchemy, aiosqlite]
+    capabilities: ["Daily worker reports per contract", "Monthly planning for managers", "Plan-vs-actual dashboards with forecasts", "Deviation risk alerts", "Scheduled reminders & morning dashboard", "Accrual act tracking", RBAC]
+    integrations: ["Telegram Bot API"]
+    repos: [telegram-accountant]

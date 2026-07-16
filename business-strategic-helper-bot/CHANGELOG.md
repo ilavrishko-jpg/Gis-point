@@ -2,6 +2,14 @@
 
 Кожен запис: дата · що змінилось · навіщо · на основі яких сигналів. Це довготривала памʼять бота.
 
+## 2026-07-16 — Навичка gis-point-capabilities
+- Додано навичку `gis-point-capabilities` (Стратегія / GTM) — перевіряє запит клієнта чи RFP
+  проти реального (анонімізованого) портфоліо GIS-Point і дає вердикт fit + докази, а також
+  пише маркетингові описи продуктів.
+- Джерело правди — `catalog.yaml` (45 проєктів/можливостей) + `reference/` (industries,
+  capability-index, tech-stack).
+- Внесено в `governance/registry.md`. Використання — для лідогенерації та маркетингу GIS-Point.
+
 ## 2026-06-28 — Ініціалізація
 - Створено бота на базі методології Scaling Up (Harnish), 4 зони рішень.
 - Додано 8 бізнес-навичок: company-stage-calibrator, lean-process-writer, one-page-strategic-plan,
