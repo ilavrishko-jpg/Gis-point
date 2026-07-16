@@ -2,6 +2,16 @@
 
 Кожен запис: дата · що змінилось · навіщо · на основі яких сигналів. Це довготривала памʼять бота.
 
+## 2026-07-16 — Стратегічна сесія AllGIS / Oak Peace (proposed, чекає гейту власника)
+- Додано 4 навички (статус `proposed`, активуються лише merge власника):
+  `group-structure-and-ip-ownership`, `business-model-and-offer-design`,
+  `partner-equity-and-investment-split`, `strategy-brainstorm`.
+- Навіщо: запит власника по субпродукту AllGIS виявив прогалини у структуруванні власності IP,
+  дизайні оферу/монетизації, розподілі часток партнерів і фасилітації брейнштормів.
+- Сигнали: жива сесія `strategy-sessions/allgis-oakpeace.md` (4 заходи) + беклог 2026-07-16 (явно цінні).
+- Додано фінальну рекомендацію `strategy-sessions/allgis-recommendation.md`.
+- Метод: після merge оновити цей запис зі статусу `proposed` → `active` у registry.
+
 ## 2026-06-28 — Ініціалізація
 - Створено бота на базі методології Scaling Up (Harnish), 4 зони рішень.
 - Додано 8 бізнес-навичок: company-stage-calibrator, lean-process-writer, one-page-strategic-plan,
