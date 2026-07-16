@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "skills": {
+    "anticopywriting-ai": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "anticopywriting-ai/SKILL.md",
+      "computedHash": "dbfc8bcfec5cda5e657bd4cfcb4ed8a3aba53d34c81371799f144afb96607d89"
+    },
+    "lead-scoring": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "lead-scoring/SKILL.md",
+      "computedHash": "22b995654fb45868b60b0a32d525156c0551c5db77f53fb1d5883ba070b81458"
+    },
+    "meeting-prep": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "meeting-prep/SKILL.md",
+      "computedHash": "38c00c0e8c30dc7225cbe2a9770cfabd052d22837491352a48b7e2036f4e4dbe"
+    },
+    "offer-factory": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "offer-factory/SKILL.md",
+      "computedHash": "89a46596719457a6c5a3853b4e773aa5d90c6770c3bfbbef69588841c8a17a71"
+    },
+    "proposal-generator": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "proposal-generator/SKILL.md",
+      "computedHash": "fab0f199ea1bbec24e0488650bab13451983a53e65f0b6d2ecb4bfe517356713"
+    },
+    "reply-audit": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "reply-audit/SKILL.md",
+      "computedHash": "3dcb56a5cc43e40358276b70b768ded6208e829a9784650744c5031082eac283"
+    },
+    "reply-objection-handler": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "reply-objection-handler/SKILL.md",
+      "computedHash": "c4d4c0d02d9d51d678655b9551904389530565b2e25ae34c8b7168a10db23afb"
+    },
+    "weekly-outreach-report": {
+      "source": "victor-shulga/gtm-skills",
+      "sourceType": "github",
+      "skillPath": "weekly-outreach-report/SKILL.md",
+      "computedHash": "6891f6d2fcd801bab6ec8b030f50d513d1f7d86dd14d4aff2754e8546f258d40"
+    }
+  }
+}
