@@ -1,6 +1,54 @@
 {
   "version": 1,
   "skills": {
+    "01-strategy": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/01-strategy/SKILL.md",
+      "computedHash": "98e083bb29d35347a751fe8813acd52118e3be2f071aeddb6b75690fe20991e2"
+    },
+    "02-profile-audit": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/02-profile-audit/SKILL.md",
+      "computedHash": "c14fc51907c793e5437eb165b81cee4e414c930a29420304dc09581251fdc99d"
+    },
+    "03-research": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/03-research/SKILL.md",
+      "computedHash": "bf1bd106e54729debd5a53dfdc7601ce356bb4b57d7f37539b000fd7c09365ec"
+    },
+    "04-weekly-plan": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/04-weekly-plan/SKILL.md",
+      "computedHash": "279c02451cf2da1a94858fd1b3ac63f86e9be0cfa415e1aa193b27c2a3757c56"
+    },
+    "05-creative": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/05-creative/SKILL.md",
+      "computedHash": "4a94e1e27b42a82a9755025f3443c1461108471f0aa804476413e2a98dfa9fb0"
+    },
+    "06-write": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/06-write/SKILL.md",
+      "computedHash": "45eca0df46ecd04a47959a9546b616ea7b601965fee1d0a21d56a8ce7feddef1"
+    },
+    "07-repurpose": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/07-repurpose/SKILL.md",
+      "computedHash": "d9897ab634ea789f8841096f3b1ad01dc74de3f29644253a2f48a3a9b36ef11b"
+    },
+    "08-engage": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/08-engage/SKILL.md",
+      "computedHash": "27a51cdee5b97c55f1295a04bbb05481910d4c63cee58f7996c45544c3dfa093"
+    },
     "anticopywriting-ai": {
       "source": "victor-shulga/gtm-skills",
       "sourceType": "github",
@@ -42,6 +90,12 @@
       "sourceType": "github",
       "skillPath": "reply-objection-handler/SKILL.md",
       "computedHash": "c4d4c0d02d9d51d678655b9551904389530565b2e25ae34c8b7168a10db23afb"
+    },
+    "run": {
+      "source": "victor-shulga/content-engine-skills",
+      "sourceType": "github",
+      "skillPath": "skills/run/SKILL.md",
+      "computedHash": "157713abc09bbcc19b88343d5241de746bab306e80dd0cc118c30efe6252c78c"
     },
     "weekly-outreach-report": {
       "source": "victor-shulga/gtm-skills",
