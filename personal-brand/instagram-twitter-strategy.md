@@ -5,7 +5,7 @@
 **Visibility level:** *Professional* — you appear on camera and lead with business, leadership, and ideas. Family stays light (values, not private details), and failures are framed as **professional lessons**, not raw personal confession.
 
 **Positioning in one line:**
-> *Global engineering entrepreneur — founder of International Engineering Group (since 2009) and COO of GIS-Point — building companies, products, and people across borders.*
+> *Global engineering entrepreneur — founder of International Engineering Group (since 2009) and COO of GIS-Point — based between the UK and Ukraine, building companies and products across borders.*
 
 ---
 
@@ -78,34 +78,81 @@ The part that makes you likeable and real — kept professional.
 
 ---
 
-## 4. Profile setup
+## 4. Profile setup — copy-paste ready
 
-### Instagram bio (pick/adapt one)
-**Option A — clear & credible**
+> Replace `[Your Name]` and `@yourhandle` with your real name and handle. Being based between the **UK 🇬🇧 and Ukraine 🇺🇦** is a genuine asset — it positions you as a bridge between strong Eastern European engineering and Western (UK / North America) markets. Use it.
+
+### Instagram — field by field
+
+**Name field** (searchable — use your name + a keyword):
 ```
-Founder, International Engineering Group (2009) · COO @ GIS-Point
-Building companies & products globally 🌍
-Entrepreneur • NLP coach • Father of 3
-Lessons from 15 years of building (and failing forward) ↓
-[link]
-```
-**Option B — personality-forward (still professional)**
-```
-Lifelong builder. Many startups — some worked, all taught me something.
-Engineering group founder · Global operator · NLP coach · Marathoner
+[Your Name] — Engineering Entrepreneur
 ```
 
-### Twitter / X bio
+**Username / handle:**
+```
+@yourhandle   (your name, same on every platform — this is a personal brand, not a company)
+```
+
+**Category** (Instagram professional account): `Entrepreneur`
+
+**Bio** (⚠️ Instagram limit = **150 characters**, line breaks included — pick one):
+
+*Option A — clear & credible*
+```
+Founder, International Engineering Group · COO GIS-Point
+Building companies globally 🌍 Based UK 🇬🇧 & Ukraine 🇺🇦
+Entrepreneur · NLP coach ↓
+```
+
+*Option B — personality-forward (still professional)*
+```
+Lifelong builder. Engineering group founder · COO GIS-Point
+UK 🇬🇧 & Ukraine 🇺🇦 · Global operator · NLP coach · Marathoner
+```
+
+*Option C — short & punchy*
+```
+Building engineering companies across the UK 🇬🇧 & Ukraine 🇺🇦
+Founder · Operator · NLP coach · Lessons from 15 yrs building ↓
+```
+
+**Link(s)** (Instagram allows several): LinkedIn · International Engineering Group site · GIS-Point site · contact form. Use a simple one-page link hub (your own site or Linktree).
+
+**Contact buttons:** turn on the **Email** button (and WhatsApp/phone only if you want direct inbound).
+
+### The "About" text (for your website / link-in-bio page — no character limit)
+```
+I'm [Your Name] — an engineering entrepreneur building companies and
+products across the UK and Ukraine, and expanding into North America.
+
+Since 2009 I've been the founder of International Engineering Group,
+and today I'm co-partner and COO of GIS-Point. Inside the group we've
+launched two products and we develop our businesses globally.
+
+I've built startups, projects and companies my whole life — some
+succeeded, some didn't, and every one taught me something about focus,
+timing and resilience. As a certified NLP coach and a marathon
+finisher, I care as much about mindset and endurance as about strategy.
+
+I split my time between the UK and Ukraine, and I use that position to
+connect strong engineering talent with Western markets.
+
+Follow along for the real lessons of building companies globally —
+and let's connect if we can build something together.
+```
+
+### Twitter / X bio (limit = 160 characters)
 ```
 Founder, International Engineering Group · COO GIS-Point.
-Building companies & products across the globe. Ex-failed-founder → still building.
-Engineering, entrepreneurship, mindset. NLP coach. Dad x3.
+Building engineering companies · UK 🇬🇧 & Ukraine 🇺🇦.
+Entrepreneurship, mindset. NLP coach.
 ```
 
-### Handle & name
-- Use the **same handle** on both platforms (your name, not a company name — this is a *personal* brand).
-- Name field should include a keyword: e.g. `Name — Engineering Entrepreneur`.
-- Link: a simple one-page site or Linktree pointing to LinkedIn, your companies, and a contact form.
+### Handle & name — rules
+- **Same handle everywhere** (your name, not a company name — this is a *personal* brand).
+- **Location field:** set it to `London / Kyiv` (or your actual cities) — the dual base signals your international reach.
+- **Link:** one hub pointing to LinkedIn, both companies, and a contact form.
 
 ---
 
