@@ -15,6 +15,10 @@
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
+| group-structure-and-ip-ownership | Стратегія+Гроші | proposed | Хто володіє активами/IP; «платити vs володіти»; intercompany, related-party |
+| business-model-and-offer-design | Стратегія | proposed | Архітектура SKU/оферу, монетизація, окупність під потужність |
+| partner-equity-and-investment-split | Гроші | proposed | Частки й інвестиції партнерів: sweat vs кеш, true-up, dev-позика |
+| strategy-brainstorm | Мета | proposed | Фасилітація глибоких стратегічних брейнштормів (вузли, кишені, жива памʼять) |
 
 ## Агенти (agents)
 | Агент | Зона | Статус | Коли викликати |
