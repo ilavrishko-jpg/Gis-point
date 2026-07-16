@@ -2,6 +2,8 @@
 
 **Goal:** Present your personality and build trust with potential clients and partners in the **UK and North America**, as the founder of an international group of companies.
 
+**Visibility level:** *Professional* — you appear on camera and lead with business, leadership, and ideas. Family stays light (values, not private details), and failures are framed as **professional lessons**, not raw personal confession.
+
 **Positioning in one line:**
 > *Global engineering entrepreneur — founder of International Engineering Group (since 2009) and COO of GIS-Point — building companies, products, and people across borders.*
 
@@ -34,12 +36,12 @@ What you actually do and build.
 - *Purpose: credibility and "this person builds real things."*
 
 ### Tile 2 — The Entrepreneur's Lessons (Journey & Resilience)
-Your most valuable and relatable asset.
+Your most valuable and relatable asset — kept at a professional register.
 - You've built startups, projects, and companies your whole life
-- The startups that **failed** — what they cost you and what they taught you
-- Why resilience, not luck, is the real entrepreneurial skill
-- Decisions you'd make differently; lessons for younger founders
-- *Purpose: authenticity and trust. Western audiences reward founders who show the scars, not just the trophies.*
+- The startups that **didn't work** — framed as *business lessons* (market timing, focus, capital, team), not personal drama
+- Why resilience and judgment, not luck, are the real entrepreneurial skills
+- Decisions you'd make differently; practical lessons for founders and operators
+- *Purpose: credibility and trust. Western audiences respect founders who share hard-won lessons — you can do this without over-exposing yourself.*
 
 ### Tile 3 — Mindset & Coaching (Leadership & Growth)
 Where your NLP certification becomes an advantage.
@@ -49,12 +51,12 @@ Where your NLP certification becomes an advantage.
 - Habits and routines that keep a global operator sane
 - *Purpose: positions you as more than a businessman — a leader people learn from.*
 
-### Tile 4 — The Human (Family, Values & Lifestyle)
-The part that makes you likeable and real.
-- Father of three — balancing family with a global business
-- Values, culture, the "why" behind the work
-- Travel between markets, everyday moments, what grounds you
-- *Purpose: relatability. People do business with humans, not logos.*
+### Tile 4 — The Human (Values & Perspective)
+The part that makes you likeable and real — kept professional.
+- Values and the "why" behind the work (mention being a father of three as *motivation and perspective*, without private details or kids' faces)
+- Culture, principles, how you lead and make decisions
+- Travel between markets, workspaces, what a global operator's week looks like
+- *Purpose: relatability. People do business with humans, not logos — but you control how much you reveal.*
 
 ---
 
@@ -66,11 +68,11 @@ The part that makes you likeable and real.
 | Co-partner & COO, GIS-Point | Tile 1 | Shows you operate, not just own. |
 | Launched 2 products inside the group | Tile 1 | Concrete proof of building. Do a post per product. |
 | Developing businesses globally | Tile 1 / 4 | Ties to UK/NA expansion story. |
-| Earlier startups that failed | Tile 2 | **Your strongest content.** Vulnerability + lessons = trust in Western markets. |
+| Earlier startups that failed | Tile 2 | **Your strongest content.** Framed as business lessons (not confession) = credibility in Western markets. |
 | "I've built startups my whole life" | Tile 2 | Your identity line — a lifelong builder. |
 | NLP coach certification | Tile 3 | Differentiator. Lets you post mindset/coaching content credibly. |
 | One marathon finished | Tile 3 | Metaphor for endurance and long-term thinking. |
-| Three kids | Tile 4 | Humanizes you; the "why I build" story. |
+| Three kids | Tile 4 | Mention as motivation/perspective only — no private details or kids' faces. |
 
 **What to lead with (your top 3 signals):** ① 15 years running a real international engineering group, ② a lifelong builder who has failed and kept going, ③ a coach-certified leader who thinks about mindset. That trio is memorable and hard to fake.
 
@@ -87,10 +89,10 @@ Entrepreneur • NLP coach • Father of 3
 Lessons from 15 years of building (and failing forward) ↓
 [link]
 ```
-**Option B — personality-forward**
+**Option B — personality-forward (still professional)**
 ```
-Lifelong builder. 3 kids, 1 marathon, many startups — some failed, all taught me something.
-Engineering group founder · Global operator · NLP coach
+Lifelong builder. Many startups — some worked, all taught me something.
+Engineering group founder · Global operator · NLP coach · Marathoner
 ```
 
 ### Twitter / X bio
@@ -116,7 +118,7 @@ A clean opening grid tells your whole story at a glance:
 3. The failure story — a startup that didn't work and what it taught you (Tile 2)
 4. Product #1 you launched — the problem it solves (Tile 1)
 5. Mindset post — one NLP or leadership idea you use daily (Tile 3)
-6. Family / why you build — father of three (Tile 4)
+6. Why you build — values and perspective (father of three as motivation, no private details) (Tile 4)
 7. Product #2 / global expansion into UK & North America (Tile 1)
 8. Marathon lesson — endurance = entrepreneurship (Tile 3)
 9. "What I believe about building companies" — values (Tile 2/4)
