@@ -11,8 +11,16 @@
 
 | Файл | Призначення |
 | --- | --- |
-| [`create-form.gs`](./create-form.gs) | Google Apps Script — одним запуском будує повну Google Форму (44 питання, блоки A–L). |
+| [`create-form.gs`](./create-form.gs) | Google Apps Script — загальний discovery: повна Google Форма (44 питання, блоки A–L). |
+| [`meeting-guide-manufacturer.md`](./meeting-guide-manufacturer.md) | **Гід для живої зустрічі з виробником** (з місцем для нотаток): точність по місіях, SWaP, протоколи інтеграції, день/ніч, ціна-тригер переходу від конкурентів. |
+| [`create-form-manufacturer.gs`](./create-form-manufacturer.gs) | Apps Script — та сама виробнича анкета у вигляді Google Форми (якщо треба надіслати цифрово). |
 | `README.md` | Інструкція запуску та мапінг питань. |
+
+### Який файл коли брати
+
+- **Зустріч 1:1 з виробником** → відкрий [`meeting-guide-manufacturer.md`](./meeting-guide-manufacturer.md) і веди нотатки прямо в ньому.
+- **Надіслати виробнику анкету онлайн** → згенеруй форму з [`create-form-manufacturer.gs`](./create-form-manufacturer.gs) (функція `createFlybyManufacturerForm`).
+- **Широкий discovery по ринку** → [`create-form.gs`](./create-form.gs) (функція `createProjectFlyForm`).
 
 > У цьому середовищі немає прямого доступу до Google Forms API, тож форма
 > генерується через **Google Apps Script** — це офіційний, повторюваний спосіб
