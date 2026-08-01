@@ -1,48 +1,50 @@
 # UC Berkeley — Навчальні матеріали (AgriTech Accelerator)
 
-Матеріали з навчання в **UC Berkeley Haas AgriTech Accelerator** (травень 2026) + візити до UC Davis / Stanford. Ця папка накопичує вихідні матеріали, з яких далі формуватимуться **методичка навчання** та **презентація**.
+Матеріали з навчання в **UC Berkeley Haas AgriTech Accelerator** (травень 2026) + візити до UC Davis / Stanford. Ця папка накопичує вихідні матеріали та навчальну програму для **передачі знань команді GIS-Point**.
 
-> Статус: 🟡 накопичення матеріалів (батч 1). Далі буде додано ще.
+> Статус: 🟢 повний набір сесій зібрано (12 сесій, 10 спікерів) + сформовано зміст навчання.
+
+## 🚀 Почати звідси
+**➡️ [`01-curriculum.md`](01-curriculum.md) — Навчальна програма (зміст + тези по кожній темі).** Головний документ для передачі знань команді: 8 тематичних модулів, наскрізні принципи, рекомендований формат навчання.
 
 ## 📂 Структура
 
 ```
 training/uc-berkeley/
-├── README.md                       ← цей файл (індекс)
-├── 00-field-notes-report.md        ← зведений звіт: контакти спікерів + ключові висновки
-├── sessions/                       ← конспекти сесій спікерів
-│   ├── 01-barry-katz-silicon-valley-ecosystem.md
-│   ├── 02-natalie-lambert-1-synthetic-personas.md
-│   ├── 03-natalie-lambert-2-content-systems.md
-│   ├── 04-george-panagiotopoulos-fundraising.md
-│   └── 05-caroline-simard-ai-transformation.md
-├── articles/                       ← статті/додаткові матеріали
-│   └── ai-doesnt-reduce-work-it-intensifies-it.md
-└── source-files/
-    └── original-files.md           ← посилання на оригінали в Google Drive
+├── README.md                       ← індекс
+├── 01-curriculum.md                ← 🎓 НАВЧАЛЬНА ПРОГРАМА (зміст + тези)
+├── 00-field-notes-report.md        ← реєстр контактів + ключові висновки
+├── sessions/                       ← конспекти всіх 12 сесій
+├── articles/                       ← статті (HBR)
+└── source-files/original-files.md  ← посилання на оригінали в Drive
 ```
 
-## 📑 Зміст матеріалів
+## 🎤 Сесії спікерів (за модулями програми)
 
-### Зведений звіт
-- **[00-field-notes-report.md](00-field-notes-report.md)** — повний реєстр контактів (17 спікерів Berkeley + 7 контактів UC Davis + візити/зустрічі), пріоритети A/B/C, і структуровані «Field Notes» по темах: VC, пітч, evidence, AI-маркетинг, AI в організаціях, carbon credits, data strategy, каліфорнійський агроринок, переговори.
+| # | Спікер | Тема | Модуль |
+|---|--------|------|--------|
+| 01 | **Barry Katz** | Silicon Valley: мислення, історія, екосистема | М1 |
+| 04 | **George Panagiotopoulos** | Венчурний капітал і фандрейзинг | М2 |
+| 06 | **Gigi Wang** | Пітчинг «будь-що будь-кому» + NABC | М3 |
+| 02 | **Natalie Lambert (1)** | Синтетичні персони для стрес-тесту | М3, М5 |
+| 07 | **Michael Anderson** | Докази та валідація (RCT / experiments) | М4 |
+| 03 | **Natalie Lambert (2)** | AI-контент системи для видимості | М5 |
+| 08 | **Gauthier Vasseur (1)** | Дані як фундамент (FAIR data) | М6 |
+| 09 | **Gauthier Vasseur (2)** | AI демістифікований (ML / Markdown) | М6 |
+| 05 | **Caroline Simard** | AI-трансформація організації | М7 |
+| 10 | **Rebecca Hinds** | AI на роботі: парадокс продуктивності | М7 |
+| 11 | **Dan Klein** | Імпровізаційні продажі, невдачі, «yes and» | М8 |
+| 12 | **Ellen Bruno** | Вода та каліфорнійський агроринок | Дод. |
 
-### Сесії спікерів
-| # | Спікер | Тема | Ключове |
-|---|--------|------|---------|
-| 01 | **Barry Katz** | Silicon Valley: мислення, історія, екосистема | Інновації народжуються з екосистеми, а не з технології; не копіюйте SV — знайдіть свої активи |
-| 02 | **Natalie Lambert (1/2)** | Синтетичні персони для стрес-тесту стартапу | AI-персони (VC / operational buyer / sustainability) для перевірки пітчу перед реальною зустріччю |
-| 03 | **Natalie Lambert (2/2)** | AI-контент-системи для видимості | Перехід від пошуку до AI-відповідей; LinkedIn як джерело для AI; content flywheel + AI-спеціалісти |
-| 04 | **George Panagiotopoulos** | Фандрейзинг та мислення інвестора | Networking, швидкість (CEO = Chief Experimentation Officer), think big, problem vs. issue, painkiller vs. vitamin |
-| 05 | **Caroline Simard** | AI-трансформація та організаційні зміни | AI не лагодить зламані процеси — підсилює їх; J-крива; psychological safety; AI як операційна система |
-
-### Статті
-- **[AI Doesn't Reduce Work — It Intensifies It](articles/ai-doesnt-reduce-work-it-intensifies-it.md)** (HBR, 2026) — дослідження про «інтенсифікацію» роботи через AI та концепцію «AI practice».
+## 📄 Інше
+- **[00-field-notes-report.md](00-field-notes-report.md)** — 17 спікерів Berkeley + 7 контактів UC Davis + візити, пріоритети A/B/C, тематичні висновки.
+- **[articles/AI Doesn't Reduce Work](articles/ai-doesnt-reduce-work-it-intensifies-it.md)** — стаття HBR (концепція «AI practice»).
 
 ## 🎯 Наступні кроки
-1. ➕ Додати решту матеріалів навчання (в міру надходження).
-2. 📘 Сформувати **методичку навчання** на основі цих конспектів.
-3. 🖥️ Підготувати **презентацію**.
+1. ✅ Зібрано всі сесії + сформовано зміст навчання (`01-curriculum.md`).
+2. ⬜ Обрати формат: коротка методичка чи повний курс.
+3. ⬜ Розгорнути модулі в повноцінні матеріали + презентацію.
+4. ⬜ Адаптувати приклади під продукти GIS-Point.
 
 ---
 *Оригінали файлів: [source-files/original-files.md](source-files/original-files.md)*
