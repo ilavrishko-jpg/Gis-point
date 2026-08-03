@@ -49,13 +49,29 @@ So this GeoAI/ML section is **premium-tier, not front-door**. Its job is not to 
 Layout gets the section *seen*. None of the three variants converts on its own, because the copy has **no exit toward a contract**. These apply to A, B and C equally:
 
 1. **No CTA / no next step (biggest blocker).** A convinced lead has nowhere to go. Add a tier-appropriate close: **"Book a technical session"** or **"See a live demo of allgis.io."** Per brand voice, **not** "free pilot." Without this, the section informs but never converts.
-2. **No proof point — violates "proof before claim."** The section is all claim. "Validation, not black boxes" *promises* a measured number but *shows* none. Pair it with one verified IT-Unit metric (e.g. allgis.io as GIS-Point's own production SaaS; or a defensible Agro/LiDAR figure — **confirm with Alevtyna before publishing**, per the metric-ownership rule). One real number under that block is what makes it land.
+2. **No proof point — violates "proof before claim."** The section is all claim. "Validation, not black boxes" *promises* a measured number but *shows* none. Do **not** substitute an accuracy figure we cannot defend (e.g. the contested "500 km / 4 days / 97.2%" line — that number is not solidly verified and must not go on the page). Instead anchor with a proof we *own*: **allgis.io, our own geospatial SaaS running the same ML pipelines and evaluations in production.** A buyer can open it and check it; there is no metric to defend later. If a benchmark number is ever published here, the metric owner confirms it first.
 3. **No down-ladder bridge.** GeoAI/ML is the top rung, reached after embedding via GIS production. A software-curious lead who is not ready for a full custom-AI contract currently bounces. Add a soft bridge — "not ready to build? start with a demo dataset on the production side" — so the lead still enters the funnel instead of leaving.
 
 **Brand-voice compliance (all three pass):** no emojis, no em dashes, no "AI-native," no price-leading, no competitor name-dropping; "reduce cost" is carried by "at the cost of compute instead of headcount," which is defensible without an unverified number. Keep it that way — do not add adjectives to compensate for the missing proof point; add the *number*.
 
 ---
 
-## 5. One-line answer
+## 5. Double analysis — non-stock GeoAI & ML we can propose
 
-**Ship Variant C (violet band): it is the only layout that reads as its own tier, avoids being mistaken for the grid above, and puts the trust-closing "Validation" block where a CTA belongs — but its conversion depends on adding the two things all three variants are missing: a tier-appropriate CTA ("book a technical session / see a live allgis.io demo," never "free pilot") and one verified proof number under the Validation block.**
+"Stock" is what any off-the-shelf GIS or AI vendor already gives every client: a rented dashboard, a black-box score, a model they cannot maintain. Our differentiators are the opposite of all three, and they come from the moat — BSc+ engineers, our own production platform (allgis.io), and a handover model that leaves the client owning everything. Pure-AI shops lack the production QA; pure-production shops lack the ML. We hold both, which is what makes these hard to copy cheaply. Each proposition is read twice: the stock version, and our non-stock version.
+
+| Proposition | Stock in the industry | Our non-stock version | Edge |
+|---|---|---|---|
+| **You own the agents** | Rented SaaS or a black box licensed back to you forever | Models, pipelines, prompts, tool schemas, governance and evaluations land in your repository; no proprietary framework licensed back | Handover model |
+| **Accountable accuracy** | A confidence score you must trust, no threshold agreed, nobody's name on it | Thresholds agreed before anything ships, measured against a benchmark set, a BSc+ engineer signs off | Engineer sign-off |
+| **Human-in-the-loop spatial QA** | Automated output shipped as-is, or QA that never touches the ML | Dual review (processor ≠ QA) applied to ML output — the discipline that keeps production rework low, now on the model | Production QA on AI |
+| **Embedded, not a portal** | Log in to the vendor's dashboard to see your own data | Delivered as an API or a screen inside your own product, on your stack | Builds into your product |
+| **Open standards, no lock-in** | Proprietary format, closed cloud AutoML, export only while you keep paying | PostGIS, OGC, WMS/WFS, your CRS — interoperable with what you already run | GIS-native, open |
+| **Governed natural-language access** | A chatbot that answers, and sometimes acts, on its own | Plain-language questions on live spatial data with a human checkpoint before anything consequential is acted on | Safety by design |
+| **Standing change monitoring** | A one-off detection project that ends at the invoice | Continuous detection from satellite and drone imagery as a recurring service — subsidence, encroachment, asset and vegetation change, exception-only review | Recurring, not one-off |
+
+Which of these to surface on the page is a merchandising choice, not a build one — the C cards already carry pipelines, detection, prediction, natural-language and agents. The two that are not yet visible and differentiate hardest are **you own the agents** and **accountable accuracy**, which is why C+ leads its proof and closing line with exactly those.
+
+## 6. One-line answer
+
+**Ship Variant C (violet band): it is the only layout that reads as its own tier, avoids being mistaken for the grid above, and puts the trust-closing "Validation" block where a CTA belongs — but its conversion depends on adding the two things all three variants are missing: a tier-appropriate CTA ("book a technical session / see a live allgis.io demo," never "free pilot") and one *owned* proof under the Validation block — allgis.io, our own ML in production, not an accuracy figure we cannot defend.**
