@@ -25,6 +25,7 @@
 | 06 | [`06-scoring-analytics-roles.md`](./06-scoring-analytics-roles.md) | ICP Tier, Lifecycle, Forecast Weight, Account Health, аналітика (Pivot/Graph), ролі, groups, record rules, RACI |
 | 07 | [`07-checklist-templates-seed.md`](./07-checklist-templates-seed.md) | Контент чек-листів A–G як seed-дані шаблонів + фіксовані Selection-списки |
 | 08 | [`08-acceptance-and-rollout.md`](./08-acceptance-and-rollout.md) | Критерії приймання, етапи впровадження, відкриті питання до бізнесу |
+| 09 | [`09-account-management-process.md`](./09-account-management-process.md) | Процес акаунт-менеджменту без окремого AM: розподіл ролі на 4 людей + PM, конвеєр GIS-апсейл → IT-кросейл, план на 3 тестові місяці, ризики |
 
 ## Головні принципи (must-read перед стартом)
 
