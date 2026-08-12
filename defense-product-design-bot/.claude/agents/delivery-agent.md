@@ -17,7 +17,8 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 - Реалізоване ≠ спроєктоване, поки не звірив (дизайн-QA на критичних потоках).
 - Реліз без каналу фідбеку — глухий: Фаза 6 неможлива без способу почути фронт.
 
-Навички-інструменти: `field-validation` (Фаза 4), `delivery-compliance-handoff` (Фаза 5).
+Навички-інструменти: `field-validation` (Фаза 4), `delivery-compliance-handoff` і
+`product-roadmap-milestones` (Фаза 5).
 Протокол польового тесту — `references/degraded-first-field-test.md`.
 Артефакти на виході: звіт валідації + вердикт готовності; реліз + пройдені compliance-ворота + канал фідбеку.
 Перевіряй ворота 4→5 і 5→6 (`governance/stage-gates.md`).

@@ -9,12 +9,14 @@ Develop · Deliver) + **Stage-Gate**: між фазами стоять воро�
 офлайн/ніч/стрес/рукавиці, а не під ідеальне демо).
 
 ## Що вміє
-- **Веде по 6 фазах:** Discovery → Definition → Design → Validate → Deliver → Learn.
-- **Диригент фаз** (`product-lifecycle-orchestrator`) визначає, де команда, і проходить ворота.
+- **Веде по 6 фазах:** Discovery → Definition → Design → Validate → Deliver → Learn (диригент `product-lifecycle-orchestrator` проходить ворота).
+- **Discovery у два зрізи:** місія (mission/task analysis, JTBD, threat model) **+ ринок і промбаза** —
+  збір виробників БПЛА/постачальників, опитувальник (тех·рег·фін), синтез інтерв'ю, мапа ринку (скільки таких в Україні).
+- **Definition з фінансовим gate:** PRD + пріоритезація за критичністю місії + специфікація вимог + **бізнес-кейс/юніт-економіка (go/no-go)**.
 - **Дефенс-UX:** info-dense UI без перевантаження, human factors під стрес, design system.
 - **Геопросторовий/C2 UX** — пряма перевага GIS-Point: карти, шари, координати, ISR, situational awareness.
 - **Валідація з операторами** навіть при закритому доступі (проксі-метрики, degraded-тест на залізі).
-- **Delivery/Compliance:** інженерний handoff, дизайн-QA, сертифікаційні ворота (ATO/STIG/FedRAMP; STANAG).
+- **Delivery:** роадмеп із віхами, інженерний handoff, дизайн-QA, сертифікаційні ворота (ATO/STIG/FedRAMP; STANAG).
 - **Самонавчається** з фронтового фідбеку: прогалини → нові навички/чек-пункти через PR із гейтом власника.
 
 ## Швидкий старт
@@ -29,7 +31,7 @@ defense-product-design-bot/
 ├── CHANGELOG.md               # журнал самонавчання (довготривала памʼять)
 ├── .claude/
 │   ├── settings.json
-│   ├── skills/                # диригент + 6 навичок фаз + skill-author + agent-architect
+│   ├── skills/                # диригент + 12 навичок фаз + skill-author + agent-architect
 │   └── agents/                # discovery / design / delivery-agent
 ├── governance/                # ворота фаз, цикл навчання, стандарт, реєстр, беклог, шаблони
 ├── references/                # польовий degraded-тест, C2-символіка й координати
@@ -47,8 +49,9 @@ defense-product-design-bot/
 
 ## Місце в репозиторії GIS-Point
 - `business-strategic-helper-bot/` — стратегія компанії (Scaling Up).
-- `product-manager-flyby-bot/` — продукт-менеджмент напрямку БПЛА (виробники, опитування, ринок).
-- `defense-product-design-bot/` — **цей бот**: продуктовий дизайн дефенс-тек (від ідеї до фронту).
+- `defense-product-design-bot/` — **цей бот**: єдиний продуктовий бот дефенс-тек від ідеї до фронту.
+  Вбирає й продукт-менеджмент напрямку БПЛА (виробники, опитування тех/рег/фін, мапа ринку, юніт-економіка),
+  і продуктовий дизайн (UX, C2/гео, human factors, валідація, compliance).
 
 ## Межі (чесно)
 Бот не переписує себе автономно і не вигадує фронтовий фідбек: немає доступу до операторів — позначає

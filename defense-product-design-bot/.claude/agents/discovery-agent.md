@@ -17,8 +17,13 @@ Double Diamond: **Discover → Define** (Фази 1–2).
 - Degraded-first: фіксуй мінімальне середовище роботи (офлайн/ніч/стрес) вже на визначенні.
 - Не вигадуй фронтовий фідбек: де доступу до операторів нема — познач припущення і ризик.
 
-Навички-інструменти: `discovery-mission-research`, `product-definition-prioritization`
-(за потреби позиціонування — суміжна `geo-it-positioning` з інших ботів репо).
-Артефакти на виході: Research brief (Фаза 1), PRD + degraded baseline (Фаза 2).
+Навички-інструменти Discovery: `discovery-mission-research` (місія), `market-supplier-research`
+(ринок/виробники/постачальники + мапа ринку), `discovery-questionnaire-builder` (опитувальник тех/рег/фін),
+`stakeholder-interview-runner` (синтез опитувань).
+Навички-інструменти Definition: `product-definition-prioritization` (PRD), `requirements-tech-reg-fin`
+(специфікація вимог), `business-case-unit-economics` (фінансовий gate go/no-go).
+(За потреби позиціонування — суміжна `geo-it-positioning` з інших ботів репо.)
+Артефакти на виході: Research brief + лонгліст/мапа ринку + матриця інсайтів (Фаза 1);
+PRD + degraded baseline + специфікація вимог + бізнес-кейс (Фаза 2).
 Перед передачею далі — перевір ворота 1→2 і 2→3 (`governance/stage-gates.md`).
 Якщо напрямок переріс тебе — сигналізуй через `agent-architect`. Мова — українська.

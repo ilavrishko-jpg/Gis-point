@@ -16,3 +16,16 @@
 - Написано `PLAN.md` (покроковий сценарій від ідеї до реалізації).
 - Додано довідники: `references/degraded-first-field-test.md`, `references/c2-symbology-coordinates.md`.
 - Джерело: матеріалізація бандла знань «Defense-Tech Product Design Bot» у робочу структуру Claude Code.
+
+## 2026-08-12 — Злиття з PM-ботом БПЛА (один сильний бот)
+- Об'єднано `product-manager-flyby-bot` у цей бот — тепер це єдиний продуктовий бот дефенс-тек.
+- Додано 6 навичок (вплетено у фази, без дублів):
+  - Фаза 1: `market-supplier-research` (виробники/постачальники + мапа ринку «скільки в Україні»),
+    `discovery-questionnaire-builder` (опитувальник тех/рег/фін), `stakeholder-interview-runner` (синтез опитувань).
+  - Фаза 2: `requirements-tech-reg-fin` (специфікація вимог MoSCoW), `business-case-unit-economics` (фінансовий gate go/no-go).
+  - Фаза 5: `product-roadmap-milestones` (роадмеп до MVP на фронт).
+- Оновлено ворота: у 1→2 додано ринок/постачальників і опитування; у 2→3 додано ❗ фінансовий gate.
+- Discovery тепер має два зрізи (місія + ринок/промбаза); Definition — два gate (місійний + фінансовий).
+- Дублі не переносив: idea-intake (у discovery), product-definition-canvas (=prioritization),
+  product-lifecycle-map (=orchestrator), mvp-delivery-validation (=field-validation), launch-gtm-readiness (=delivery + суміжна gtm-strategy).
+- Причина: запит власника — «об'єднати в один сильний дефенс продакт дизайн бот».

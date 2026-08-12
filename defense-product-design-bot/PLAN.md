@@ -11,18 +11,21 @@
 - 🚪 Ворота 0→1: є гіпотеза місії; є доступ до ≥3 носіїв досвіду; немає стоп-фактора (ITAR/експорт/сертифікація).
 - Немає доступу до носіїв досвіду — це головний ризик, познач його явно.
 
-## Фаза 1. Discovery — знання, а не рішення
-- 🎯 `discovery-mission-research`
-- Дії: mission/task flow (OODA/kill chain/ISR), JTBD оператора, threat model, ціна помилки, dual-use.
-- 📄 Research brief (1–2 стор.).
-- 🚪 Ворота 1→2: mission flow (не абстрактний journey) · JTBD · threat model · ціна помилки · ≥3 джерела.
+## Фаза 1. Discovery — знання, а не рішення (два зрізи: місія + ринок)
+- 🎯 `discovery-mission-research` — mission/task flow (OODA/kill chain/ISR), JTBD оператора, threat model, ціна помилки, dual-use.
+- 🎯 `market-supplier-research` — лонгліст 10–20 виробників/постачальників/аналогів + мапа ринку (скільки таких в Україні, діапазон + джерела).
+- 🎯 `discovery-questionnaire-builder` — опитувальник у 3 блоки: технічні · регуляторні · фінансові.
+- 🎯 `stakeholder-interview-runner` — провести опитування, звести у матрицю інсайтів, дати статус кожному припущенню.
+- 📄 Research brief + лонгліст/мапа ринку + матриця інсайтів.
+- 🚪 Ворота 1→2: mission flow · JTBD · threat model · ціна помилки · ≥3 джерела (+ лонгліст/мапа й опитування — бажані).
 
-## Фаза 2. Definition — що будуємо першим і чому
-- 🎯 `product-definition-prioritization`
-- Дії: PRD, метрики = проксі критичності місії, пріоритезація за критичністю, **degraded baseline**,
+## Фаза 2. Definition — що будуємо, за якими вимогами і чи це життєздатно
+- 🎯 `product-definition-prioritization` — PRD, метрики = проксі критичності місії, пріоритезація, **degraded baseline**,
   trade-off «швидкість↔надійність», dual-use/етика, груба тех-здійсненність.
-- 📄 PRD + пріоритезований scope + degraded baseline.
-- 🚪 Ворота 2→3: PRD зі scope/НЕ-scope · пріоритет за критичністю · degraded baseline · trade-off узгоджено.
+- 🎯 `requirements-tech-reg-fin` — специфікація вимог (MoSCoW) з джерелами, критеріями приймання й регуляторними блокерами.
+- 🎯 `business-case-unit-economics` — фінмодель, unit-економіка, сценарії, точка беззбитковості, рішення **go/no-go/pivot**.
+- 📄 PRD + пріоритезований scope + специфікація вимог + бізнес-кейс.
+- 🚪 Ворота 2→3: PRD зі scope/НЕ-scope · пріоритет за критичністю · degraded baseline · trade-off узгоджено · **фінансовий gate (go/no-go)**.
 
 ## Фаза 3. Design — як це працює під стресом
 - 🎯 `defense-ux-design` (+ `geospatial-c2-ux` для карт/ISR/C2)
@@ -40,11 +43,11 @@
 - 🚪 Ворота 4→5: тест з операторами/проксі · критичне виправлено або прийнято з ризиком · degraded на залізі.
 
 ## Фаза 5. Deliver — до фронту без втрат
-- 🎯 `delivery-compliance-handoff`
-- Дії: handoff-пакет (стани/edge-cases/навантаження), compliance під ринок (класифікація даних; US: ATO/STIG/
-  FedRAMP; НАТО: interoperability/STANAG), дизайн-QA на критичних потоках, канал фронтового фідбеку.
-- 📄 Реліз + пройдені compliance-ворота + працюючий канал фідбеку.
-- 🚪 Ворота 5→6: дизайн-QA · сертифікаційні ворота ринку · канал фідбеку є · реліз-нотатки.
+- 🎯 `product-roadmap-milestones` — роадмеп із віхами за результатом; найближча = MVP на фронт (дата·власник·критерій).
+- 🎯 `delivery-compliance-handoff` — handoff-пакет (стани/edge-cases/навантаження), compliance під ринок (класифікація
+  даних; US: ATO/STIG/FedRAMP; НАТО: interoperability/STANAG), дизайн-QA на критичних потоках, канал фронтового фідбеку.
+- 📄 Роадмеп + реліз + пройдені compliance-ворота + працюючий канал фідбеку.
+- 🚪 Ворота 5→6: дизайн-QA · сертифікаційні ворота ринку · канал фідбеку є · реліз-нотатки · найближча віха визначена.
 
 ## Фаза 6. Learn — навчання з поля (постійна)
 - 🎯 `governance/self-improvement-loop.md`

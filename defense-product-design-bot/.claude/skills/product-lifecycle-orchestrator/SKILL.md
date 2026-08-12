@@ -30,14 +30,18 @@ description: >-
 - Чи вже в полі й збираємо фідбек? → **Фаза 6** (Learn).
 
 ## Маршрутизація
-| Фаза | Навичка | Агент |
+| Фаза | Навички | Агент |
 |---|---|---|
-| 1. Discovery | `discovery-mission-research` | discovery-agent |
-| 2. Definition | `product-definition-prioritization` | discovery-agent |
+| 1. Discovery | `discovery-mission-research` · `market-supplier-research` · `discovery-questionnaire-builder` · `stakeholder-interview-runner` | discovery-agent |
+| 2. Definition | `product-definition-prioritization` · `requirements-tech-reg-fin` · `business-case-unit-economics` | discovery-agent |
 | 3. Design | `defense-ux-design` (+ `geospatial-c2-ux`) | design-agent |
 | 4. Validate | `field-validation` | delivery-agent |
-| 5. Deliver | `delivery-compliance-handoff` | delivery-agent |
+| 5. Deliver | `delivery-compliance-handoff` · `product-roadmap-milestones` | delivery-agent |
 | 6. Learn | `governance/self-improvement-loop.md` | — |
+
+> Discovery має два зрізи: **місія** (`discovery-mission-research`) і **ринок/промбаза**
+> (`market-supplier-research` → `discovery-questionnaire-builder` → `stakeholder-interview-runner`).
+> Definition має два gate: **місійний** (PRD/пріоритети/вимоги) і **фінансовий** (`business-case-unit-economics`).
 
 ## Degraded-first нагадування
 На будь-якій фазі перепитуй: «а як це в офлайні / вночі / у рукавицях / під стресом?».

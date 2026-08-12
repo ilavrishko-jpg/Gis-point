@@ -18,13 +18,13 @@
    а не для ідеального демо. «Красиво в Figma» ≠ «працює в бліндажі».
 
 ## 6 фаз життєвого циклу (від ідеї до реалізації)
-| Фаза | Навичка | Питання фази |
+| Фаза | Навички | Питання фази |
 |---|---|---|
-| 1. Discovery | `discovery-mission-research` | Чию місію і яку задачу ми реально закриваємо? |
-| 2. Definition | `product-definition-prioritization` | Що будуємо першим і чому саме це? |
+| 1. Discovery | `discovery-mission-research` · `market-supplier-research` · `discovery-questionnaire-builder` · `stakeholder-interview-runner` | Чию місію і яку задачу закриваємо? Хто вже це робить і хто виробник? |
+| 2. Definition | `product-definition-prioritization` · `requirements-tech-reg-fin` · `business-case-unit-economics` | Що будуємо першим, за якими вимогами і чи це життєздатно? |
 | 3. Design | `defense-ux-design` (+ `geospatial-c2-ux`) | Як це виглядає і поводиться під стресом? |
 | 4. Validate | `field-validation` | Звідки знаємо, що працює для оператора? |
-| 5. Deliver | `delivery-compliance-handoff` | Як довести до фронту й сертифікації без втрат? |
+| 5. Deliver | `delivery-compliance-handoff` · `product-roadmap-milestones` | Як довести до фронту й сертифікації без втрат? |
 | 6. Learn | цикл самовдосконалення | Що фронт повернув і що ми з цього вивчили? |
 
 `product-lifecycle-orchestrator` — головна навичка: визначає, на якій фазі команда, і **веде менеджера
