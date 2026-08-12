@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "google-workspace": {
+      "command": "python",
+      "args": ["-m", "google_workspace_connector.server"],
+      "cwd": "/абсолютний/шлях/до/google-workspace-connector",
+      "env": {
+        "PYTHONPATH": "/абсолютний/шлях/до/google-workspace-connector/src",
+        "GOOGLE_OAUTH_CLIENT_SECRETS": "/абсолютний/шлях/до/credentials.json",
+        "GOOGLE_OAUTH_TOKEN_PATH": "/абсолютний/шлях/до/token.json"
+      }
+    }
+  }
+}
