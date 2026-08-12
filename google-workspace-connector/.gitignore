@@ -1,0 +1,15 @@
+# Креденшели та токени — НІКОЛИ не комітити
+credentials.json
+client_secret*.json
+token.json
+service-account*.json
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
