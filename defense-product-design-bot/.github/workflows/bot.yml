@@ -1,0 +1,37 @@
+name: Defense-Tech Product Design Bot
+
+# Інтерактивний бот на GitHub: згадай @claude в Issue або коментарі — і він
+# відповість, спираючись на навички/агентів defense-product-design-bot.
+#
+# УВАГА (одноразове налаштування власником):
+#   Settings → Secrets and variables → Actions → New repository secret
+#   Назва: ANTHROPIC_API_KEY, значення: твій ключ Anthropic.
+# Без цього секрету воркфлоу не запуститься.
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  helper:
+    if: contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Defense-Tech Product Design Bot
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Робоча директорія бота — щоб підхопити .claude/skills, .claude/agents і CLAUDE.md
+          claude_args: "--add-dir defense-product-design-bot"
