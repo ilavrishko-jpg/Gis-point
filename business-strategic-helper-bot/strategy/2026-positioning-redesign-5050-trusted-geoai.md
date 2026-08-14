@@ -73,14 +73,17 @@ Firms adopting GeoAI face a trust gap: foundation models and automation tools sh
 - *Our method — Validated GeoAI (Field-to-Finish, dual-review):* automation-accelerated classification and spatial ML, **validated by BSc geospatial engineers** (processor ≠ QA), delivered as software you own. Two halves, one team.
 - *Why better:* structural **<7% rework** vs 15–40% industry; you own all code and IP (no Esri rent, no lock-in); GeoAI grounded on production-grade geodata, not scraped inputs.
 
-**Why you (proof — balanced 50/50).**
+**Why you (proof — balanced 50/50, з реальних кейсів сайту gis-point.com/case-studies + Drive).**
 
-| GIS-половина (data & validation) | IT-половина (software & GeoAI) |
+| GIS Engine — Production & Validation (delivered, metric-led) | IT / GeoAI Engine — Software & Intelligence |
 | :-- | :-- |
-| <7% rework (галузь 15–40%) | allgis.io — власна production SaaS GIS-платформа |
-| 500 km LiDAR / 4 дні / 97.2% | PlateauGIS — multi-tenant Web GIS (OGC), delivered *(не називати публічно)* |
-| 570+ проєктів · 17+ років · 12+ країн · 100% BSc+ | AgroDataHub — 6 джерел уніфіковано, report 2 дні → same-session |
-| BellIngram (point cloud → Revit) · GlobeZenit | 40,000+ га Copernicus (−30% виїздів) · 8,000 га NDVI/48h · Tec Solution $245K |
+| **500 km LiDAR / 4 дні** (GlobeZenit · MDP GEO · GEODROM · GB-geodezie · GMtech) | **allgis.io** — власна SaaS GIS-платформа в проді *(delivered)* |
+| **LiDAR-класифікація 3 тижні → macro-automated, 99%** | **PlateauGIS** — multi-tenant OGC Web GIS для нід. GeoTech-клієнта *(delivered; публічно не називати)* |
+| **<7% rework** (галузь 15–40%), dual-review QA | **AgroDataHub** — 6 джерел уніфіковано, report 2 дні → same-session *(delivered)* |
+| **Scan-to-BIM**: Bell Ingram (Grade B → Revit LOD300) · Metropolitan House (7-storey LOD300) · Frenchton Farmhouse (LOA 20mm) · Kindergarten Bitīte (IFC) · Pied Chateau (scan-to-CAD) | **GeoAI ROI**: NDVI 8,000 га (7–10 д → **48h**) · zone delineation 15,000 га (3-day → **2 min**) · spatial ETL **3–5×** · Copernicus 40,000+ га (**−30%** виїздів) |
+| **570+ проєктів · 12+ країн · 17+ років · 100% BSc+** | **Tec Solution $245K** (IT-anchor) · **Palm Jumeirah Urban Digital Twin** — LiDAR → twin → predictive fire-safety AI → autonomous *(⚠ vision/investment case, рунга DIGITIZE/PRODUCT — не delivered-метрика)* |
+
+**⚠ Головна знахідка з реальних кейсів (re-attribution).** На сайті зараз GeoAI-докази (NDVI, zone delineation, spatial ETL, digital twin) сховані під «GIS/Agriculture production», а IT-плитка несе лише 2 тонкі кейси (allgis.io + безіменний OGC-портал). **Тобто 50-50 наполовину досягається без вигадування нічого — простим ПЕРЕатрибутуванням наявних доказів на IT/GeoAI Engine.** Друга половина — чесна прогалина: **IT потребує 2–3 названих delivered-кейсів** (Palm Jumeirah — поки vision, не proof; PlateauGIS — не називається). Це #1 пункт, щоб вітрина справді читалась 50-50, а не «GIS + маленький IT».
 
 **Brand / personality.** Expert, precise, GIS-native, evidence-led. Channels: gis-point.com, LinkedIn (company + CEO), Intergeo/Esri IMGIS, tender desks. No hype, no emojis, proof before claim.
 
