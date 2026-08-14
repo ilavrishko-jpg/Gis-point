@@ -1,7 +1,8 @@
 # GisPoint — Company Positioning · Single Source of Truth
 
 **Остаточний єдиний файл позиціонування компанії (Google Docs):**
-https://docs.google.com/document/d/1BThtOEpPurO0unLxgAW-318uSWydQphiibxWrNEiL6c/edit
+https://docs.google.com/document/d/1dGXENZjcotjVECNj7oRaCpEZiIfu_ZyjIU9oHn-nEcI/edit  (v2: +драбина +пропозиції по індустріях)
+Попередня v1: https://docs.google.com/document/d/1BThtOEpPurO0unLxgAW-318uSWydQphiibxWrNEiL6c/edit
 
 Чистий канон без версійного/аудит-шуму, організований за відділами:
 0. Суть на 30 секунд (для всіх)
