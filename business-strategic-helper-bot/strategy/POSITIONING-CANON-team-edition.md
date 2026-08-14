@@ -23,3 +23,12 @@ https://docs.google.com/document/d/1S9MZvJ9-tsQK6JRsMVMkUKms_KS0reEMfOU9OceMIWE/
 - v2.1 · Technology Partner — 1GjlLPOvEGYtWCWOp29CzDpbavzoseRE9Trq3SEPPyy0
 - v2.0 · Trusted GeoAI — 1V7DfSRsRhk2opqZxMJtizEbUbqqsUQGG8UcttS_ni5Y
 - v1.0 · Spine — 1Zr5kMZjGFDwjgbTkrLtLE22548bjAIqmBrSkyg0YdY8
+
+---
+## Companion: /technology & IT Services — Adapted-to-Need Redesign
+https://docs.google.com/document/d/1wTZ9WlQmAcJG_XMOjjhdrhRR1stYuuwwUW0_YiYJqsE/edit
+
+Аналіз IT-послуг на /technology + сторінок послуг/індустрій, і редизайн «need → service
+→ outcome» з матрицею «послуга × індустрія» (кожна з 6 IT-послуг перекомпонована під
+потребу кожної індустрії з A→Z-карти). Джерело контенту сайту — Drive (Website IT Unit
+v1.0 + Final Lovable TZ), бо live-сайт заблокований egress-політикою.
