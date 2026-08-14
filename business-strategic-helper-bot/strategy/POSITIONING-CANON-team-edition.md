@@ -1,7 +1,7 @@
 # GisPoint — Positioning Canon (Team Edition, FINAL v3.0)
 
 **Готовий командний документ (Google Docs):**
-https://docs.google.com/document/d/1iFzjkZexp_RtNKb8utTxojfe4AvBwjzTU99nQ2KZN-Y/edit
+https://docs.google.com/document/d/1S9MZvJ9-tsQK6JRsMVMkUKms_KS0reEMfOU9OceMIWE/edit
 
 Єдиний консолідований канон позиціонування компанії + повний перелік підзадач.
 Зводить усю роботу сесії (v1.0 Spine → v2.5 синтез із розбором консультанта) в один
@@ -14,7 +14,8 @@ https://docs.google.com/document/d/1iFzjkZexp_RtNKb8utTxojfe4AvBwjzTU99nQ2KZN-Y/
       відкриті рішення CEO, maturity) з власниками й термінами 30/60/90
 
 Історія версій (Google Docs, папка positioning):
-- v3.0 · Team Edition (FINAL) — 1iFzjkZexp_RtNKb8utTxojfe4AvBwjzTU99nQ2KZN-Y (актуальна, командна)
+- v3.1 · Team Edition (FINAL, multi-industry entry) — 1S9MZvJ9-tsQK6JRsMVMkUKms_KS0reEMfOU9OceMIWE (актуальна, командна)
+- v3.0 · Team Edition — 1iFzjkZexp_RtNKb8utTxojfe4AvBwjzTU99nQ2KZN-Y
 - v2.5 · Consultant Reconciliation — 1Hnipaq5r2KGJKn5lVa0aDFUR14bGZKYBF6BwYDZ_IhM
 - v2.4 · Checklist-Audited & Proof-Verified — 1iylR-rtPlaJwGY6ymXLgaa7Sv0zQqCua2dxx0WmNQtU
 - v2.3 · A→Z per industry — 105X6Und1hd2T9dex0P5bvztv-6evHouQY8HEQKbPfAE
