@@ -1,18 +1,19 @@
-# GisPoint — Positioning Decision (Spine) v2.0 · Trusted GeoAI (CANONICAL)
+# GisPoint — Positioning (CANONICAL, live docs)
 
-**Canonical live doc (Google Docs, у папці positioning):**
-https://docs.google.com/document/d/1V7DfSRsRhk2opqZxMJtizEbUbqqsUQGG8UcttS_ni5Y/edit
+**Поточна канонічна версія — v2.1 · Technology Partner (from data to decisions):**
+https://docs.google.com/document/d/1GjlLPOvEGYtWCWOp29CzDpbavzoseRE9Trq3SEPPyy0/edit
 
-Ця остаточна версія (v2.0) еволюціонує Spine v1.0 у категорію **Trusted GeoAI** з
-двома співрівними машинами (50/50: GIS Engine + IT/GeoAI Engine), додає ML для
-дронової навігації як флагманський proof, робить proof-дисципліну
-confidentiality-aware (кейси delivered, клієнти анонімні) і додає виконавчу секцію
-**Маркетинг & Продажі (30/60/90)**.
+Головний зсув v2.1: перевести сприйняття з «робочих рук» на **технологічного партнера**,
+що веде клієнта **від геоданих → до автоматизації бізнес-процесів → до систем рішень**;
+клієнт-фейс драбина «from data to decisions» для кожної індустрії (включно з продуктовими
+компаніями галузі); інтегровано Бачення 2026–2030 (дві компанії · brand promise · BHAG · ринки).
 
-Повний зміст — у Google Docs за посиланням вище. Робочі артефакти сесії, що привели
-до v2.0, лежать поруч у цій теці:
-- `2026-ai-ml-positioning-brainstorm.md` — де AI/ML доречні + 3 варіанти + оффери
-- `2026-positioning-redesign-5050-trusted-geoai.md` — редизайн 50/50, аналіз Spine v1.0
-- `2026-FINAL-positioning-proposal-trusted-geoai.md` — фінальна пропозиція по індустріях
+Історія версій (Google Docs, папка positioning):
+- v2.1 · Technology Partner — 1GjlLPOvEGYtWCWOp29CzDpbavzoseRE9Trq3SEPPyy0 (актуальна)
+- v2.0 · Trusted GeoAI (50/50 two-engine) — 1V7DfSRsRhk2opqZxMJtizEbUbqqsUQGG8UcttS_ni5Y
+- v1.0 · Spine — 1Zr5kMZjGFDwjgbTkrLtLE22548bjAIqmBrSkyg0YdY8
 
-Supersedes: Spine v1.0 (Google Doc 1Zr5kMZjGFDwjgbTkrLtLE22548bjAIqmBrSkyg0YdY8).
+Робочі артефакти сесії (у цій теці):
+- 2026-ai-ml-positioning-brainstorm.md
+- 2026-positioning-redesign-5050-trusted-geoai.md
+- 2026-FINAL-positioning-proposal-trusted-geoai.md
