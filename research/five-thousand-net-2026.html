@@ -1,0 +1,288 @@
+<title>П'ять тисяч на руки</title>
+<style>
+:root{
+  --bg:#EFF2EE; --surface:#FAFBF9; --surface-2:#E7EBE5; --ink:#101A17;
+  --muted:#57665E; --border:#D2DAD1; --accent:#0E5A57; --accent-soft:#DCE9E6;
+  --ochre:#9A5E10; --ochre-soft:#F0E4CE; --red:#8C2F22; --red-soft:#F2DFDB;
+  --serif: ui-serif, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+    --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+    --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+  --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+  --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;
+  line-height:1.65;margin:0;padding:0 20px 96px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:74ch;margin:0 auto}
+
+.masthead{padding:64px 0 32px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+.kicker span::before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);
+  border-radius:50%;margin-right:8px;vertical-align:middle}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:19px;color:var(--muted);margin:0;max-width:62ch}
+
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.2;letter-spacing:-.01em;
+  margin:0 0 6px;text-wrap:balance}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 10px}
+h3{font-weight:650;font-size:17.5px;line-height:1.35;margin:32px 0 8px;letter-spacing:-.005em}
+p{margin:0 0 14px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+strong{font-weight:650}
+ul,ol{margin:0 0 16px;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+li::marker{color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);margin-bottom:22px;max-width:64ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95em}
+
+.thesis{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ochre);
+  border-radius:2px;padding:22px 22px 18px;margin:26px 0}
+.thesis p{font-family:var(--serif);font-size:20px;line-height:1.45;margin:0}
+.thesis p + p{margin-top:12px;font-family:var(--sans);font-size:16px;color:var(--muted)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:2px;margin:22px 0 26px;overflow:hidden}
+.tile{background:var(--surface);padding:16px 15px;display:flex;flex-direction:column;gap:4px}
+.tile b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:22px;font-weight:600;
+  letter-spacing:-.02em;color:var(--ink);line-height:1.15}
+.tile span{font-size:12.5px;color:var(--muted);line-height:1.4}
+
+.scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--border);border-radius:2px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:540px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{background:var(--surface-2);font-weight:650;border-top:2px solid var(--border);
+  font-family:var(--mono);font-variant-numeric:tabular-nums}
+tfoot td:first-child{font-family:var(--sans)}
+tr.step td:first-child{padding-left:26px;color:var(--muted)}
+
+.note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:2px;padding:16px 18px;margin:22px 0;font-size:15.5px}
+.note.warn{border-left-color:var(--ochre)}
+.note.stop{border-left-color:var(--red)}
+.note p:last-child{margin-bottom:0}
+.note .h{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:7px}
+
+.stage{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--border)}
+.stage:first-of-type{border-top:none}
+.stage .t{font-family:var(--mono);font-size:12.5px;color:var(--accent);font-weight:600;padding-top:3px;
+  font-variant-numeric:tabular-nums}
+.stage h3{margin:0 0 5px}
+.stage p{font-size:15.5px;margin:0}
+
+.src{font-size:14px;color:var(--muted)}
+.src ol{padding-left:20px}
+footer{padding-top:34px;font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px;padding:0 16px 72px}
+  .stage{grid-template-columns:1fr;gap:5px}
+  .thesis p{font-size:18px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="kicker">
+    <span>Фінансова модель</span>
+    <span>Серпень 2026</span>
+    <span>Перерахунок цілі</span>
+  </div>
+  <h1>П'ять тисяч на руки</h1>
+  <p class="standfirst">Що насправді означає ціль «$5 000 дивідендів на місяць при найманому директорі»: скільки має заробляти компанія, скільки в ній має бути людей, коли наймати директора і чому ставка важливіша за кількість інженерів.</p>
+</header>
+
+<section>
+  <p class="eyebrow">Головне</p>
+  <h2>Ціль виявилась у п'ять разів більшою</h2>
+
+  <div class="note stop">
+    <span class="h">Що змінилось</span>
+    <p>У попередніх звітах я рахував $5 000 як <strong>виручку</strong>. Ціль «$5 000 дивідендів на руки при найманому директорі» — це інша величина: після податків на дивіденди, податку на прибуток, зарплати директора та накладних витрат вона вимагає компанії з річною виручкою <span class="num">$250–400</span> тис. і командою з <span class="num">6–14</span> осіб.</p>
+  </div>
+
+  <div class="thesis">
+    <p>Ціль ставиться не до виручки, а до того, що лишається після всіх, хто стоїть у черзі перед власником. У цій черзі четверо, і власник — останній.</p>
+    <p>Держава бере двічі: з прибутку компанії і з дивідендів. Директор бере щомісяця незалежно від результату. Накладні витрати беруть завжди. Тільки після них залишок стає дивідендами.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b>$60 000</b><span>потрібно власнику на рік, на руки</span></div>
+    <div class="tile"><b>$149 300</b><span>валової маржі на рік, щоб це закрити</span></div>
+    <div class="tile"><b>$250–400k</b><span>річна виручка залежно від моделі</span></div>
+    <div class="tile"><b>6–14</b><span>людей у команді</span></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 1</p>
+  <h2>Розрахунок знизу вгору</h2>
+  <p class="lead">Від бажаної суми на руки до виручки, яку для цього має робити компанія. Курс — 44,87 ₴/$ за НБУ на 15 серпня 2026 року.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Крок</th><th class="n">На рік</th><th class="n">На місяць</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Дивіденди на руки власнику</strong></td><td class="n">$60 000</td><td class="n">$5 000</td></tr>
+      <tr class="step"><td>+ ПДФО 5% і військовий збір 5%</td><td class="n">$6 667</td><td class="n">$556</td></tr>
+      <tr><td><strong>Нараховані дивіденди</strong></td><td class="n">$66 667</td><td class="n">$5 556</td></tr>
+      <tr class="step"><td>+ податок на прибуток 18%</td><td class="n">$14 633</td><td class="n">$1 219</td></tr>
+      <tr><td><strong>Прибуток до оподаткування</strong></td><td class="n">$81 300</td><td class="n">$6 775</td></tr>
+      <tr class="step"><td>+ повна вартість директора</td><td class="n">$32 000</td><td class="n">$2 667</td></tr>
+      <tr class="step"><td>+ накладні витрати</td><td class="n">$36 000</td><td class="n">$3 000</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Потрібна валова маржа</td><td class="n">$149 300</td><td class="n">$12 442</td></tr>
+    </tfoot>
+  </table>
+  </div>
+
+  <h3>Звідки взялися цифри</h3>
+  <ul>
+    <li><strong>Дивіденди.</strong> Військовий збір з дивідендів у 2026 році — 5%, і він утримується тоді, коли дивіденди обкладаються ПДФО. Ставка ПДФО залежить від системи оподаткування компанії: 5% для платника податку на прибуток і 9% для неплатника. У моделі взято сприятливіший варіант; для єдинника загальне навантаження буде 14% замість 10%, і потрібні нараховані дивіденди зростуть до <span class="num">$69 800</span>.</li>
+    <li><strong>Директор.</strong> Медіана по ринку для операційного директора — <span class="num">67 500</span> ₴/міс, тобто близько <span class="num">$1 500</span>. Але директор, який реально замінює власника в компанії з виручкою за чверть мільйона, коштує <span class="num">$2 500–3 500</span> на руки. У моделі — $2 500 на руки при оформленні через ФОП. Якщо оформляти трудовим договором з ЄСВ, ПДФО і військовим збором, та сама сума на руки коштує компанії близько <span class="num">$4 200</span>/міс, і потрібна маржа зростає на <span class="num">$20</span> тис. на рік.</li>
+    <li><strong>Накладні.</strong> <span class="num">$3 000</span>/міс — ліцензії на ПЗ (у геопросторовій галузі це найдорожча стаття після людей), бухгалтерія в двох юрисдикціях, банки, юристи, маркетинг, обладнання. Для компанії на 6–14 осіб це радше нижня межа.</li>
+  </ul>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 2</p>
+  <h2>Чотири способи закрити ту саму маржу</h2>
+  <p class="lead">Валова маржа однакова у всіх сценаріях — <span class="num">$12 442</span>/міс. Різниця лише в тому, скільки людей і виручки для цього потрібно.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Модель</th><th class="n">Ставка</th><th class="n">Маржа</th><th class="n">Виручка / рік</th><th class="n">Виробнича команда</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Погодинний субпідряд</strong><br><span style="color:var(--muted);font-size:13.5px">Базовий сценарій із першого звіту</span></td><td class="n">$20/год</td><td class="n">38%</td><td class="n">$403 000</td><td class="n">14 інженерів</td></tr>
+      <tr><td><strong>Спеціалізований субпідряд</strong><br><span style="color:var(--muted);font-size:13.5px">Вузька компетенція, складні об'єкти</span></td><td class="n">$30/год</td><td class="n">58%</td><td class="n">$259 000</td><td class="n">6 інженерів</td></tr>
+      <tr><td><strong>Продуктизовані SKU</strong><br><span style="color:var(--muted);font-size:13.5px">Фікс-ціна замість годин</span></td><td>за пакет</td><td class="n">55%</td><td class="n">$271 000</td><td class="n">7–9 осіб</td></tr>
+      <tr><td><strong>Експертиза й аудит даних</strong><br><span style="color:var(--muted);font-size:13.5px">QC, висновки, міграція архівів</span></td><td class="n">$70/год</td><td class="n">69%</td><td class="n">$252 000</td><td class="n">3–4 сеньйори</td></tr>
+      <tr><td><strong>SaaS</strong><br><span style="color:var(--muted);font-size:13.5px">Після 2–3 років розробки</span></td><td>підписка</td><td class="n">80%</td><td class="n">$187 000</td><td class="n">5–7 осіб</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="thesis">
+    <p>Різниця між $20 і $30 за годину — це різниця між чотирнадцятьма інженерами і шістьма при однаковому результаті для власника.</p>
+    <p>Головний важіль тут не масштаб, а ціна години. Кожен долар до ставки знімає з вас приблизно одного найманого працівника, один стіл, один процес найму й одну людину, якою треба керувати.</p>
+  </div>
+
+  <p>Це переставляє пріоритети з попередніх звітів. Продуктизація й вузька спеціалізація виглядали приємним покращенням маржі — насправді це <strong>єдиний спосіб не будувати виробництво на п'ятнадцять осіб</strong>. А сценарій «експертиза й аудит даних» цікавий не високою ставкою саму по собі, а тим, що ціль закривається командою, яку одна людина ще здатна тримати в голові.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 3</p>
+  <h2>Коли наймати директора</h2>
+  <p class="lead">Найпоширеніша помилка на цьому шляху — найняти директора занадто рано і роками фінансувати його зарплату з власної кишені.</p>
+
+  <p>Директор коштує <span class="num">$2 700–4 200</span>/міс повної вартості. Поки валова маржа компанії менша за <span class="num">$7 000</span>/міс, наймання директора означає, що власник платить за право нічого не отримувати: маржа йде на зарплату, дивідендів немає.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Валова маржа / міс</th><th>Що з цього виходить</th></tr></thead>
+    <tbody>
+      <tr><td class="n">до $5 000</td><td>Директора немає. Власник керує сам, забирає дохід як зарплату або ФОП, не як дивіденди</td></tr>
+      <tr><td class="n">$5 000–7 000</td><td>Можна взяти керівника виробництва — не директора. Дешевше, знімає операційку, лишає продажі власнику</td></tr>
+      <tr><td class="n">$7 000–10 000</td><td>Директор окупається, але дивіденди символічні: <span class="num">$1 000–2 500</span>/міс</td></tr>
+      <tr><td class="n">$12 500+</td><td>Ціль досягнута: директор працює, власник отримує <span class="num">$5 000</span> на руки</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Практичний висновок:</strong> між «власник усе робить сам» і «власник отримує дивіденди при директорі» є обов'язковий проміжний етап — керівник виробництва, який дешевший за директора вдвічі й знімає 70% операційного навантаження. Пропускати його дорого.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 4</p>
+  <h2>Структурні важелі, які варто порахувати з бухгалтером</h2>
+  <p class="lead">Два з чотирьох платників у черзі перед власником залежать не від бізнесу, а від того, як він оформлений.</p>
+  <ul>
+    <li><strong>Система оподаткування компанії.</strong> Різниця між 5% і 9% ПДФО на дивіденди — це <span class="num">$3 100</span>/рік на цій цілі. Не вирішально, але помітно.</li>
+    <li><strong>Дія Сіті.</strong> Для резидента Дія Сіті — платника податку на виведений капітал діє звільнення: дивіденди не включаються до оподатковуваного доходу фізособи, якщо виплат не було два роки поспіль, причому звільнення зберігається й тоді, коли виплата йде кількома траншами. Це змінює конструкцію цілі — не $5 000 щомісяця, а <span class="num">$120 000</span> раз на два роки — і вимагає окремого розрахунку разом із податком на виведений капітал на рівні компанії.</li>
+    <li><strong>Дві юрисдикції.</strong> У групи вже є британська юрособа поруч з українською. Де саме осідає прибуток і як він розподіляється між ними — питання з найбільшою ціною помилки в усьому цьому документі, і воно точно не вирішується за пів години аналізу.</li>
+    <li><strong>Співвідношення зарплати та дивідендів власника.</strong> Ефективне навантаження суттєво залежить від того, яка частина доходу власника йде якою формою.</li>
+  </ul>
+  <div class="note warn">
+    <span class="h">Межа цього документа</span>
+    <p>Усе в цьому розділі — перелік питань до податкового консультанта, а не відповіді. Ставки й норми наведені станом на серпень 2026 року і потребують перевірки на дату рішення; конструкція групи з українською та британською компаніями вимагає фахового розрахунку, а не оцінки з відкритих джерел.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 5</p>
+  <h2>Виправлена траєкторія</h2>
+  <p class="lead">Попередній 90-денний план не помилковий — він виявився першим із чотирьох етапів, а не всім шляхом.</p>
+
+  <div class="stage">
+    <div class="t">Етап 1<br>3–6 міс</div>
+    <div><h3>Перші $5 000 виручки</h3>
+    <p>Той самий план із першого звіту: два інженери на субпідряді, 1–2 retainer-акаунти. Власник керує сам і забирає дохід як зарплату. Дивідендів немає й не має бути.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Етап 2<br>6–18 міс</div>
+    <div><h3>Підняти ставку, а не кількість людей</h3>
+    <p>Перехід з $20 на $30+ за годину через спеціалізацію та фікс-ціну. Виручка <span class="num">$15–20</span> тис./міс при команді 5–7 осіб. У кінці етапу — наймання керівника виробництва, не директора.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Етап 3<br>18–30 міс</div>
+    <div><h3>Додати високомаржинальну лінію</h3>
+    <p>Експертиза, аудит геоданих, міграція архівів — те, що продається за <span class="num">$60–80</span>/год і не потребує пропорційного зростання команди. Валова маржа виходить за <span class="num">$10</span> тис./міс.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Етап 4<br>30–42 міс</div>
+    <div><h3>Директор і дивіденди</h3>
+    <p>Маржа стабільно понад <span class="num">$12 500</span>/міс, операційка передана директору, власник виходить на <span class="num">$5 000</span> на руки. Реалістичний горизонт — три-три з половиною роки від старту, а не три місяці.</p></div>
+  </div>
+
+  <div class="note">
+    <span class="h">Що це означає для попередніх звітів</span>
+    <p>Плани в них лишаються чинними, змінюється лише підпис під цифрою: «$5 000/міс» у звіті про Північну Америку — це виручка етапу 1. Висновок про SaaS («не спосіб дійти до $5 000, а спосіб не залишитись на $5 000») після перерахунку став ще точнішим: при 80% маржі SaaS закриває ту саму ціль найменшою виручкою з усіх моделей. А геотех-напрямок цінний саме тим, що потрапляє в сценарій експертизи зі ставкою $60–80/год — тобто в модель, яка не вимагає фабрики.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 6</p>
+  <h2>Де модель може помилятись</h2>
+  <ul>
+    <li><strong>Завантаження 75%</strong> — оптимістична цифра для сервісної компанії без стабільного потоку замовлень. При 60% кількість потрібних інженерів у першому сценарії зростає з 14 до 18.</li>
+    <li><strong>Накладні $3 000/міс</strong> легко перетворюються на $5 000, щойно з'являються ліцензії на повний геопросторовий стек і другий офіс. Це ще <span class="num">$24</span> тис. потрібної маржі на рік.</li>
+    <li><strong>Собівартість інженера зростає.</strong> Модель узята з поточного ринку: геодезисти у Львові — <span class="num">20–35</span> тис. ₴, інженер під північноамериканського клієнта з англійською дорожчий. Ринок праці рухається вгору швидше за ставки замовників.</li>
+    <li><strong>Курс.</strong> Витрати переважно гривневі, виручка валютна — девальвація працює на вас, ревальвація проти. У бюджеті на 2026 закладено середньорічний курс 45,7 ₴/$.</li>
+    <li><strong>Директор — це ризик, а не лише витрата.</strong> Наймання людини, яка керує компанією замість власника, — найдорожча кадрова помилка з можливих, і закладати в план треба не одну спробу.</li>
+  </ul>
+</section>
+
+<section class="src">
+  <p class="eyebrow">Джерела</p>
+  <h2>На чому побудована модель</h2>
+  <ol>
+    <li>Оподаткування дивідендів — <a href="https://i.factor.ua/ukr/qa/vijs-kovij-zbir-z-dividendiv-za-akou-stavkou-splacuvati/">Factor: військовий збір з дивідендів</a>, <a href="https://buhplatforma.com.ua/article/7096-viplata-divdendv">Бухплатформа: виплата дивідендів 2026</a>, <a href="https://buhplatforma.com.ua/article/7401-viyskoviy-zbir">ставка військового збору</a></li>
+    <li>Дія Сіті — <a href="https://i.factor.ua/ukr/news/rezident-diya-siti-viplachuye-dividendi-u-2026-roci-yaka-stavka-pdfo-i-vijskovogo-zboru/">Factor: ставки для резидента Дія Сіті</a>, <a href="https://www.1tax.com.ua/base/local-tax/local-state-tax-service/dia-city/umovy-zvilnennya-vid-pdfo-ta-vijskovogo-zboru-dyvidendiv-narahovanyh-rezydentom-diya-siti-na-osoblyvyh-umovah-u-2026-roczi-za-2023-ta-2025-roky-pravyla-obchyslennya-kalendarnogo-roku/">умови звільнення від ПДФО</a></li>
+    <li>Зарплати — <a href="https://ua.trud.com/ua/ukrayina/salary/2/78704.html">операційний директор в Україні</a>, <a href="https://www.work.ua/en/jobs-lviv-%D0%B3%D0%B5%D0%BE%D0%B4%D0%B5%D0%B7%D0%B8%D1%81%D1%82/">геодезисти у Львові, Work.ua</a>, <a href="https://intime.ua/skilky-zaroblyaye-geodezyst-v-ukrayini-povnyj-oglyad-zarplat/">огляд зарплат геодезистів</a></li>
+    <li>Курс — <a href="https://index.minfin.com.ua/ua/exchange/nbu/curr/usd/">НБУ, офіційний курс долара</a>, <a href="https://minfin.com.ua/ua/currency/articles/kurs-dollara-v-avguste-2026-goda-smozhet-li-nbu-uderzhat-grivnu-nizhe-45-grn/">Мінфін: прогноз на серпень 2026</a></li>
+    <li>Ставки та маржа послуг — цінові бенчмарки з <a href="./mirnychyj-north-america-2026.html">звіту про Північну Америку</a></li>
+  </ol>
+  <footer>Модель побудована на публічних ставках податків і зарплат станом на серпень 2026 року й на власних припущеннях щодо завантаження, накладних витрат і собівартості. Це інструмент для планування, а не податкова чи фінансова консультація: перед структурними рішеннями цифри слід перевірити з бухгалтером і податковим консультантом.</footer>
+</section>
+
+</div>
