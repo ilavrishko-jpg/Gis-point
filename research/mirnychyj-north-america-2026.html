@@ -1,0 +1,519 @@
+<title>Мірничий і Північна Америка</title>
+<style>
+:root{
+  --bg:#EFF2EE;
+  --surface:#FAFBF9;
+  --surface-2:#E7EBE5;
+  --ink:#101A17;
+  --muted:#57665E;
+  --border:#D2DAD1;
+  --accent:#0E5A57;
+  --accent-soft:#DCE9E6;
+  --ochre:#9A5E10;
+  --ochre-soft:#F0E4CE;
+  --shadow:0 1px 2px rgba(16,26,23,.06);
+  --serif: ui-serif, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1211;
+    --surface:#131A18;
+    --surface-2:#1A2320;
+    --ink:#E4EBE6;
+    --muted:#93A399;
+    --border:#26322E;
+    --accent:#5CC3B7;
+    --accent-soft:#16302D;
+    --ochre:#D9A253;
+    --ochre-soft:#2C2416;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1211;
+  --surface:#131A18;
+  --surface-2:#1A2320;
+  --ink:#E4EBE6;
+  --muted:#93A399;
+  --border:#26322E;
+  --accent:#5CC3B7;
+  --accent-soft:#16302D;
+  --ochre:#D9A253;
+  --ochre-soft:#2C2416;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  margin:0;
+  padding:0 20px 96px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:74ch;margin:0 auto;display:flex;flex-direction:column;gap:0}
+
+/* ---------- masthead ---------- */
+.masthead{padding:64px 0 32px;border-bottom:2px solid var(--ink)}
+.kicker{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px;
+}
+.kicker span::before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);
+  border-radius:50%;margin-right:8px;vertical-align:middle}
+h1{
+  font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance;
+}
+.standfirst{font-size:19px;color:var(--muted);margin:0;max-width:62ch}
+
+/* ---------- sections ---------- */
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h2{
+  font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.2;
+  letter-spacing:-.01em;margin:0 0 6px;text-wrap:balance;
+}
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 10px;
+}
+h3{
+  font-family:var(--sans);font-weight:650;font-size:17.5px;line-height:1.35;
+  margin:32px 0 8px;letter-spacing:-.005em;
+}
+h4{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:26px 0 8px;font-weight:600}
+p{margin:0 0 14px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+strong{font-weight:650}
+ul,ol{margin:0 0 16px;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+li::marker{color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);margin-bottom:22px;max-width:64ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95em}
+
+/* ---------- stat tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:2px;margin:22px 0 26px;overflow:hidden}
+.tile{background:var(--surface);padding:16px 15px;display:flex;flex-direction:column;gap:4px}
+.tile b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:22px;
+  font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.15}
+.tile span{font-size:12.5px;color:var(--muted);line-height:1.4}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--border);border-radius:2px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- callouts ---------- */
+.note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:2px;padding:16px 18px;margin:22px 0;font-size:15.5px}
+.note.warn{border-left-color:var(--ochre)}
+.note p:last-child{margin-bottom:0}
+.note .h{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:7px}
+
+/* ---------- product cards ---------- */
+.cards{display:flex;flex-direction:column;gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:2px;margin:22px 0}
+.card{background:var(--surface);padding:18px 18px 16px}
+.card .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:6px}
+.card .name{font-weight:650;font-size:16px}
+.card .price{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;
+  color:var(--ochre);background:var(--ochre-soft);padding:2px 8px;border-radius:2px;white-space:nowrap}
+.card p{font-size:15px;margin:0 0 8px;color:var(--ink)}
+.card .who{font-size:13.5px;color:var(--muted);margin:0}
+
+/* ---------- timeline (real sequence) ---------- */
+.phase{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--border)}
+.phase:first-of-type{border-top:none}
+.phase .d{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;
+  color:var(--accent);font-weight:600;padding-top:2px}
+.phase h3{margin:0 0 6px}
+.phase ul{margin:0}
+
+/* ---------- sources ---------- */
+.src{font-size:14px;color:var(--muted)}
+.src ol{padding-left:20px}
+footer{padding-top:34px;font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px;padding:0 16px 72px}
+  .phase{grid-template-columns:1fr;gap:6px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="kicker">
+    <span>Аналітичний звіт</span>
+    <span>Серпень 2026</span>
+    <span>Для GIS-Point / Мірничий</span>
+  </div>
+  <h1>Мірничий і Північна Америка</h1>
+  <p class="standfirst">Портрет львівської геодезично-геологічної групи, розбір її прямих аналогів у США та Канаді, вісім трендів, куди ці компанії реально рухаються, і конкретна арифметика виходу на $5 000+/міс у картографічному та геологічному напрямках.</p>
+</header>
+
+<section>
+  <p class="eyebrow">Головне</p>
+  <h2>Що показав аналіз</h2>
+  <p class="lead">Дев'ять тез, з яких випливає весь інший звіт.</p>
+  <ol>
+    <li><strong>«Мірничий» — класична повносервісна польова компанія:</strong> геодезія + інженерна геологія + лазерне 3D-сканування, 100% проєктна виручка, локальний ринок, гривня, нуль рекурентного доходу.</li>
+    <li><strong>У Північній Америці такі компанії вже розкололись надвоє.</strong> Польовий бізнес лишився локальним і ліцензованим, а <em>вся камеральна обробка</em> (реєстрація хмар, моделювання, класифікація LiDAR, кресленики) виїхала в аутсорс — переважно в Індію.</li>
+    <li><strong>Це і є ваша ніша.</strong> Ви не конкуруєте з американським сюрвеєром — ви стаєте його back-office. GIS-Point вже побудований саме під це.</li>
+    <li><strong>Гроші в камералці реальні:</strong> моделювання з хмари в США коштує <span class="num">$50–125</span>/год, реєстрація хмари <span class="num">$75–150</span>/год. Офшорна ставка — <span class="num">$10–25</span>/год. Дельта і є ваша маржа.</li>
+    <li><strong>$5 000/міс — це не «багато клієнтів», а 1–2 акаунти.</strong> Два інженери на <span class="num">160</span> год по <span class="num">$20</span> = <span class="num">$6 400</span> валом. Задача — не масштаб, а стабільність завантаження.</li>
+    <li><strong>Ручна векторизація як основний продукт помирає.</strong> Автоматична екстракція об'єктів уже зрізає 60%+ ручної обробки; foundation-моделі (Prithvi, Clay, DOFA, власна модель Esri) — це 2026 рік, не майбутнє.</li>
+    <li><strong>Найгостріша недообслугована ніша — цифровий геотех.</strong> DIGGS отримав статус provisional standard від AASHTO, ринок пішов з gINT, а тисячі геологічних звітів досі лежать у PDF. Оцифровка + структуровані бази — ваш геологічний напрямок з нульовою конкуренцією з боку BIM-аутсорсерів.</li>
+    <li><strong>Модель, яку варто скопіювати, — GPRS + SiteMap:</strong> польова послуга віддає дані у власну підписну платформу. Кожен проєкт продає підписку, кожна підписка тягне наступний проєкт.</li>
+    <li><strong>Новий грошовий потік 2026 — earthworks та моніторинг під AI-дата-центри і ВДЕ.</strong> Це вже окремі контракти з підпискою (кейс ZenaTech), і туди заходять із DEM, обсягами виїмки та щомісячним трекінгом.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 1</p>
+  <h2>Портрет ТзОВ «ГЗГ Мірничий»</h2>
+
+  <div class="tiles">
+    <div class="tile"><b>2009</b><span>рік заснування, 13 серпня</span></div>
+    <div class="tile"><b>36610302</b><span>ЄДРПОУ, Львів</span></div>
+    <div class="tile"><b>71.12</b><span>основний КВЕД: інженерія, геологія, геодезія</span></div>
+    <div class="tile"><b>ТОП-5</b><span>в Україні з лазерного 3D-сканування (самозаява)</span></div>
+  </div>
+
+  <h3>Хто це</h3>
+  <p>Геодезично-землевпорядна група «Мірничий» — львівська інженерно-вишукувальна компанія, зареєстрована 13 серпня 2009 року (просп. Чорновола, 16е, кв. 3; операційний офіс і продажі — вул. Садова, 2а). Основний вид діяльності — інженерія, геологія та геодезія з технічним консультуванням у цих сферах. Працює по всій Україні та, за власними заявами, виїжджає за кордон.</p>
+  <p>Ключова стратегічна деталь: <strong>GIS-Point — це спін-офф «Мірничого»</strong>, який успадкував 15+ років досвіду в геодезії, геології та зйомці й переніс його в модель віддаленого геопросторового виробництва. Тобто в групи вже є обидві половини північноамериканської конструкції: польова компанія та продакшн-команда.</p>
+
+  <h3>Портфель послуг</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Блок</th><th>Склад</th><th>Тип попиту</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Геодезія</strong></td><td>Топографічна зйомка 1:500 і картографія ділянок, виконавча зйомка, винесення меж за кадастровим номером, розбивочні роботи, геодезія під ландшафтний дизайн, виконавча документація для введення об'єкта в експлуатацію, червоні лінії</td><td>Разовий, прив'язаний до дозвільного циклу</td></tr>
+      <tr><td><strong>Інженерна геологія</strong></td><td>Комплексні ІГВ під будівництво, буріння, відбір проб ґрунту та ґрунтових вод, лабораторні дослідження, аналіз геоморфологічних і геохімічних властивостей, виявлення несприятливих умов будівництва</td><td>Разовий, обов'язковий етап будівництва</td></tr>
+      <tr><td><strong>Реаліті-кепчер</strong></td><td>Наземне лазерне 3D-сканування фасадів, житлових і промислових об'єктів, інфраструктури та інженерних споруд; LiDAR; аерозйомка; 3D-моделі під CAD / 3ds Max / DGN; топоплани й картограми з матеріалів сканування</td><td>Проєктний, зростаючий</td></tr>
+      <tr><td><strong>Землеустрій</strong></td><td>Технічна документація, інвентаризація земель, схеми планування територій, супровід мереж</td><td>Регуляторний</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Референси й ринок</h3>
+  <ul>
+    <li>Інженерно-геологічні вишукування під будівництво біогазової електростанції у Львові.</li>
+    <li>ІГВ для державної дороги Т-14-02 «Східниця — Пісочна».</li>
+    <li>3D-моделі підземних паркінгів за матеріалами лазерного сканування.</li>
+    <li>Робота з об'єктами культурної спадщини (компанія присутня в реєстрі операторів ReHERIT).</li>
+    <li>Регіональне покриття через окремі посадкові сторінки: Ужгород, Івано-Франківськ, Тернопіль, Чернівці, Хмельницький, Миколаїв.</li>
+  </ul>
+
+  <h3>Бізнес-модель як вона є</h3>
+  <p>Модель — «повний комплекс вишукувань з однієї точки»: клієнт (забудовник, проєктувальник, приватний власник) отримує геодезію, геологію та сканування в одному контракті. Сильні сторони — комплексність, власне польове обладнання, географічне покриття, 15+ років референсів. Слабкі — все, що випливає з проєктності:</p>
+  <ul>
+    <li>виручка нерівна і повністю залежить від будівельного циклу України;</li>
+    <li>нуль рекурентного доходу — кожен місяць починається з нуля;</li>
+    <li>цінова конкуренція на локальному ринку (топозйомка від <span class="num">3 500</span> грн у сусідів по ринку);</li>
+    <li>дохід у гривні при валютних витратах на обладнання й ПЗ;</li>
+    <li>найцінніший актив — камеральна компетенція — не продається окремо.</li>
+  </ul>
+
+  <div class="note">
+    <span class="h">Методологічна примітка</span>
+    <p>Сайт mirnychyj.com.ua та реєстрові портали (Opendatabot, YouControl) заблоковані мережевим проксі цієї сесії, тому портрет зібраний з індексованого вмісту сторінок сайту, реєстрових витягів і галузевих каталогів. Фінансові показники компанії (виручка, штат) підтвердити не вдалося — їх у звіті немає навмисно.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 2</p>
+  <h2>Аналоги в США та Канаді</h2>
+  <p class="lead">Компанії «як Мірничий» у Північній Америці не існують в одному шматку. Вони розпались на п'ять архетипів — і це саме по собі головний висновок.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Архетип</th><th>Приклади</th><th>Що продає</th><th>Урок для вас</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>A. Реаліті-кепчер спеціаліст</strong></td>
+        <td>TruePoint Laser Scanning, Arrival 3D, TrueScan, The Future 3D, iScano (Канада/США)</td>
+        <td>Сканування + as-built + Scan-to-BIM, часто з мережею локальних операторів у десятках міст</td>
+        <td>Вузька спеціалізація на одній технології масштабується краще, ніж «повний комплекс»</td>
+      </tr>
+      <tr>
+        <td><strong>B. Підземка + власний SaaS</strong></td>
+        <td>GPRS (+ платформа SiteMap; поглинули TruePoint у 2022)</td>
+        <td>Локація підмереж, CCTV, сканування бетону, лазерне сканування — і все це вивантажується у власну підписну ГІС</td>
+        <td>Еталон продуктизації: послуга годує платформу, платформа повертає клієнта</td>
+      </tr>
+      <tr>
+        <td><strong>C. Геотех та довкілля</strong></td>
+        <td>Terracon, Braun Intertec, GeoTill, Partner ESI</td>
+        <td>ІГВ, лабораторія, будівельний контроль і <em>стандартизований</em> Phase I ESA за ASTM E1527-21</td>
+        <td>Геологію в США давно продають як SKU з прайсом, а не як «індивідуальний прорахунок»</td>
+      </tr>
+      <tr>
+        <td><strong>D. Геопросторовий інжиніринг</strong></td>
+        <td>Woolpert, NV5 Geospatial, McElhanney (Канада)</td>
+        <td>Аеро-LiDAR, картографування, цифрові двійники, консалтинг для DOT і муніципалітетів</td>
+        <td>Ваш потенційний клієнт, а не конкурент — у них хронічний дефіцит камеральних рук</td>
+      </tr>
+      <tr>
+        <td><strong>E. Виробничий аутсорс</strong></td>
+        <td>Chudasama Outsourcing, TrueCADD, VIBIM, Flatworld Solutions (Індія)</td>
+        <td>Point cloud → BIM, CAD-кресленики, обробка LiDAR для клієнтів у США, Канаді, Британії, Австралії</td>
+        <td><strong>Ваш прямий конкурент.</strong> Саме проти них ви продаєте GIS-Point</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Цінові бенчмарки ринку США / Канади, 2026</h3>
+  <p>Це найважливіша таблиця звіту — вона задає, скільки взагалі коштує те, що ви вмієте робити.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Позиція</th><th>Ціна</th><th>Коментар</th></tr></thead>
+    <tbody>
+      <tr><td>Польове лазерне сканування</td><td class="n">$150–500 / год</td><td>Недоступно вам — потрібна присутність</td></tr>
+      <tr><td>Реєстрація та обробка хмари точок</td><td class="n">$75–150 / год</td><td>Повністю віддалене</td></tr>
+      <tr><td>Моделювання в Revit з хмари</td><td class="n">$50–125 / год</td><td>Основний обсяг аутсорсу</td></tr>
+      <tr><td>Scan-to-BIM, комерція LOD 200</td><td class="n">$0.50–1.50 / sq ft</td><td>Пакетне ціноутворення iScano</td></tr>
+      <tr><td>Scan-to-BIM, LOD 350+ / складне MEP, спадщина</td><td class="n">$4–10+ / sq ft</td><td>Найдорожчий сегмент</td></tr>
+      <tr><td>Проєкт point cloud → BIM під ключ</td><td class="n">$2 000–20 000+</td><td>Тільки хмара без моделі — мінус 60–70%</td></tr>
+      <tr><td>Мінімальна мобілізація виїзду</td><td class="n">$2 500–3 500</td><td>Пояснює, чому камералку віддають назовні</td></tr>
+      <tr><td>ALTA/NSPS Land Title Survey</td><td class="n">$3 000–8 000</td><td>До <span class="num">$15 000+</span> на складних; стандарт 2026 діє з 23.02.2026 і додав 3–8% через deed research</td></tr>
+      <tr><td>Окрема топозйомка</td><td class="n">$750–1 500</td><td>Item 5 до ALTA додає <span class="num">$500–3 000</span></td></tr>
+      <tr><td>Phase I ESA</td><td class="n">$1 500–6 000+</td><td>ASTM E1527-21; нижче <span class="num">$2 000</span> ринок вважає неякісним</td></tr>
+      <tr><td>Офшорна ставка (Індія, Бангладеш, Філіппіни)</td><td class="n">$10–25 / год</td><td>Ваша конкурентна межа знизу</td></tr>
+      <tr><td>Медіана GIS-фрилансу на Upwork</td><td class="n">~$25 / год</td><td>Інфраструктурні GIS-аналітики — <span class="num">$90–120</span>/год</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 3</p>
+  <h2>Вісім трендів, куди рухається Північна Америка</h2>
+
+  <h3>1. GeoAI і foundation-моделі стали робочим інструментом</h3>
+  <p>Комп'ютерний зір для автоматичної екстракції об'єктів з LiDAR і гіперспектру — вже стандартна практика; компанії рапортують скорочення ручної обробки більш ніж на 60%. У полі геопросторові foundation-моделі: Prithvi, Clay, Dynamic-One-For-All, власна модель Esri під мультиспектр і високу роздільність. Зсув 2026 року — не поява моделей, а їх <em>доменна спеціалізація</em> і вбудовування прямо в звичні інструменти.</p>
+  <p class="src"><strong>Наслідок для вас:</strong> продавати години ручної векторизації — стратегія на 2–3 роки максимум. Продавати контроль якості, складні випадки і донавчання моделей під клієнтський стандарт — стратегія на 10 років.</p>
+
+  <h3>2. 3D-реаліті-кепчер дозрів, цифровий двійник став дефолтом</h3>
+  <p>Цифрові двійники стають стандартом у розумних містах, управлінні інфраструктурою та промисловості; у зрілість вийшов і Gaussian Splatting як спосіб подачі. Наземне лазерне сканування в США росте саме на попиті інфраструктурних двійників.</p>
+
+  <h3>3. Від файлів — до сервісів і потоків</h3>
+  <p>Сервісна модель (Data-as-a-Service та турнкей-зйомка) дає 55–60% виручки ринку — покупці з держсектору та інжинірингу переходять від купівлі обладнання до закупівлі результату. Статична віддача файлів заміщується стрімінгом даних, а софтверний сегмент росте на 27.1% CAGR.</p>
+
+  <h3>4. БПЛА-LiDAR — найшвидший сегмент</h3>
+  <p>Ринок обладнання для зйомки — <span class="num">$8.7–10.7</span> млрд у 2026 з ростом 4.2% на рік (США — 4.8% CAGR), але UAV/дрон-LiDAR росте на <span class="num">21.2%</span> CAGR, а ринок дрон-LiDAR у цілому оцінюють у <span class="num">28.5%</span> CAGR до 2034. У Канаді — 14–18% CAGR до 2035, з дата-центрами, інспекцією інфраструктури та двійниками як драйверами. 60–65% нових проєктів уже виконують цифровими інструментами, економія часу 50–80%.</p>
+
+  <h3>5. Підземна інфраструктура і as-built мереж</h3>
+  <p>GPRS зібрала бізнес навколо того, чого не видно: GPR, електромагнітна індукція, CCTV-інспекція труб — і 3D as-built моделі підземних мереж для будівництв та кампусів. Це сегмент з високою маржею і майже без цінового тиску, бо помилка коштує аварії.</p>
+
+  <h3>6. Геотех оцифровується — і це вікно можливостей</h3>
+  <p>DIGGS (XML/GML-схема обміну геотехнічними даними) прийнятий AASHTO як provisional standard для цифрового обміну геотехнічними даними; поруч живе AGS. Ринок переживає «життя після gINT»: OpenGround від Seequent, BoreDM, EQuIS Geotech, GeoDin, Aldoa — усі на підписці, усі в хмарі. Тренд: геологічні дані перестають бути PDF-звітом і стають базою даних з Python-автоматизацією та ГІС-інтеграцією.</p>
+  <p class="src"><strong>Наслідок для вас:</strong> це найменш конкурентний вхід для <em>геологічного</em> напрямку. BIM-аутсорсери з Індії туди не йдуть — у них немає геологів.</p>
+
+  <h3>7. Кадровий дефіцит зробив аутсорс нормою</h3>
+  <p>За BLS кількість землемірів у США виросте лише на 2% до 2030 при масовому виході чинних ліцензованих сюрвеєрів на пенсію. 59% компаній називають причиною аутсорсу зниження витрат і фокус на профільному. Аутсорс перестав бути про низькокваліфіковану роботу — сьогодні так закривають ролі, які раніше були виключно для офісних фахівців з освітою.</p>
+
+  <h3>8. Рекурентні моделі проникли в польовий бізнес</h3>
+  <p>Приклад ZenaTech: Drone-as-a-Service плюс ПЗ ZenaWorx з 3D-трекінгом прогресу, обсягами виїмки й ґрунту, точністю планування та дренажем — компанія свідомо будує підписні відносини на весь життєвий цикл проєкту й уже підписала першого платного клієнта серед AI-дата-центрів. Ринок цифрових моделей рельєфу оцінюють у <span class="num">$3.8</span> млрд у 2026 з ростом до <span class="num">$10</span> млрд до 2035 (11.4% CAGR). GPRS робить те саме через рівні підписки SiteMap: Personal безкоштовно кожному клієнту, далі Project / Pro / Team.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 4</p>
+  <h2>Дорога до $5 000+ на місяць</h2>
+  <p class="lead">Головна теза: $5 000/міс — це не задача масштабу, а задача одного-двох стабільних акаунтів. Ось три сценарії за швидкістю виходу на цифру.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>2 × 160 год</b><span>завантаження двох інженерів</span></div>
+    <div class="tile"><b>× $20/год</b><span>ставка між офшором і ринком США</span></div>
+    <div class="tile"><b>= $6 400</b><span>валова виручка на місяць</span></div>
+    <div class="tile"><b>1–2</b><span>акаунти, щоб це закрити</span></div>
+  </div>
+
+  <h3>Сценарій A — білий лейбл продакшн для NA-фірм <span class="num">(30–60 днів)</span></h3>
+  <p>Ви продаєте не «ГІС-послуги», а <em>потужність камерального відділу</em> американським і канадським скануючим та сюрвеєрським фірмам, у яких польових бригад вистачає, а рук на обробку — ні.</p>
+  <ul>
+    <li><strong>Ставка:</strong> <span class="num">$18–25</span>/год. Нижче — ви вбиваєте маржу і сигналите «дешевий Індійський аутсорс»; вище — вас порівняють з локальним junior-моделером.</li>
+    <li><strong>Математика:</strong> 2 інженери × 160 год × <span class="num">$20</span> = <span class="num">$6 400</span>; при <span class="num">$18</span> і 70% завантаженні — <span class="num">$4 000</span>. Тобто ціль вимагає ~<span class="num">280–320</span> оплачених годин на місяць.</li>
+    <li><strong>Чим бити індійців:</strong> часовий пояс (ви віддаєте результат до їхнього ранку), англійська, інженерна освіта виконавців, і головне — вимірюваний rework rate. У GIS-Point заявлений показник у 4–7 разів кращий за галузеву норму: це і є ваш продажний аргумент, бо переробка коштує клієнту дорожче за ставку.</li>
+    <li><strong>Пілот:</strong> фікс-ціна на один об'єкт із гарантією переробки за наш кошт. Далі — retainer на N годин/міс.</li>
+  </ul>
+
+  <h3>Сценарій B — продуктизовані SKU з фікс-ціною <span class="num">(60–120 днів)</span></h3>
+  <p>Перехід від годин до пакетів: клієнт бачить прайс і терміни, не чекає прорахунку. 3–4 проданих SKU по <span class="num">$1 200–1 800</span> закривають ціль. Маржа вища, бо ви продаєте нормалізований процес, а не час. Конкретні продукти — у розділі 5.</p>
+
+  <h3>Сценарій C — підписка й дані <span class="num">(6–12 місяців)</span></h3>
+  <p>Моніторинг, підписка на актуальні дані, портал замовника. Найповільніший, але єдиний, що дає передбачуваний MRR і множник до вартості компанії. Запускати <em>тільки</em> після того, як A або B дали живих клієнтів.</p>
+
+  <h3>Скільки лідів це вимагає</h3>
+  <p>Реалістична воронка для B2B-субпідряду з середнім чеком <span class="num">$2–4</span> тис.:</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Етап</th><th>Кількість / квартал</th><th>Канал</th></tr></thead>
+    <tbody>
+      <tr><td>Цільових акаунтів у списку</td><td class="n">120–150</td><td>Малі й середні scanning / survey фірми США та Канади, 5–50 осіб</td></tr>
+      <tr><td>Персональних дотиків</td><td class="n">400+</td><td>LinkedIn до Survey Manager, BIM Manager, Director of Operations; email</td></tr>
+      <tr><td>Дзвінків-знайомств</td><td class="n">10–15</td><td>Демо на їхньому власному тестовому скані</td></tr>
+      <tr><td>Платних пілотів</td><td class="n">3–4</td><td>Фікс-ціна, один об'єкт</td></tr>
+      <tr><td>Переходів у retainer</td><td class="n">1–2</td><td>Це і є ваші $5k</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Додаткові канали, які працюють у цій галузі: профільні спільноти (NSPS та державні асоціації сюрвеєрів, ASPRS, Land Surveyors United, GoGeomatics у Канаді), партнерські мережі великих гравців, галузеві виставки (GEO Business, Commercial UAV Expo), і — недооцінено — субпідряд у самих аутсорсерів у пікові періоди.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 5</p>
+  <h2>Продуктизація: вісім продуктів</h2>
+  <p class="lead">Кожен — з фіксованим обсягом, ціною і терміном. Ціни орієнтовані на бенчмарки розділу 2 з дисконтом субпідрядника.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="top"><span class="name">Scan-to-BIM за квадратний фут</span><span class="price">$0.35–0.90 / sq ft</span></div>
+      <p>Меню LOD 100 / 200 / 300 / 350 з чіткою матрицею «що входить». Клієнт рахує вартість сам, ще до дзвінка. Копія логіки iScano та Arrival 3D, але за ставкою субпідрядника.</p>
+      <p class="who">Кому: скануючі фірми США й Канади без власного BIM-відділу.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">Overnight Point Cloud</span><span class="price">$400–900 / об'єкт</span></div>
+      <p>Реєстрація, чистка й зшивання хмари за 24 години: вони віддають сирі скани ввечері — отримують готове до роботи вранці. Часовий пояс перетворюється з незручності на продукт.</p>
+      <p class="who">Кому: усі, хто сканує в полі щодня і не встигає обробляти.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">LiDAR-продакшн за км²</span><span class="price">від $60–150 / км²</span></div>
+      <p>Класифікація хмари, DTM/DSM, горизонталі, breaklines, контроль якості за специфікацією замовника. Пакет за площею, не за годинами. У вас уже 35 000+ га обробленого LiDAR і 800 000+ га UAV-знімків як референс.</p>
+      <p class="who">Кому: аерозйомочні компанії, підрядники DOT, лісове й енергетичне господарство.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">Геотех-оцифровка: PDF → DIGGS / AGS</span><span class="price">$25–60 / свердловина</span></div>
+      <p>Перетворення архівів бурових журналів і лабораторних звітів у структуровану базу за стандартом DIGGS або AGS, з ГІС-шаром і дашбордом. Найменш конкурентна ніша зі знайдених: попит створений стандартом AASHTO та міграцією ринку з gINT, а BIM-аутсорсери туди не заходять, бо не мають геологів. У вас геологи є.</p>
+      <p class="who">Кому: геотехнічні консультанти, DOT-підрядники, власники інфраструктури.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">As-built підземних мереж</span><span class="price">$600–1 500 / майданчик</span></div>
+      <p>Обробка даних GPR та електромагнітної локації в CAD/ГІС-шар з атрибутами та 3D. Модель GPRS, але як data-service для сотень локальних locator-компаній, у яких немає власної камералки й тим паче платформи.</p>
+      <p class="who">Кому: незалежні utility locators, SUE-підрядники.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">Site Feasibility Report</span><span class="price">$300–800 / ділянка</span></div>
+      <p>Продукт для девелоперів сонця, накопичувачів і дата-центрів: DEM, ухили, гідрологія, водозбори, обмеження, попередній баланс виїмки й насипу — за 3 дні з відкритих і замовлених даних. Купується пачками на етапі скринінгу майданчиків, до будь-якого польового виїзду.</p>
+      <p class="who">Кому: ВДЕ-девелопери, land acquisition команди, брокери.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">Моніторинг прогресу будівництва</span><span class="price">$500–2 000 / міс</span></div>
+      <p>Щомісячний виліт локального пілота-партнера + ваша обробка: ортофото, DEM, обсяги виїмки, порівняння з проєктом, звіт у портал. Єдиний продукт зі списку, що дає MRR. Точна калька з ZenaTech ZenaWorx, де це вже продано під AI-дата-центри.</p>
+      <p class="who">Кому: генпідрядники з earthworks, кар'єри, полігони, дата-центри.</p>
+    </div>
+    <div class="card">
+      <div class="top"><span class="name">Digital Twin / Heritage-пакети</span><span class="price">$1 500–6 000 / об'єкт</span></div>
+      <p>3D-двійник будівлі або пам'ятки: хмара, меш, Gaussian Splatting-тур, обмірні кресленики. У «Мірничого» вже є досвід зі спадщиною (ReHERIT) і з підземними паркінгами — це готове портфоліо для найбільш «продаваного» візуально продукту.</p>
+      <p class="who">Кому: архітектурні бюро, музеї та фонди, facility-менеджмент.</p>
+    </div>
+  </div>
+
+  <h3>Як перетворити послугу на продукт — п'ять кроків</h3>
+  <ol>
+    <li><strong>Заморозити обсяг.</strong> Один SKU = один список того, що входить, і явний список того, що не входить.</li>
+    <li><strong>Поставити ціну на сайт.</strong> Діапазон або калькулятор. Відсутність ціни — головна причина, чому американці не пишуть іноземним підрядникам.</li>
+    <li><strong>Дати SLA.</strong> Термін у робочих днях і гарантія переробки. Це дорожче за ставку і продає краще за ставку.</li>
+    <li><strong>Шаблонізувати результат.</strong> Один брендований шаблон звіту / моделі, однакова структура файлів, однаковий чеклист QC. Продукт — це повторюваність, а не унікальність.</li>
+    <li><strong>Зробити замовлення в один клік.</strong> Форма + оплата карткою для перших пілотів, без переговорів і без контракту на 20 сторінок.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 6</p>
+  <h2>Ризики і чого робити не варто</h2>
+  <div class="note warn">
+    <span class="h">Ліцензування — критично</span>
+    <p>У США геодезичні роботи ліцензовані на рівні штатів: план може підписати й опечатати лише PLS зі штатною ліцензією. Ви <strong>не можете</strong> продавати кінцевому клієнту «survey» — ви можете бути субпідрядником-виконавцем під печаткою ліцензованого сюрвеєра. Це не обмеження бізнес-моделі, це її форма: продавайте фірмам, а не власникам нерухомості.</p>
+  </div>
+  <ul>
+    <li><strong>Не воюйте ціною з Індією.</strong> На <span class="num">$10–12</span>/год ви не виживете. Ваша позиція — «дешевше за американця в 3–5 разів, надійніше за офшор», а доказ — метрика переробок і англомовний інженер на зв'язку.</li>
+    <li><strong>Не будуйте бізнес на ручній векторизації.</strong> Автоматична екстракція вже зрізала 60%+ цієї роботи; за 2–3 роки залишиться контроль якості та складні випадки.</li>
+    <li><strong>Не пишіть SaaS без 10 платних пілотів.</strong> Спокуса зробити «SiteMap для малих» велика, але GPRS будувала платформу на потоці власних польових проєктів. Спершу — послуга й дані, потім — платформа.</li>
+    <li><strong>Не розпорошуйтесь на 8 продуктів одночасно.</strong> Візьміть два: один швидкий (Overnight Point Cloud або Scan-to-BIM) і один «блакитний океан» (геотех-оцифровка).</li>
+    <li><strong>Врахуйте операційне:</strong> NDA і режим зберігання даних клієнта, обмеження на об'єкти критичної інфраструктури, страхування професійної відповідальності (E&O) — американські фірми питають про нього на другому дзвінку.</li>
+    <li><strong>Валютний і безперервнісний ризик війни</strong> знімається розподіленою командою та резервними майданчиками — про це варто говорити першими, не чекаючи питання.</li>
+  </ul>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 7</p>
+  <h2>План на 90 днів</h2>
+  <p class="lead">Послідовність тут має значення: кожен блок спирається на результат попереднього.</p>
+
+  <div class="phase">
+    <div class="d">Дні<br>1–30</div>
+    <div>
+      <h3>Упакувати</h3>
+      <ul>
+        <li>Обрати два стартові SKU: <em>Overnight Point Cloud</em> та <em>Геотех-оцифровка PDF → DIGGS/AGS</em>.</li>
+        <li>Написати для кожного одну сторінку: обсяг, ціна, термін, гарантія, приклад результату.</li>
+        <li>Зібрати 3 демо-кейси на власних даних «Мірничого» (паркінг, дорога Т-14-02, об'єкт спадщини) — англійською, з цифрами точності та часу.</li>
+        <li>Скласти список 120–150 цільових фірм США й Канади за архетипами A, C і E.</li>
+        <li>Оформити метрику якості (rework rate, on-time delivery) як публічну обіцянку.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="d">Дні<br>31–60</div>
+    <div>
+      <h3>Продати пілоти</h3>
+      <ul>
+        <li>400+ персональних дотиків, ціль — 10–15 дзвінків.</li>
+        <li>Пропозиція входу: обробити їхній власний тестовий скан за фікс-ціну з гарантією повернення.</li>
+        <li>Мінімум 3 платні пілоти. Не безкоштовні — безкоштовний пілот не конвертується.</li>
+        <li>Паралельно: зайти в 2–3 профільні спільноти не з продажем, а з технічним контентом (порівняння DIGGS та AGS, чекліст QC хмари точок).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="d">Дні<br>61–90</div>
+    <div>
+      <h3>Перевести в рекурент</h3>
+      <ul>
+        <li>Кожному пілоту — пропозиція retainer: N годин або N об'єктів на місяць зі знижкою 10–15%.</li>
+        <li>Ціль кварталу: <span class="num">1–2</span> retainer-акаунти сумарно на <span class="num">$5 000+</span>/міс.</li>
+        <li>Запустити третій SKU за фактичним попитом пілотів — не за власною гіпотезою.</li>
+        <li>Зафіксувати юніт-економіку: фактичні години на SKU, реальна маржа, частка переробок. Без цих цифр масштабування наосліп.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="h">Метрики, за якими судити</span>
+    <p>Оплачених годин на місяць · середня реалізована ставка $/год · частка рекурентної виручки у загальній · rework rate · час від запиту до комерційної пропозиції (ціль — до 24 год) · вартість залучення одного retainer-акаунта.</p>
+  </div>
+</section>
+
+<section class="src">
+  <p class="eyebrow">Джерела</p>
+  <h2>На чому побудований звіт</h2>
+  <ol>
+    <li>Реєстрові та каталожні дані «Мірничий» — <a href="https://opendatabot.ua/c/36610302">Opendatabot 36610302</a>, <a href="https://youcontrol.com.ua/en/catalog/company_details/36610302/">YouControl</a>, <a href="https://www.ua-region.com.ua/en/36610302">UA-Region</a>, <a href="https://reherit.org.ua/operators/tzov-geodezychno-zemleporyadna-grupa-mirnychyj/">ReHERIT</a></li>
+    <li>Послуги та референси — <a href="https://mirnychyj.com.ua/vikonani-roboti/">mirnychyj.com.ua / виконані роботи</a>, <a href="https://mirnychyj.com.ua/en/lazerne-3d-skanuvannya/">лазерне 3D-сканування</a>, <a href="https://mirnychyj.com.ua/en/">головна EN</a></li>
+    <li>GIS-Point — <a href="https://gis-point.com/gis-production">GIS Production Outsourcing</a>, <a href="https://gis-point.com/services/dedicated-gis-and-it-team/">Dedicated GIS team</a>, <a href="https://www.geobusinessshow.com/meet-the-exhibitor-gis-point/">GEO Business: Meet the Exhibitor</a></li>
+    <li>Ціни Scan-to-BIM і реаліті-кепчер — <a href="https://iscano.com/real-world-applications-laser-scanning-lidar/scan-to-bim-cost-guide/">iScano Cost Guide 2026</a>, <a href="https://vibimglobal.com/blog/scan-to-bim-cost/">VIBIM</a>, <a href="https://www.truecadd.com/news/top-scan-to-bim-companies-to-outsource">TrueCADD</a>, <a href="https://arrival3d.com/services/scan-to-bim">Arrival 3D</a></li>
+    <li>Ціни зйомки — <a href="https://apprais.ai/alta-survey-cost/">ALTA Survey Cost 2026</a>, <a href="https://apexsurvey.us/guides/land-survey-cost">Apex Survey</a>; Phase I ESA — <a href="https://www.rmagreen.com/rma-blog/how-much-does-a-phase-i-esa-cost">RMA</a>, <a href="https://www.solutionsintheland.com/feeds/blog/phase-1-environmental-site-assessment-cost">Solutions in the Land</a></li>
+    <li>Тренди — <a href="https://woolpert.com/blog/mapping-the-future-critical-geospatial-trends-for-2026/">Woolpert: Critical Geospatial Trends for 2026</a>, <a href="https://www.esri.com/about/newsroom/arcnews/geoai-in-the-age-of-foundation-models">Esri ArcNews: GeoAI in the Age of Foundation Models</a>, <a href="https://www.gminsights.com/industry-analysis/lidar-in-mapping-market">GM Insights: LiDAR in Mapping</a>, <a href="https://gogeomatics.ca/lidar-canex-2025-panel-exploring-the-current-and-future-landscape-of-lidar-projects-in-canada/">GoGeomatics: Lidar CANEX</a></li>
+    <li>Геотех-стандарти — <a href="https://www.geoinstitute.org/special-projects/diggs">Geo-Institute DIGGS</a>, <a href="https://www.geoengineer.org/news/life-after-gint-rethinking-geotechnical-data-management-for-a-new-era">Geoengineer: Life after gINT</a>, <a href="https://www.seequent.com/products-solutions/openground/">Seequent OpenGround</a></li>
+    <li>Продуктизація й підписки — <a href="https://www.sitemap.com/">GPRS SiteMap</a>, <a href="https://www.gp-radar.com/partnership/truepoint-laser-scanning">GPRS × TruePoint</a>, <a href="https://www.globenewswire.com/news-release/2026/08/13/3344449/0/en/zenatech-expands-zenaworx-drone-based-construction-monitoring-software-to-include-digital-terrain-modeling-and-signs-first-ai-data-center-customer.html">ZenaTech ZenaWorx</a></li>
+    <li>Кадри й аутсорс — <a href="https://landsurveyorsunited.com/articles/vanishing-lines-confronting-the-surveying-workforce-shortage">Land Surveyors United: Vanishing Lines</a>, <a href="https://gigabpo.com/offshore-outsourcing-job-trends/">GigaBPO Offshore Trends 2025–2026</a>, <a href="https://www.upwork.com/hire/gis-developers/cost/">Upwork GIS rates</a></li>
+  </ol>
+  <footer>Ринкові цифри — це оцінки галузевих аналітиків і публічні прайси компаній станом на серпень 2026; вони орієнтир для позиціонування, а не гарантія. Ціни в продуктових картках — рекомендовані до тестування, а не підтверджені продажами.</footer>
+</section>
+
+</div>
