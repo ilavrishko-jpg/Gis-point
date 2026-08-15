@@ -29,5 +29,7 @@
 |---|---|---|
 | gtm-strategy | Стратегія | B2B GTM-флоу з URL сайту |
 | geo-it-positioning | Стратегія | Перепозиціонування geospatial/IT |
+| strategy (linkedin-strategy-kit) | Стратегія | LinkedIn-стратегія персонального бренду: 9 секцій машиночитного конфігу |
+| profile-audit (linkedin-strategy-kit) | Стратегія | Аудит LinkedIn-профілю проти стратегії: хедлайн, About, банер, Featured |
 
 > Статуси: `active` · `proposed` (чекає гейту власника) · `deprecated` (на виведення).
