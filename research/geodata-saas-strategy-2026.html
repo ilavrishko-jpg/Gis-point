@@ -1,0 +1,337 @@
+<title>Геодані як продукт</title>
+<style>
+:root{
+  --bg:#EFF2EE;
+  --surface:#FAFBF9;
+  --surface-2:#E7EBE5;
+  --ink:#101A17;
+  --muted:#57665E;
+  --border:#D2DAD1;
+  --accent:#0E5A57;
+  --accent-soft:#DCE9E6;
+  --ochre:#9A5E10;
+  --ochre-soft:#F0E4CE;
+  --red:#8C2F22;
+  --red-soft:#F2DFDB;
+  --serif: ui-serif, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+    --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+    --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+  --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+  --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;
+  line-height:1.65;margin:0;padding:0 20px 96px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:74ch;margin:0 auto}
+
+.masthead{padding:64px 0 32px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+.kicker span::before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);
+  border-radius:50%;margin-right:8px;vertical-align:middle}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:19px;color:var(--muted);margin:0;max-width:62ch}
+
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.2;letter-spacing:-.01em;
+  margin:0 0 6px;text-wrap:balance}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 10px}
+h3{font-weight:650;font-size:17.5px;line-height:1.35;margin:32px 0 8px;letter-spacing:-.005em}
+p{margin:0 0 14px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+strong{font-weight:650}
+ul,ol{margin:0 0 16px;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+li::marker{color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);margin-bottom:22px;max-width:64ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95em}
+
+.thesis{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ochre);
+  border-radius:2px;padding:22px 22px 18px;margin:26px 0}
+.thesis p{font-family:var(--serif);font-size:20px;line-height:1.45;margin:0}
+.thesis p + p{margin-top:12px;font-family:var(--sans);font-size:16px;color:var(--muted)}
+
+.scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--border);border-radius:2px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:540px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:2px;padding:16px 18px;margin:22px 0;font-size:15.5px}
+.note.warn{border-left-color:var(--ochre)}
+.note p:last-child{margin-bottom:0}
+.note .h{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:7px}
+
+.cand{background:var(--surface);border:1px solid var(--border);border-radius:2px;
+  padding:20px;margin:20px 0}
+.cand .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+.cand .letter{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);
+  background:var(--accent-soft);padding:3px 8px;border-radius:2px}
+.cand .name{font-weight:650;font-size:18px}
+.cand h4{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:16px 0 6px;font-weight:600}
+.cand p{font-size:15.5px;margin:0 0 10px}
+.cand ul{font-size:15.5px;margin-bottom:10px}
+.verdict{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;
+  padding:3px 9px;border-radius:2px;margin-top:6px}
+.v-go{background:var(--accent-soft);color:var(--accent)}
+.v-later{background:var(--ochre-soft);color:var(--ochre)}
+.v-no{background:var(--red-soft);color:var(--red)}
+
+.reject{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:2px;margin:20px 0}
+.reject > div{background:var(--surface);padding:15px 17px}
+.reject b{display:block;font-size:15.5px;margin-bottom:4px}
+.reject span{font-size:14.5px;color:var(--muted)}
+
+.stage{display:grid;grid-template-columns:100px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--border)}
+.stage:first-of-type{border-top:none}
+.stage .t{font-family:var(--mono);font-size:12.5px;color:var(--accent);font-weight:600;padding-top:3px;
+  font-variant-numeric:tabular-nums}
+.stage h3{margin:0 0 5px}
+.stage p{font-size:15.5px;margin:0}
+
+.src{font-size:14px;color:var(--muted)}
+.src ol{padding-left:20px}
+footer{padding-top:34px;font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px;padding:0 16px 72px}
+  .stage{grid-template-columns:1fr;gap:5px}
+  .thesis p{font-size:18px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="kicker">
+    <span>Продуктова стратегія</span>
+    <span>Серпень 2026</span>
+    <span>Доповнення до звіту про Північну Америку</span>
+  </div>
+  <h1>Геодані як продукт</h1>
+  <p class="standfirst">Що насправді запитує український ринок у 2026 році, які з цих запитів здатні стати SaaS, і яка архітектура дозволяє тому самому продукту згодом працювати в Північній Америці — без переписування з нуля.</p>
+</header>
+
+<section>
+  <p class="eyebrow">Головне</p>
+  <h2>Теза, з якої все випливає</h2>
+
+  <div class="thesis">
+    <p>SaaS — це не спосіб дійти до $5 000 на місяць. Це спосіб не залишитись на $5 000 назавжди.</p>
+    <p>Український геопросторовий SaaS не окупить навіть команду з двох розробників у перший рік. Але він робить дві речі, яких не робить сервіс: перетворює вашу експертизу в актив, що працює без ваших годин, і дає компанії вартість, яку можна продати. Гроші зараз дає сервіс. Продукт треба фінансувати сервісом, а не навпаки.</p>
+  </div>
+
+  <p>Друга теза, менш очевидна і значно важливіша практично: <strong>масштабувати з України в Північну Америку можна тільки те, що не тримається на українському регулюванні</strong>. Регуляторна прив'язка — це чудовий рів навколо замку, але рів не подорожує. Продукт, побудований навколо ДБН, кадастрового обміну чи вимог ЄДЕССБ, у США доведеться писати заново — а це не масштабування, це другий стартап.</p>
+  <p>Тому правильна конструкція — <strong>двошарова</strong>: регуляторно-агностичне ядро (фізика даних однакова скрізь — хмари точок, LiDAR, ортофото, свердловини, точність) плюс тонкий змінний шар відповідності (в Україні один, у США інший). Якщо ядро тонке, а регуляторний шар товстий — ви побудували українську компанію. Якщо навпаки — глобальну.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 1</p>
+  <h2>Реальні запити українського ринку</h2>
+  <p class="lead">П'ять джерел попиту, які існують не в презентаціях, а в законах, дедлайнах і бюджетах.</p>
+
+  <h3>1. Комплексні плани просторового розвитку громад</h3>
+  <p>Найбільший регламентований виробничий потік у галузі. Станом на квітень 2025 року <strong>лише 2 з 1469 громад</strong> мали затверджені комплексні плани; Законом №9549 від 25 березня 2025 року термін розробки продовжено <strong>до 2028 року</strong>. Перша громада, чий план погодили на державному рівні, — Чернівецька, і сталося це аж у серпні 2026-го. Держава окремими траншами фінансує розроблення (наприклад, 62,5 млн грн на групу громад).</p>
+  <p>Перекладаючи: понад 1400 громад мають за два роки виготовити складну комбіновану містобудівно-землевпорядну документацію, а ринок виконавців до цього не готовий. Це масовий, повторюваний, дедлайнований процес — ідеальна основа для інструменту, який його прискорює.</p>
+
+  <h3>2. Містобудівний кадастр — ніша, яку вже зайняла держава</h3>
+  <p>Це найважливіше обмеження всього розбору. Геопортал Містобудівного кадастру на державному рівні <strong>вже працює</strong>: станом на березень 2026 року 1302 громади — 99% від тих, що не в зоні бойових дій чи окупації — отримали повноваження замовника документації в системі. Портал має електронні кабінети замовника, розробника та експертизи, приймає документи онлайн і <em>автоматично перевіряє геодані</em>.</p>
+  <div class="note warn">
+    <span class="h">Практичний висновок</span>
+    <p>Будувати «геопортал для громади» у 2026 році — це будувати те, що держава роздала безкоштовно. Гроші не в порталі, а в тому, щоб дані <em>пройшли</em> його перевірку з першого разу.</p>
+  </div>
+
+  <h3>3. Цифровізація будівництва: ЄДЕССБ і BIM</h3>
+  <p>Уряд ухвалив Концепцію впровадження BIM, прийнято національні стандарти ДСТУ EN ISO 19650-1/2/3, іде поетапна цифровізація держархбудконтролю — з 1 квітня 2026 року органи контролю формують чеклісти за результатами інспекцій просто в ЄДЕССБ. Обов'язковості BIM для держоб'єктів ще немає, але напрям і класифікатори вже задані, а потреба у зв'язці «BIM-модель ↔ державна система» проговорена на рівні концепції.</p>
+
+  <h3>4. Відбудова і підзвітність донорам</h3>
+  <p>DREAM — державна екосистема управління відновленням, законодавчо врегульована, з понад 8 000 зареєстрованих проєктів і 787 схваленими інвестпроєктами в єдиному портфелі. Її суть — прозорість для міжнародних партнерів: кожен етап проєкту видно всім учасникам.</p>
+  <p>Тут прихований найцікавіший запит: донор вимагає <strong>доказу</strong>, що роботи виконані в тому місці, в тому обсязі й у той час. Геопросторовий доказ (ортофото до/після, обсяги, координати, часова мітка) — це те, чого в системі бракує і що вміє робити геодезична компанія.</p>
+
+  <h3>5. Гуманітарне розмінування</h3>
+  <p>З 2026 року планування розмінування деокупованих територій переводять на цифрові рішення; платформу створили українські фахівці з екології, економіки, ГІС та дата-інжинірингу, на UTTC Technology Week тестували дрони, роботизовані комплекси й ШІ-рішення для нетехнічного та технічного обстеження. Але головна проблема року названа прямо — <strong>скорочення фінансування, насамперед з боку США</strong>, традиційно ключового донора.</p>
+  <p>Тобто попит технологічно реальний, а платоспроможність — падає, і ключову платформу вже будують під егідою уряду. Як ринок для незалежного SaaS це найгірший з п'яти варіантів, попри найгучніші заголовки.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 2</p>
+  <h2>Фільтр: три тести для будь-якої ідеї</h2>
+  <p class="lead">Перш ніж оцінювати кандидатів, варто зафіксувати критерії — інакше вибір зробить не логіка, а ентузіазм.</p>
+  <ol>
+    <li><strong>Тест переїзду.</strong> Чи виживе ядро продукту, якщо викинути весь український регуляторний контекст? Якщо ні — це український бізнес, і оцінювати його треба як український бізнес, без ілюзій про Північну Америку.</li>
+    <li><strong>Тест платника.</strong> Хто підписує рахунок і з якого бюджету? Громада через Prozorro — це 6–12 місяців циклу і тиск на ціну. Приватна інженерна фірма — це картка й рішення за тиждень. Донорський грант — це гроші сьогодні й нуль завтра.</li>
+    <li><strong>Тест несправедливої переваги.</strong> Що у вас є такого, чого конкурент не купить за гроші? У вашому випадку це не код. Це накопичена статистика реальних помилок у геоданих на 153 000+ га топокарт, 35 000+ га LiDAR і 800 000+ га UAV-знімків, плюс відпрацьовані правила приймання, завдяки яким rework виявився в 4–7 разів нижчим за галузеву норму. Продукт має спиратися саме на це.</li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 3</p>
+  <h2>Що будувати: три кандидати</h2>
+
+  <div class="cand">
+    <div class="top"><span class="letter">A</span><span class="name">Автоматичний контроль якості геоданих</span></div>
+    <p>Сервіс, у який завантажують хмару точок, LiDAR-набір, ортофото чи ЦМР — і за хвилини отримують протокол відповідності специфікації: щільність точок і рівномірність покриття, дірки й перекриття, коректність класифікації, RMSE по контрольних точках, георефернс, повнота атрибутів, цілісність швів між польотами. На виході — не «файл ок», а підписаний протокол з переліком того, що конкретно треба переробити.</p>
+    <h4>Український шар</h4>
+    <p>Перевірка матеріалів перед подачею в Геопортал МБК і перед прийманням робіт громадою чи обленерго. Замовник перестає приймати «на віру», підрядник перестає переробляти тричі.</p>
+    <h4>Північноамериканський шар</h4>
+    <p>Приймальний контроль за галузевими специфікаціями LiDAR і вхідний контроль субпідряду. Кожна фірма, що віддає камералку в Індію, змушена перевіряти результат вручну — це прямий і болючий біль, який ви вже вирішили для себе.</p>
+    <h4>Чому це найсильніший кандидат</h4>
+    <ul>
+      <li>Ядро повністю регуляторно-агностичне: геометрія й точність однакові у Львові та Х'юстоні. Змінюється лише пресет специфікації — тонкий шар.</li>
+      <li>Платить інженер або керівник виробництва зі свого бюджету, без тендеру.</li>
+      <li>Ваша несправедлива перевага працює напряму: правила перевірки — це і є ваш досвід переробок.</li>
+      <li>Продається без дозволів, ліцензій і присутності в країні.</li>
+    </ul>
+    <span class="verdict v-go">Будувати першим</span>
+  </div>
+
+  <div class="cand">
+    <div class="top"><span class="letter">B</span><span class="name">Геотехнічна дата-платформа</span></div>
+    <p>Свердловини, лабораторні випробування та звіти в одній базі замість купи PDF: введення польових даних, генерація журналів і розрізів, експорт у DIGGS та AGS, ГІС-шар з усіма точками історичних вишукувань.</p>
+    <h4>Український шар</h4>
+    <p>Архіви ІГВ, які роками лежать у PDF і паперових томах, — включно з вашими власними за 15+ років. Оцифрований архів сам по собі є активом: повторний продаж даних по ділянці, де вишукування вже робились.</p>
+    <h4>Північноамериканський шар</h4>
+    <p>Ринок у русі: DIGGS прийнятий AASHTO як provisional standard, галузь мігрує з gINT, а верхній сегмент зайнятий OpenGround від Seequent, EQuIS та BoreDM. Малі геотехнічні фірми при цьому лишаються з Excel — вони не тягнуть ні ціну, ні впровадження корпоративних систем.</p>
+    <h4>Ризик</h4>
+    <p>Конкуренти сильні й з капіталом. Заходити варто не «ще однією платформою», а через міграцію: сервіс оцифровки архіву, який природно закінчується підпискою на систему, де цей архів живе. Сервіс продає підписку — це та сама логіка, що в GPRS із SiteMap.</p>
+    <span class="verdict v-later">Другим, через сервіс оцифровки</span>
+  </div>
+
+  <div class="cand">
+    <div class="top"><span class="letter">C</span><span class="name">Моніторинг об'єктів і доказова звітність</span></div>
+    <p>Регулярний обліт, ортофото та ЦМР, обсяги виїмки й насипу, порівняння з проєктом, звіт у кабінет замовника.</p>
+    <h4>Стан ринку</h4>
+    <p>У Північній Америці ніша зайнята: DroneDeploy має публічні тарифи <span class="num">$1 908–4 188</span>/рік, Propeller працює за індивідуальними цінами й тримає будівництво та земляні роботи. Заходити туди фронтально безглуздо.</p>
+    <h4>Де щілина</h4>
+    <p>В Україні ніша практично вільна, а головне — тут є вимога, якої немає в американських продуктів: <strong>доказова звітність для донорів і DREAM</strong>. Не «красива 3D-модель кар'єру», а верифікований пакет доказів виконання робіт із геоприв'язкою й часовою міткою. Це вузько, це локально — і саме тому це можна виграти.</p>
+    <h4>Ризик</h4>
+    <p>Капіталомісткість і залежність від польової логістики. І доказова частина — це якраз той регуляторний шар, який у США доведеться замінити цілком.</p>
+    <span class="verdict v-later">Тільки якщо знайдеться якірний замовник</span>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 4</p>
+  <h2>Чого не будувати</h2>
+  <div class="reject">
+    <div><b>Геопортал для громад</b><span>Держава роздала Геопортал МБК 99% громад безкоштовно. Конкурувати з безкоштовним державним стандартом — програшна позиція за визначенням.</span></div>
+    <div><b>Сервіс навколо українського кадастру чи ДБН</b><span>Провалює тест переїзду повністю. Може бути гарним бізнесом в Україні, але називати це «згодом масштабуємо в Північну Америку» — самообман.</span></div>
+    <div><b>Платформа для розмінування</b><span>Фінансування скорочується (насамперед американське), ключову платформу вже будують під егідою уряду, цикл продажу державі й міжнародним організаціям — роки. Емоційно найпривабливіший і практично найгірший варіант.</span></div>
+    <div><b>Маркетплейс геодезистів</b><span>Двосторонній ринок — найважчий тип продукту для запуску: треба одночасно набрати попит і пропозицію, маючи нуль важелів на обидві сторони.</span></div>
+    <div><b>«Свій Revit» чи власний рушій обробки хмар</b><span>Капітал і роки розробки проти Bentley, Trimble, Hexagon. Виграшна позиція — надбудова над їхніми форматами, а не заміна їхніх продуктів.</span></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 5</p>
+  <h2>Як запускати: сервіс першим, продукт другим</h2>
+  <p class="lead">Класичний спосіб убити геопросторовий SaaS — рік писати платформу, а потім шукати, кому вона потрібна. Правильна послідовність зворотна.</p>
+
+  <div class="stage">
+    <div class="t">Місяці 1–2</div>
+    <div><h3>Продавати результат руками</h3>
+    <p>QC-протокол як платна послуга: <span class="num">$150–400</span> за набір даних, зроблений напівавтоматично, наполовину вручну. Ціль — не гроші, а десять реальних наборів чужих даних і десять розмов про те, що саме клієнта болить.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Місяці 3–4</div>
+    <div><h3>Автоматизувати всередині</h3>
+    <p>Ті самі перевірки, але вже скриптами. Клієнт нічого не помічає, крім того, що відповідь приходить за годину, а не за день. Собівартість падає, ціна лишається.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Місяці 5–7</div>
+    <div><h3>Віддати інтерфейс</h3>
+    <p>Завантаження файлу, пресет специфікації, протокол. Перші 5–10 українських дизайн-партнерів — безкоштовно або майже, в обмін на щотижневий зворотний зв'язок і право на кейс.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Місяці 8–12</div>
+    <div><h3>Взяти гроші</h3>
+    <p>Тарифи, самостійна реєстрація, оплата карткою. Мета першого року — не виручка, а <em>підтверджена готовність платити</em> хоча б у двадцяти акаунтів.</p></div>
+  </div>
+  <div class="stage">
+    <div class="t">Рік 2</div>
+    <div><h3>Перейти океан через власних клієнтів</h3>
+    <p>Найдешевший канал дистрибуції в Північній Америці — ті самі фірми, яким ви вже робите продакшн. Ви не продаєте їм холодний SaaS, ви даєте інструмент, яким уже перевіряєте роботу для них. Продукт заходить як частина відносин, що вже працюють.</p></div>
+  </div>
+
+  <div class="note">
+    <span class="h">Чому саме так</span>
+    <p>Сервісна виручка фінансує розробку, тому не потрібні ні інвестор, ні рішення «все або нічого». І кожен етап можна зупинити без втрати грошей: навіть якщо продукт не злетить, у вас лишається автоматизація, яка здешевила власне виробництво.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 6</p>
+  <h2>Економіка без ілюзій</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Показник</th><th>Україна</th><th>Північна Америка</th></tr></thead>
+    <tbody>
+      <tr><td>Реалістичний чек за акаунт</td><td class="n">$20–60 / міс</td><td class="n">$80–300 / міс</td></tr>
+      <tr><td>Скільки акаунтів досяжно за рік</td><td class="n">20–50</td><td class="n">5–15</td></tr>
+      <tr><td>Виручка на кінець першого року</td><td class="n">$600–2 500 / міс</td><td class="n">$600–3 000 / міс</td></tr>
+      <tr><td>Цикл продажу</td><td class="n">2–8 тижнів (приватні), 6–12 міс (громади)</td><td class="n">3–10 тижнів</td></tr>
+      <tr><td>Головна функція ринку</td><td>Дизайн-партнери, дані, кейси</td><td>Гроші й вартість компанії</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Читати цю таблицю треба так: <strong>Україна — це не ринок збуту, це полігон</strong>. Тут ви за рік отримуєте відпрацьований продукт, реальні дані для правил і портфель кейсів — за ціною, яку український клієнт готовий платити. Гроші продукт починає приносити на другому ринку, і саме тому ядро від першого дня має бути незалежним від українського регулювання.</p>
+  <p>І ще одна чесна цифра для порівняння: два інженери на субпідряді дають <span class="num">$5 000–6 400</span>/міс уже через два місяці. SaaS дасть ту саму суму приблизно через два роки — але вона не потребуватиме двох інженерів.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 7</p>
+  <h2>Ризики</h2>
+  <ul>
+    <li><strong>Держава заходить у нішу.</strong> Вона вже зробила це з геопорталом, і Геопортал МБК уже вміє автоматично перевіряти геодані. Захист — тримати продукт на боці <em>виконавця</em>, а не регулятора: інструмент, який готує дані до перевірки, а не другий орган перевірки.</li>
+    <li><strong>Вендори закривають щілину зверху.</strong> Bentley, Trimble, Hexagon можуть додати QC у свої пакети. Захист — глибина правил і незалежність від конкретного вендора: ви перевіряєте те, що зроблено будь-чим.</li>
+    <li><strong>Розмивання фокусу.</strong> Найімовірніша причина невдачі — не конкуренція, а спроба тягнути сервіс, продукт і три ринки одночасно. Один продукт, один сегмент, один рік.</li>
+    <li><strong>Сервіс з'їдає продукт.</strong> Коли приходить велике сервісне замовлення, розробка зупиняється. Лікується лише жорстко: фіксований відсоток часу команди на продукт, недоторканний.</li>
+    <li><strong>Дані клієнтів.</strong> Хмари точок промислових і критичних об'єктів — чутливий матеріал. Політика зберігання, регіон розміщення даних і NDA потрібні до першого платного клієнта, а не після.</li>
+  </ul>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 8</p>
+  <h2>Що зробити в найближчі шість тижнів</h2>
+  <ol>
+    <li><strong>Тиждень 1.</strong> Виписати з власного досвіду 20 найчастіших дефектів у геоданих, які ви ловили на прийманні. Це чернетка технічного завдання на продукт — і вона у вас уже фактично є, просто не записана.</li>
+    <li><strong>Тиждень 2.</strong> Поговорити з 10 українськими геодезичними та проєктними компаніями і 5 громадами про приймання робіт: скільки часу займає, скільки разів переробляють, хто за це відповідає.</li>
+    <li><strong>Тижні 3–4.</strong> Зробити QC-протокол як платну послугу і продати щонайменше три. Ціна — <span class="num">$150–400</span> за набір.</li>
+    <li><strong>Тиждень 5.</strong> Ті самі перевірки паралельно прогнати на даних двох північноамериканських клієнтів, яким уже робите продакшн, і показати їм протокол як бонус. Реакція на цей протокол — найдешевша перевірка гіпотези з усіх можливих.</li>
+    <li><strong>Тиждень 6.</strong> Рішення: якщо українські компанії платять, а американські просять «а можна нам таке ж на постійно» — будувати. Якщо ні — гіпотеза не підтвердилась, і ви витратили шість тижнів замість року.</li>
+  </ol>
+</section>
+
+<section class="src">
+  <p class="eyebrow">Джерела</p>
+  <h2>На чому побудований розбір</h2>
+  <ol>
+    <li>Комплексні плани — <a href="https://auc.org.ua/novyna/kompleksnyy-plan-prostorovogo-rozvytku-gromady-novyy-vyd-mistobudivnoyi-ta-zemlevporyadnoyi">Асоціація міст України</a>, <a href="https://decentralization.ua/news/14364">Decentralization.ua</a>, <a href="https://kalushcity.gov.ua/news/chy2">про продовження термінів до 2028</a>, <a href="https://bukovyna.online/2026/08/14/kompleksnii-plan-rozvitky-chern%D1%96vecko%D1%97-gromadi-pogodili-na-derjavnomy-r%D1%96vn%D1%96/">перше державне погодження, Чернівці</a></li>
+    <li>Містобудівний кадастр — <a href="https://www.kmu.gov.ua/news/mintsyfry-v-ukraini-zapratsiuvav-heoportal-mistobudivnoho-kadastru-na-derzhavnomu-rivni">КМУ про запуск Геопорталу МБК</a>, <a href="https://kadastr.gov.ua/news-page/3855652597209761502">статистика доступу громад</a></li>
+    <li>ЄДЕССБ і BIM — <a href="https://www.kmu.gov.ua/news/uryad-zatverdiv-koncepciyu-vprovadzhennya-v-ukrayini-vim-tehnologij-u-budivnictvi">Концепція впровадження BIM</a>, <a href="https://mediaresource-pz.com.ua/kabmin-udoskonalyv-protsedury-pryynyattya-v-ekspluatatsiyu-ob-ektiv-budivnytstva-ta-robotu-edessb/">зміни в роботі ЄДЕССБ</a>, <a href="https://uscc.ua/uploads/page/images/normativnye%20dokumenty/bim/dstu-EN-ISO-19650_2.pdf">ДСТУ EN ISO 19650-2</a></li>
+    <li>Відбудова — <a href="https://dream.gov.ua/ua/news/article-22">DREAM</a>, <a href="https://mtu.gov.ua/news/36415.html">законодавче врегулювання екосистеми</a>, <a href="https://restoration.gov.ua/press/news/55209.html">Агентство відновлення</a></li>
+    <li>Розмінування — <a href="https://www.kmu.gov.ua/news/ukraina-perekhodyt-do-tsyfrovoho-planuvannia-humanitarnoho-rozminuvannia-vyznacheno-priorytety-na-2026-rik">КМУ: цифрове планування, пріоритети 2026</a>, <a href="https://nv.ua/ukr/opinion/gumanitarne-rozminuvannya-ukrajini-ekspert-pro-pidsumki-ta-novi-pidhodi-u-2026-50568815.html">NV: підсумки й фінансування</a></li>
+    <li>Бенчмарки продуктів — <a href="https://toolradar.com/tools/dronedeploy/pricing">DroneDeploy pricing 2026</a>, <a href="https://www.softwareadvice.com/mining/propeller-platform-profile/">Propeller Aero</a>, <a href="https://boredm.com/">BoreDM</a>, <a href="https://www.seequent.com/products-solutions/openground/">Seequent OpenGround</a>, <a href="https://www.geoinstitute.org/special-projects/diggs">DIGGS</a></li>
+  </ol>
+  <footer>Цифри платоспроможності та чеків — оцінки, побудовані на публічних тарифах суміжних продуктів і структурі українського ринку; вони орієнтир для планування, а не прогноз. Статус державних систем перевірявся станом на серпень 2026 року.</footer>
+</section>
+
+</div>

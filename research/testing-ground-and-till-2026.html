@@ -1,0 +1,304 @@
+<title>Полігон і каса</title>
+<style>
+:root{
+  --bg:#EFF2EE; --surface:#FAFBF9; --surface-2:#E7EBE5; --ink:#101A17;
+  --muted:#57665E; --border:#D2DAD1; --accent:#0E5A57; --accent-soft:#DCE9E6;
+  --ochre:#9A5E10; --ochre-soft:#F0E4CE; --red:#8C2F22; --red-soft:#F2DFDB;
+  --serif: ui-serif, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+    --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+    --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1211; --surface:#131A18; --surface-2:#1A2320; --ink:#E4EBE6;
+  --muted:#93A399; --border:#26322E; --accent:#5CC3B7; --accent-soft:#16302D;
+  --ochre:#D9A253; --ochre-soft:#2C2416; --red:#E08A79; --red-soft:#2E1A16;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;
+  line-height:1.65;margin:0;padding:0 20px 96px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:74ch;margin:0 auto}
+
+.masthead{padding:64px 0 32px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+.kicker span::before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);
+  border-radius:50%;margin-right:8px;vertical-align:middle}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:19px;color:var(--muted);margin:0;max-width:62ch}
+
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.2;letter-spacing:-.01em;
+  margin:0 0 6px;text-wrap:balance}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 10px}
+h3{font-weight:650;font-size:17.5px;line-height:1.35;margin:32px 0 8px;letter-spacing:-.005em}
+h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:22px 0 6px;font-weight:600}
+p{margin:0 0 14px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+strong{font-weight:650}
+ul,ol{margin:0 0 16px;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+li::marker{color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);margin-bottom:22px;max-width:64ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:.95em}
+
+.thesis{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ochre);
+  border-radius:2px;padding:22px 22px 18px;margin:26px 0}
+.thesis p{font-family:var(--serif);font-size:20px;line-height:1.45;margin:0}
+.thesis p + p{margin-top:12px;font-family:var(--sans);font-size:16px;color:var(--muted)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:2px;margin:22px 0 26px;overflow:hidden}
+.tile{background:var(--surface);padding:16px 15px;display:flex;flex-direction:column;gap:4px}
+.tile b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:22px;font-weight:600;
+  letter-spacing:-.02em;color:var(--ink);line-height:1.15}
+.tile span{font-size:12.5px;color:var(--muted);line-height:1.4}
+
+.scroll{overflow-x:auto;margin:20px 0 24px;border:1px solid var(--border);border-radius:2px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{background:var(--surface-2);font-weight:650;border-top:2px solid var(--border)}
+tfoot td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:2px;padding:16px 18px;margin:22px 0;font-size:15.5px}
+.note.warn{border-left-color:var(--ochre)}
+.note.stop{border-left-color:var(--red)}
+.note p:last-child{margin-bottom:0}
+.note .h{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:7px}
+
+.hyp{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:20px;margin:22px 0}
+.hyp .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}
+.hyp .name{font-weight:650;font-size:18px}
+.verdict{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;
+  padding:3px 9px;border-radius:2px;white-space:nowrap}
+.v-go{background:var(--accent-soft);color:var(--accent)}
+.v-later{background:var(--ochre-soft);color:var(--ochre)}
+.v-no{background:var(--red-soft);color:var(--red)}
+.hyp p{font-size:15.5px}
+.hyp ul{font-size:15.5px}
+
+.src{font-size:14px;color:var(--muted)}
+.src ol{padding-left:20px}
+footer{padding-top:34px;font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px;padding:0 16px 72px}
+  .thesis p{font-size:18px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="kicker">
+    <span>Перевірка гіпотез</span>
+    <span>Серпень 2026</span>
+    <span>Україна і США</span>
+  </div>
+  <h1>Полігон і каса</h1>
+  <p class="standfirst">Як перевірити три гіпотези з попереднього розбору за шість тижнів і менш ніж за $500, який реальний обсяг ринку в Україні та США по кожній з них, і як ці цифри лягають на ціль у $5 000 дивідендів.</p>
+</header>
+
+<section>
+  <p class="eyebrow">Головне</p>
+  <h2>Україна тестує, Америка платить</h2>
+
+  <div class="thesis">
+    <p>В Україні на порядок більше угод із землею, ніж у США — екологічних обстежень. І приблизно в тридцять разів менше грошей у цьому обігу.</p>
+    <p>Причина одна: в США попит створений нормою і відповідальністю кредитора, а в Україні його не створює ніхто. Тому Україна — це місце, де гіпотезу можна перевірити дешево і швидко, а не місце, де на ній заробляють.</p>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Гіпотеза</th><th>Україна</th><th>США</th><th>Що робити</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Звіт про ділянку</strong></td><td>Величезна база угод, нульовий регуляторний тригер</td><td>Ринок сформований, але зайнятий LightBox, ERIS і подібними</td><td>Тестувати в Україні, у США заходити лише в геотехнічну щілину</td></tr>
+      <tr><td><strong>Міграція gINT</strong></td><td>Немає ринку — gINT в Україні майже не використовують</td><td>Датований попит до кінця 2028 року</td><td>Тестувати одразу в США, Україну не чіпати</td></tr>
+      <tr><td><strong>Скринінг для відбудови</strong></td><td>Попит є, платник невизначений</td><td>Немає аналога</td><td>Тестувати як репутаційний вхід, не як бізнес</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 1</p>
+  <h2>Транзакційна база двох ринків</h2>
+  <p class="lead">Скільки разів на рік хтось купує ділянку і теоретично міг би купити звіт про неї.</p>
+
+  <div class="tiles">
+    <div class="tile"><b>394 100</b><span>договорів відчуження земельних ділянок в Україні, 2025</span></div>
+    <div class="tile"><b>366 700</b><span>договорів з нерухомістю в Україні, 2025 (−9,8%)</span></div>
+    <div class="tile"><b>205 200</b><span>з них купівля-продаж квартир і будинків (+15%)</span></div>
+    <div class="tile"><b>~215 000</b><span>Phase I ESA у США за рік (оцінка за індексом LightBox)</span></div>
+  </div>
+
+  <p>Українська база угод — приблизно <strong>760 тисяч на рік</strong> сумарно по землі й нерухомості. Американська база регламентованих екологічних обстежень — близько <span class="num">215</span> тисяч: у четвертому кварталі 2024 року індекс LightBox зафіксував <span class="num">54 286</span> звітів Phase I ESA, а у першому кварталі 2025-го активність зросла на 14% рік до року.</p>
+
+  <div class="note warn">
+    <span class="h">Чому більша база не означає більший ринок</span>
+    <p>У США звіт Phase I ESA виконують за стандартом ASTM E1527-21, бо без нього кредитор не отримує захисту від відповідальності за забруднення. Це не вибір покупця — це умова угоди. В Україні жодна норма не вимагає перевіряти ґрунтові ризики перед купівлею, тому проникнення продукту визначається не кількістю угод, а тим, чи вдасться переконати покупця витратити гроші добровільно. Реалістичний коридор — <strong>0,5–3%</strong> угод замість 100%.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 2</p>
+  <h2>Гіпотеза 1: звіт про ділянку</h2>
+
+  <div class="hyp">
+    <div class="top"><span class="name">Україна</span><span class="verdict v-go">Тестувати</span></div>
+    <h4>Розмір ринку</h4>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Крок</th><th class="n">Значення</th></tr></thead>
+      <tbody>
+        <tr><td>База угод (земля + нерухомість)</td><td class="n">760 000 / рік</td></tr>
+        <tr><td>Реалістичне проникнення без норми</td><td class="n">0,5–3%</td></tr>
+        <tr><td>Звітів на рік по всьому ринку</td><td class="n">3 800–22 800</td></tr>
+        <tr><td>Ціна звіту</td><td class="n">$30–60</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Увесь ринок</td><td class="n">$115–1 370 тис. / рік</td></tr>
+        <tr><td>Ваша частка при 20–30%</td><td class="n">$25–350 тис. / рік</td></tr>
+      </tfoot>
+    </table>
+    </div>
+    <p>Розкид у десять разів — це чесне відображення того, наскільки все залежить від однієї змінної: чи знайдеться канал дистрибуції. При базовому припущенні в 1% проникнення і 25% частки виходить <strong><span class="num">$85</span> тис. виручки на рік</strong>, тобто близько <span class="num">$7</span> тис./міс при маржі даних понад 70%.</p>
+    <h4>Де вирішується все</h4>
+    <p>Не в продукті, а в дистрибуції. Покупець ділянки не шукає такий звіт — його треба покласти йому на стіл у момент угоди. Три можливі канали: ріелторські агентства за реферальний відсоток, нотаріуси як точка оформлення, банки при оцінці застави. Перший — найшвидший, третій — найбільший.</p>
+  </div>
+
+  <div class="hyp">
+    <div class="top"><span class="name">США</span><span class="verdict v-no">Не входити прямо</span></div>
+    <p>Шар даних усередині кожного Phase I ESA коштує <span class="num">$200–500</span>, що дає ринок порядку <span class="num">$40–110</span> млн на рік. Він зайнятий гравцями з базами, які накопичувались десятиліттями: ERIS постачає дані про екологічні ризики в Канаді з 1999 року і в США з 2013-го, LightBox веде галузевий індекс активності. Побудувати конкурентну базу історичних записів по США з нуля неможливо.</p>
+    <h4>Але є щілина</h4>
+    <p>Ці звіти відповідають на питання «чи було тут забруднення». Вони <strong>не відповідають на питання «чи тут уже бурили»</strong>. Геотехнічний шар — історичні свердловини, характеристики ґрунтів, попередні вишукування — в цих продуктах відсутній, а для девелопера він так само цінний. Це і є єдина розумна точка входу: не конкурувати з екологічним звітом, а продавати те, чого в ньому немає, тим самим покупцям.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 3</p>
+  <h2>Гіпотеза 2: міграція gINT</h2>
+
+  <div class="hyp">
+    <div class="top"><span class="name">США</span><span class="verdict v-go">Тестувати першим</span></div>
+    <p>Це єдина з трьох гіпотез, де попит уже існує, створений чужим рішенням і має дату закінчення. Розрахунок обсягу — з попереднього розбору: <span class="num">4–8</span> контрактів на рік для команди з 3–5 осіб, тобто <strong><span class="num">$150–500</span> тис. річної виручки</strong> у вікні до кінця 2028 року.</p>
+    <h4>Найдешевший спосіб знайти клієнтів</h4>
+    <p>Не купувати бази і не шукати списки. <strong>Шукати вакансії зі словом gINT.</strong> Компанія, яка сьогодні шукає інженера з досвідом gINT, має живий архів у gINT і проблему з ним — це найточніший з можливих сигналів, він публічний і безкоштовний. Другий такий самий сигнал — опубліковані матеріали департаментів транспорту штатів про перехід на OpenGround: Вісконсин замовляв дослідження з оцінки переходу, Індіана публікувала презентацію про міграцію.</p>
+    <h4>Що перевіряємо</h4>
+    <p>Не «чи потрібна міграція» — це вже відомо. Перевіряємо, чи готові віддати її <em>назовні</em>, а не робити руками власних інженерів. Відповідь дають двадцять листів.</p>
+  </div>
+
+  <div class="hyp">
+    <div class="top"><span class="name">Україна</span><span class="verdict v-no">Ринку немає</span></div>
+    <p>gINT в Україні майже не використовується — геологи працюють у Word, Excel і AutoCAD. Тестувати міграцію нема з чого. Українським еквівалентом є оцифровка PDF-архівів, обсяг якої вже пораховано: <span class="num">$1,5–6</span> тис./міс досяжної виручки за два-три роки. Це не привід відмовлятись — це привід не витрачати на український напрямок більше, ніж він може повернути.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 4</p>
+  <h2>Гіпотеза 3: скринінг для відбудови</h2>
+  <div class="hyp">
+    <div class="top"><span class="name">Україна</span><span class="verdict v-later">Репутаційний вхід, не бізнес</span></div>
+    <p>У DREAM зареєстровано понад 8 000 проєктів відновлення, 787 інвестиційних проєктів схвалено до єдиного портфеля. Логіка продукту бездоганна: перевірити, чи існують історичні дані по ділянці, і зекономити донору гроші на повторних вишукуваннях.</p>
+    <p>Проблема одна, але важка: <strong>вигоду отримує донор, а рішення про закупівлю ухвалює громада</strong> за процедурою і в межах бюджету, якого на це не передбачено. Класична ситуація, коли той, хто платить, і той, хто виграє, — різні люди.</p>
+    <h4>Як це все ж використати</h4>
+    <p>Не як джерело виручки, а як спосіб потрапити в поле зору міжнародних організацій. Один безкоштовний скринінг для реального проєкту з публічним результатом коштує кілька днів роботи, а дає посилання на вашу компанію в середовищі, куди інакше не заходять. Ставитись до цього треба як до маркетингу з бюджетом у 20 годин, а не як до продукту.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 5</p>
+  <h2>Протокол: сім тестів за шість тижнів</h2>
+  <p class="lead">Кожен тест має бюджет, строк і критерій, за яким видно результат без інтерпретацій.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Тест</th><th>Ринок</th><th class="n">Бюджет</th><th class="n">Строк</th><th>Критерій успіху</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Пошук вакансій зі згадкою gINT</strong> — зібрати фірми з живим архівом</td><td>США</td><td class="n">$0</td><td class="n">3 дні</td><td>≥50 фірм у списку</td></tr>
+      <tr><td><strong>Двадцять листів про міграцію</strong> — пропозиція перенести один проєкт безкоштовно як демо</td><td>США</td><td class="n">~10 год</td><td class="n">3 тиж</td><td>≥3 відповіді, ≥1 демо</td></tr>
+      <tr><td><strong>Фальшиві двері</strong> — лендинг «геологічний паспорт ділянки, 3 дні» з кнопкою передоплати</td><td>Україна</td><td class="n">$400</td><td class="n">2 тиж</td><td>≥10 заявок, ≥3 передоплати</td></tr>
+      <tr><td><strong>Дистрибуція через ріелторів</strong> — 20 агентств, реферальний відсоток</td><td>Україна</td><td class="n">$0</td><td class="n">2 тиж</td><td>≥2 агентства згодні пропонувати</td></tr>
+      <tr><td><strong>Розмова з банками</strong> — скринінг ґрунтових ризиків застави</td><td>Україна</td><td class="n">$0</td><td class="n">3 тиж</td><td>≥1 банк дає тестову вибірку об'єктів</td></tr>
+      <tr><td><strong>Мікропослуга «чи є дані по ділянці»</strong> — платний запит по власному архіву</td><td>Україна</td><td class="n">$0</td><td class="n">1 тиж</td><td>≥5 платних запитів за місяць</td></tr>
+      <tr><td><strong>Безкоштовний скринінг DREAM-проєкту</strong> — з публічним результатом</td><td>Україна</td><td class="n">~20 год</td><td class="n">4 тиж</td><td>Громада підтверджує економію</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Разом</td><td></td><td class="n">$400 + ~30 год</td><td class="n">6 тиж</td><td>Три гіпотези закриті або підтверджені</td></tr>
+    </tfoot>
+  </table>
+  </div>
+
+  <div class="note">
+    <span class="h">Порядок запуску</span>
+    <p>Перші три дні — тільки пошук вакансій: він безкоштовний і одразу показує, скільки взагалі фірм у США сидить на gINT. Якщо їх виявиться не 50, а 5 — вся американська гіпотеза відпадає за три дні, і решту тестів можна перебудувати. Починати треба з того, що здатне зруйнувати план найшвидше.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 6</p>
+  <h2>Скільки це в грошах і як лягає на ціль</h2>
+  <p class="lead">Нагадування з фінансової моделі: ціль у $5 000 дивідендів вимагає <span class="num">$149,3</span> тис. валової маржі на рік.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Напрямок</th><th class="n">Виручка / рік</th><th class="n">Маржа</th><th class="n">Внесок у ціль</th></tr></thead>
+    <tbody>
+      <tr><td>Міграція gINT, США</td><td class="n">$150–500 тис.</td><td class="n">60–70%</td><td class="n">90–350 тис.</td></tr>
+      <tr><td>Звіт про ділянку, Україна</td><td class="n">$25–350 тис.</td><td class="n">70%+</td><td class="n">18–245 тис.</td></tr>
+      <tr><td>Оцифровка архівів, Україна</td><td class="n">$18–70 тис.</td><td class="n">50–60%</td><td class="n">9–42 тис.</td></tr>
+      <tr><td>Геотехнічний шар до US-звітів</td><td>невизначено</td><td class="n">70%+</td><td>потребує окремої перевірки</td></tr>
+      <tr><td>Скринінг для відбудови</td><td class="n">$0–50 тис.</td><td>грантово</td><td>не планувати</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Потрібно для цілі</td><td></td><td></td><td class="n">$149,3 тис.</td></tr>
+    </tfoot>
+  </table>
+  </div>
+
+  <p>Читається це так: <strong>американська міграція сама по собі здатна закрити ціль у середньому сценарії</strong>, український звіт про ділянку — від чверті до цілої за оптимістичного розвитку, а оцифровка архівів — приблизно шосту частину. Комбінація «США платить, Україна додає» дає запас, і саме тому обидва напрямки варто вести паралельно, а не по черзі.</p>
+  <p>Але з поправкою на час: американське вікно закривається наприкінці 2028 року, тобто вся міграційна виручка вміщується у два з половиною роки. Це не суперечить трирічній траєкторії з фінансової моделі — це означає, що <strong>міграція фінансує етапи 2 і 3, а до етапу 4 компанія має спиратись уже на щось інше</strong>: на дані, підписку або експертизу, вибудувану за ці два роки.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Розділ 7</p>
+  <h2>Де ці розрахунки можуть бути неправі</h2>
+  <ul>
+    <li><strong>Проникнення 0,5–3% в Україні — найслабше місце всієї моделі.</strong> Воно може виявитись 0,1%, і тоді український звіт про ділянку не бізнес, а хобі. Саме тому перший тест на нього коштує $400, а не $40 000.</li>
+    <li><strong>Обсяг Phase I ESA — квартальний зріз, помножений на чотири.</strong> Ринок циклічний і залежить від активності комерційної нерухомості й кредитування; річна оцінка в <span class="num">215</span> тис. має похибку в обидва боки.</li>
+    <li><strong>Кількість фірм на gINT невідома.</strong> Я не знайшов публічної цифри — саме тому перший тест її і вимірює. Уся американська оцінка виручки тримається на припущенні, що таких фірм сотні, а не десятки.</li>
+    <li><strong>Ціна $30–60 за український звіт не перевірена жодною продажею.</strong> Українець, який купує ділянку за $5 000, може не заплатити і $30; девелопер за $500 тис. заплатить і $300. Сегментація тут важливіша за середню ціну.</li>
+    <li><strong>Реферальні канали можуть виявитись дорожчими за очікування.</strong> Ріелтор захоче не 10%, а 30–40% — і тоді юніт-економіка змінюється принципово.</li>
+  </ul>
+</section>
+
+<section class="src">
+  <p class="eyebrow">Джерела</p>
+  <h2>На чому побудований розбір</h2>
+  <ol>
+    <li>Угоди в Україні — <a href="https://interfax.com.ua/news/economic/1142096.html">Інтерфакс-Україна: активність ринку нерухомості 2025, −9,8%</a>, <a href="https://zaxid.net/dogovir_daruvannya_abo_kupivli_prodazhu_shho_populyarnishe_statistika_n1629778">Zaxid: структура договорів за даними Мін'юсту</a>, <a href="https://epravda.com.ua/finances/ukrajinci-vtrachayut-interes-do-kupivli-ta-prodazhu-neruhomosti-803126/">Економічна правда</a></li>
+    <li>Обсяг Phase I ESA — <a href="https://www.lightboxre.com/insight/lightbox-phase-i-esa-activity-index-breaks-three-quarter-streak-with-year-end-slowdown/">LightBox: 54 286 звітів у Q4 2024</a>, <a href="https://www.lightboxre.com/insight/lightbox-phase-i-esa-activity-index-rallies-14-in-q1-despite-volatility/">LightBox: +14% у Q1</a></li>
+    <li>Постачальники даних — <a href="https://www.erisinfo.com/about/">ERIS</a>, <a href="https://www.groundsure.com/">Groundsure</a>; вартість Phase I ESA — <a href="https://www.rmagreen.com/rma-blog/how-much-does-a-phase-i-esa-cost">RMA</a></li>
+    <li>Вікно gINT — <a href="https://www.geoengineer.org/news/seequent-announced-extended-gint-support-until-dec-31-2028">підтримка до 31.12.2028</a>, <a href="https://wisconsindot.gov/documents2/research/0092-23-52-MMS-final-report.pdf">WisDOT</a>, <a href="https://www.in.gov/indot/engineering/files/IN-Transition-to-OpenGround-Hasan-Ghani.pdf">INDOT</a></li>
+    <li>Відбудова — <a href="https://dream.gov.ua/ua/news/article-22">DREAM</a>, <a href="https://mtu.gov.ua/news/36415.html">законодавче врегулювання</a></li>
+    <li>Ціль по маржі — <a href="./five-thousand-net-2026.html">фінансова модель «П'ять тисяч на руки»</a></li>
+  </ol>
+  <footer>Проникнення, частка ринку, ціна звіту та кількість контрактів — авторські припущення, позначені в таблицях; вони задають порядок величини й існують для того, щоб їх спростували перші ж тести. Офіційна статистика наведена за 2025 рік, оскільки повні річні дані за 2026-й ще не опубліковані.</footer>
+</section>
+
+</div>
