@@ -11,11 +11,16 @@
 Ключова зміна позиціонування: замість «навігаційної системи» (карта як кінцевий
 продукт) — двошарова платформа на спільному цифровому двійнику:
 
-- **Шар А — GORO Resort OS**: гірські операції, активи, потоки, безпека,
-  комунальна інфраструктура, мобільність, майстер-план, BI.
-- **Шар Б — GORO App**: застосунок гостя (2D/3D, офлайн, real-time, скіпас,
-  безпека групи, бронювання, літній режим).
-- **Ядро — GORO Digital Twin**: геодані, реєстр активів, часові ряди, стани.
+- **Шар А — GORO Resort OS** (A1–A9): гірські операції, активи, підземні мережі
+  й комунальна інфраструктура, потоки, безпека, мобільність, майстер-план, BI,
+  портал девелопменту.
+- **Шар Б — GORO App** (B1–B12): застосунок гостя — 2D/3D, офлайн, real-time,
+  скіпас, безпека групи, бронювання в один кошик, літній режим.
+- **Ядро — GORO Digital Twin**: геодані, реєстр активів і мереж, часові ряди,
+  стани й правила.
+
+Кожен модуль і кожна фаза супроводжуються економічним обґрунтуванням; розділ 17
+зводить усі ефекти в одну таблицю ROI.
 
 ## Файли
 
@@ -24,7 +29,8 @@
 ## Бенчмарк
 
 SKIDATA / Axess, Doppelmayr Connect + clair, SNOWsat (Kässbohrer),
-TechnoAlpin ATASSpro, Lumiplan, Vail EpicMix, Alterra Ikon Pass App,
-Aspenware / Inntopia / accesso, FATMAP by Strava, EDGEpatrol, Mappedin / Situm.
+TechnoAlpin ATASSpro, Lumiplan, Vail Resorts, Palisades Tahoe,
+Aspenware / Inntopia / accesso, FATMAP by Strava, EDGEpatrol, Mappedin / Situm,
+FHWA / Purdue (SUE), Common Ground Alliance DIRT.
 
 Джерела перелічені у футері документа.
