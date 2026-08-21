@@ -1,7 +1,21 @@
 # FLY BY / ONS Pre-Seed 2026 deck — v2 (2026-08-21)
 
-Redesigned and updated version of `Fly_By_ONS_PreSeed_2026.pdf`, rebuilt from scratch
-(dark defence-tech visual system, 15 slides) with August 2026 field data and project status.
+Redesigned and updated version of `Fly_By_ONS_PreSeed_2026.pdf` (15 slides) with
+August 2026 field data and project status.
+
+## Design system
+
+Built in the **GIS-Point Ltd brand system** (Brand Positioning Guide v1.1):
+- **Typeface:** Arial throughout
+- **Primary / company colour:** `#2D2D2D` charcoal (dark title & exit slides, body text)
+- **Accent:** `#08543C` GIS-Department green — the geospatial / map-IP unit colour,
+  the natural company-level fit for FlyBy (its moat is GIS-grade maps)
+- Flat, rule-based layout with hairline dividers and large light-weight stat numbers,
+  consistent with the original ONS deck's structure (kicker + section header + rule,
+  footer with page numbers, sovereign light content slides between charcoal bookends)
+
+Note: the IT-Unit purple `#7C6FCD` is available as an alternate accent if preferred —
+switching the `GREEN` token in `build_deck.js` flips the whole deck.
 
 ## What changed vs v1
 
