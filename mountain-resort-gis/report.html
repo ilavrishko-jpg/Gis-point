@@ -1,0 +1,1074 @@
+<title>ГІС гірських курортів</title>
+
+<style>
+  :root {
+    --paper:      #ECEEEC;
+    --panel:      #FFFFFF;
+    --panel-2:    #F4F6F4;
+    --ink:        #141918;
+    --ink-2:      #454C4A;
+    --ink-3:      #757C7A;
+    --line:       #D3D8D4;
+    --line-soft:  #E4E8E5;
+
+    --pine:       #1F5137;
+    --pine-soft:  #E1EBE4;
+    --ochre:      #8A6510;
+    --ochre-soft: #F4EBD8;
+    --slate:      #566172;
+    --slate-soft: #E6E9EE;
+    --rust:       #8F3324;
+    --rust-soft:  #F6E4E0;
+
+    --f-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --f-quote: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+    --f-mono: ui-monospace, "Cascadia Mono", Consolas, "DejaVu Sans Mono", "Courier New", monospace;
+
+    --w-text: 76ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0E1211;
+      --panel:      #161B19;
+      --panel-2:    #1B211F;
+      --ink:        #DFE5E2;
+      --ink-2:      #A0A8A5;
+      --ink-3:      #767E7B;
+      --line:       #28312D;
+      --line-soft:  #1F2724;
+      --pine:       #63AE83;
+      --pine-soft:  #13291E;
+      --ochre:      #C79A3C;
+      --ochre-soft: #2B2413;
+      --slate:      #93A0B2;
+      --slate-soft: #1B2028;
+      --rust:       #DB7B65;
+      --rust-soft:  #2C1713;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0E1211;
+    --panel:      #161B19;
+    --panel-2:    #1B211F;
+    --ink:        #DFE5E2;
+    --ink-2:      #A0A8A5;
+    --ink-3:      #767E7B;
+    --line:       #28312D;
+    --line-soft:  #1F2724;
+    --pine:       #63AE83;
+    --pine-soft:  #13291E;
+    --ochre:      #C79A3C;
+    --ochre-soft: #2B2413;
+    --slate:      #93A0B2;
+    --slate-soft: #1B2028;
+    --rust:       #DB7B65;
+    --rust-soft:  #2C1713;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16.5px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell { max-width: 1200px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- Masthead ---------- */
+
+  .top { padding: 52px 0 0; border-bottom: 3px solid var(--ink); margin-bottom: 40px; }
+  .top-kicker {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--pine);
+    margin: 0 0 20px;
+  }
+  .top h1 {
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    margin: 0 0 20px;
+    max-width: 20ch;
+  }
+  .top-lede { font-size: 1.13rem; color: var(--ink-2); max-width: 64ch; margin: 0 0 34px; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    margin-bottom: 24px;
+  }
+  .meta span { padding-right: 22px; margin-right: 22px; border-right: 1px solid var(--line); }
+  .meta span:last-child { border-right: 0; }
+
+  /* ---------- Layout ---------- */
+
+  .wrap { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 1060px) {
+    .wrap { grid-template-columns: 210px minmax(0, 1fr); gap: 54px; align-items: start; }
+    .toc { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow-y: auto; }
+  }
+
+  .toc {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    border-top: 1px solid var(--ink);
+    padding-top: 13px;
+    margin-bottom: 44px;
+  }
+  .toc p { font-size: 10px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 13px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; max-width: none; }
+  .toc li { margin: 0; }
+  .toc a { color: var(--ink-2); text-decoration: none; display: grid; grid-template-columns: 24px 1fr; gap: 4px; line-height: 1.4; }
+  .toc a b { color: var(--ink-3); font-weight: 400; }
+  .toc a:hover, .toc a:focus-visible { color: var(--pine); }
+  .toc a:hover b, .toc a:focus-visible b { color: var(--pine); }
+
+  main { min-width: 0; }
+  section { scroll-margin-top: 22px; margin-bottom: 68px; }
+
+  .sh { border-top: 2px solid var(--ink); padding-top: 13px; margin-bottom: 24px; display: flex; gap: 13px; align-items: baseline; }
+  .sh-n { font-family: var(--f-mono); font-size: 12px; color: var(--pine); flex: none; padding-top: 5px; }
+  h2 { font-weight: 700; font-size: clamp(1.42rem, 3vw, 1.95rem); line-height: 1.14; letter-spacing: -0.021em; text-wrap: balance; margin: 0; }
+  h3 { font-weight: 650; font-size: 1.05rem; margin: 34px 0 11px; text-wrap: balance; letter-spacing: -0.006em; }
+  h4 { font-family: var(--f-mono); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 28px 0 10px; }
+  p { max-width: var(--w-text); margin: 0 0 15px; }
+  ul, ol { max-width: var(--w-text); padding-left: 20px; margin: 0 0 17px; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--ink-3); }
+  a { color: var(--pine); }
+  :focus-visible { outline: 2px solid var(--pine); outline-offset: 2px; border-radius: 2px; }
+  .lede { font-size: 1.06rem; color: var(--ink-2); }
+
+  /* ---------- Confidence chips ---------- */
+
+  .cf {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+    vertical-align: 1px;
+    font-weight: 600;
+  }
+  .cf-c { color: var(--pine);  background: var(--pine-soft); }
+  .cf-s { color: var(--ochre); background: var(--ochre-soft); }
+  .cf-i { color: var(--slate); background: var(--slate-soft); }
+  .cf-n { color: var(--rust);  background: var(--rust-soft); }
+
+  /* ---------- Evidence blocks ---------- */
+
+  .ev { border: 1px solid var(--line); background: var(--panel); padding: 15px 17px 16px; margin: 16px 0; max-width: var(--w-text); }
+  .ev-h { display: flex; gap: 9px; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+  .ev-h b { font-size: 0.97rem; font-weight: 650; }
+  .ev p { margin: 0 0 8px; font-size: 14.6px; color: var(--ink-2); max-width: none; }
+  .ev p:last-child { margin-bottom: 0; }
+  .ev .src { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3); }
+
+  blockquote {
+    margin: 18px 0;
+    padding: 2px 0 2px 20px;
+    border-left: 3px solid var(--pine);
+    font-family: var(--f-quote);
+    font-size: 1.06rem;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 66ch;
+  }
+  blockquote cite { display: block; font-family: var(--f-mono); font-size: 11.5px; font-style: normal; color: var(--ink-3); margin-top: 9px; }
+
+  /* ---------- Tables ---------- */
+
+  .tw { overflow-x: auto; margin: 20px 0 24px; border: 1px solid var(--line); background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 14.3px; }
+  thead th {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--ink-3); text-align: left; font-weight: 600; padding: 10px 13px;
+    border-bottom: 2px solid var(--ink); white-space: nowrap; background: var(--panel-2);
+  }
+  tbody td { padding: 10px 13px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.n, th.n { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 13.3px; }
+  td.k { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+
+  /* ---------- Callouts ---------- */
+
+  .box { border-left: 3px solid var(--pine); background: var(--pine-soft); padding: 15px 17px; margin: 22px 0; max-width: var(--w-text); }
+  .box.warn { border-left-color: var(--rust); background: var(--rust-soft); }
+  .box.note { border-left-color: var(--ochre); background: var(--ochre-soft); }
+  .box > :last-child { margin-bottom: 0; }
+  .box-k { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 7px; }
+
+  /* ---------- Stats ---------- */
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 2px solid var(--ink); border-left: 1px solid var(--line); margin: 22px 0 26px; }
+  .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 13px 14px 15px; background: var(--panel); }
+  .stat b { display: block; font-family: var(--f-mono); font-size: 1.32rem; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+  .stat span { font-size: 12.3px; color: var(--ink-3); line-height: 1.34; display: block; }
+
+  /* ---------- Hypothesis cards ---------- */
+
+  .hyp { border: 1px solid var(--line); background: var(--panel); margin: 0 0 1px; padding: 17px 18px 18px; }
+  .hyps { border: 0; margin: 22px 0 26px; display: flex; flex-direction: column; gap: 10px; }
+  .hyp-top { display: flex; gap: 11px; align-items: baseline; margin-bottom: 9px; flex-wrap: wrap; }
+  .hyp-id { font-family: var(--f-mono); font-size: 11.5px; font-weight: 600; color: var(--pine); }
+  .hyp h5 { margin: 0; font-size: 1.01rem; font-weight: 650; line-height: 1.32; flex: 1 1 260px; }
+  .hyp p { font-size: 14.5px; color: var(--ink-2); margin: 0 0 10px; max-width: none; }
+  .hyp p:last-child { margin-bottom: 0; }
+  .hyp dl { margin: 10px 0 0; display: grid; grid-template-columns: 1fr; gap: 7px; font-size: 13.8px; }
+  @media (min-width: 640px) { .hyp dl { grid-template-columns: 108px 1fr; gap: 7px 14px; } }
+  .hyp dt { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+  .hyp dd { margin: 0; color: var(--ink-2); }
+
+  /* ---------- Figure ---------- */
+
+  figure { margin: 26px 0; border: 1px solid var(--line); background: var(--panel); padding: 20px 18px 15px; }
+  figure svg { display: block; width: 100%; max-width: 100%; height: auto; color: var(--ink); }
+  figcaption { font-size: 12.8px; color: var(--ink-3); margin-top: 15px; padding-top: 11px; border-top: 1px solid var(--line-soft); max-width: 80ch; }
+  .s-box { fill: var(--panel-2); stroke: var(--ink-2); stroke-width: 1; }
+  .s-box-a { fill: var(--pine-soft); stroke: var(--pine); stroke-width: 1.5; }
+  .s-band { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 3; }
+  .s-t { fill: var(--ink); font-family: var(--f-body); font-size: 13px; font-weight: 650; }
+  .s-s { fill: var(--ink-2); font-family: var(--f-mono); font-size: 10.5px; }
+  .s-h { fill: var(--ink-3); font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.13em; }
+  .s-l { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
+
+  footer { border-top: 3px solid var(--ink); padding-top: 20px; margin-top: 16px; font-size: 13.6px; color: var(--ink-2); }
+  footer h4 { margin-top: 0; }
+  .srcs { font-size: 13px; columns: 1; }
+  @media (min-width: 780px) { .srcs { columns: 2; column-gap: 34px; } }
+  .srcs li { margin-bottom: 6px; break-inside: avoid; }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="shell">
+
+  <header class="top">
+    <p class="top-kicker">GIS-Point · Дослідження ринку · Внутрішній документ</p>
+    <h1>ГІС гірських курортів</h1>
+    <p class="top-lede">Хто з провідних курортів Північної Америки та Європи реально користується геоінформаційними системами, що вони з цього отримують, що пропонує Esri — і які гіпотези варто перевірити на наступному клієнті.</p>
+    <div class="meta">
+      <span>Серпень 2026</span>
+      <span>Версія 1.0</span>
+      <span>3 паралельні дослідження</span>
+      <span>~230 джерел</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <nav class="toc" aria-label="Зміст">
+      <p>Зміст</p>
+      <ol>
+        <li><a href="#s0"><b>00</b> Як читати</a></li>
+        <li><a href="#s1"><b>01</b> Головне</a></li>
+        <li><a href="#s2"><b>02</b> Структура ринку</a></li>
+        <li><a href="#s3"><b>03</b> Північна Америка</a></li>
+        <li><a href="#s4"><b>04</b> Європа</a></li>
+        <li><a href="#s5"><b>05</b> Регуляторика</a></li>
+        <li><a href="#s6"><b>06</b> Esri: що і почім</a></li>
+        <li><a href="#s7"><b>07</b> Де Esri програє</a></li>
+        <li><a href="#s8"><b>08</b> Що це для GIS-Point</a></li>
+        <li><a href="#s9"><b>09</b> Гіпотези: база</a></li>
+        <li><a href="#s10"><b>10</b> Гіпотези: навігація</a></li>
+        <li><a href="#s11"><b>11</b> Як перевіряти</a></li>
+        <li><a href="#s12"><b>12</b> Прогалини</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <!-- 00 -->
+      <section id="s0">
+        <div class="sh"><span class="sh-n">00</span><h2>Як читати цей звіт</h2></div>
+
+        <p class="lede">Кожне твердження нижче має позначку достовірності. Це не формальність: у переговорах із курортом за $1,5 млрд одна вигадана цифра коштує дорожче за весь звіт.</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Позначка</th><th>Що означає</th><th>Як використовувати</th></tr></thead>
+            <tbody>
+              <tr><td><span class="cf cf-c">Підтверджено</span></td><td>Факт із першоджерела з робочим посиланням</td><td>Можна цитувати клієнту напряму</td></tr>
+              <tr><td><span class="cf cf-s">Через пошук</span></td><td>Зміст сторінки отриманий через пошуковий витяг; саму сторінку відкрити не вдалося</td><td>Перед комерційним використанням відкрити посилання вручну</td></tr>
+              <tr><td><span class="cf cf-i">Висновок</span></td><td>Наша інтерпретація фактів, а не опублікований факт</td><td>Подавати як гіпотезу, не як дані</td></tr>
+              <tr><td><span class="cf cf-n">Не підтверджено</span></td><td>Шукали й не знайшли</td><td>Не стверджувати. Часто це і є ринкова можливість</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <span class="box-k">Технічне обмеження, яке вплинуло на глибину</span>
+          <p>Мережева політика цього середовища блокує прямий доступ до сайтів — <code>esri.com</code>, <code>skiresort.info</code>, <code>snowsat.com</code>, навіть Wikipedia повертали відмову. Обходити політику ми не стали. Тому переважна частина фактів отримана через пошукові витяги з тих самих сторінок: <strong>посилання справжні й перевіряються, але сторінки не були відкриті нами напряму</strong>.</p>
+          <p>Практичний наслідок: приблизно <strong>15 ключових посилань</strong> варто відкрити вручну перед тим, як цифри підуть у комерційну пропозицію. Вони позначені в тексті.</p>
+        </div>
+      </section>
+
+      <!-- 01 -->
+      <section id="s1">
+        <div class="sh"><span class="sh-n">01</span><h2>Головне</h2></div>
+
+        <p class="lede">Ринок, у який ви заходите, вже існує, вже поділений — і поділений <em>регіонально</em>. Це головний висновок дослідження, і він змінює не аргументацію, а стратегію.</p>
+
+        <h3>П'ять висновків, які варто прочитати, навіть якщо решту звіту ні</h3>
+
+        <div class="ev">
+          <div class="ev-h"><b>1. Курорти не купують Esri напряму. Між ними є галузевий шар.</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>В Австрії, Німеччині та Швейцарії це <strong>PowerGIS / ARENA PistenManagement</strong> — офіційний партнер Esri, ~55 канатно-дорожніх компаній, ~250 систем вимірювання глибини снігу. У Швейцарії — <strong>gissolution / alpineSOLUTION</strong>: Zermatt, Laax, Lenzerheide, Andermatt-Sedrun, Corvatsch, St. Moritz. У США — <strong>Earth Analytic / SmartMountain</strong> (20+ курортів) і <strong>North Line GIS</strong>.</p>
+          <p class="src">esri.com/partners/powergis-gmbh · gissolution.ch/produkte/alpine · esri.com/partners/earth-analytic-inc</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>2. Нішу вже валідували через M&amp;A.</b><span class="cf cf-c">Підтверджено</span></div>
+          <p><strong>North Line GIS</strong> (Брекенрідж, Колорадо) — ГІС-консультанція, вузько спеціалізована на курортах: активи засніження, підйомники, електрика й телеком, моделювання лавин, картування глибини снігу, БПЛА, дозвільна документація. У червні 2022 її придбала <strong>IMEG</strong>. Це і підтвердження, що модель працює, і сигнал, що консолідація вже почалася.</p>
+          <p class="src">northlinegis.com/resort-snow-management · imegcorp.com</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>3. Esri не опублікував жодної цифри ROI для гірськолижних курортів.</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Є два серйозні кейси — Vail і Jackson Hole — але обидва описані <strong>якісно</strong>. Жодного відсотка економії, жодного строку окупності. Якщо клієнт спитає «скільки Vail на цьому зекономив», чесна відповідь: <em>Esri цього не публікує</em>. Усі тверді цифри в галузі належать не ГІС-вендорам, а вендорам снігу.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>4. Найсильніший драйвер у Європі — не зручність, а закон.</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>В Австрії розширення курорту автоматично потребує ОВНС при <strong>≥20 га</strong>, скринінг починається з <strong>5 га</strong>, а в охоронних зонах — з <strong>10 га</strong>. Це <em>площинні</em> пороги: оператор фізично не може знати, з якого боку межі його проєкт, без точного ГІС-розрахунку площі. Директива ЄС про ОВНС прямо називає «гірськолижні траси, підйомники та канатні дороги» у Додатку II.</p>
+          <p class="src">bmluk.gv.at Leitfaden UVP Schigebiete · eur-lex.europa.eu/eli/dir/2011/92</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>5. Вендори снігу активно витісняють ГІС-підрядників.</b><span class="cf cf-s">Через пошук</span></div>
+          <p>Kässbohrer прямо продає <strong>SNOWsat GIS Data Manager</strong> як спосіб обійтися без зовнішньої геодезії: «раніше доводилось замовляти геодезичну компанію» — тепер персонал курорту оновлює дані сам. Це найкраще формулювання бізнес-кейсу ГІС у цій галузі — і водночас пряма загроза моделі «продамо вам ГІС як послугу».</p>
+          <p class="src">simagazin.com · seilbahn.net</p>
+        </div>
+
+        <div class="box">
+          <span class="box-k">Стратегічний висновок</span>
+          <p>Продавати «ГІС для гірського курорту» як нову ідею не вийде — у Альпах цю ідею продали двадцять років тому. Але <strong>жодного такого вендора не існує для України та Центрально-Східної Європи</strong>, а всі наявні гравці оптимізовані під <em>діючі</em> курорти, не під будівництво з нуля. Це і є вікно.</p>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section id="s2">
+        <div class="sh"><span class="sh-n">02</span><h2>Структура ринку: шар, якого не видно ззовні</h2></div>
+
+        <p>Найпоширеніша помилка в пітчі — говорити з курортом так, ніби вибір стоїть між «Esri» і «нічого». Насправді ринок тришаровий, і два з трьох шарів обходять ГІС-підрядника стороною.</p>
+
+        <figure>
+          <svg viewBox="0 0 940 440" role="img" aria-label="Структура ринку: Esri як платформа передає ліцензії галузевим ГІС-вендорам (PowerGIS ARENA, gissolution alpineSOLUTION, Earth Analytic SmartMountain, North Line GIS), які постачають готовий продукт курортам. Операційні вендори SNOWsat і TechnoAlpin постачають власний ГІС курортам напряму, обходячи цей шар, а вендори гостьових додатків Lumiplan та Intermaps споживають офіційні геодані курорту.">
+            <defs>
+              <marker id="a1" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+                <polygon points="0,0 10,4 0,8" fill="currentColor"></polygon>
+              </marker>
+            </defs>
+
+            <rect class="s-box-a" x="320" y="34" width="300" height="54" rx="2"></rect>
+            <text class="s-t" x="470" y="58" text-anchor="middle">Esri ArcGIS</text>
+            <text class="s-s" x="470" y="76" text-anchor="middle">платформа, ліцензії, SDK</text>
+
+            <line class="s-l" x1="470" y1="88" x2="470" y2="146" marker-end="url(#a1)"></line>
+            <text class="s-s" x="482" y="122">партнерство, ліцензії</text>
+
+            <rect class="s-band" x="238" y="146" width="464" height="142" rx="2"></rect>
+            <text class="s-h" x="252" y="166">ГАЛУЗЕВИЙ ШАР</text>
+
+            <rect class="s-box" x="252" y="180" width="212" height="42" rx="2"></rect>
+            <text class="s-s" x="358" y="197" text-anchor="middle">PowerGIS · ARENA</text>
+            <text class="s-s" x="358" y="212" text-anchor="middle">AT · DE · CH</text>
+
+            <rect class="s-box" x="476" y="180" width="212" height="42" rx="2"></rect>
+            <text class="s-s" x="582" y="197" text-anchor="middle">gissolution · alpineSOLUTION</text>
+            <text class="s-s" x="582" y="212" text-anchor="middle">CH</text>
+
+            <rect class="s-box" x="252" y="232" width="212" height="42" rx="2"></rect>
+            <text class="s-s" x="358" y="249" text-anchor="middle">Earth Analytic</text>
+            <text class="s-s" x="358" y="264" text-anchor="middle">SmartMountain · US</text>
+
+            <rect class="s-box" x="476" y="232" width="212" height="42" rx="2"></rect>
+            <text class="s-s" x="582" y="249" text-anchor="middle">North Line GIS → IMEG</text>
+            <text class="s-s" x="582" y="264" text-anchor="middle">US</text>
+
+            <line class="s-l" x1="470" y1="288" x2="470" y2="330" marker-end="url(#a1)"></line>
+            <text class="s-s" x="482" y="313">готовий галузевий продукт</text>
+
+            <rect class="s-box-a" x="238" y="330" width="464" height="66" rx="2"></rect>
+            <text class="s-t" x="470" y="354" text-anchor="middle">Курорти</text>
+            <text class="s-s" x="470" y="374" text-anchor="middle">Kitzbühel · Ischgl · Arlberg · Zermatt · Laax</text>
+            <text class="s-s" x="470" y="388" text-anchor="middle">Jackson Hole · Taos · Telluride · Vail</text>
+
+            <rect class="s-box" x="16" y="330" width="196" height="66" rx="2"></rect>
+            <text class="s-s" x="114" y="356" text-anchor="middle">SNOWsat · TechnoAlpin</text>
+            <text class="s-s" x="114" y="372" text-anchor="middle">операційні вендори</text>
+            <line class="s-l" x1="212" y1="363" x2="234" y2="363" marker-end="url(#a1)"></line>
+            <text class="s-s" x="114" y="315" text-anchor="middle">власний ГІС —</text>
+            <text class="s-s" x="114" y="302" text-anchor="middle">без ГІС-підрядника</text>
+
+            <rect class="s-box" x="728" y="330" width="196" height="66" rx="2"></rect>
+            <text class="s-s" x="826" y="356" text-anchor="middle">Lumiplan · Intermaps</text>
+            <text class="s-s" x="826" y="372" text-anchor="middle">гостьові додатки</text>
+            <line class="s-l" x1="706" y1="363" x2="724" y2="363" marker-end="url(#a1)"></line>
+            <text class="s-s" x="826" y="315" text-anchor="middle">споживають офіційні</text>
+            <text class="s-s" x="826" y="302" text-anchor="middle">геодані курорту</text>
+          </svg>
+          <figcaption>Центральна вертикаль — те, що прийнято називати «ринком ГІС для курортів». Але праворуч і ліворуч від неї два потоки, які визначають реальну економіку. Ліворуч: вендори снігу постачають курорту власний ГІС разом із технікою і прямо позиціонують це як спосіб не наймати геодезистів. Праворуч: вендори гостьових додатків <strong>не будують</strong> геодані — вони їх споживають, і саме тому база даних завжди первинна щодо навігації.</figcaption>
+        </figure>
+
+        <div class="box note">
+          <span class="box-k">Що з цього випливає для позиціонування</span>
+          <p>Якщо ви приходите з пропозицією «зробимо навігацію», ви конкуруєте з Lumiplan (220+ курортів, 500+ встановлених схем трас) і Intermaps (250+ регіонів у 15 країнах) — і програєте на швидкості впровадження. Якщо ви приходите з пропозицією «зробимо базу», ви конкуруєте з PowerGIS та gissolution — і програєте на галузевій репутації. <strong>Виграшна позиція — там, де жоден із них не сильний: greenfield-будівництво і ринки без місцевого вендора.</strong></p>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section id="s3">
+        <div class="sh"><span class="sh-n">03</span><h2>Північна Америка: хто, що і з яким результатом</h2></div>
+
+        <h3>Топ-курорти за площею катання</h3>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Курорт</th><th>Оператор</th><th class="n">Акрів</th><th class="n">Підйомників</th><th>ГІС підтверджено?</th></tr></thead>
+            <tbody>
+              <tr><td>Whistler Blackcomb</td><td>Vail Resorts</td><td class="n">~8 171</td><td class="n">32–34</td><td><span class="cf cf-n">Ні (тільки муніципалітет)</span></td></tr>
+              <tr><td>Park City Mountain</td><td>Vail Resorts</td><td class="n">7 300+</td><td class="n">41</td><td><span class="cf cf-n">Ні (лише Lumiplan)</span></td></tr>
+              <tr><td>Big Sky</td><td>Boyne</td><td class="n">5 850</td><td class="n">40</td><td><span class="cf cf-n">Ні</span></td></tr>
+              <tr><td>Aspen Snowmass</td><td>Aspen Skiing Co.</td><td class="n">5 500+</td><td class="n">~41</td><td><span class="cf cf-n">Ні (лише SKIDATA + RTP)</span></td></tr>
+              <tr><td><strong>Vail Mountain</strong></td><td>Vail Resorts</td><td class="n">5 317</td><td class="n">32</td><td><span class="cf cf-c">Так — ArcGIS Online</span></td></tr>
+              <tr><td>Deer Valley</td><td>Alterra</td><td class="n">4 300 → 5 726</td><td class="n">+11 нових</td><td><span class="cf cf-n">Ні</span></td></tr>
+              <tr><td>Steamboat</td><td>Alterra</td><td class="n">3 741</td><td class="n">24</td><td><span class="cf cf-c">Так — БПЛА + ортофото</span></td></tr>
+              <tr><td>Palisades Tahoe</td><td>Alterra</td><td class="n">3 600</td><td class="n">30</td><td><span class="cf cf-n">Ні (лише EDGEauditor)</span></td></tr>
+              <tr><td>Mammoth</td><td>Alterra</td><td class="n">3 500</td><td class="n">25</td><td><span class="cf cf-n">Ні (лише EDGEauditor)</span></td></tr>
+              <tr><td>Breckenridge</td><td>Vail Resorts</td><td class="n">2 908</td><td class="n">20</td><td><span class="cf cf-c">Вакансія GIS Analyst</span></td></tr>
+              <tr><td><strong>Jackson Hole</strong></td><td>незалежний</td><td class="n">2 500</td><td class="n">13</td><td><span class="cf cf-c">Так — SmartMountain</span></td></tr>
+              <tr><td><strong>Telluride</strong></td><td>незалежний</td><td class="n">—</td><td class="n">—</td><td><span class="cf cf-c">Так — цифровий двійник</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><span class="cf cf-c">Підтверджено</span> Галузевий контекст: США зафіксували <strong>61,5 млн скі-візитів у сезоні 2024/25</strong> — другий результат в історії. Водночас малосніжні роки 2001–2016 коштували галузі <strong>понад 5,5 млн візитів, ~$1 млрд і 17 400 робочих місць</strong> порівняно з середнім сезоном.</p>
+
+        <h3>Vail Mountain — єдиний в галузі жорсткий комерційний результат</h3>
+
+        <p><span class="cf cf-c">Підтверджено, два незалежні джерела</span> Штатний ГІС-фахівець <strong>Майк Кройс</strong> із 2016 року будував на ArcGIS Online цифровий двійник системи засніження: компресори, насоси, водяні й повітряні засувки, снігогенератори, труби, електрика й трансформатори — надземні й підземні, зняті по GPS.</p>
+
+        <div class="stats">
+          <div class="stat"><b>421</b><span>новий снігогенератор</span></div>
+          <div class="stat"><b>19 миль</b><span>трубопроводу повітря й води</span></div>
+          <div class="stat"><b>25</b><span>трансформаторів</span></div>
+          <div class="stat"><b>200 акрів</b><span>раннього сезону — вдвічі більше попереднього</span></div>
+        </div>
+
+        <blockquote>
+          Ми б не змогли скласти цей план без карти, яка просто показала: ось що вам треба зробити.
+          <cite>Кейт Шифані, Vail Resorts — InformationWeek</cite>
+        </blockquote>
+
+        <p>Показова деталь: проєкт почався не з карти, а з <strong>конфлікту найменувань</strong>. Рятувальна служба орієнтувалась за номерами старих телефонних будок, служба засніження — за назвами насосів. ГІС став єдиним джерелом назв. Це типовий прихований драйвер, який жоден курорт не формулює як «нам потрібен ГІС».</p>
+
+        <h3>Інші підтверджені програми</h3>
+
+        <div class="ev">
+          <div class="ev-h"><b>Jackson Hole — 50 років лавинних даних у робочій системі</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Рятувальна служба працює на <strong>SmartMountain</strong> (Earth Analytic, на базі ArcGIS: Experience Builder як інтерфейс, Survey123 для польових форм, Dashboards для диспетчерської). Кожен закладений заряд прив'язаний до лавини, яку він спричинив — це дає причинно-наслідкові дані по кожному сніговому циклу. Рукописні записи з початку 1970-х оцифровано й перенесено в живу систему.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Winter Park — трекінг ратраків через радіомережу з 2012 року</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>ArcGIS Tracking Analyst відображає позиції рятувальників і снігоходів із <strong>радіосистеми Motorola</strong>. Щоночі контролюються <strong>20 ратраків і 20 снігогенераторників</strong>; оператори отримують попередження в реальному часі, коли перекривають уже оброблену смугу. Це десятирічна операційна практика, а не новинка.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Telluride — цифровий двійник на сцені Esri UC 2021</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Штатна посада — <strong>«GIS Analyst &amp; Drone Operator»</strong> (Метт Таркінгтон). Рятувальники ведуть у Survey123 лавинні звіти, <strong>облік вибухівки</strong>, розслідування нещасних випадків; диспетчерська веде дашборди відкриття/закриття території.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Steamboat — БПЛА як інструмент капітального будівництва</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Дрон і ГІС використовують для картування снігового покриву взимку, а ортофото — для планування земляних робіт багаторічної прокладки трубопроводу засніження від бази до вершини. Окремо: ортофотоплан усієї гори як підкладка, <strong>щоб оператори могли орієнтуватись у туман і хуртовину</strong>.</p>
+        </div>
+
+        <h3>Недооцінений аргумент: суд</h3>
+
+        <blockquote>
+          ГІС-картування вже ефективно використовувалося для підкріплення свідчень експертів у десятках судових залів по всій країні.
+          <cite>Пітер Рітц, юридичний радник Keystone — SAM Magazine</cite>
+        </blockquote>
+
+        <p><span class="cf cf-i">Висновок</span> Для курорту, що прийматиме сотні тисяч людей на рік, документована геоприв'язка кожного інциденту — це не операційна зручність, а позиція в спорі про відповідальність. У фінансовій моделі це рядок «страхова премія», а не «ІТ».</p>
+
+        <h3>Регуляторний драйвер у США</h3>
+
+        <p><span class="cf cf-c">Підтверджено</span> Курорти на землях Національного лісового фонду працюють за <strong>Ski Area Term Special Use Permits</strong> і подають <strong>Master Development Plans</strong> — плани, побудовані на інвентаризації експозиції та ухилів схилів і балансі пропускної здатності трас, підйомників, сервісів і паркінгу. Це за визначенням ГІС-робота. Vail Resorts оперує <strong>п'ятьма з десяти найвідвідуваніших курортів США</strong>, чотири з яких — на території White River National Forest.</p>
+      </section>
+
+      <!-- 04 -->
+      <section id="s4">
+        <div class="sh"><span class="sh-n">04</span><h2>Європа: зріліший ринок, інша механіка</h2></div>
+
+        <p class="lede">Європейські курорти користуються ГІС не менше, а більше за американські — але через регіональних вендорів, тому ззовні цього не видно. Esri майже не публікує європейських кейсів; докази лежать у німецькомовній галузевій пресі.</p>
+
+        <h3>Найтвердіший факт: великий альпійський курорт прямо називає Esri</h3>
+
+        <blockquote>
+          Bergbahn AG Kitzbühel використовує геодані, користуючись численними можливостями ГІС-продуктів ESRI.
+          <cite>seilbahn.net, звіт про PowerGIS — <span class="cf cf-s">через пошук</span></cite>
+        </blockquote>
+
+        <p>Kitzbühel — клієнт ARENA PistenManagement, працює в ArcGIS Pro, а польовий збір веде через <strong>ArcGIS Field Maps</strong> зі смартфона з сантиметровою точністю.</p>
+
+        <h3>Три вендори, які тримають альпійський ринок</h3>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Вендор</th><th>Продукт</th><th>Стек</th><th>Названі клієнти</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>PowerGIS</strong><br><span class="cf cf-c">Партнер Esri</span></td>
+                <td>ARENA PistenManagement, MasterPLAN, PistenEnergie, GPS+</td>
+                <td>ArcGIS Pro + Field Maps + StoryMaps</td>
+                <td>Kitzbühel, Ischgl (Silvretta), Arlberg, Planai-Hochwurzen</td>
+              </tr>
+              <tr>
+                <td><strong>Grünenfelder / gissolution</strong></td>
+                <td>alpineSOLUTION (сніг, рятслужба, інфраструктура трас, мережі), TEDAMOS (геомоніторинг)</td>
+                <td>Web-GIS; спільний інноваційний проєкт із <strong>Esri R&amp;D Center Zurich</strong></td>
+                <td>Zermatt, Weisse Arena (Laax), Lenzerheide, Andermatt-Sedrun, Corvatsch, St. Moritz, Obersaxen</td>
+              </tr>
+              <tr>
+                <td><strong>Kässbohrer</strong></td>
+                <td>SNOWsat GIS Data Manager, вимірювання глибини снігу, LiDAR</td>
+                <td>Власний ГІС з імпортом/експортом зовнішніх геоданих</td>
+                <td>Val Thorens, Saint-Gervais, Mayrhofen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><span class="cf cf-s">Через пошук</span> Масштаб PowerGIS: близько <strong>20 років у піст-менеджменті, ~50 гірськолижних зон досвіду, ~55 канатно-дорожніх компаній сьогодні, ~250 систем вимірювання глибини снігу</strong> в Австрії, Німеччині та Швейцарії. Послуги прямо включають БПЛА-зйомку зон катання, ЦМР та обробку геоданих у майстер-план.</p>
+
+        <div class="ev">
+          <div class="ev-h"><b>Швейцарія: ГІС у критичних для життя операціях</b><span class="cf cf-s">Через пошук</span></div>
+          <p>Платформа <strong>alpineSOLUTION</strong> у мережі гірських залізниць із <strong>2018 року</strong>, а з зими <strong>2019/20 — для рятування на трасах і підривання лавин</strong>. Веде: усі підземні й надземні лінії та шахти засніження, електрики, води й стоків; краї трас, анкерні точки ратраків, огорожі; облік нещасних випадків із типом травми, місцем, часом і тим, який рятувальник виїжджав; літні активи — велотраси, пішохідні маршрути й вивіски. Позиціонується прямо як <strong>цифровий двійник зони катання</strong>, з формулюванням «усі дані належать клієнту».</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Esri будує альпійський двійник власними руками — але в Європі</b><span class="cf cf-s">Через пошук</span></div>
+          <p>Grünenfelder und Partner AG запустила інноваційний проєкт разом із <strong>Weisse Arena Group (Laax)</strong> та <strong>Esri R&amp;D Center Zurich</strong> про «цифрову гору»: 3D над літніми й зимовими супутниковими знімками, класифікація поверхні (вода, сніг, скеля, ліс), наявні 3D-моделі будівель. Формулювання проблеми в них таке саме, як у нас: <em>дані є, але вони в силосах — частина у постачальників, частина в одному відділі, частина взагалі поза полем зору</em>.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Франція: публічні гроші купують двійник курорту просто зараз</b><span class="cf cf-s">Через пошук</span></div>
+          <p>Région Sud замовила <strong>IGO та SINTEGRA (GEOFIT Group)</strong> аерозйомку й 3D-модель високої роздільності курортів <strong>Serre Chevalier і Montgenèvre</strong> для цифрового двійника до <strong>Олімпіади 2030</strong>. Політ виконано <strong>15 лютого 2026</strong> — після значного снігопаду й при висоті сонця понад 20°, щоб мінімізувати тіні на схилах. Результат покриває рельєф, підйомники, будівлі, спортивні споруди й рослинність <strong>у стандартних сумісних форматах, що інтегруються з ГІС</strong>.</p>
+        </div>
+
+        <h3>Цифри економії — усі належать вендорам снігу, не ГІС</h3>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Ефект</th><th class="n">Цифра</th><th>Де</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td>Економія води, електрики й витрат від GPS-керованої обробки трас</td><td class="n">~25%<br>з 2017</td><td>SkiWelt Wilder Kaiser</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+              <tr><td>Скорочення повного циклу засніження</td><td class="n">8 днів<br>→ 4 дні</td><td>SkiWelt Wilder Kaiser</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+              <tr><td>Економія на виробництві штучного снігу</td><td class="n">25–30%</td><td>Mayrhofen (Zillertal), власний розрахунок курорту</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+              <tr><td>Економія води, енергії та мотогодин</td><td class="n">до 25%</td><td>SNOWsat, заява вендора</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+              <tr><td>Енергія при повністю автоматичному засніженні</td><td class="n">до −30%</td><td>TechnoAlpin ATASSpro</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+              <tr><td>Державна субсидія на цифровий кадастр мереж</td><td class="n">€2 / п.м.</td><td>Австрія, федеральна, до 50% витрат</td><td><span class="cf cf-s">Через пошук</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <span class="box-k">Чого немає в жодному джерелі</span>
+          <p>Жодної опублікованої цифри окупності <strong>ГІС-програмного забезпечення</strong> в євро чи франках у жодного європейського курорту. Усі тверді числа вище — це вода, енергія та відсотки від снігових операцій. У пропозицію не можна ставити «€ROI від ГІС» із посиланням на ці джерела.</p>
+        </div>
+
+        <h3>Найбільша непокрита зона в Європі</h3>
+
+        <p><span class="cf cf-n">Не підтверджено</span> <strong>Dolomiti Superski</strong> — 1 200 км трас, з яких <strong>~1 160 км (97%) обладнані засніженням</strong>. Це один із найбільших підземних трубопровідних активів у галузі. Жодної корпоративної ГІС-платформи не знайдено. Так само порожньо у <strong>SkiStar</strong> (Åre, Trysil, Hemsedal), <strong>Grandvalira</strong>, <strong>Espace Killy</strong>, <strong>Paradiski</strong> і <strong>Portes du Soleil</strong>.</p>
+      </section>
+
+      <!-- 05 -->
+      <section id="s5">
+        <div class="sh"><span class="sh-n">05</span><h2>Регуляторика: єдиний недискреційний драйвер</h2></div>
+
+        <p class="lede">Витрати на зручність курорт відкладає. Витрати на дозвіл — ні. Це найстійкіший аргумент продажу і водночас найменш використаний у наших матеріалах.</p>
+
+        <h3>Рівень ЄС</h3>
+
+        <div class="ev">
+          <div class="ev-h"><b>Директива про ОВНС 2011/92/ЄС, Додаток II</b><span class="cf cf-c">Підтверджено</span></div>
+          <p><strong>«Гірськолижні траси, підйомники та канатні дороги і пов'язана забудова»</strong> — окремо названа категорія проєктів у розділі «Туризм і дозвілля». Проєкти Додатка II підлягають скринінгу за критеріями Додатка III. Кожен скринінг і кожна ОВНС потребують просторово визначеної базової зйомки.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Оселищна директива, ст. 6(3) — стандарт доказовості</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Проєкт у межах або поблизу території Natura 2000 має бути <strong>відхилений</strong>, якщо суттєвий вплив на цілісність території не можна виключити <em>«у світлі найкращих наукових знань і без обґрунтованого наукового сумніву»</em>. Natura 2000 покриває <strong>понад 18% суходолу ЄС</strong>. Альпійські курорти непропорційно часто розташовані всередині або поруч.</p>
+          <p><span class="cf cf-i">Висновок</span> «Без обґрунтованого наукового сумніву» — це формулювання про <strong>якість даних</strong>. Це найсильніша юридична підстава продавати точність, яка існує в галузі.</p>
+        </div>
+
+        <h3>Австрія — пороги, які неможливо оцінити без ГІС</h3>
+
+        <div class="stats">
+          <div class="stat"><b>≥ 20 га</b><span>автоматична ОВНС при розширенні зони катання</span></div>
+          <div class="stat"><b>5 га</b><span>поріг індивідуального скринінгу (25% від основного)</span></div>
+          <div class="stat"><b>10 га</b><span>у зонах категорії А, що підлягають охороні</span></div>
+          <div class="stat"><b>25 років</b><span>максимальний строк дозволу на водокористування</span></div>
+        </div>
+
+        <p><span class="cf cf-c">Підтверджено</span> Це <em>площинні</em> пороги. Оператор не може знати, з якого боку межі його проєкт, поки площа не порахована в ГІС. Справа розширення льодовика Pitztal дійшла до найвищого суду, який підтвердив обов'язковість ОВНС.</p>
+
+        <p><span class="cf cf-s">Через пошук</span> Масштаб регульованого господарства: близько <strong>75% площі австрійських трас (16 590 га)</strong> обладнано технічним засніженням, яке живлять <strong>459 накопичувальних басейнів</strong>. Кожен із них — це дозволений, інспектований і геопросторово визначений водний об'єкт.</p>
+
+        <h3>Франція</h3>
+
+        <ul>
+          <li><span class="cf cf-c">Підтверджено</span> <strong>PPRN Avalanches</strong> на основі закону Барньє 1995 року ділить території на зони з обов'язковими будівельними правилами. Лавини зачіпають <strong>понад 600 комун</strong>.</li>
+          <li><span class="cf cf-c">Підтверджено</span> <strong>CLPA</strong> — карта локалізації лавинних явищ, створена <strong>1971 року</strong> після трагедії у Val d'Isère (39 загиблих), масштаб <strong>1:25 000</strong>, дані з 1970 року, веде INRAE.</li>
+          <li><span class="cf cf-c">Підтверджено</span> Водозабір і накопичувальні басейни для засніження: оцінка впливу <strong>обов'язкова</strong>, якщо вартість проєкту ≥ <strong>€1 900 000</strong> або площа водосховищ ≥ <strong>10 га</strong>.</li>
+        </ul>
+
+        <h3>Швейцарія</h3>
+
+        <p><span class="cf cf-s">Через пошук</span> Затвердження плану Федеральним відомством транспорту <strong>є будівельним дозволом</strong> і покриває всі дозволи федерального рівня. Планування землекористування — <strong>обов'язкова формальна передумова</strong>, а <strong>другорядні об'єкти, зокрема лижні траси, мають бути точно визначені</strong> у плані землекористування. Карти небезпек (лавини, паводки, зсуви, каменепади) стають <strong>юридично обов'язковими</strong> через муніципальні зонувальні плани.</p>
+
+        <div class="box note">
+          <span class="box-k">Важлива поправка, щоб не втратити довіру технічного покупця</span>
+          <p><strong>INSPIRE не зобов'язує курорти.</strong> Директива зобов'язує органи влади. Подавати INSPIRE як обов'язок курорту — фактична помилка, і грамотний співрозмовник це помітить. Правильне формулювання: <em>це стандарт сумісності, якому мають відповідати ваші подання й дані, які ви споживаєте</em>.</p>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section id="s6">
+        <div class="sh"><span class="sh-n">06</span><h2>Esri: що реально пропонує і що це коштує</h2></div>
+
+        <h3>Продукти, релевантні курорту</h3>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Продукт</th><th>Застосування на курорті</th><th>Ціновий сигнал</th></tr></thead>
+            <tbody>
+              <tr><td class="k">ArcGIS Online</td><td>Система обліку: траси, підйомники, активи, інциденти</td><td>За типами користувачів; 500 кредитів у Creator</td></tr>
+              <tr><td class="k">ArcGIS Enterprise</td><td>Локальне розгортання, суверенітет даних, хостинг Utility Network</td><td><strong>Тільки за запитом</strong> через відділ продажів</td></tr>
+              <tr><td class="k">ArcGIS Pro</td><td>Картографія, аналіз ухилів, проєктування трас</td><td>Входить у типи користувачів</td></tr>
+              <tr><td class="k">Field Maps</td><td>Інспекція підйомників, трас, снігогенераторів; офлайн</td><td>Від Mobile Worker</td></tr>
+              <tr><td class="k">Survey123</td><td>Чек-листи інспекцій, лавинні спостереження, картки травм</td><td>Входить</td></tr>
+              <tr><td class="k">Dashboards</td><td>Статус підйомників, щільність потоку, диспетчерська</td><td>Входить</td></tr>
+              <tr><td class="k">Utility Network</td><td><strong>Трубопроводи засніження, вода, повітря, СН-живлення, зв'язок</strong></td><td>Потребує Enterprise + Advanced Editing</td></tr>
+              <tr><td class="k">Indoors</td><td>Готелі, welcome-центр, паркінги, прокат</td><td><strong>Тільки за запитом</strong>, три рівні</td></tr>
+              <tr><td class="k">Urban</td><td>Майстер-план забудови на 15 років</td><td><strong>Публічної ціни немає</strong></td></tr>
+              <tr><td class="k">GeoBIM</td><td>Зв'язок із Autodesk BIM 360 / ACC на будівництві</td><td><strong>Тільки за запитом</strong></td></tr>
+              <tr><td class="k">Velocity</td><td>Телеметрія підйомників, IoT, потоки гостей (Kafka, MQTT)</td><td><strong>Тільки за запитом</strong></td></tr>
+              <tr><td class="k">Drone2Map</td><td>Щорічна зйомка рельєфу, обсяги земляних робіт, ЦМР</td><td><strong>Публічної ціни немає</strong></td></tr>
+              <tr><td class="k">Business Analyst</td><td>Аналіз зони охоплення, профіль покупця апартаментів</td><td><strong>Ціна за угодою</strong></td></tr>
+              <tr><td class="k">Location Platform</td><td><strong>Правильний носій для гостьового застосунку</strong></td><td>Єдиний публічний прайс: $0,15/1000 тайлів</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box note">
+          <span class="box-k">Головний факт про ціни</span>
+          <p>Усе, що курорту реально потрібно — Enterprise, Indoors, Urban, Velocity, Utility Network, Business Analyst, дрони — <strong>продається тільки за запитом</strong>. Єдиний продукт Esri із прозорим публічним прайсом — <strong>ArcGIS Location Platform</strong> ($0,15 за 1000 тайлів, $4 за 1000 сесій, безкоштовно до 2 млн тайлів на місяць). Для закупівельної процедури це сам по собі важливий факт.</p>
+        </div>
+
+        <p><span class="cf cf-n">Не підтверджено</span> Жодної опублікованої ціни ArcGIS Online на користувача. Оцінки на кшталт «Creator $500–760 на рік» походять із сторонніх агрегаторів, не від Esri. <strong>Не подавати їх клієнту як ціни Esri.</strong></p>
+
+        <h3>Безкоштовні шаблони ArcGIS Solutions, що підходять курорту</h3>
+
+        <p><span class="cf cf-c">Підтверджено за назвами</span> <strong>Park Infrastructure Management</strong> (містить шаблони трас) · <strong>Parks and Grounds Management</strong> · <strong>Recreation Outreach</strong> (публічний; Trail Locator із профілем висот і фільтрами за довжиною й складністю) · <strong>Capital Project Planning / Coordination / Tracker</strong> · <strong>Events Operations Planner</strong> (операційні карти масових заходів — прямо застосовно до етапів Кубка світу) · <strong>Emergency Management Operations</strong> · <strong>Utility Network Foundation</strong> з готовими моделями для електрики, газу й води.</p>
+
+        <h3>Три продукти, які зараз виводяться з експлуатації</h3>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Продукт</th><th>Природне застосування на курорті</th><th>Доля</th></tr></thead>
+            <tbody>
+              <tr><td class="k">ArcGIS Workforce</td><td>Диспетчеризація нарядів рятувальникам і механікам</td><td>Знято з підтримки 15.01.2026, вимкнення Q4 2026</td></tr>
+              <tr><td class="k">ArcGIS Insights</td><td>Просторова бізнес-аналітика</td><td>Виводиться у 2026</td></tr>
+              <tr><td class="k">ArcGIS GeoEvent Server</td><td>IoT і телеметрія в реальному часі</td><td>Остання версія — Enterprise 12.3, орієнтовно 2027</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><span class="cf cf-i">Висновок</span> Курорт із 15-річним циклом будівництва переживе щонайменше два покоління продуктів Esri. Три модулі, які він обрав би сьогодні для диспетчеризації, аналітики та IoT, <strong>усі три</strong> в кінці життєвого циклу просто зараз. Це не аргумент проти Esri — це рядок «міграції» в моделі сукупної вартості володіння, який треба показати клієнту самим, поки його не показав конкурент.</p>
+      </section>
+
+      <!-- 07 -->
+      <section id="s7">
+        <div class="sh"><span class="sh-n">07</span><h2>Де Esri програє — і кому</h2></div>
+
+        <p class="lede">Цей розділ важливіший за попередній. Пропозиція, яка виглядає як реклама Esri, не проходить технічну перевірку. Пропозиція, яка сама називає межі — проходить.</p>
+
+        <div class="ev">
+          <div class="ev-h"><b>Ліцензування воює зі структурою персоналу курорту</b><span class="cf cf-i">Висновок на підтверджених фактах</span></div>
+          <p>ArcGIS ліцензується <strong>річними іменними користувачами</strong>. Персонал курорту влаштований протилежно: сотні сезонних рятувальників, операторів підйомників, ратракістів та інструкторів на 4–6 місяців із високою плинністю. Річна ліцензія Mobile Worker на п'ятимісячного працівника — це оплата 12 місяців за 40% використання, щосезону. Сезонного чи помісячного типу користувача не існує. Для порівняння, SNOWsat і Lumiplan тарифікуються за курорт, машину або об'єкт — не за сезонну людину.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Гостьовий застосунок — найслабше місце Esri</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Базові карти ArcGIS Online обмежені <strong>1 млн транзакцій на місяць</strong>. Курорт із 15 тис. лижників на день вичерпає ліміт за тиждень пікового навантаження. Правильна відповідь — окремий продукт <strong>Location Platform</strong> із погодинною тарифікацією, тобто два різні контракти з Esri замість одного.</p>
+          <p>Показово: єдиний опублікований гостьовий гірськолижний застосунок на Esri — <strong>Snow Mappy</strong> — збудував сторонній стартап на Runtime SDK, а партнера Esri (GEO Jobe) найняли виправляти критичні баги й чергувати в день запуску.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Сніг: SNOWsat виграє беззастережно</b><span class="cf cf-s">Через пошук</span></div>
+          <p>SNOWsat вимірює глибину снігу з точністю <strong>±3 см</strong> — не лише під машиною, а на відвалі та <strong>до 50 м попереду</strong>. Esri не має нічого подібного: ArcGIS може бути тільки <em>споживачем</em> цих даних. І SNOWsat прямо позиціонує свій GIS Data Manager як спосіб працювати «без потреби в ГІС-провайдері».</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Indoor: Mappedin і Situm швидші й дешевші на малих обсягах</b><span class="cf cf-s">Через пошук, зокрема з матеріалів конкурента</span></div>
+          <p>ArcGIS Indoors сильний, <em>якщо команда вже живе в AutoCAD і Revit</em>; інакше він потребує тривалого навчання й довгих циклів впровадження. Mappedin дає швидше впровадження й самообслуговування. ArcGIS Indoors виграє лише тоді, коли внутрішній простір має бути однією безперервною моделлю разом із зовнішніми мережами й активами — реальна, але вузька перевага.</p>
+        </div>
+
+        <div class="ev">
+          <div class="ev-h"><b>Офлайн: обмеження реальне, але переборне</b><span class="cf cf-c">Підтверджено</span></div>
+          <p>Офлайн-редагування у Field Maps обмежене <strong>власністю репліки</strong>: коли кілька користувачів працюють офлайн з однієї вебкарти, надійно синхронізувати зміни може лише власник карти. Зміни схеми під час офлайну ламають синхронізацію. Токени спливають несподівано.</p>
+          <p>Чесна противага: Лісова служба США тримає національний застосунок, який працює <strong>без стільникового зв'язку</strong> на 193 млн акрів. Офлайн працює — але вимагає дисципліни в керуванні схемою, а це податок на невелику ІТ-команду курорту.</p>
+        </div>
+
+        <h3>Де відкритий стек виграє прямо</h3>
+
+        <ul>
+          <li><strong>Тривимірний рельєф у гостьовому застосунку.</strong> MapLibre GL рендерить 3D-рельєф нативно з нульовою граничною вартістю.</li>
+          <li><strong>Маршрутизація по підйомниках і трасах.</strong> Snow Mappy довів, що потрібна <em>власна мережа на підйомниках і спусках, а не на дорогах</em>. Якщо мережу все одно будувати самим, pgRouting поверх PostGIS дешевший і керованіший за Network Analyst плюс StreetMap Premium — і без ліцензії на користувача.</li>
+          <li><strong>Необмежений публічний трафік.</strong> Власний стек PostGIS + MapLibre не має ліміту транзакцій і оплати за перегляд. Це найчистіша економічна перевага.</li>
+        </ul>
+
+        <div class="box">
+          <span class="box-k">Рекомендована гібридна архітектура</span>
+          <p>ArcGIS Enterprise + Utility Network + Field Maps / Survey123 для <strong>регульованого, критичного до безпеки ядра</strong> — мережі засніження, активи підйомників, лавинні записи, історія інцидентів та інспекцій, де модель даних, трасування й аудит Esri справді не мають відкритого аналога. І <strong>MapLibre / PostGIS / pgRouting для гостьового зовнішнього контуру</strong>, який живиться з тієї самої бази. Платити Esri за систему обліку, не за перегляди.</p>
+        </div>
+
+        <div class="box note">
+          <span class="box-k">Біла пляма, яку варто зайняти</span>
+          <p><span class="cf cf-n">Не підтверджено</span> Жодного опублікованого впровадження <strong>ArcGIS Utility Network для системи засніження</strong> не існує — ні в Європі, ні в Північній Америці. Кейс Vail описує «цифровий двійник» труб, засувок і генераторів, але називає ArcGIS Online, а не Utility Network. Мережі засніження — це вода під тиском, стиснене повітря, засувки й насосні, тобто рівно те, для чого Utility Network створений. Перший, хто це опублікує, отримає галузевий кейс.</p>
+        </div>
+      </section>
+
+      <!-- 08 -->
+      <section id="s8">
+        <div class="sh"><span class="sh-n">08</span><h2>Що це означає для GIS-Point</h2></div>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Позиція</th><th>Наскільки зайнята</th><th>Наш реалістичний шанс</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ГІС-платформа для альпійського курорту</strong></td>
+                <td>Зайнята щільно: PowerGIS (~55 компаній), gissolution (7+ флагманів CH), 20 років репутації</td>
+                <td>Низький. Вхід лише через субпідряд або нішу, якої вони не покривають</td>
+              </tr>
+              <tr>
+                <td><strong>Гостьовий застосунок і навігація</strong></td>
+                <td>Зайнята: Lumiplan (220+ курортів, 500+ схем трас), Intermaps (250+ регіонів)</td>
+                <td>Низький як окремий продукт. Високий як надбудова над власною базою</td>
+              </tr>
+              <tr>
+                <td><strong>Снігові операції</strong></td>
+                <td>Зайнята вертикально інтегрованими виробниками техніки</td>
+                <td>Нульовий. Тут ми споживач даних, не постачальник</td>
+              </tr>
+              <tr>
+                <td><strong>Україна та ЦСЄ</strong></td>
+                <td><span class="cf cf-n">Вендора не знайдено</span></td>
+                <td><strong>Високий.</strong> Ринок без місцевого галузевого гравця</td>
+              </tr>
+              <tr>
+                <td><strong>Greenfield-будівництво</strong></td>
+                <td>Слабо покрита: наявні вендори оптимізовані під діючі курорти</td>
+                <td><strong>Високий.</strong> As-built під час будівництва — вікно, що не повторюється</td>
+              </tr>
+              <tr>
+                <td><strong>Utility Network для засніження</strong></td>
+                <td><span class="cf cf-n">Публікацій немає ніде у світі</span></td>
+                <td><strong>Високий</strong> як референс, середній як бізнес</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Три конкуренти, яких варто вивчити детально</h3>
+
+        <ul>
+          <li><strong>North Line GIS / IMEG</strong> — найближчий аналог нашої моделі, доведений до придбання. Варто розібрати їхній перелік послуг: він майже дослівно збігається з тим, що ми вміємо.</li>
+          <li><strong>PowerGIS / ARENA</strong> — показує, як виглядає зріла продуктизація: не години, а названі продукти (PistenManagement, MasterPLAN, PistenEnergie, GPS+) із власним брендом поверх Esri.</li>
+          <li><strong>gissolution / alpineSOLUTION</strong> — показує модульну структуру, яку варто скопіювати: сніг, рятслужба, інфраструктура трас, мережі, літні активи. І гасло «усі дані належать клієнту», яке ми вже використовуємо.</li>
+        </ul>
+
+        <div class="box warn">
+          <span class="box-k">Головний ризик моделі</span>
+          <p>Kässbohrer і Prinoth вбудовують ГІС у техніку, яку курорт і так купує, і прямо обіцяють, що геодезична компанія більше не потрібна. Якщо наша пропозиція звучить як «ми зробимо вам карту мереж», вона конкурує з тим, що клієнт отримає в комплекті з ратраком. Захист один: <strong>продавати те, чого немає в жодному ратраку</strong> — дозвільну доказовість, підземні мережі поза трасами, майстер-план забудови, indoor, гостьовий контур і інтеграційне ядро.</p>
+        </div>
+      </section>
+
+      <!-- 09 -->
+      <section id="s9">
+        <div class="sh"><span class="sh-n">09</span><h2>Гіпотези: навіщо курорту ГІС-база</h2></div>
+
+        <p class="lede">Дев'ять гіпотез, впорядкованих за силою доказів і легкістю перевірки. Кожна містить механізм, доказ і те, що її спростує — останнє важливіше за перші два.</p>
+
+        <div class="hyps">
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г1</span><h5>Дозвільна відповідність: без ГІС оператор не знає, чи потрібна йому ОВНС</h5><span class="cf cf-c">Найсильніша</span></div>
+            <p>Пороги ОВНС в Австрії — площинні: 20 га автоматично, 5 га на скринінг, 10 га в охоронних зонах. У Франції оцінка впливу обов'язкова при водосховищах ≥10 га. Це не «краще мати карту» — це неможливість пройти процедуру без розрахунку площі.</p>
+            <dl>
+              <dt>Механізм</dt><dd>Точні межі та площі → правильна класифікація проєкту → передбачуваний строк і бюджет дозволу</dd>
+              <dt>Доказ</dt><dd>UVP-G 2000; Директива 2011/92/ЄС Додаток II; ст. 6(3) Оселищної директиви — «без обґрунтованого наукового сумніву»</dd>
+              <dt>Спростує</dt><dd>Якщо курорт віддає всю дозвільну роботу проєктувальнику й ніколи не тримає геодані в себе</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г2</span><h5>Підземні мережі: реєстр коштує менше за одну зупинку засніження в піковий тиждень</h5><span class="cf cf-c">Сильна</span></div>
+            <p>Курорт на 1 200 га за 15 років будівництва прокладе десятки кілометрів води, стоків, електрики, зв'язку й трубопроводів засніження — різними підрядниками, у різні роки. Через п'ять років ніхто не пам'ятатиме, де що лежить.</p>
+            <dl>
+              <dt>Механізм</dt><dd>As-built відкритої траншеї до засипання + датчики тиску → локалізація пориву за хвилини замість днів</dd>
+              <dt>Доказ</dt><dd>Австрія субсидує це на рівні держави: €2 за погонний метр, до 50% витрат. 75% площі австрійських трас засніжено, 459 басейнів під дозволами</dd>
+              <dt>Спростує</dt><dd>Якщо генпідрядник уже здає виконавчу зйомку мереж у ГІС-форматі за договором</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г3</span><h5>Геобаза усуває повторні вишукування на кожному наступному об'єкті</h5><span class="cf cf-c">Сильна</span></div>
+            <p>Найкраще формулювання бізнес-кейсу в галузі належить не ГІС-вендору, а виробнику ратраків: «раніше доводилось замовляти геодезичну компанію».</p>
+            <dl>
+              <dt>Механізм</dt><dd>Актуальна геопідоснова → проєктувальник наступної черги не замовляє топозйомку з нуля</dd>
+              <dt>Доказ</dt><dd>Kässbohrer SNOWsat GIS Data Manager; Saint-Gervais оновив цифрові контури всіх трас силами власного парку ратраків</dd>
+              <dt>Спростує</dt><dd>Якщо вартість підтримання бази в актуальному стані перевищує вартість разових зйомок — рахувати обов'язково</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г4</span><h5>Адресна снігогенерація — найшвидша операційна окупність</h5><span class="cf cf-s">Сильна, але цифри вендорські</span></div>
+            <p>Вимірювання глибини снігу під ратраком → перерахунок у м³ до довиробництва → завдання снігогенераторам, замість рівномірного покриття всієї площі.</p>
+            <dl>
+              <dt>Механізм</dt><dd>Точний обсяг замість надлишкового → менше води, електрики й мотогодин</dd>
+              <dt>Доказ</dt><dd>SkiWelt: ~25% економії з 2017, цикл засніження 8 днів → 4. Mayrhofen: 25–30% на виробництві снігу. TechnoAlpin: до −30% енергії при повній автоматиці</dd>
+              <dt>Спростує</dt><dd>Ефект належить SNOWsat і TechnoAlpin, не ГІС-підряднику. Ми можемо продавати лише інтеграцію та зведення цих даних — не сам ефект</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г5</span><h5>Капітальні проєкти: ГІС визначає, куди фізично ставити обладнання</h5><span class="cf cf-c">Сильна</span></div>
+            <p>Єдиний задокументований жорсткий комерційний результат у галузі.</p>
+            <dl>
+              <dt>Механізм</dt><dd>Цифровий двійник мережі → оптимальне розміщення генераторів, труб і трансформаторів → більше засніженої площі на ту саму інвестицію</dd>
+              <dt>Доказ</dt><dd>Vail: 421 генератор, 19 миль труб, 25 трансформаторів → 200 акрів раннього сезону, вдвічі більше попереднього</dd>
+              <dt>Спростує</dt><dd>Ефект не відокремлено від самої інвестиції в засніження — Vail не публікує, скільки додала саме карта</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г6</span><h5>Доказова база: геоприв'язаний інцидент — це позиція в суді</h5><span class="cf cf-c">Недооцінена</span></div>
+            <p>Найменш використаний нами аргумент і, ймовірно, найсильніший для фінансового директора.</p>
+            <dl>
+              <dt>Механізм</dt><dd>Інцидент із координатами, погодою, станом траси й часом обробки → захист у спорі про відповідальність → страховий тариф</dd>
+              <dt>Доказ</dt><dd>Юрист Keystone: ГІС-картування використовувалось «у десятках судових залів». Jackson Hole веде 50 років лавинних записів. alpineSOLUTION фіксує, який саме рятувальник виїжджав</dd>
+              <dt>Спростує</dt><dd>Різні юрисдикції: українська судова практика щодо відповідальності курортів може не давати такої ваги геоданим. Перевірити з юристом</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г7</span><h5>Єдина система найменувань — прихований драйвер, який клієнт не назве сам</h5><span class="cf cf-i">Гіпотеза</span></div>
+            <p>У Vail проєкт почався не з потреби в карті, а з того, що рятувальна служба орієнтувалась за номерами старих телефонних будок, а служба засніження — за назвами насосів.</p>
+            <dl>
+              <dt>Механізм</dt><dd>ГІС стає єдиним джерелом назв і координат → зникає клас помилок «ми говорили про різні місця»</dd>
+              <dt>Доказ</dt><dd>Vail (InformationWeek). Grünenfelder формулює те саме: «дані в силосах — частина у постачальників, частина в одному відділі»</dd>
+              <dt>Спростує</dt><dd>На greenfield цієї проблеми ще немає — там це профілактика, а не лікування, і продається гірше</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г8</span><h5>Пропускна здатність без капітальних витрат</h5><span class="cf cf-s">Помірна</span></div>
+            <p>Керування прибуттям і розведення потоків дає більше гостей на тій самій інфраструктурі.</p>
+            <dl>
+              <dt>Механізм</dt><dd>Дані гейтів і руху → теплові карти й прогноз піків → розведення потоків і планування змін</dd>
+              <dt>Доказ</dt><dd>Lumiplan Itinemap дає менеджерам теплові карти для оптимізації потоків. Snow Mappy зібрав ~7,5 млн точок від ~1 500 користувачів і віддавав курортам знеособлені патерни руху за рівнем катання</dd>
+              <dt>Спростує</dt><dd>Ефект залежить від проникнення застосунку. При 5% встановлень дані нерепрезентативні</dd>
+            </dl>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Г9</span><h5>Продаж нерухомості: 3D-портал як інструмент девелопера</h5><span class="cf cf-i">Гіпотеза, доказів у галузі мало</span></div>
+            <p>Для курорту, що будує 25 готелів і 5 500 номерів, візуалізація черг забудови — інструмент відділу продажів, а не ІТ.</p>
+            <dl>
+              <dt>Механізм</dt><dd>3D майстер-плану + статуси ділянок → пакет для інвестора за годину замість тижнів</dd>
+              <dt>Доказ</dt><dd>Непрямий: ArcGIS Urban створений саме для цього; Serre Chevalier + Montgenèvre купують двійник за публічні гроші під Олімпіаду 2030</dd>
+              <dt>Спростує</dt><dd>Жодного опублікованого кейсу «3D-портал прискорив продажі курортної нерухомості» не знайдено. Це найслабша гіпотеза в списку</dd>
+            </dl>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section id="s10">
+        <div class="sh"><span class="sh-n">10</span><h2>Гіпотези: чому навігація йде другою, а не першою</h2></div>
+
+        <p class="lede">Це найважливіший розділ для розмови з клієнтом, який каже «нам потрібен застосунок». Дані нижче дозволяють відповісти не «ви не праві», а «застосунок буде — питання лише, на чому він стоятиме».</p>
+
+        <div class="hyps">
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Н1</span><h5>Лідер ринку будує гостьову карту з офіційного ГІС курорту, а не з краудсорсингу</h5><span class="cf cf-s">Підтверджено формулюванням вендора</span></div>
+            <p>Lumiplan прямо заявляє про Itinemap: карта спирається <em>«на офіційні географічні дані курортів із геоінформаційних систем, а не на внески спільноти»</em>. Позиціонування точніше за стандартне у шість разів.</p>
+            <p>Тобто навіть вендор, який продає <strong>тільки застосунок</strong>, вимагає, щоб ГІС курорту вже існував. Без бази він продає гірший продукт.</p>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Н2</span><h5>Маршрутизація по горі потребує власної мережі, а не дорожньої</h5><span class="cf cf-c">Підтверджено</span></div>
+            <p>Snow Mappy будував <strong>власні мережеві набори даних на підйомниках і спусках замість доріг</strong>. Жоден готовий дорожній граф — ані Esri, ані OSM — не описує, що з траси A можна потрапити на трасу B тільки через підйомник C, і лише коли він працює.</p>
+            <p>Ця мережа <em>є</em> частиною ГІС-бази. Її не можна намалювати в застосунку.</p>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Н3</span><h5>Застосунок без бази активів показує розклад, а не стан</h5><span class="cf cf-i">Висновок</span></div>
+            <p>Різниця між «підйомник працює за розкладом» і «підйомник зупинений 12 хвилин тому, причина — вітер, прогноз відновлення 20 хвилин» — це не інтерфейс. Це наявність реєстру активів, підключеного до телеметрії.</p>
+            <p>Курорти, у яких це працює, мають ГІС-базу під низом: Winter Park із 2012 року, alpineSOLUTION у рятувальних операціях із 2019/20.</p>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Н4</span><h5>Ринок гостьових застосунків зайнятий — ринок бази під ними ні</h5><span class="cf cf-c">Підтверджено</span></div>
+            <p>Lumiplan: 220+ курортів, 500+ встановлених схем трас, винайшли динамічну схему трас у 1972 році. Intermaps: 250+ регіонів у 15 країнах. Продавати курорту «ще один застосунок» — конкурувати з півстолітньою присутністю.</p>
+            <p>Натомість база, на якій вони працюють, у більшості курортів або відсутня, або в силосах. Dolomiti Superski: 1 160 км трас із засніженням і <strong>жодної підтвердженої ГІС-платформи</strong>.</p>
+          </div>
+
+          <div class="hyp">
+            <div class="hyp-top"><span class="hyp-id">Н5</span><h5>Навігація — це шар монетизації бази, і про неї треба говорити саме так</h5><span class="cf cf-i">Позиційна</span></div>
+            <p>Правильна послідовність у розмові: спочатку те, що курорт <strong>зобов'язаний</strong> мати (дозволи, мережі, безпека), потім те, що <strong>економить</strong> (сніг, персонал, вишукування), і лише потім те, що <strong>заробляє</strong> (навігація, бронювання, потоки).</p>
+            <p>Якщо почати з навігації, розмова зводиться до порівняння з Lumiplan за ціною. Якщо почати з дозволів — порівнювати нема з чим.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section id="s11">
+        <div class="sh"><span class="sh-n">11</span><h2>Як перевіряти ці гіпотези</h2></div>
+
+        <p>Гіпотеза без тесту — це слоган. Нижче — що саме питати на першій зустрічі, щоб за 40 хвилин зрозуміти, які з дев'яти гіпотез працюють на цьому конкретному клієнті.</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Гіпотеза</th><th>Питання клієнту</th><th>Що означає відповідь «ні»</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Г1 Дозволи</td><td>Хто рахує площі для ОВНС і де зберігаються ці межі після подання?</td><td>Дані у проєктувальника — продавати треба йому, не курорту</td></tr>
+              <tr><td class="k">Г2 Мережі</td><td>Покажіть, де у вас лежить магістраль засніження на третій черзі. За скільки знайдете?</td><td>Знайшли за хвилину — реєстр уже є, гіпотеза мертва</td></tr>
+              <tr><td class="k">Г3 Вишукування</td><td>Скільки окремих договорів на топозйомку ви уклали за останні три роки?</td><td>Один — ефекту масштабу немає</td></tr>
+              <tr><td class="k">Г4 Сніг</td><td>Ваші ратраки вимірюють глибину снігу? Куди йдуть ці дані?</td><td>Дані вже у SNOWsat і використовуються — ми тут зайві</td></tr>
+              <tr><td class="k">Г5 Капітал</td><td>Як приймалось рішення про розміщення останніх 50 снігогенераторів?</td><td>За розрахунком проєктувальника — ефект уже отримано</td></tr>
+              <tr><td class="k">Г6 Суд</td><td>Скільки позовів від гостей було за останні п'ять років і чим ви доводили свою позицію?</td><td>Позовів немає — аргумент не працює в цій юрисдикції</td></tr>
+              <tr><td class="k">Г7 Найменування</td><td>Як рятувальна служба і служба засніження називають одну й ту саму точку на горі?</td><td>Однаково — силосів немає</td></tr>
+              <tr><td class="k">Г8 Потоки</td><td>Звідки ви знаєте, скільки людей зараз у третьому секторі?</td><td>З даних гейтів у реальному часі — контур замкнено</td></tr>
+              <tr><td class="k">Г9 Нерухомість</td><td>Що показує відділ продажів інвестору по ділянці, якої ще немає?</td><td>Готовий 3D — інструмент є</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <span class="box-k">Найкоротший шлях до угоди</span>
+          <p>Друге питання в таблиці — <strong>«покажіть, де лежить магістраль засніження, і засічемо час»</strong> — за нашим досвідом і за всіма зібраними тут матеріалами дає найшвидшу діагностику. Якщо відповідь довша за дві хвилини або звучить «треба спитати у Петра», проблема доведена без жодного слайда.</p>
+        </div>
+      </section>
+
+      <!-- 12 -->
+      <section id="s12">
+        <div class="sh"><span class="sh-n">12</span><h2>Прогалини й що доперевірити</h2></div>
+
+        <p>Перелік того, чого ми <strong>не</strong> знаємо. Він так само важливий, як і решта звіту.</p>
+
+        <h4>Потребує ручної перевірки перед комерційним використанням</h4>
+        <ul>
+          <li>Усі цифри Vail (421 генератор, 19 миль, 25 трансформаторів, 200 акрів) — відкрити Esri WhereNext та InformationWeek напряму</li>
+          <li>Цитата Kitzbühel про продукти Esri — відкрити seilbahn.net</li>
+          <li>Масштаб PowerGIS (~55 компаній, ~250 систем) — джерело вторинне</li>
+          <li>Економія SkiWelt 25% і цикл 8→4 дні — джерело є прес-релізом курорту</li>
+          <li>Австрійська субсидія €2/п.м. — перевірити чинність і умови</li>
+        </ul>
+
+        <h4>Не знайдено взагалі — і це може бути можливістю</h4>
+        <ul>
+          <li><span class="cf cf-n">Не підтверджено</span> Жодного впровадження ArcGIS <strong>Utility Network для засніження</strong> у світі</li>
+          <li><span class="cf cf-n">Не підтверджено</span> Жодного європейського кейсу гірськолижного курорту на сайтах самої Esri — усі публічні кейси Esri північноамериканські</li>
+          <li><span class="cf cf-n">Не підтверджено</span> Жодної ГІС-платформи в <strong>Dolomiti Superski</strong> (1 160 км із засніженням), <strong>SkiStar</strong>, <strong>Grandvalira</strong>, <strong>Espace Killy</strong>, <strong>Paradiski</strong>, <strong>Portes du Soleil</strong></li>
+          <li><span class="cf cf-n">Не підтверджено</span> Жодної корпоративної ГІС-програми в <strong>Alterra</strong>, <strong>Boyne</strong>, <strong>Aspen Skiing Company</strong>, <strong>POWDR</strong></li>
+          <li><span class="cf cf-n">Не підтверджено</span> ArcGIS <strong>Urban</strong> та <strong>Indoors</strong> на жодному названому гірськолижному курорті</li>
+        </ul>
+
+        <h4>Свідомо не досліджено</h4>
+        <ul>
+          <li>Матеріали конференцій Esri User Conference — сайт недоступний із цього середовища</li>
+          <li>Партнерський каталог Esri із фільтром за галуззю — сторінка є JS-застосунком</li>
+          <li>Річні звіти альпійських операторів німецькою — PDF недоступні</li>
+          <li>Українські та польські гірськолижні оператори — не входили в завдання, але це наш ринок і їх треба вивчити окремо</li>
+        </ul>
+
+        <div class="box warn">
+          <span class="box-k">Одна помилка, якої треба уникнути</span>
+          <p>Не подавати <strong>INSPIRE</strong> як обов'язок курорту. Директива зобов'язує органи влади, а не операторів. Так само не називати <strong>Doppelmayr Connect</strong> і <strong>LEITNER Skadii</strong> геоінформаційними системами — це телеметрія й операційні платформи. Обидві помилки легко ловить технічно грамотний співрозмовник, і вони коштують довіри до всієї решти документа.</p>
+        </div>
+      </section>
+
+      <footer>
+        <h4>Про це дослідження</h4>
+        <p>Три паралельні дослідження, виконані у серпні 2026 року: Північна Америка, Європа, Esri. Загалом близько 230 джерел. Через мережеві обмеження середовища переважна частина фактів отримана через пошукові витяги, а не прямим відкриттям сторінок — див. розділ 00.</p>
+
+        <h4>Ключові джерела</h4>
+        <ol class="srcs">
+          <li><a href="https://www.esri.com/about/newsroom/publications/wherenext/vail-ski-resort-snowmaking-expansion">Esri WhereNext — цифровий двійник засніження Vail</a></li>
+          <li><a href="https://www.informationweek.com/data-management/digital-twin-smart-mapping-hits-the-slopes">InformationWeek — Digital Twin Smart Mapping Hits the Slopes</a></li>
+          <li><a href="https://www.esri.com/about/newsroom/blog/inside-jackson-holes-map-driven-mission-to-reduce-avalanche-risk">Esri — Jackson Hole, лавинна програма</a></li>
+          <li><a href="https://www.esri.com/about/newsroom/arcwatch/delivering-an-alpine-high">Esri ArcWatch — Winter Park, Tracking Analyst</a></li>
+          <li><a href="https://www.esri.com/about/newsroom/arcwatch/gis-to-the-rescue/">Esri ArcWatch — GIS to the Rescue</a></li>
+          <li><a href="https://www.esri.com/about/newsroom/publications/wherenext/drones-with-gis">Esri WhereNext — Steamboat, дрони та ГІС</a></li>
+          <li><a href="https://mediaspace.esri.com/media/t/1_ugd8atwh">Esri UC 2021 — Telluride, Real-Time Digital Twin</a></li>
+          <li><a href="https://www.esri.com/partners/earth-analytic-inc-a2T70000000TNPHEA4/smartmountain-a2df2000004gc4JAAQ">Esri Partner — Earth Analytic, SmartMountain</a></li>
+          <li><a href="http://northlinegis.com/resort-snow-management/">North Line GIS — послуги для курортів</a></li>
+          <li><a href="https://imegcorp.com/news_events/imeg-acquires-colorado-firm-north-line-gis/">IMEG — придбання North Line GIS</a></li>
+          <li><a href="https://www.saminfo.com/copper-mountain?view=article&amp;id=3410:the-digital-mountain&amp;catid=38">SAM Magazine — The Digital Mountain</a></li>
+          <li><a href="https://www.fs.usda.gov/r02/whiteriver/planning/ski-area-master-development-plans">USFS — Ski Area Master Development Plans</a></li>
+          <li><a href="https://www.esri.com/partners/powergis-gmbh-a2T70000000TNbjEAG">Esri Partner — PowerGIS</a></li>
+          <li><a href="https://seilbahn.net/sn/berichte/bericht.php?news=10053&amp;kategorie=3&amp;klickpass=agh586zyf">seilbahn.net — PowerGIS та Kitzbühel</a></li>
+          <li><a href="https://arena.or.at/geodatenmanagement/">ARENA — управління геоданими</a></li>
+          <li><a href="https://gissolution.ch/produkte/alpine/">gissolution — alpineSOLUTION</a></li>
+          <li><a href="https://www.simagazin.com/si-magazin/themen/digitalisierung-innovation/gruenenfelder-digitaler-zwilling-von-skigebieten/">SI Magazin — Grünenfelder × Esri R&amp;D Zurich, цифровий двійник</a></li>
+          <li><a href="https://www.simagazin.com/si-magazin/themen/pistenpflege-beschneiung/kaessbohrer-gis-daten-verwalten-einfach-praezise-digital/">SI Magazin — Kässbohrer, керування геоданими</a></li>
+          <li><a href="https://www.snowsat.com/en/solutions/gis">SNOWsat — GIS Data Manager</a></li>
+          <li><a href="https://www.igo.fr/en/the-digital-twin-of-the-2030-olympic-and-paralympic-games/">IGO — цифровий двійник Олімпіади 2030</a></li>
+          <li><a href="https://www.iloveski.org/fr/2026/01/08/itinemap-la-carte-interactive-qui-change-le-quotidien-en-station-de-ski/">iloveski — Lumiplan Itinemap</a></li>
+          <li><a href="https://media.skiwelt.at/media/2023-skiwelt-wilder-kaiser-brixental-nachhaltigkeit-benni-raich.doc">SkiWelt — сталий розвиток і економія</a></li>
+          <li><a href="https://www.pistenbully.com/en/news/2023/snowsat-proves-its-value-in-practice">PistenBully — SNOWsat у Mayrhofen</a></li>
+          <li><a href="https://www.bmluk.gv.at/dam/jcr:406fabdb-b5ba-4256-a7dd-f7bc5b54eb52/UVE_L_Schigebiete_2011.pdf">BMLUK — керівництво з ОВНС для гірськолижних зон</a></li>
+          <li><a href="https://eur-lex.europa.eu/eli/dir/2011/92/oj/eng">EUR-Lex — Директива 2011/92/ЄС про ОВНС</a></li>
+          <li><a href="https://natureconservation.pensoft.net/article/13599/">Nature Conservation — аналіз ст. 6(3) Оселищної директиви</a></li>
+          <li><a href="https://www.gisquadrat.com/gis-loesungen/wasserleitungskataster/">GISquadrat — кадастр мереж і субсидія</a></li>
+          <li><a href="https://www.wko.at/transport-verkehr/seilbahnen/beschneiung">WKO — засніження в Австрії, масштаб</a></li>
+          <li><a href="https://www.esri.com/arcgis-blog/products/workforce/field-mobility/deprecation-notice-for-arcgis-workforce">Esri — виведення ArcGIS Workforce</a></li>
+          <li><a href="https://location.arcgis.com/pricing/">Esri — ціни ArcGIS Location Platform</a></li>
+          <li><a href="https://www.esri.com/about/newsroom/arcnews/a-new-way-to-navigate-the-slopes-with-real-time-geospatial-data">Esri ArcNews — Snow Mappy</a></li>
+          <li><a href="https://coloradosun.com/2025/05/12/national-skier-visits-2024-25/">Colorado Sun — 61,5 млн скі-візитів</a></li>
+        </ol>
+
+        <p style="margin-top:24px;font-size:12.6px;color:var(--ink-3)">Документ підготовлено для внутрішнього використання GIS-Point Ltd. Позначки достовірності обов'язкові до збереження при будь-якому цитуванні. Цифри, позначені як заяви вендорів, не є незалежно перевіреними.</p>
+      </footer>
+
+    </main>
+  </div>
+</div>
