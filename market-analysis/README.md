@@ -87,6 +87,7 @@
 | 02 | [`02-market-sizing.md`](./02-market-sizing.md) | 9 внутрішніх ринків: TAM/SAM/SOM 2026–2029 |
 | 03 | [`03-focus-strategy.md`](./03-focus-strategy.md) | Три ставки, say-no, P&L, сценарії, план на 90 днів |
 | 04 | [`04-assumptions-and-sources.md`](./04-assumptions-and-sources.md) | Припущення, джерела, межі достовірності |
+| 05 | [`05-subscription-scale.md`](./05-subscription-scale.md) | **Скільки підписників потрібно продукту за $50–100/міс для $30 тис. чистими** |
 | 📊 | [`unit-economics-model.xlsx`](./unit-economics-model.xlsx) | Жива модель: формули від аркуша припущень |
 
 ---
