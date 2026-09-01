@@ -5,52 +5,114 @@
 
 ---
 
-## 1. Що поставити (один раз, ~2 години)
+## 1. Сім типів пошукових запитів
 
-### Алерт 1 — Find a Tender (UK), нові тендери
+Логіка: ми шукаємо не «тендери на ГІС», а **місця, де обробка даних піде на підряд**. Це або
+предмет самого тендера, або обсяг обробки всередині контракту, який виграє хтось інший.
 
-Портал: `find-tender.service.gov.uk` → Search → Save this search.
+Портали: `find-tender.service.gov.uk` · `contractsfinder.service.gov.uk` · `ted.europa.eu`
+(Expert search) — у кожному зберегти пошук і ввімкнути щоденний лист.
 
-**Рядок пошуку:**
+### Тип 1 — Обробка даних як предмет тендера
+*Наша роль: подаємось самі або йдемо named subcontractor.*
 ```
-("framework agreement" OR "call-off" OR "dynamic purchasing system" OR "managed service")
-AND (geospatial OR GIS OR "spatial data" OR LiDAR OR "point cloud" OR photogrammetry
-     OR "asset data" OR "utility records" OR vectorisation OR "scan to BIM"
-     OR "data cleansing" OR digitisation)
+("data processing" OR "data production" OR "data cleansing" OR "data validation"
+ OR "data capture" OR vectorisation OR "feature extraction" OR digitisation
+ OR "back office" OR "bureau service")
+AND (geospatial OR GIS OR "spatial data" OR cartograph* OR mapping OR LiDAR
+     OR "point cloud" OR topograph*)
 ```
 
-**Фільтри:** notice type = *Contract notice* · частота листа = щодня.
+### Тип 2 — Капчур із прописаною обробкою ⟵ головний
+*Наша роль: переможець стає нашим клієнтом. Дивимось award notice.*
+```
+(LiDAR OR "aerial survey" OR photogrammetr* OR "laser scanning" OR "mobile mapping"
+ OR "drone survey" OR UAV OR "topographic survey")
+AND (processing OR classification OR "point cloud" OR deliverables OR "data delivery"
+     OR "digital terrain model" OR DTM OR DSM)
+AND ("framework" OR "call-off" OR "multi-supplier" OR lot)
+```
 
-### Алерт 2 — Find a Tender, присудження ⟵ головний
+### Тип 3 — Впровадження ГІС-платформи
+*Там завжди міграція даних і подальші дата-операції. Заходимо до інтегратора.*
+```
+(GIS OR "geographic information system" OR "spatial data infrastructure"
+ OR "web mapping" OR "asset management system")
+AND (implementation OR "data migration" OR "support and maintenance" OR hosting
+     OR "managed service")
+```
 
-Той самий рядок. **Фільтр: notice type = *Contract award notice*.**
+### Тип 4 — Реєстри та регуляторні програми
+*Дані оновлюються циклічно — постійна потреба в потужності.*
+```
+("asset register" OR "asset data" OR "asset information" OR "utility records"
+ OR "underground assets" OR NUAR OR cadastr* OR "land registry" OR basemap
+ OR "base map" OR "topographic data")
+AND (update OR maintenance OR standardisation OR migration OR "data capture"
+     OR digitisation)
+```
 
-Це основний генератор лідів: award публічно називає переможця, тривалість і суму.
+### Тип 5 — BIM і scan-to-BIM
+```
+("scan to BIM" OR "point cloud to BIM" OR "measured building survey"
+ OR "as-built model" OR "Revit model" OR "digital twin")
+AND (survey OR "laser scan" OR "point cloud")
+```
 
-### Алерт 3 — Contracts Finder (UK, дрібніші контракти)
+### Тип 6 — Циклічний моніторинг
+*Повторні епохи однією методикою — багаторічна робота за конструкцією.*
+```
+(monitoring OR "repeat survey" OR "change detection" OR encroachment OR vegetation
+ OR deformation OR settlement OR subsidence OR bathymetr* OR coastal)
+AND (survey OR LiDAR OR satellite OR annual OR cyclical OR framework)
+```
 
-Портал: `contractsfinder.service.gov.uk`. Той самий рядок, обидва типи нотисів.
+### Тип 7 — Прямий сигнал на субпідряд
+*Найточніший запит під «ІТ на підряд в обробку».*
+```
+(subcontract OR "sub-contractor" OR "supply chain opportunities" OR "framework partner"
+ OR "surge capacity" OR "additional resource" OR "resource augmentation"
+ OR "capacity support")
+AND (geospatial OR GIS OR survey OR "data processing" OR mapping)
+```
 
-### Алерт 4 — TED (EU)
-
-Портал: `ted.europa.eu` → Expert search → Save.
-
+### Мовні варіанти для TED
 ```
 DE:  (Rahmenvertrag OR Rahmenvereinbarung) AND (Vermessung OR Netzdokumentation
      OR Leitungsdokumentation OR Geodaten OR Bestandsdokumentation OR Laserscanning
-     OR Punktwolke)
+     OR Punktwolke OR Datenerfassung)
 NL:  raamovereenkomst AND (landmeetkundig OR geo-informatie OR basisregistratie
-     OR BGT OR BAG OR puntenwolk)
+     OR BGT OR BAG OR puntenwolk OR inwinning)
 PL:  "umowa ramowa" AND (geodezyjn* OR "ewidencji gruntów i budynków" OR EGiB
-     OR digitalizacja OR fotogrametr*)
+     OR digitalizacja OR fotogrametr* OR "opracowanie danych")
 ```
 
-### Алерт 5 — Google Alerts (новини про перемоги)
-
+### Google Alerts — новини про перемоги
 ```
 "wins framework" OR "appointed to framework" OR "secures place on framework"
   AND (survey OR geospatial OR LiDAR OR mapping)
 ```
+
+### Негативні слова — додати до кожного запиту
+```
+-"supply of equipment" -"purchase of hardware" -"software licence only"
+-"feasibility study" -"training only"
+```
+
+---
+
+## 1а. Сигнальні слова в тексті нотиса
+
+Читати перед скорингом. Наявність цих ознак означає, що обробка **точно** піде на підряд:
+
+- **Обсяг у цифрах** — км мережі, га, точок/м², кількість обʼєктів. Є що обробляти.
+- **`deliverable format`, `data schema`, `CRS`, `QA/QC requirements`** — вимоги до продукту
+  обробки прописані окремо від зйомки.
+- **`framework`, `call-off`, `multi-supplier`, `lot`** — потік, а не разова здача.
+- **Дозвіл на субпідряд** у тексті — прямий шлях усередину.
+- **Строк 3+ роки.**
+
+Якщо у нотисі є лише опис польових робіт без жодної з цих ознак — обробка мінімальна, лід слабкий.
 
 ### CPV-коди для підписки
 
