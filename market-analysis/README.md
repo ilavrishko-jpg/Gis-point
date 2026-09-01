@@ -88,6 +88,7 @@ EBITDA +7,8 → **+59,1 млн грн** · ВП на людину $7 996 → **$
 | 03 | [`03-focus-strategy.md`](./03-focus-strategy.md) | Ставки, say-no, P&L, сценарії, план на 90 днів |
 | 04 | [`04-assumptions-and-sources.md`](./04-assumptions-and-sources.md) | Припущення, джерела, межі достовірності |
 | 05 | [`05-subscription-scale.md`](./05-subscription-scale.md) | Скільки підписників потрібно продукту за $50–100/міс |
+| 07 | [`07-smart-territory.md`](./07-smart-territory.md) | Розумна територія: Smart City для заводів, парків і курортних комплексів |
 | 📊 | [`unit-economics-model.xlsx`](./unit-economics-model.xlsx) | Жива модель: формули від аркуша припущень |
 
 ---
