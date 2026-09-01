@@ -1,14 +1,14 @@
 # Recruitment Manager (Talent Acquisition Manager)
 
-**GIS-Point & Mirneci group of companies** · Ukraine · remote / hybrid · full-time
+**GIS-Point & Mirneci group of companies** · Lviv / remote or hybrid · full-time · 1+ year of experience
 
 ---
 
 ## About us, briefly
 
-**GIS-Point** and **Mirneci** are an engineering and geospatial group: surveying, GIS, spatial data
-processing and related technical services. We are about 50 people today, heading to 100. Hiring has
-stopped being an occasional task — it needs to become a system.
+**GIS-Point** and **Mirneci** are an engineering and geospatial group: surveying, GIS, BIM, spatial
+data processing and related technical services. We are about 50 people today, heading to 100. Hiring
+has stopped being an occasional task — it needs to become a system.
 
 ## Why this role exists
 
@@ -23,39 +23,55 @@ This is a role for someone early in their career but with strong systems thinkin
 deliberately hiring at that level and giving room to build the process from scratch rather than
 maintain someone else's.
 
+## Who you will be hiring
+
+Mostly **engineering and technical roles**:
+
+- **BIM engineers** — one of our priority hiring areas.
+- Surveying and cadastral engineers.
+- GIS specialists and spatial data processing experts.
+- Developers and adjacent technical specialities.
+- Administrative and commercial roles as the group grows.
+
+Location: Ukraine.
+
 ## What you will do
 
 ### 1. Full-cycle recruiting
 - Run intake with hiring managers: what result the person must deliver, how we will assess it.
 - Build a one-page role profile and scorecard.
 - Write job ads people actually read.
-- Sourcing → screening → interviews → test task (where needed) → offer → handover to onboarding.
+- Sourcing → screening → interviews → test task (where needed) → offer.
 - Own the candidate experience: no ghosting, no week-long silences.
 
-### 2. Building the system (the core of the job)
+### 2. Onboarding every new hire
+Hiring does not end with an offer. The recruiter stays with each candidate afterwards:
+- Prepares the start: access, equipment, introductions, a first-weeks plan agreed with the manager.
+- Runs check-ins at week 1, day 30 and day 90 — with both the new hire and their manager.
+- Collects feedback and feeds it back into hiring: what we underestimated at the interview stage.
+- Owns the outcome — that the person makes it through probation.
+
+### 3. Building the system (the core of the job)
 - Set up and run a single candidate tracker (ATS or a structured database — we choose together).
 - Define funnel stages, criteria for moving between them, and who owns what.
 - Build interview question banks and scripts for recurring roles.
 - Maintain a warm talent pool to come back to when a similar role opens.
 - Launch an internal referral programme across the group.
 
-### 3. Sourcing channels — all of them, not one
+### 4. Sourcing channels — all of them, not one
 - **LinkedIn**: search, Boolean / X-ray, personalised outreach, network building.
 - **Classic job boards**: Work.ua, Robota.ua, Djinni, DOU, OLX Robota.
-- **Communities and groups**: professional Telegram, Facebook and LinkedIn groups — surveying,
+- **Communities and groups**: professional Telegram, Facebook and LinkedIn groups — BIM, surveying,
   cadastre, GIS, engineering, IT; university and faculty alumni chats.
 - **Lead-generation style outbound**: build a target list → enrich contacts → run a personalised
   touch sequence → measure reply rate per segment.
 - **Referrals** from the team and from candidates.
 
-### 4. Analytics and control
-- Keep funnel numbers current and report them weekly in a short digest.
+### 5. Analytics and control
+- Keep funnel numbers current and report them weekly in a short digest: touches, replies,
+  interviews, offers.
 - Know which channel produces hires and which only produces traffic — and reallocate time accordingly.
 - Monthly review: roles, bottlenecks, closing forecast.
-
-### Who you will be hiring
-Mostly **engineering and technical roles**: surveying, GIS, spatial data processing, development and
-adjacent specialities — plus administrative and commercial roles as the group grows. Location: Ukraine.
 
 ## What matters to us
 
@@ -69,44 +85,21 @@ adjacent specialities — plus administrative and commercial roles as the group 
 
 ## Nice to have
 
-- Experience hiring engineering or technical specialists.
+- Experience hiring engineering or technical specialists, BIM especially.
 - Experience with an ATS (Huntflow, Teamtailor, Recruitee, a Notion base — anything).
 - Outbound campaign experience: list building, enrichment, touch sequences.
 - Using AI tools in recruiting routine.
-- Basic familiarity with surveying / GIS / cadastre terminology.
-
-## First 90 days
-
-| Period | Outcome |
-|---|---|
-| **30 days** | Immersed in the group's business. Intake done with every hiring manager. Candidate tracker chosen and live. Current funnel documented as-is. |
-| **60 days** | Profiles and scorecards for priority roles. At least 4 sourcing channels running. First roles closed. First weekly report with numbers. |
-| **90 days** | Hiring runs as a process: documented stages, a filled pipeline, clear per-channel statistics, and a hiring plan for the next quarter. |
-
-## How we measure the result
-
-The targets below are a starting hypothesis; we agree the final numbers together after the first 90 days.
-
-| Metric | What it shows | Target |
-|---|---|---|
-| Time to hire | Days from opening a role to an accepted offer | ≤ 30–40 days |
-| Time to first CV | Days to the first relevant candidates reaching the hiring manager | ≤ 5 days |
-| Funnel conversion | Touch → reply → screening → interview → offer | improving quarter over quarter |
-| Candidates at final stage | Real options the hiring manager gets to choose from | ≥ 3 per role |
-| Offer acceptance rate | % of offers accepted | ≥ 80% |
-| Source of hire | Distribution of hires per channel | ≥ 40% from non-job-board channels |
-| Probation pass rate | % of hires still with us after 3 months | ≥ 85% |
-| Cost per hire | Cost of one hire | measure first, then reduce |
+- Basic familiarity with BIM / surveying / GIS / cadastre terminology.
 
 ## What we offer
 
-- Format: remote or hybrid ([office — city]), [working hours].
-- Contract: [private entrepreneur / employment record].
-- Compensation: base [range] + a bonus per closed hire who passes probation.
-- [X] days of vacation, paid sick leave.
-- A budget for recruiting tools (LinkedIn, job boards, databases) — separate from salary.
-- A learning budget of [amount / year].
-- Reporting directly to [role], without extra approval layers.
+- **Format:** remote or hybrid, office in **Lviv**.
+- **Compensation:** a fixed base + a bonus for every person hired.
+- **Contract:** [private entrepreneur / employment], [working hours].
+- **[X] days of vacation**, paid sick leave.
+- **A budget for recruiting tools** (LinkedIn, job boards, databases) — separate from salary.
+- **A learning budget** of [amount / year].
+- **Reporting directly to** [role], without extra approval layers.
 
 ## Hiring process for this role
 
