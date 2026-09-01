@@ -1,111 +1,17 @@
-# Пошуковий кит по тендерах — гіпотези назв під довгий контракт
+# Моніторинг тендерів — сетап і 3-місячний тест
 
-Додаток до `scaling-formula.md` §03. Мета — перетворити «шукати клієнтів» на щотижневу
-операцію з конкретними збереженими пошуками.
-
-**Статус даних.** Формулювання назв — гіпотези, побудовані на реальних патернах, які видно у
-відкритих джерелах. Приклади з позначкою *(спостережено)* взяті зі сніпетів пошуку і **потребують
-перевірки безпосередньо на порталі** — суми, дати й статуси в сніпетах бувають застарілі.
-Джерела: Find a Tender Service, Contracts Finder (UK), TED (EU).
+Додаток до `scaling-formula.md` §03. Мета — поставити алерти за один вечір і за 3 місяці
+отримати однозначну відповідь: цей канал дає ліди чи ні.
 
 ---
 
-## Головний поділ: два різні типи тендерів
+## 1. Що поставити (один раз, ~2 години)
 
-У GIS-Point **немає польової частини** — Mirnychyj Engineering Group є якорем довіри, а не
-конкуруючою послугою польової зйомки. Тому тендери діляться навпіл, і поводитись з ними треба
-протилежним чином.
+### Алерт 1 — Find a Tender (UK), нові тендери
 
-| | **Категорія A — подаємось самі** | **Категорія B — переможець стає клієнтом** |
-|---|---|---|
-| Що в предметі | Обробка, підтримка, міграція, моделювання, платформа | Обов'язкова польова зйомка / аероносій |
-| Наша роль | Прямий постачальник або субпідрядник | **Субпідрядник переможця** |
-| Що моніторимо | **Contract notice** — щоб встигнути податись | **Award notice** — щоб дізнатися імʼя клієнта |
-| Момент контакту | До дедлайну подачі | Перші 2–6 тижнів після присудження |
+Портал: `find-tender.service.gov.uk` → Search → Save this search.
 
-> **Категорія B — це і є ваш головний канал.** Award notice публічно називає компанію, тривалість
-> фреймворку і суму. Це готовий, датований, кваліфікований лід: у переможця щойно з'явилось
-> багаторічне зобов'язання і фіксована потужність обробки.
-
----
-
-## Категорія A — назви, під які можна подаватись самим
-
-| Гіпотеза назви | Чому довга | Що ми продаємо всередину |
-|---|---|---|
-| `Provision of GIS Data Management and Support Services` | Support-контракти за конструкцією багаторічні | Сходинка 02: виділена команда під підтримку даних |
-| `Geospatial Managed Service` / `GIS Bureau Services` | Managed service = місячна плата | Прямо наша одиниця продажу — FTE-місяць |
-| `Asset Data Capture, Cleansing and Validation` | Реєстр активів чиститься циклами | Вивірка, топологія, приведення до схеми |
-| `Asset Information Management Services` | Прив'язана до інвестиційного циклу | Постійна операція, не проєкт |
-| `Utility Records Digitisation and Standardisation` | NUAR-обовʼязок безстроковий | Векторизація, CRS, схеми даних |
-| `Digitisation of Records, Plans and Drawings` | Архіви великі, здаються траншами | Масова оцифровка + QA |
-| `Point Cloud Registration, Classification and Deliverable Production` | Прив'язана до потоку зйомок | Ядро Field-to-Finish |
-| `Scan-to-BIM / Point Cloud to Revit Modelling Services` | Портфель обʼєктів, не один | Пруф BellIngram |
-| `Vectorisation and Feature Extraction Services` | Обсяг ділиться на роки | Automation-accelerated класифікація |
-| `Geospatial Data Quality Assurance and Validation` | QA потрібне доти, доки є потік | Dual-review як предмет контракту |
-| `Web GIS Platform Development, Hosting and Support` | Ліцензія + підтримка = ARR | Сходинка 04, allgis.io |
-| `Spatial Data Infrastructure (SDI) Maintenance and Support` | SDI підтримують, а не будують раз | IT-юніт + GIS разом |
-| `Cadastral Data Modernisation / Land Registry Digitisation` | Держпрограми на роки | *(спостережено на TED: модернізація реєстру земель і будівель, гміна Мщонув — CPV 71354000 + 72310000 + 71355000 + 72314000)* |
-| `Topographic / Basemap Data Maintenance and Update Services` | Оновлення за розкладом | Циклічна операція |
-| `Land Referencing and Plan Production` | DCO та інфраструктурні схеми тягнуться роками | Виробництво планів під юридичні пакети |
-| `Data Migration Services` (у складі впровадження платформи) | Довга, якщо прив'язана до платформи | *(спостережено: Bedford Borough Council, FTS, січень 2026)* — сам по собі разовий, брати лише в парі з підтримкою |
-
----
-
-## Категорія B — назви, переможця яких треба брати в роботу
-
-| Гіпотеза назви | Спостережений приклад | Чому це наш лід |
-|---|---|---|
-| `Framework Agreement for Geospatial Survey Services` | *Historic England NP195 — 3 роки + 1 рік опції, ~£400k, лоти, Lot 3 Topographic Survey ≈25%* | Багатолотовий фреймворк = потік обробки на 4 роки |
-| `Topographical Surveys — Framework Agreement` | *Corserv Solutions — 01.04.2026–31.03.2030, 4 роки, ~£1M, до 5 постачальників* | 5 переможців = 5 потенційних клієнтів з одного award |
-| `Geospatial Capabilities Framework` | *спостережено на FTS* | Широкий фреймворк, обробка всередині кожного лоту |
-| `Provision of LiDAR and Aerial Digital Photography Surveying and Data (LiDAR Mapping)` | *FTS 080079-2025* | Аерозйомка → класифікація хмари, наш профіль |
-| `LiDAR Mapping of [територія]` | *Shetland Islands Council — 10 точок/м², аерофото, обробка і передача файлів* | Явно прописана обробка в предметі |
-| `LiDAR-based Forest Inventory — Data Collection and Processing` | *Forestry England, ~£185k, 46 725 га* | «Collection **and Processing**» у самій назві |
-| `Measured Building Surveys and Laser Scanning Framework` | — | Потік scan-to-BIM |
-| `Utility Survey and Mapping (PAS 128) Framework` | — | Підземні активи, вихід на NUAR-роботу |
-| `Vegetation Management / Encroachment Survey Framework` (DNO) | — | Щорічні цикли класифікації рослинності |
-| `Structural / Ground Movement Monitoring Survey Framework` | — | Повторні епохи однією методикою роками |
-| `Bathymetric and Coastal Monitoring Survey Framework` | — | Циклічність за фізикою явища |
-| `Multi-Disciplinary Consultancy Framework — Lot: Surveying / Geospatial` | — | Великі рамкові з геолотом; переможець лоту — наш клієнт |
-| `AMP8 — [Water Co] Capital Delivery / Asset Data Framework` | *AMP8 = регуляторний цикл квіт. 2025 – 2030; більшість фреймворків присуджено сер. 2024 – сер. 2025* | **Tier-1 ландшафт уже сформований** — тобто список переможців існує зараз і його можна опрацьовувати |
-
-> Зауваження по AMP8: якщо основні фреймворки вже присуджені, вікно «подамось разом» здебільшого
-> закрите — але вікно «прийдемо до переможця» відкрите весь цикл до 2030. Це аргумент іти по
-> award-нотисах ретроспективно за 18–24 місяці, а не лише за свіжими.
-
----
-
-## CPV-коди для підписки
-
-Головні:
-
-| Код | Що це |
-|---|---|
-| `71354000` | Map-making services |
-| `71354100` | Digital mapping services |
-| `71354200` | Aerial mapping services |
-| `71354300` | Cadastral surveying services |
-| `71355000` | Surveying services |
-| `71355100` | Photogrammetry services |
-| `72310000` | Data-processing services |
-| `72312000` | Data entry services |
-| `72314000` | Data collection and collation services |
-| `72316000` | Data analysis services |
-| `72322000` | Data management services |
-| `38221000` | Geographic information systems (GIS) |
-| `79999100` | Scanning services |
-
-Підписка робиться на **батьківські** коди (`71354000`, `71355000`, `72310000`) — ієрархія
-підтягне підкоди. Точні підкоди перед налаштуванням звірити на порталі: класифікація
-оновлювалась, і частина сніпетів у пошуку застаріла.
-
----
-
-## Збережені пошуки
-
-### Find a Tender / Contracts Finder — потік A (подаємось)
-
+**Рядок пошуку:**
 ```
 ("framework agreement" OR "call-off" OR "dynamic purchasing system" OR "managed service")
 AND (geospatial OR GIS OR "spatial data" OR LiDAR OR "point cloud" OR photogrammetry
@@ -113,81 +19,157 @@ AND (geospatial OR GIS OR "spatial data" OR LiDAR OR "point cloud" OR photogramm
      OR "data cleansing" OR digitisation)
 ```
 
-### Find a Tender / Contracts Finder — потік B (award notices)
+**Фільтри:** notice type = *Contract notice* · частота листа = щодня.
 
-Той самий рядок, але фільтр **notice type = Contract award notice** і сортування за датою.
-Це і є генератор ліда: з кожного award витягуємо переможця, тривалість, суму, замовника.
+### Алерт 2 — Find a Tender, присудження ⟵ головний
 
-### TED — DACH
+Той самий рядок. **Фільтр: notice type = *Contract award notice*.**
 
-```
-(Rahmenvertrag OR Rahmenvereinbarung)
-AND (Vermessung OR Netzdokumentation OR Leitungsdokumentation OR Geodaten
-     OR Bestandsdokumentation OR Laserscanning OR Punktwolke OR "Glasfaser Dokumentation")
-```
+Це основний генератор лідів: award публічно називає переможця, тривалість і суму.
 
-### TED — Benelux
+### Алерт 3 — Contracts Finder (UK, дрібніші контракти)
 
-```
-raamovereenkomst AND (landmeetkundig OR geo-informatie OR basisregistratie
-                      OR "BGT" OR "BAG" OR puntenwolk OR inwinning)
-```
+Портал: `contractsfinder.service.gov.uk`. Той самий рядок, обидва типи нотисів.
 
-### TED — Польща / CEE
+### Алерт 4 — TED (EU)
+
+Портал: `ted.europa.eu` → Expert search → Save.
 
 ```
-"umowa ramowa" AND (geodezyjn* OR "ewidencji gruntów i budynków" OR EGiB
-                    OR digitalizacja OR "zasobu geodezyjnego" OR fotogrametr*)
+DE:  (Rahmenvertrag OR Rahmenvereinbarung) AND (Vermessung OR Netzdokumentation
+     OR Leitungsdokumentation OR Geodaten OR Bestandsdokumentation OR Laserscanning
+     OR Punktwolke)
+NL:  raamovereenkomst AND (landmeetkundig OR geo-informatie OR basisregistratie
+     OR BGT OR BAG OR puntenwolk)
+PL:  "umowa ramowa" AND (geodezyjn* OR "ewidencji gruntów i budynków" OR EGiB
+     OR digitalizacja OR fotogrametr*)
 ```
+
+### Алерт 5 — Google Alerts (новини про перемоги)
+
+```
+"wins framework" OR "appointed to framework" OR "secures place on framework"
+  AND (survey OR geospatial OR LiDAR OR mapping)
+```
+
+### CPV-коди для підписки
+
+Батьківські (підтягнуть підкоди):
+
+```
+71354000   Map-making services
+71355000   Surveying services
+72310000   Data-processing services
+```
+
+Додатково, якщо портал дозволяє вузькі: `71354100` · `71354300` · `71355100` ·
+`72312000` · `72314000` · `72322000` · `38221000` · `79999100`.
 
 ---
 
-## Негативний фільтр — що відкидати одразу
+## 2. Ретроспектива на старті (одноразово, ~4 години)
 
-- Предмет **тільки польова зйомка** без обсягу обробки і без фреймворку.
-- Тривалість менша за 3 роки **і** обсяг нижчий за 2 FTE на 12 місяців.
-- `Supply of equipment` / `Purchase of hardware` / постачання дронів, сканерів, ПЗ-ліцензій.
-- Разові дослідження, feasibility, one-off study.
-- Лоти, де замовник прямо вимагає локальної присутності інженерів на майданчику.
+Не чекати нових award — підняти **вже присуджені за останні 18–24 місяці** за тими самими
+фільтрами. AMP8-фреймворки, наприклад, здебільшого присуджені у 2024–2025, і їхні переможці
+працюють до 2030 — тобто вони є лідом уже сьогодні.
+
+Це дає стартову базу для тесту одразу, а не через місяць.
 
 ---
 
-## Скоринг ліда — 5 балів, по одному за кожну умову §02
+## 3. Що записувати (одна таблиця, 9 колонок)
 
-1. Фреймворк / call-off / DPS на **3+ роки** (є в тексті нотиса).
-2. У предметі є **обробка, підтримка або оновлення** даних, а не лише капчур.
+| Колонка | Що вносити |
+|---|---|
+| Дата award | З нотиса |
+| Замовник | Хто оголосив |
+| Переможець | **Наш потенційний клієнт** |
+| Тривалість | Роки; фільтр — від 3 |
+| Сума | Загальна по фреймворку |
+| Категорія | **A** (подаємось самі) / **B** (йдемо до переможця) |
+| Бал | 0–5 за скорингом нижче |
+| Покупець | ПІБ + посада (Head of Production / Ops Director / GIS Manager) |
+| Статус | список → контакт → відповідь → discovery → demo dataset |
+
+**Категорія A** — предмет це обробка, підтримка, міграція, платформа: подаємось самі, дивимось
+*contract notice*.
+**Категорія B** — предмет вимагає польової зйомки: **не подаємось** (у нас немає польової
+частини), йдемо до переможця, дивимось *award notice*, контакт у перші 2–6 тижнів.
+
+### Скоринг — по балу за умову
+
+1. Фреймворк / call-off / DPS на **3+ роки**.
+2. У предметі є обробка, підтримка або оновлення даних, а не лише капчур.
 3. Обсяг тягне на **≥2 FTE на 12 місяців**.
-4. Переможець — **фірма 30–200 людей** (не Tier-1 гігант, не мікро-бюро).
-5. Знайдено **Head of Production / Operations Director / GIS Manager** поіменно.
+4. Переможець — фірма **30–200 людей**.
+5. Знайдено покупця поіменно.
 
-**4–5 балів** — в роботу цього тижня. **3** — у нерт. **≤2** — say-no, не витрачати час.
+**4–5** — в роботу. **3** — нерт. **≤2** — відкинути.
+
+### Відкидати одразу
+
+Тільки польова зйомка без обробки · менше 3 років і менше 2 FTE · supply of equipment /
+hardware / ліцензій · разові дослідження й feasibility · вимога присутності інженерів на
+майданчику.
 
 ---
 
-## Щотижнева операція (30 хвилин)
+## 4. Тест на 3 місяці
 
-| Крок | Дія | Власник |
+**Витрати:** ~30 хв/тиждень на скринінг + ~1.5 год/тиждень на аутріч ≈ **26 годин за квартал**.
+Плюс 6 годин на сетап і ретроспективу. Грошей — нуль, портали безкоштовні.
+
+**Власники:** Vasyl — знімає й заповнює таблицю. Andrijana — скоринг і пошук покупця.
+Ievgen — аутріч.
+
+### Що міряти щотижня — 5 чисел
+
+```
+1. Нових award у фільтрі
+2. З них 4–5 балів
+3. Знайдено покупця поіменно
+4. Надіслано аутрічів
+5. Отримано відповідей
+```
+
+### Контрольні точки
+
+| | Місяць 1 | Місяць 2 | Місяць 3 |
+|---|---|---|---|
+| Кваліфікованих компаній у списку (накопичено) | 20 | 40 | 60 |
+| З них із покупцем поіменно | 12 | 25 | 40 |
+| Надіслано аутрічів | 10 | 25 | 40 |
+| Відповідей | 1 | 2 | 3 |
+| Discovery-дзвінків | 0 | 1 | 3 |
+| Demo dataset запущено | 0 | 0 | 1 |
+
+Числа — **модель**. Їхня роль не в точності, а в тому, щоб на 13-му тижні було з чим порівняти.
+
+---
+
+## 5. Рішення на 13-му тижні
+
+Головне застереження: **контракт за 3 місяці не є критерієм.** Цикл угоди на багаторічну
+потужність довший за квартал. Тест міряє, чи канал взагалі виробляє сировину і чи реагує ринок.
+
+| Що бачимо | Діагноз | Що робити |
 |---|---|---|
-| 1 | Зняти нові award notices за збереженими пошуками (UK + TED) | Vasyl |
-| 2 | Витягнути переможця, тривалість, суму, замовника | Vasyl |
-| 3 | Проскорити за 5 умовами, лишити 4–5 балів | Andrijana |
-| 4 | Знайти покупця поіменно, додати в список | Andrijana |
-| 5 | Аутріч по тригеру «ви щойно взяли N-річний фреймворк» | Ievgen |
+| ≥50 кваліфікованих · ≥60% з покупцем · ≥5% відповідей · ≥3 discovery | Канал працює | Масштабувати: подвоїти час, додати Моушен 2 (субпідряд у біддах) |
+| Список наповнюється (≥30), але відповідей <5% | Сировина є, меседж не влучає | Міняти **меседж і таргет усередині списку**, канал не чіпати. Ще 6 тижнів. |
+| Список наповнюється, але покупця не знаходимо (<40% з ПІБ) | Проблема не в тендерах, а в збагаченні | Додати інструмент пошуку контактів, не міняти пошуки |
+| <20 кваліфікованих за 13 тижнів | Сировини немає в цих фільтрах | Розширити географію й CPV. Якщо після розширення те саме — award-тригер не є джерелом, і формулу треба перевіряти по Моушену 2 і 3 |
 
-Через 12 місяців це дає накопичений, датований список усіх фірм у beachhead, які взяли довгий
-контракт — актив, якого немає в конкурентів, бо його не купиш, його треба вести щотижня.
+### Порівняння з базою
+
+До старту зафіксувати, скільки лідів дав поточний канал за попередній квартал і якої
+тривалості. Без цієї цифри тест не має з чим порівнюватись.
 
 ---
 
-## Джерела
+## Джерела спостережених прикладів
 
-- [Geospatial Capabilities Framework — Find a Tender](https://www.find-tender.service.gov.uk/Notice/028269-2021)
 - [Framework Agreement for Geospatial Survey Services NP195 — Contracts Finder](https://www.contractsfinder.service.gov.uk/Notice/2c96d120-2ac3-4849-8a2d-0965ed840ca1)
 - [Topographical Surveys — Find a Tender 085040-2025](https://www.find-tender.service.gov.uk/Notice/085040-2025/PDF)
-- [Provision of LiDAR and Aerial Digital Photography Surveying and Data — Find a Tender 080079-2025](https://www.find-tender.service.gov.uk/Notice/080079-2025)
-- [LiDAR-coupled Digital Aerial Surveys — Find a Tender 010858-2025](https://www.find-tender.service.gov.uk/Notice/010858-2025)
-- [LiDAR-based Forest Inventory, Data Collection and Processing — D3 Tenders](https://d3tenders.com/contract/?ocid=ocds-h6vhtk-04db78)
-- [Modernisation of the land and buildings register, Mszczonów — TED / EU Publications Office](https://op.europa.eu/en/web/public-procurement/procurement-details/-/procurement/f26059b2-c7fa-4d45-b36d-e35a6c9c46b0)
+- [Provision of LiDAR and Aerial Digital Photography Surveying and Data — FTS 080079-2025](https://www.find-tender.service.gov.uk/Notice/080079-2025)
 - [AMP8 framework winners, lot by lot — Water Industry Hub](https://www.waterindustryhub.com/frameworks-won.html)
-- [AMP8 overview — Sensat](https://www.sensat.co/news/everything-you-need-to-know-about-amp8-a-comprehensive-guide)
-- [Common Procurement Vocabulary — Wikipedia](https://en.wikipedia.org/wiki/Common_Procurement_Vocabulary)
+- [Common Procurement Vocabulary](https://en.wikipedia.org/wiki/Common_Procurement_Vocabulary)
