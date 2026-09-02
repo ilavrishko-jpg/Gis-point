@@ -1,38 +1,23 @@
-# AllGIS · Cold outreach sequence — INTERGEO 2026 (Munich, 15–17 Sep)
+# INTERGEO 2026 — секвенція на зустріч (Munich, 15–17 Sep)
 
-**Юніт:** Unit 2 — IT / GeoAI Engine
-**ICP:** GIS / surveying / LiDAR / mapping firms 30–200 (UK · EU/DACH · NA), продуктові GeoTech
-**Buyer:** Head of Production / GIS Manager → CTO / Head of Product / Founder
-**Мета секвенції:** зустріч на INTERGEO (наш стенд або їхній), фолбек — 20-хв дзвінок після виставки
-**Вхідний офер (paid entry):** Platform Discovery Sprint · апсайд: Geo-Workflow Automation Sprint → GeoData Platform Build
-
-**Джерела (Notion, канон):**
-- IT-Unit Offer / Value Prop v2.1 — офер-драбина, ціни, диференціатори, кейси
-- Позиціонування GisPoint — SSOT — категорія, меседж-стек, правила голосу, пруфи
-
-**Правила голосу, застосовані тут:** numbers over adjectives · без емодзі · proof before claim · GIS-native лексика · без «AI-native» / «outsourcing» · імена клієнтів не називаємо.
-
-**Плейсхолдери перед відправкою:** `[First name]`, `[Hall X · Stand Y]`, `[calendar link]`.
-AllGIS = офер тільки для ГІС/гео-аудиторії. Аграріям — AgroDataHub, не AllGIS.
+**Ціль:** домовитися на зустріч на виставці. Більше нічого.
+**Кому:** GIS / surveying / LiDAR / mapping фірми, продуктові GeoTech.
+**Ритм:** день 0 · 3 · 6 · 9 · 12 (останній лист — 14 вересня, за день до відкриття).
+**Плейсхолдери:** `[First name]`, `[Company]`, `[Hall X · Stand Y]`, `[calendar link]`.
 
 ---
 
 ## Лист 1 — День 0
 
-**Subject:** LiDAR file ping-pong — and INTERGEO in Munich
-**Alt subject:** Meeting at INTERGEO, 15–17 Sep?
+**Subject:** Meeting at INTERGEO, 15–17 Sep?
 
 Hi [First name],
 
-Ievgen from GIS-Point. We are a geospatial technology partner for surveying, LiDAR and mapping teams: we process point cloud data to spec, and we build the software and automation that runs on it. 17 years, 570+ projects, 12+ countries. Code and IP are the client's from day one.
+Ievgen from GIS-Point. We work with surveying and mapping teams: point cloud and LiDAR processing, Scan-to-BIM, and the web platforms and automation that sit on top of that data. 17 years, 570+ projects, 12+ countries.
 
-Half the work on a LiDAR project is not the processing. It is the files. Upload, download, check, send back, fix, upload again.
+We will be at INTERGEO in Munich with a stand, [Hall X · Stand Y].
 
-We got tired of watching that and built AllGIS — https://allgis.io. Data goes up once, you mark it up in the browser, and you send a link instead of a file.
-
-We will be at INTERGEO in Munich, 15–17 September, with a stand. Worth 20 minutes there? I can come to your stand, or host you at ours — [Hall X · Stand Y]. Whatever is easier.
-
-Not going to Munich? A call works just as well.
+Would you have 20 minutes there? I can come to your stand, or you come to ours — whichever suits. Happy to just compare notes on how [Company] handles processing volume right now.
 
 Ievgen
 
@@ -40,16 +25,13 @@ Ievgen
 
 ## Лист 2 — День 3
 
-**Subject:** Re: LiDAR file ping-pong — and INTERGEO in Munich
-*(відповідь у той самий тред; без нового продажу, одне питання + один пруф)*
+**Subject:** Re: Meeting at INTERGEO, 15–17 Sep?
 
 Hi [First name],
 
-Following up. Even a one-line answer helps: how does your team move LiDAR data between capture, QC and delivery today — still file transfers back and forth, or something else?
+Following up on Munich. Are you going?
 
-For context on where this comes from: on a recent power-line project we ran 118.8M points into vectorised geometry — 5,644 m of conductor, 333 spans, 2.2 cm clearance accuracy, no per-seat licences. The handover was the slowest part of it, not the classification.
-
-INTERGEO is in two weeks. Slot for 20 minutes?
+If yes, name a time and I will hold it: [calendar link]. Tuesday and Wednesday mornings are still open on our side.
 
 Ievgen
 
@@ -57,19 +39,17 @@ Ievgen
 
 ## Лист 3 — День 6
 
-**Subject:** How we usually start (2 weeks, fixed fee)
+**Subject:** Re: Meeting at INTERGEO, 15–17 Sep?
 
 Hi [First name],
 
-Still curious how you handle the handoff. Short version of what we do beyond AllGIS, so you know what a conversation would be about:
+In case it helps to know what a conversation would actually be about — the three things teams usually come to us with:
 
-- **Platform Discovery Sprint** — 2 weeks, fixed fee from £3K, credited against the build. Architecture, a working prototype on your own data, cost and timeline. IP yours.
-- **Geo-Workflow Automation Sprint** — 30 days, from £8K. One workflow taken end to end: pipelines, classification, automated QA, with a before/after benchmark.
-- **GeoData Platform Build** — web-GIS portal, LiDAR automation, spatial QA. Open-source stack, PostGIS and MapLibre, full source and IP yours. No vendor roadmap to die with.
+- Processing backlog after a won tender, cleared without hiring. Same timezone, QC on our side.
+- A repeating workflow turned into an automated pipeline. On one power-line job that meant 118.8M points to vectorised geometry, 333 spans, at 2.2 cm.
+- A web platform instead of sending files around — our own is live at allgis.io, and we build the same for clients. Open-source stack, code and IP yours.
 
-AllGIS (allgis.io) is the productised version of the first problem we kept hitting: one shared view of the point cloud, comments included, instead of the file back-and-forth.
-
-Worth 20 minutes at INTERGEO to compare notes? Our stand is [Hall X · Stand Y], or I will come to yours.
+Which of those is closest to your situation? Or we skip the email and talk in Munich — [Hall X · Stand Y].
 
 Ievgen
 
@@ -77,13 +57,15 @@ Ievgen
 
 ## Лист 4 — День 9
 
-**Subject:** Re: How we usually start (2 weeks, fixed fee)
+**Subject:** Next week in Munich
 
 Hi [First name],
 
-Munich next week — the calendar is filling up. Still worth a quick word? No pitch, just comparing notes on how LiDAR data gets handed off between capture, QC and delivery.
+INTERGEO opens next Tuesday and the calendar is filling up.
 
-Tuesday or Wednesday morning at your stand, or drop by ours: [Hall X · Stand Y]. [calendar link]
+20 minutes, your stand or ours: [calendar link]
+
+If you are not going, a call the week after works too.
 
 Ievgen
 
@@ -91,23 +73,22 @@ Ievgen
 
 ## Лист 5 — День 12
 
-**Subject:** Re: How we usually start (2 weeks, fixed fee)
+**Subject:** Re: Next week in Munich
 
 Hi [First name],
 
-I will leave it here. If this is not your area, is there someone else on your team worth asking instead?
+Last one from me before the show.
 
-And the open invitation stands: if you are at INTERGEO, come by [Hall X · Stand Y]. Coffee, a look at AllGIS on real point clouds, no pitch.
+The invitation stands: come by [Hall X · Stand Y] any time on 15–17. Coffee, and we can look at your data on screen if you bring a sample.
 
-Either way, thanks for reading this far.
+And if this is not your area at [Company], who would be the right person to ask?
 
 Ievgen
 
 ---
 
-## Нотатки для лідгена
+## Нотатки
 
-1. **Тільки ГІС/гео-акаунти.** AllGIS не пропонуємо аграріям (їм — AgroDataHub).
-2. **Правило розділення каналів:** IT і ГІС офери не змішуємо на одному акаунті — ця секвенція йде з IT-контуру.
-3. **Ціни в листі 3** можна зняти, якщо акаунт enterprise-рівня — тоді формулювання «fixed-fee entry sprint, two weeks».
-4. **Після INTERGEO:** акаунти, що не відповіли, але були на виставці, — окремий post-show тред, не продовження цього.
+- AllGIS — тільки для ГІС/гео-аудиторії. Аграріям не пропонуємо.
+- Цін у секвенції немає навмисно: ціль — зустріч, не квота.
+- Після виставки — окремий post-show тред, не продовження цього.
