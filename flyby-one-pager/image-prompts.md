@@ -1,80 +1,106 @@
-# FLY BY — image-generation prompts
+# FLY BY — image prompts for GPT Image / Nano Banana
 
-For Nano Banana (Gemini image) or GPT Image. Written to match the flyer's
-palette so generated art drops straight into the A4 layout.
+Derived from the real flyby.gis-point.com pages, not invented. The house image
+style there is one consistent thing: **a desaturated documentary photograph,
+warm-toned, with a luminous scan cone and thin white technical vector overlays
+drawn on top, and a monospace caption bar along the bottom.**
 
-**Read first.** Image models still garble small text. Never let a generator set
-the headline, the accuracy figures, the phone number or the QR — those stay as
-type in `Main.dc.html`. Every prompt below ends with "no text" on purpose:
-generate the *picture*, keep the *words* in the layout.
+## Paste this first — the style block
 
-**Palette to keep consistent across all three**
-`#10151C` near-black · `#143A5E` deep navy · `#E0A22B` amber · `#F4F2ED` warm off-white
+Give this to the model once, then any of the prompts below. Keeping it verbatim
+across assets is what makes them look like a set.
 
----
+> **Style: FLY BY house style.** Desaturated documentary photograph, almost
+> monochrome, graded to a warm sepia-brown duotone — deep warm near-black
+> `#1A1411` in the shadows, warm off-white `#F8F6F0` in the highlights, and a
+> single muted copper `#885530` used sparingly and only on graphic overlay
+> elements. Flat, overcast, directionless light. Matte finish, fine film grain,
+> low contrast in the midtones, no glossy highlights, no lens flare, no colour
+> outside that warm neutral range. Thin, precise white vector overlays drawn
+> over the photograph like an instrument readout: 1px crosshairs, dashed
+> trajectory lines, concentric arcs, corner brackets, a faint ellipse marking a
+> ground footprint. Restrained and editorial, closer to a defence white paper
+> than to game art. No text, no letters, no numbers, no logos, no watermarks.
 
-## 1 · Hero band for the flyer (16:9, or 3:1 crop)
+## Prompt 1 — Hero (the main marketing image)
 
-> A wide aerial view looking down at a 40-degree angle over a patchwork of
-> Eastern European farmland and treelines in flat overcast light. In the upper
-> third, the small dark silhouette of a fixed-wing reconnaissance drone, seen
-> from behind and above, tiny against the landscape. Over the terrain, a precise
-> cartographic overlay: thin amber survey lines, small amber crosshair ticks
-> locking onto field boundaries and road junctions, a few faint amber corner
-> brackets framing matched features — like a machine recognising ground it has
-> seen before. Colour palette strictly deep navy #143A5E shadows, warm
-> off-white #F4F2ED highlights, amber #E0A22B for every overlay element. Matte,
-> muted, high contrast, fine film grain. Editorial defence-technology
-> photography crossed with a technical survey diagram. No text, no numbers, no
-> logos, no watermarks, no lens flare, no HUD clutter, no explosions.
+Matches the site's own hero. Ask for **16:9** or **3:4**.
 
-**Avoid list if the tool takes one:** text, letters, numbers, watermark, logo,
-signature, lens flare, neon glow, sci-fi hologram, weapons, fire, smoke, gore,
-flags, people, heavy vignette, oversaturated blue.
+> A fixed-wing reconnaissance drone seen from slightly behind and above,
+> banking gently over a wide patchwork of farmland, rivers and treelines far
+> below. The horizon sits high in the frame; the ground is soft with haze. A
+> single luminous pale shaft of light descends vertically from the aircraft's
+> belly to the ground, widening slightly, marking what the camera sees. Thin
+> white technical overlays: a crosshair where the shaft meets the ground, a
+> faint ellipse around that point, two dashed vector lines running off toward
+> the horizon, and small corner brackets framing one field boundary. Warm sepia
+> duotone, flat overcast light, matte, fine grain. No text, no logos.
 
----
+## Prompt 2 — GNSS-denied envelope (the problem image)
 
-## 2 · Standalone promo poster (3:4 or A4)
+Matches the site's problem section. **16:9**, works well cropped to a band.
 
-Use when you want a whole visual for social, a booth screen, or a slide — not
-the print flyer.
+> A low, flat horizon at dusk. On the left, the dark silhouette of a military
+> ground vehicle bristling with antenna masts, seen in profile. Concentric thin
+> white arcs radiate outward from its antennas across the sky, evenly spaced,
+> like a broadcast pattern. On the right and higher in the frame, the small
+> silhouette of a fixed-wing drone, with a luminous pale trapezoid of light
+> descending from it to the ground, a thin white crosshair centred inside that
+> beam. The two forms do not touch. Near-monochrome, warm grey-brown duotone,
+> heavy atmospheric haze, matte, fine grain. No text, no logos.
 
-> A vertical poster composition, top two-thirds a downward aerial view of
-> farmland and river bends under flat grey light, rendered in deep navy
-> #143A5E and warm off-white #F4F2ED. A thin amber #E0A22B cartographic grid
-> lies precisely over the terrain, with small amber crosshair markers pinned to
-> recognisable ground features. In the top left, a satellite icon drawn as a
-> simple amber line symbol with a clean amber X struck through it. Bottom third
-> is a solid flat near-black #10151C band, completely empty, reserved for
-> typography. Flat vector-and-photography hybrid, matte, restrained, high
-> contrast, no gradients on the flat colour areas. No text anywhere, no logos,
-> no watermarks.
+## Prompt 3 — Terrain match (close on the mechanism)
 
-The empty black band is deliberate — set the headline and contact details over
-it in your own layout, where you control the type.
+For a square or a wide band. **1:1** or **16:9**.
 
----
-
-## 3 · Square variant for LinkedIn / booth screen (1:1)
-
-> A square, near-symmetrical composition. Centre: a small fixed-wing drone
-> silhouette in flat amber #E0A22B seen from directly above, on a deep navy
-> #143A5E ground. Radiating out from it, concentric thin off-white contour
-> lines like a topographic map, with a scatter of small amber tick marks where
-> the contours cross. The outer edge fades to near-black #10151C. Precise,
-> instrument-panel feel, flat vector illustration, matte, no gradients, no
-> glow. No text, no numbers, no logos, no watermarks.
-
----
+> A near-vertical aerial view straight down onto farmland — irregular field
+> polygons, a curving river, a single road cutting diagonally. Rendered as a
+> desaturated warm-grey aerial photograph. Over it, thin white technical
+> overlays lock onto ground features: four small crosshair markers on field
+> corners and the road junction, each ringed by a thin circle, plus corner
+> brackets framing the centre of the frame. A faint one-pixel grid overlays the
+> whole image, slightly offset from the terrain beneath it. Matte, flat light,
+> fine grain, no colour beyond warm neutral. No text, no numbers, no logos.
 
 ## Working notes
 
-- Generate at the largest size the tool offers, then downsample. For the flyer
-  the band needs ~2400 px wide to hold up at 300 dpi across A4.
-- Ask for three or four variations and pick on **silhouette legibility at
-  thumbnail size** — an exhibition handout is judged from two metres away.
-- Check every candidate in grayscale before committing. If the amber overlay
-  disappears in mono, the print is weaker than the screen suggests.
-- If a generator refuses the brief, drop the word "drone" for "small
-  fixed-wing survey aircraft" and drop "defence" entirely — the composition is
-  what matters, not the vocabulary.
+- **Never let the model set type.** The site puts real captions over its images
+  (`GNSS-DENIED ENVELOPE`, `L1 · L2 · L5`) — those are laid on in the page, in
+  letter-spaced uppercase mono, not baked into the photograph. Do the same:
+  generate clean, add the caption bar in the layout.
+- Generate large and downsample. A full-bleed A4 band needs ~2400 px wide to
+  survive 300 dpi.
+- Pick candidates on **silhouette legibility at thumbnail size**, and check each
+  one in grayscale — the whole palette is nearly monochrome already, so if it
+  falls apart in mono it was relying on the copper, which the style says should
+  be doing almost nothing.
+- If a generator balks, drop "military" and "drone" for "survey aircraft" and
+  "ground station". The composition carries the meaning, not the vocabulary.
+
+## The brand system these were pulled from
+
+Sampled from the page screenshots, so these are the real values.
+
+| Role | Value |
+| --- | --- |
+| Paper | `#F8F6F0` (warm off-white; a second, warmer `#F2EEE5` also appears) |
+| Ground | `#1A1411` (warm near-black, not blue-black) |
+| Copper on light | `#815837` — eyebrow labels, the live logo dot |
+| Copper on dark | `#C7956D` — labels and figures on dark sections |
+| Copper fill | `#885530` — the solid CTA button |
+| Body text | `#413D39` secondary, `#6D6965` for mono metadata |
+| Hairline | `#D2CFCA` on screen; darkened to `#ADA79D` in print so it survives |
+
+**Type roles** — four, and each does one job:
+- **Headlines: a serif, sentence case.** Never all-caps. "Optical
+  terrain-matching. No satellite signal. No survey flight."
+- **Figures: a light geometric sans.** `46,000+`, `+300%`, `$3.7B`.
+- **Body: a neutral sans**, generous line-height, around 1.6–1.7.
+- **Every label, source line and piece of metadata: uppercase monospace with
+  wide letter-spacing.** This is the strongest single signature of the brand.
+- Section openers are a short rule followed by a spaced copper mono word —
+  `—— SOLUTION`, `—— PROBLEM`.
+
+The flyer approximates the serif with **Newsreader** and the figures with
+**Jost**. Both are stand-ins picked by eye from screenshots; send the font names
+from the site's CSS and I will swap them for the real ones.
