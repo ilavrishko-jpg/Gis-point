@@ -1,0 +1,1732 @@
+<title>Стенд-радар</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --bg:#F1F4F1;
+  --surface:#FFFFFF;
+  --surface-2:#E6ECE8;
+  --surface-3:#DBE4DF;
+  --line:#CFDAD4;
+  --line-soft:#E2E9E5;
+  --text:#12211D;
+  --text-dim:#5C6E68;
+  --text-faint:#8798924D;
+  --accent:#0E7C6B;
+  --accent-ink:#08554A;
+  --accent-soft:#D8EDE7;
+  --hot:#C2410C;
+  --hot-soft:#FBE4D8;
+  --warn:#A2620A;
+  --warn-soft:#F7E9D2;
+  --dead:#7A8A85;
+  --dead-soft:#E4E9E7;
+  --shadow:0 1px 2px rgba(18,33,29,.06),0 8px 24px -12px rgba(18,33,29,.18);
+  --shadow-lift:0 2px 6px rgba(18,33,29,.10),0 20px 44px -16px rgba(18,33,29,.30);
+  --r:10px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --disp:"Archivo","IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C1614;
+    --surface:#132220;
+    --surface-2:#1B2E2A;
+    --surface-3:#243B36;
+    --line:#2B423C;
+    --line-soft:#1F332E;
+    --text:#E8EFEB;
+    --text-dim:#93A8A1;
+    --text-faint:#6B807A;
+    --accent:#35B79F;
+    --accent-ink:#7FD8C6;
+    --accent-soft:#123630;
+    --hot:#F97316;
+    --hot-soft:#3A2013;
+    --warn:#D9962F;
+    --warn-soft:#33260F;
+    --dead:#7E918B;
+    --dead-soft:#1D2C29;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.5),0 20px 44px -16px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C1614;
+  --surface:#132220;
+  --surface-2:#1B2E2A;
+  --surface-3:#243B36;
+  --line:#2B423C;
+  --line-soft:#1F332E;
+  --text:#E8EFEB;
+  --text-dim:#93A8A1;
+  --text-faint:#6B807A;
+  --accent:#35B79F;
+  --accent-ink:#7FD8C6;
+  --accent-soft:#123630;
+  --hot:#F97316;
+  --hot-soft:#3A2013;
+  --warn:#D9962F;
+  --warn-soft:#33260F;
+  --dead:#7E918B;
+  --dead-soft:#1D2C29;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.5),0 20px 44px -16px rgba(0,0,0,.75);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:15px;line-height:1.45;
+  -webkit-text-size-adjust:100%;
+  overscroll-behavior-y:none;
+}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none;padding:0}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:var(--disp);font-size:10.5px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--text-dim);
+}
+
+/* ---------- shell ---------- */
+.shell{max-width:920px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--bg);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar-inner{max-width:920px;margin:0 auto;padding:10px 14px 8px}
+.brandrow{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.brand{
+  font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em;
+  display:flex;align-items:baseline;gap:7px;
+}
+.brand .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  display:inline-block;flex:none;transform:translateY(-1px);
+}
+.brand-sub{
+  font-family:var(--mono);font-size:11px;color:var(--text-dim);
+  letter-spacing:.02em;
+}
+.spacer{flex:1}
+.iconbtn{
+  width:38px;height:38px;border-radius:var(--r);
+  display:grid;place-items:center;color:var(--text-dim);
+  border:1px solid transparent;
+}
+.iconbtn:hover{background:var(--surface-2);color:var(--text)}
+.iconbtn.on{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-soft)}
+.iconbtn svg{width:19px;height:19px;display:block}
+
+.searchwrap{display:flex;gap:8px;align-items:stretch}
+.searchfield{
+  flex:1;position:relative;display:flex;align-items:center;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);
+  transition:border-color .12s ease;
+}
+.searchfield:focus-within{border-color:var(--accent)}
+.searchfield svg{width:18px;height:18px;color:var(--text-dim);margin-left:12px;flex:none}
+#q{
+  flex:1;min-width:0;border:none;background:none;outline:none;
+  padding:12px 10px;font-size:16px;font-weight:500;
+}
+#q::placeholder{color:var(--text-dim);font-weight:400}
+.clearq{padding:0 12px;color:var(--text-dim);font-size:20px;line-height:1;display:none}
+.clearq.show{display:block}
+.numtoggle{
+  flex:none;width:48px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);
+  font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text-dim);
+  box-shadow:var(--shadow);
+}
+.numtoggle.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.chips{
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+  padding:9px 14px 10px;margin:0 -14px -1px;
+}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);
+  font-size:13px;font-weight:500;color:var(--text-dim);
+  display:flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.chip .n{font-family:var(--mono);font-size:11px;color:var(--text-faint)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.on .n{color:rgba(255,255,255,.75)}
+.chip.group{border-style:dashed;color:var(--text-dim)}
+
+/* ---------- progress ---------- */
+.progress{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 14px;border-bottom:1px solid var(--line-soft);
+  background:var(--surface);
+}
+.bar{flex:1;height:5px;border-radius:3px;background:var(--surface-3);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar i.talked{background:var(--accent)}
+.bar i.hot{background:var(--hot)}
+.bar i.later{background:var(--warn)}
+.bar i.no{background:var(--dead)}
+.progress .lbl{font-family:var(--mono);font-size:11.5px;color:var(--text-dim);flex:none}
+
+/* ---------- list ---------- */
+.list{flex:1;padding:0 0 96px}
+.row{
+  display:grid;
+  grid-template-columns:3px 1fr auto;
+  align-items:stretch;
+  gap:0;
+  width:100%;text-align:left;
+  border-bottom:1px solid var(--line-soft);
+  background:var(--surface);
+}
+.row:active{background:var(--surface-2)}
+.row .stripe{background:var(--line)}
+.row.t-a .stripe{background:var(--accent)}
+.row.t-b .stripe{background:color-mix(in srgb,var(--accent) 45%,transparent)}
+.row .body{padding:11px 8px 11px 13px;min-width:0}
+.row .name{
+  font-family:var(--disp);font-weight:600;font-size:15.5px;letter-spacing:-.005em;
+  line-height:1.25;overflow-wrap:anywhere;
+}
+.row .meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  margin-top:4px;font-size:12.5px;color:var(--text-dim);
+}
+.standchip{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;
+  background:var(--surface-3);color:var(--text);
+  padding:1px 6px;border-radius:4px;letter-spacing:.01em;
+}
+.row .side{
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:center;
+  gap:5px;padding:11px 13px 11px 6px;flex:none;
+}
+.tierbadge{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;
+  color:var(--text-dim);letter-spacing:.06em;
+}
+.sdot{width:9px;height:9px;border-radius:50%;background:var(--surface-3);flex:none}
+.sdot.talked{background:var(--accent)}
+.sdot.hot{background:var(--hot)}
+.sdot.later{background:var(--warn)}
+.sdot.no{background:var(--dead)}
+.row .hit{
+  display:block;margin-top:5px;font-size:12px;color:var(--text-dim);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.row .hit b{color:var(--text);font-weight:600}
+mark{background:var(--accent-soft);color:var(--text);border-radius:2px;padding:0 1px}
+
+.more{
+  display:block;width:100%;padding:15px;text-align:center;
+  font-weight:600;color:var(--accent-ink);background:var(--surface);
+  border-bottom:1px solid var(--line-soft);
+}
+.empty{padding:56px 28px;text-align:center;color:var(--text-dim)}
+.empty h3{
+  font-family:var(--disp);font-size:17px;color:var(--text);
+  margin:0 0 6px;text-wrap:balance;
+}
+.empty p{margin:0 0 16px;font-size:14px}
+
+/* ---------- demo banner ---------- */
+.demobar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:7px 14px;background:var(--warn-soft);
+  border-bottom:1px solid var(--line-soft);
+  font-size:12.5px;color:var(--text);
+}
+.demobar .eyebrow{color:var(--warn)}
+.demobar button{font-weight:600;color:var(--accent-ink);text-decoration:underline}
+
+/* ---------- overlay sheets ---------- */
+.sheet{
+  position:fixed;inset:0;z-index:60;
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  animation:rise .16s ease-out;
+}
+@keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+.sheet-head{
+  position:sticky;top:0;z-index:2;
+  display:flex;align-items:center;gap:6px;
+  padding:8px 8px 8px 4px;
+  background:var(--bg);border-bottom:1px solid var(--line-soft);
+}
+.sheet-title{
+  font-family:var(--disp);font-weight:600;font-size:15px;
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet-inner{max-width:920px;margin:0 auto;padding:0 14px 40px}
+
+/* ---------- detail ---------- */
+.lead-head{padding:14px 0 16px;border-bottom:1px solid var(--line-soft)}
+.lead-name{
+  font-family:var(--disp);font-weight:700;font-size:23px;line-height:1.15;
+  letter-spacing:-.015em;margin:0 0 9px;text-wrap:balance;overflow-wrap:anywhere;
+}
+.lead-facts{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.fact{
+  display:flex;align-items:center;gap:5px;
+  font-size:12.5px;color:var(--text-dim);
+  background:var(--surface);border:1px solid var(--line);
+  padding:3px 9px;border-radius:999px;
+}
+.fact.stand{background:var(--accent-soft);border-color:transparent;color:var(--accent-ink);font-weight:600}
+.fact.stand span{font-family:var(--mono)}
+.fact.tier{background:var(--surface-3);border-color:transparent;font-weight:600;color:var(--text)}
+
+.sect{padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.sect > .eyebrow{display:block;margin-bottom:10px}
+
+.statusgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+@media(min-width:520px){.statusgrid{grid-template-columns:repeat(4,1fr)}}
+.sbtn{
+  padding:11px 8px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);
+  font-weight:600;font-size:13.5px;color:var(--text-dim);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:transform .1s ease;
+}
+.sbtn:active{transform:scale(.97)}
+.sbtn .sdot{width:8px;height:8px}
+.sbtn.on.talked{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+.sbtn.on.hot{background:var(--hot-soft);border-color:var(--hot);color:var(--hot)}
+.sbtn.on.later{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.sbtn.on.no{background:var(--dead-soft);border-color:var(--dead);color:var(--text-dim)}
+
+textarea.note{
+  width:100%;min-height:96px;resize:vertical;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);padding:11px 12px;outline:none;
+  font-size:15px;line-height:1.5;
+}
+textarea.note:focus{border-color:var(--accent)}
+.notemeta{
+  margin-top:7px;font-family:var(--mono);font-size:11px;color:var(--text-faint);
+  display:flex;justify-content:space-between;gap:10px;
+}
+
+.kv{display:flex;flex-direction:column;gap:0}
+.kv-row{
+  display:grid;grid-template-columns:minmax(96px,34%) 1fr;
+  gap:12px;padding:8px 0;border-bottom:1px solid var(--line-soft);
+  font-size:14px;align-items:baseline;
+}
+.kv-row:last-child{border-bottom:none}
+.kv-row dt{color:var(--text-dim);font-size:12.5px;overflow-wrap:anywhere}
+.kv-row dd{margin:0;overflow-wrap:anywhere}
+.kv-row dd.mono{font-size:13px}
+
+.linkgrid{display:grid;gap:7px}
+.linkbtn{
+  display:flex;align-items:center;gap:11px;
+  padding:11px 13px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);
+  text-decoration:none;color:var(--text);box-shadow:var(--shadow);
+}
+.linkbtn svg{width:17px;height:17px;color:var(--accent);flex:none}
+.linkbtn .l{flex:1;min-width:0}
+.linkbtn .l small{display:block;font-size:11px;color:var(--text-dim);line-height:1.3}
+.linkbtn .l span{
+  display:block;font-weight:500;font-size:14px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+details.raw{margin-top:4px}
+details.raw > summary{
+  cursor:pointer;list-style:none;padding:10px 0;
+  font-family:var(--disp);font-size:10.5px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--text-dim);
+}
+details.raw > summary::-webkit-details-marker{display:none}
+details.raw > summary::after{content:" ▾";font-family:var(--sans)}
+details.raw[open] > summary::after{content:" ▴"}
+
+.hintbox{
+  border:1px solid var(--accent-soft);background:var(--accent-soft);
+  border-radius:var(--r);padding:12px 13px;font-size:14px;line-height:1.55;
+  white-space:pre-wrap;color:var(--text);
+}
+.hintbox.pending{color:var(--text-dim);font-style:italic}
+
+/* ---------- generic controls ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 16px;border-radius:var(--r);font-weight:600;font-size:14.5px;
+  border:1px solid var(--line);background:var(--surface);color:var(--text);
+  box-shadow:var(--shadow);
+}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.wide{width:100%}
+.btn svg{width:17px;height:17px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+
+.field{display:block;margin-bottom:12px}
+.field > span{display:block;margin-bottom:5px;font-size:12.5px;color:var(--text-dim)}
+.field input,.field select{
+  width:100%;padding:10px 11px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);outline:none;font-size:15px;
+}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+
+.note-inline{font-size:13px;color:var(--text-dim);line-height:1.5;margin:0 0 14px}
+.mapgrid{display:flex;flex-direction:column;gap:9px}
+.maprow{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:center}
+.maprow > span{font-size:13px;color:var(--text-dim)}
+.maprow select{
+  padding:9px 10px;border-radius:8px;border:1px solid var(--line);
+  background:var(--surface);outline:none;font-size:14px;width:100%;
+}
+.srcrow{
+  display:flex;align-items:center;gap:10px;padding:9px 0;
+  border-bottom:1px solid var(--line-soft);font-size:13.5px;
+}
+.srcrow .mono{font-size:12px;color:var(--text-dim);flex:none}
+.srcrow .x{color:var(--hot);font-weight:600;font-size:12.5px}
+
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  z-index:90;background:var(--text);color:var(--bg);
+  padding:11px 17px;border-radius:999px;font-size:13.5px;font-weight:500;
+  box-shadow:var(--shadow-lift);max-width:88vw;text-align:center;
+}
+.syncdot{
+  width:6px;height:6px;border-radius:50%;background:var(--dead);flex:none;
+}
+.syncdot.live{background:var(--accent)}
+.hidden{display:none !important}
+</style>
+
+<div class="shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brandrow">
+        <div class="brand"><span class="dot"></span>Стенд-радар</div>
+        <span class="brand-sub" id="countLbl">—</span>
+        <span class="spacer"></span>
+        <button class="iconbtn" id="filterBtn" aria-label="Фільтри" title="Фільтри">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+        </button>
+        <button class="iconbtn" id="menuBtn" aria-label="Меню" title="База, поля, експорт">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/></svg>
+        </button>
+      </div>
+      <div class="searchwrap">
+        <label class="searchfield">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <input id="q" type="search" autocomplete="off" autocorrect="off" spellcheck="false"
+                 enterkeyhint="search" placeholder="Компанія, стенд, людина…" aria-label="Пошук">
+          <button class="clearq" id="clearq" aria-label="Очистити">×</button>
+        </label>
+        <button class="numtoggle" id="numToggle" title="Тільки цифри — для номера стенда">123</button>
+      </div>
+      <div class="chips" id="quickChips"></div>
+    </div>
+  </header>
+
+  <div class="demobar hidden" id="demobar">
+    <span class="eyebrow">Демо</span>
+    <span>Вигадані компанії для показу.</span>
+    <button id="demoImport">Завантажити свою базу</button>
+  </div>
+
+  <div class="progress" id="progress"></div>
+  <main class="list" id="list"></main>
+</div>
+
+<input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls,.xlsm,.ods" multiple class="hidden">
+
+<script>
+"use strict";
+(function () {
+  /* ==================================================================
+     Стенд-радар — пошук лідів на виставці.
+     Дані живуть у трьох місцях, у порядку надійності:
+       1) пам'ять вкладки   — те, що бачить екран
+       2) localStorage      — офлайн-копія на цьому телефоні
+       3) db (якщо є)       — спільна база стенда, синхронна для команди
+     ================================================================== */
+
+  var LS_BASE = "sr.base.v2", LS_TOUCH = "sr.touch.v2", LS_ME = "sr.me", LS_FILT = "sr.filt.v1";
+  var CHUNK_CHARS = 140000;
+
+  var STATUSES = [
+    { k: "talked", label: "Поговорили" },
+    { k: "hot",    label: "Гарячий" },
+    { k: "later",  label: "Пізніше" },
+    { k: "no",     label: "Не цікаво" }
+  ];
+  var STATUS_LABEL = { talked: "Поговорили", hot: "Гарячий", later: "Пізніше", no: "Не цікаво" };
+
+  /* Поля, які апка розуміє. Решта колонок з файлу теж зберігається
+     і показується в картці — нічого не губиться. */
+  var FIELDS = [
+    { k: "company", label: "Компанія",  syn: ["companyname","company","компані","компанія","компания","назвакомпанії","назва","фірма","организация","організація","account","firma","unternehmen","exhibitor","nazwa","бренд","brand","org"] },
+    { k: "stand",   label: "Стенд",     syn: ["standnumber","boothnumber","standno","stand","booth","стенд","стендномер","номерстенда","hall","зал","павільйон","павильон","stoisko","standnummer","halle","location","місце"] },
+    { k: "country", label: "Країна",    syn: ["country","країна","страна","land","kraj","countryname","hqcountry"] },
+    { k: "city",    label: "Місто",     syn: ["city","місто","город","stadt","miasto","town","hqcity"] },
+    { k: "person",  label: "Контакт",   syn: ["contactperson","fullname","contactname","decisionmaker","лпр","контактн","контакт","особа","контактнаособа","ім'я","имя","person","ansprechpartner","firstname","name","osoba"] },
+    { k: "role",    label: "Посада",    syn: ["jobtitle","title","position","посада","роль","function","stanowisko","seniority"] },
+    { k: "email",   label: "Email",     syn: ["email","emailaddress","e-mail","mail","пошта","емейл","почта"] },
+    { k: "phone",   label: "Телефон",   syn: ["phonenumber","phone","tel","telefon","телефон","мобільний","mobile","whatsapp"] },
+    { k: "website", label: "Сайт",      syn: ["website","websiteurl","site","url","сайт","домен","domain","web","linkedin","link"] },
+    { k: "tier",    label: "Пріоритет", syn: ["tier","priority","пріорит","пріоритет","приоритет","рівень","уровень","grade","категорія","категория","клас","класс","score","рейтинг","abc"] },
+    { k: "segment", label: "Сегмент",   syn: ["segment","сегмент","industry","галуз","галузь","індустрі","напрям","отрасль","вертикаль","niche","ніша","category","тип","branche","бізнесмодель"] },
+    { k: "offer",   label: "Що пропонуємо", syn: ["offer","офер","оффер","пропон","пропоз","пропозиція","цінність","рішення","solution","value","предложение","product","продукт","service","послуга","nextstep","наступнийкрок","action","дія","pitch","hook","зачіпка","angle","кут","usecase","кейс"] },
+    { k: "note",    label: "Нотатка з бази", syn: ["notes","note","нотат","приміт","коментар","комент","комментарий","comment","опис","описание","description","insight","інсайт","signal","сигнал","context","контекст","research","дослідження"] }
+  ];
+
+  /* --- вигадані компанії, щоб апка не відкривалась порожньою --- */
+  var DEMO_COLUMNS = ["Компанія","Стенд","Країна","Місто","Контакт","Посада","Email","Телефон","Сайт","Пріоритет","Сегмент","Що пропонуємо","Нотатка"];
+  var DEMO_ROWS = [
+    ["Nordkarta Survey AB","3 / B.041","Швеція","Гетеборг","Elin Sandberg","Head of Geodata","elin@example.se","+46 31 000 00","nordkarta.example","A","Кадастр / муніципалітети","Аутсорс обробки LiDAR — розвантажити внутрішню команду","Тендер на аерозйомку регіону, дедлайн у грудні"],
+    ["Alpine Geodesy GmbH","1 / A.118","Німеччина","Мюнхен","Markus Reiter","Geschäftsführer","m.reiter@example.de","+49 89 000 000","alpine-geodesy.example","A","Інженерна геодезія","Топозйомка + камеральна обробка під їхній пік навантаження","Скаржились на брак операторів; шукають підрядника в ЄС"],
+    ["Delta Rail Engineering","4 / C.207","Польща","Вроцлав","Anna Kowalczyk","Project Director","a.kowalczyk@example.pl","+48 71 000 00","deltarail.example","B","Залізниця / інфраструктура","Сканування колії та деформаційний моніторинг","Був контакт торік, не дійшли до пілоту"],
+    ["Meridian Utilities Mapping","2 / D.012","Нідерланди","Роттердам","Joost van Dijk","GIS Manager","joost@example.nl","+31 10 000 000","meridian-um.example","B","Комунальні мережі","Векторизація та ведення мереж у GIS","Мігрують з застарілої системи цього року"],
+    ["Highland Terrain Services","3 / B.066","Велика Британія","Інвернесс","Fiona Grant","Operations Lead","fiona@example.co.uk","+44 1463 000000","highlandterrain.example","C","Гірничодобувна","Обробка дронових даних, обсяги складів","Малий обсяг, але швидкі рішення"],
+    ["Baltic Marine Charting","5 / E.140","Естонія","Таллінн","Rein Kask","Survey Manager","rein@example.ee","+372 600 0000","balticmarine.example","B","Гідрографія","Обробка батиметрії, підготовка карт","Питали про ETL-скрипти під їхній формат"],
+    ["Trasse Ingenieure AG","1 / A.075","Швейцарія","Цюрих","Beat Hofer","Head of BIM","b.hofer@example.ch","+41 44 000 00","trasse.example","A","BIM / проєктування","Scan-to-BIM для тунелів і мостів","Найбільший потенційний чек у списку"],
+    ["Campo Aerial Iberia","4 / C.155","Іспанія","Валенсія","Lucía Moreno","CTO","lucia@example.es","+34 96 000 000","campoaerial.example","C","Сільське господарство","Автоматизація обробки мультиспектру","Технічний співрозмовник, любить деталі"]
+  ];
+
+  /* ================= стан ================= */
+  var state = {
+    columns: [],
+    map: {},
+    rows: [],
+    sources: [],
+    isDemo: false,
+    touch: {},
+    me: "",
+    baseVersion: 0,
+    filters: { q: "", country: null, tier: null, status: null, source: null, unvisited: false },
+    numMode: false,
+    limit: 60
+  };
+  var db = null, dbBaseUnsub = null, sampleFn = null, downloads = null;
+  var openLeadId = null, sheetStack = [];
+
+  /* ================= утиліти ================= */
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (txt != null) n.textContent = txt;
+    return n;
+  }
+  function norm(s) {
+    return String(s == null ? "" : s)
+      .toLowerCase()
+      .replace(/ё/g, "е").replace(/[’'`´]/g, "")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ").trim();
+  }
+  function keyify(s) { return norm(s).replace(/[^a-z0-9а-яіїєґ]/gi, ""); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function nowISO() { return new Date().toISOString(); }
+  function hash(s) {
+    var h = 5381, i;
+    for (i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    return h.toString(36);
+  }
+  function lsGet(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+  function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  var toastTimer = null;
+  function toast(msg) {
+    var t = document.querySelector(".toast");
+    if (t) t.remove();
+    t = el("div", "toast", msg);
+    document.body.appendChild(t);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { if (t.parentNode) t.remove(); }, 2600);
+  }
+
+  /* ================= читання файлів ================= */
+  function sniffDelimiter(text) {
+    var line = text.split(/\r?\n/).slice(0, 5).join("\n");
+    var best = ",", bestN = 0;
+    [",", ";", "\t", "|"].forEach(function (d) {
+      var n = line.split(d).length;
+      if (n > bestN) { bestN = n; best = d; }
+    });
+    return best;
+  }
+  function parseCSV(text, delim) {
+    var d = delim || sniffDelimiter(text);
+    var rows = [], row = [], cur = "", q = false, i, c;
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    for (i = 0; i < text.length; i++) {
+      c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+        else cur += c;
+      } else if (c === '"') q = true;
+      else if (c === d) { row.push(cur); cur = ""; }
+      else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+      else if (c === "\r") { /* skip */ }
+      else cur += c;
+    }
+    if (cur.length || row.length) { row.push(cur); rows.push(row); }
+    return rows;
+  }
+  /* Заголовок не завжди в першому рядку: беремо найзаповненіший
+     з перших восьми, віддаючи перевагу ранньому. */
+  function findHeader(matrix) {
+    var scan = Math.min(8, matrix.length), best = 0, bestN = -1, i, n;
+    for (i = 0; i < scan; i++) {
+      n = matrix[i].filter(function (c) { return String(c).trim() !== ""; }).length;
+      if (n > bestN * 1.15) { bestN = n; best = i; }
+    }
+    return best;
+  }
+  function matrixToRows(matrix, sourceName) {
+    if (!matrix || !matrix.length) return null;
+    var h = findHeader(matrix);
+    var headerRaw = matrix[h].map(function (c) { return String(c == null ? "" : c).trim(); });
+    var used = {}, header = headerRaw.map(function (name, i) {
+      var nm = name || ("Колонка " + (i + 1));
+      if (used[nm]) { used[nm]++; nm = nm + " (" + used[nm] + ")"; } else used[nm] = 1;
+      return nm;
+    });
+    var out = [], i, j, r, obj, any;
+    for (i = h + 1; i < matrix.length; i++) {
+      r = matrix[i]; obj = {}; any = false;
+      for (j = 0; j < header.length; j++) {
+        var v = r[j] == null ? "" : String(r[j]).trim();
+        if (v) any = true;
+        obj[header[j]] = v;
+      }
+      if (any) { obj.__source = sourceName; out.push(obj); }
+    }
+    return { columns: header, rows: out };
+  }
+  function readFile(file) {
+    return new Promise(function (resolve, reject) {
+      var name = file.name.replace(/\.[^.]+$/, "");
+      var isText = /\.(csv|tsv|txt)$/i.test(file.name);
+      var fr = new FileReader();
+      fr.onerror = function () { reject(new Error("Не вдалося прочитати " + file.name)); };
+      fr.onload = function () {
+        try {
+          var parts = [];
+          if (isText) {
+            var got = matrixToRows(parseCSV(String(fr.result)), name);
+            if (got) parts.push(got);
+          } else {
+            if (typeof XLSX === "undefined") throw new Error("Читалка Excel не завантажилась — спробуй CSV або онови сторінку.");
+            var wb = XLSX.read(new Uint8Array(fr.result), { type: "array" });
+            wb.SheetNames.forEach(function (sn) {
+              var m = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, raw: false, defval: "" });
+              var got = matrixToRows(m, wb.SheetNames.length > 1 ? name + " · " + sn : name);
+              if (got && got.rows.length) parts.push(got);
+            });
+          }
+          resolve(parts);
+        } catch (e) { reject(e); }
+      };
+      if (isText) fr.readAsText(file, "utf-8"); else fr.readAsArrayBuffer(file);
+    });
+  }
+
+  /* ================= автоматичне зіставлення колонок ================= */
+  function autoMap(columns) {
+    var keys = columns.map(keyify);
+    var map = {}, taken = {};
+    FIELDS.forEach(function (f) {
+      var bestCol = null, bestScore = 0;
+      columns.forEach(function (col, i) {
+        if (taken[col]) return;
+        var k = keys[i], score = 0;
+        f.syn.forEach(function (s) {
+          var sk = keyify(s);
+          if (!sk) return;
+          if (k === sk) score = Math.max(score, 1000 + sk.length);
+          else if (k.indexOf(sk) === 0) score = Math.max(score, 400 + sk.length);
+          else if (k.indexOf(sk) > -1 && sk.length >= 4) score = Math.max(score, 100 + sk.length);
+        });
+        if (score > bestScore) { bestScore = score; bestCol = col; }
+      });
+      if (bestCol) { map[f.k] = bestCol; taken[bestCol] = true; }
+    });
+    /* Без компанії апка марна — беремо першу текстову колонку. */
+    if (!map.company) {
+      for (var i = 0; i < columns.length; i++) {
+        if (!taken[columns[i]]) { map.company = columns[i]; break; }
+      }
+    }
+    return map;
+  }
+
+  function val(row, fieldKey) {
+    var col = state.map[fieldKey];
+    return col && row[col] != null ? String(row[col]).trim() : "";
+  }
+  function leadIdOf(row) {
+    var base = keyify(val(row, "company")) + "_" + keyify(val(row, "stand"));
+    var slug = base.replace(/[^a-z0-9_]/g, "").slice(0, 48) || "lead";
+    return slug + "-" + hash(val(row, "company") + "|" + val(row, "stand") + "|" + (row.__source || ""));
+  }
+  function tierOf(row) {
+    var t = norm(val(row, "tier"));
+    if (!t) return "";
+    if (/^(a|a\b|1|high|високий|top|tier ?a|критич)/.test(t)) return "A";
+    if (/^(b|2|mid|середн|tier ?b)/.test(t)) return "B";
+    if (/^(c|3|low|низьк|tier ?c)/.test(t)) return "C";
+    return val(row, "tier").slice(0, 3).toUpperCase();
+  }
+
+  /* ================= індексація для пошуку ================= */
+  function reindex() {
+    state.rows.forEach(function (r) {
+      r.__id = leadIdOf(r);
+      r.__tier = tierOf(r);
+      var bag = [];
+      for (var k in r) {
+        if (k.indexOf("__") === 0) continue;
+        if (r[k]) bag.push(r[k]);
+      }
+      r.__hay = norm(bag.join(" ⋅ "));
+      r.__stand = norm(val(r, "stand"));
+      r.__standDigits = val(r, "stand").replace(/\D/g, "");
+      r.__company = val(r, "company") || "(без назви)";
+      r.__companyN = norm(r.__company);
+    });
+    state.sources = [];
+    var seen = {};
+    state.rows.forEach(function (r) {
+      var s = r.__source || "База";
+      if (!seen[s]) { seen[s] = 1; state.sources.push(s); } else seen[s]++;
+    });
+    state.sourceCounts = seen;
+  }
+
+  function matches(row, tokens, digitsOnly) {
+    var i, t;
+    if (digitsOnly && tokens.length === 1) {
+      /* режим стенда: цифри мають збігатися з номером стенда */
+      return row.__standDigits.indexOf(tokens[0]) > -1;
+    }
+    for (i = 0; i < tokens.length; i++) {
+      t = tokens[i];
+      if (row.__hay.indexOf(t) === -1) return false;
+    }
+    return true;
+  }
+
+  function currentRows() {
+    var f = state.filters;
+    var qn = norm(f.q);
+    var tokens = qn ? qn.split(" ").filter(Boolean) : [];
+    var digitsOnly = tokens.length === 1 && /^\d+$/.test(tokens[0]);
+    var out = state.rows.filter(function (r) {
+      if (f.country && norm(val(r, "country")) !== f.country) return false;
+      if (f.tier && r.__tier !== f.tier) return false;
+      if (f.source && (r.__source || "База") !== f.source) return false;
+      var st = state.touch[r.__id] && state.touch[r.__id].status;
+      if (f.status && st !== f.status) return false;
+      if (f.unvisited && st) return false;
+      if (tokens.length && !matches(r, tokens, digitsOnly)) return false;
+      return true;
+    });
+    if (tokens.length) {
+      out.sort(function (a, b) { return score(b, tokens, digitsOnly) - score(a, tokens, digitsOnly); });
+    } else {
+      var rank = { A: 0, B: 1, C: 2 };
+      out.sort(function (a, b) {
+        var ra = rank[a.__tier] != null ? rank[a.__tier] : 3;
+        var rb = rank[b.__tier] != null ? rank[b.__tier] : 3;
+        if (ra !== rb) return ra - rb;
+        return a.__companyN < b.__companyN ? -1 : a.__companyN > b.__companyN ? 1 : 0;
+      });
+    }
+    return out;
+  }
+  function score(row, tokens, digitsOnly) {
+    var s = 0;
+    tokens.forEach(function (t) {
+      if (row.__companyN.indexOf(t) === 0) s += 60;
+      else if (row.__companyN.indexOf(t) > -1) s += 30;
+      if (row.__stand.indexOf(t) > -1) s += digitsOnly ? 80 : 25;
+      if (row.__hay.indexOf(t) > -1) s += 5;
+    });
+    if (row.__tier === "A") s += 4; else if (row.__tier === "B") s += 2;
+    return s;
+  }
+
+  /* ================= рендер списку ================= */
+  function highlight(text, tokens) {
+    if (!tokens.length) return esc(text);
+    var out = esc(text), i;
+    for (i = 0; i < tokens.length; i++) {
+      if (tokens[i].length < 2) continue;
+      var re = new RegExp("(" + tokens[i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+      out = out.replace(re, "<mark>$1</mark>");
+    }
+    return out;
+  }
+  /* Показуємо, ЧОМУ рядок знайшовся, якщо збіг не в назві та не в стенді. */
+  function whyLine(row, tokens) {
+    if (!tokens.length) return null;
+    var t = tokens[0];
+    if (row.__companyN.indexOf(t) > -1 || row.__stand.indexOf(t) > -1) return null;
+    for (var k in row) {
+      if (k.indexOf("__") === 0) continue;
+      var v = row[k];
+      if (v && norm(v).indexOf(t) > -1) {
+        return "<b>" + esc(k) + ":</b> " + highlight(String(v).slice(0, 120), tokens);
+      }
+    }
+    return null;
+  }
+
+  function renderList() {
+    var list = $("list");
+    var rows = currentRows();
+    var tokens = norm(state.filters.q).split(" ").filter(Boolean);
+    list.innerHTML = "";
+
+    $("countLbl").textContent = state.rows.length
+      ? rows.length + " / " + state.rows.length
+      : "база порожня";
+
+    if (!state.rows.length) {
+      list.appendChild(emptyState(
+        "Тут поки нічого немає",
+        "Завантаж свою базу лідів — Excel або CSV. Файл читається на телефоні, нікуди не відправляється.",
+        "Завантажити базу", function () { $("fileInput").click(); }));
+      return;
+    }
+    if (!rows.length) {
+      list.appendChild(emptyState(
+        "Нічого не знайшлося",
+        "Спробуй частину назви, номер стенда або скинь фільтри.",
+        "Скинути все", function () { resetFilters(); }));
+      return;
+    }
+
+    var frag = document.createDocumentFragment();
+    rows.slice(0, state.limit).forEach(function (r) {
+      frag.appendChild(rowNode(r, tokens));
+    });
+    list.appendChild(frag);
+
+    if (rows.length > state.limit) {
+      var more = el("button", "more", "Показати ще " + Math.min(60, rows.length - state.limit) +
+        " з " + (rows.length - state.limit));
+      more.addEventListener("click", function () { state.limit += 60; renderList(); });
+      list.appendChild(more);
+    }
+    renderProgress();
+  }
+
+  function emptyState(h, p, btnLabel, onClick) {
+    var box = el("div", "empty");
+    box.appendChild(el("h3", null, h));
+    box.appendChild(el("p", null, p));
+    var b = el("button", "btn primary", btnLabel);
+    b.addEventListener("click", onClick);
+    box.appendChild(b);
+    return box;
+  }
+
+  function rowNode(r, tokens) {
+    var t = state.touch[r.__id];
+    var node = el("button", "row" + (r.__tier === "A" ? " t-a" : r.__tier === "B" ? " t-b" : ""));
+    node.type = "button";
+    node.appendChild(el("div", "stripe"));
+
+    var body = el("div", "body");
+    var name = el("div", "name");
+    name.innerHTML = highlight(r.__company, tokens);
+    body.appendChild(name);
+
+    var meta = el("div", "meta");
+    var stand = val(r, "stand");
+    if (stand) {
+      var sc = el("span", "standchip");
+      sc.innerHTML = highlight(stand, tokens);
+      meta.appendChild(sc);
+    }
+    var place = [val(r, "country"), val(r, "city")].filter(Boolean).join(" · ");
+    if (place) meta.appendChild(el("span", null, place));
+    if (!place && val(r, "segment")) meta.appendChild(el("span", null, val(r, "segment")));
+    if (t && t.status) {
+      var st = el("span", null, STATUS_LABEL[t.status]);
+      st.style.fontWeight = "600";
+      meta.appendChild(st);
+    }
+    body.appendChild(meta);
+
+    var why = whyLine(r, tokens);
+    if (why) {
+      var w = el("span", "hit");
+      w.innerHTML = why;
+      body.appendChild(w);
+    }
+    node.appendChild(body);
+
+    var side = el("div", "side");
+    if (t && t.status) side.appendChild(el("span", "sdot " + t.status));
+    if (r.__tier) side.appendChild(el("span", "tierbadge", r.__tier));
+    node.appendChild(side);
+
+    node.addEventListener("click", function () { openLead(r.__id); });
+    return node;
+  }
+
+  function renderProgress() {
+    var p = $("progress");
+    p.innerHTML = "";
+    if (!state.rows.length) { p.classList.add("hidden"); return; }
+    p.classList.remove("hidden");
+    var counts = { talked: 0, hot: 0, later: 0, no: 0 }, done = 0;
+    state.rows.forEach(function (r) {
+      var t = state.touch[r.__id];
+      if (t && t.status && counts[t.status] != null) { counts[t.status]++; done++; }
+    });
+    var bar = el("div", "bar");
+    ["hot", "talked", "later", "no"].forEach(function (k) {
+      if (!counts[k]) return;
+      var i = el("i", k);
+      i.style.width = (counts[k] / state.rows.length * 100) + "%";
+      bar.appendChild(i);
+    });
+    var lbl = el("span", "lbl", done + " / " + state.rows.length + " опрацьовано");
+    if (counts.hot) lbl.textContent += " · " + counts.hot + " гарячих";
+    p.appendChild(bar);
+    p.appendChild(lbl);
+  }
+
+  /* ================= чіпи швидких фільтрів ================= */
+  function renderChips() {
+    var box = $("quickChips");
+    box.innerHTML = "";
+    if (!state.rows.length) return;
+    var f = state.filters;
+
+    box.appendChild(chip("Не відвідані", f.unvisited, null, function () {
+      f.unvisited = !f.unvisited; if (f.unvisited) f.status = null; refresh();
+    }));
+    STATUSES.forEach(function (s) {
+      var n = 0;
+      state.rows.forEach(function (r) {
+        var t = state.touch[r.__id];
+        if (t && t.status === s.k) n++;
+      });
+      if (!n && f.status !== s.k) return;
+      box.appendChild(chip(s.label, f.status === s.k, n, function () {
+        f.status = f.status === s.k ? null : s.k; f.unvisited = false; refresh();
+      }));
+    });
+    if (f.country) box.appendChild(chip(titleCase(f.country), true, null, function () { f.country = null; refresh(); }));
+    if (f.tier) box.appendChild(chip("Пріоритет " + f.tier, true, null, function () { f.tier = null; refresh(); }));
+    if (f.source) box.appendChild(chip(f.source, true, null, function () { f.source = null; refresh(); }));
+    if (!f.country || !f.tier) {
+      var open = chip("Ще фільтри", false, null, openFilters);
+      open.classList.add("group");
+      box.appendChild(open);
+    }
+  }
+  function chip(label, on, n, onClick) {
+    var c = el("button", "chip" + (on ? " on" : ""));
+    c.type = "button";
+    c.appendChild(document.createTextNode(label));
+    if (n) c.appendChild(el("span", "n", String(n)));
+    c.addEventListener("click", onClick);
+    return c;
+  }
+  function titleCase(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+  /* ================= картка ліда ================= */
+  function openLead(id) {
+    var row = null;
+    for (var i = 0; i < state.rows.length; i++) if (state.rows[i].__id === id) { row = state.rows[i]; break; }
+    if (!row) return;
+    openLeadId = id;
+    pushSheet(buildLeadSheet(row));
+  }
+
+  function buildLeadSheet(row) {
+    var sheet = el("div", "sheet");
+    sheet.appendChild(sheetHead(val(row, "company") || "Лід", function () { popSheet(); }));
+
+    var body = el("div", "sheet-body");
+    var inner = el("div", "sheet-inner");
+    body.appendChild(inner);
+    sheet.appendChild(body);
+
+    /* шапка */
+    var head = el("div", "lead-head");
+    head.appendChild(el("h1", "lead-name", row.__company));
+    var facts = el("div", "lead-facts");
+    var stand = val(row, "stand");
+    if (stand) {
+      var fs = el("span", "fact stand");
+      fs.appendChild(el("small", null, "Стенд"));
+      fs.appendChild(el("span", "mono", " " + stand));
+      facts.appendChild(fs);
+    }
+    if (row.__tier) facts.appendChild(el("span", "fact tier", "Пріоритет " + row.__tier));
+    [["country", val(row, "country")], ["city", val(row, "city")], ["segment", val(row, "segment")]]
+      .forEach(function (pair) { if (pair[1]) facts.appendChild(el("span", "fact", pair[1])); });
+    if (state.sources.length > 1) facts.appendChild(el("span", "fact", row.__source || "База"));
+    head.appendChild(facts);
+    inner.appendChild(head);
+
+    /* що робити на стенді */
+    var offer = val(row, "offer"), baseNote = val(row, "note");
+    if (offer || baseNote) {
+      var s0 = el("div", "sect");
+      s0.appendChild(el("span", "eyebrow", "Що з ним робити"));
+      var hb = el("div", "hintbox", [offer, baseNote].filter(Boolean).join("\n\n"));
+      s0.appendChild(hb);
+      inner.appendChild(s0);
+    }
+
+    /* дія */
+    var s1 = el("div", "sect");
+    s1.appendChild(el("span", "eyebrow", "Позначити після розмови"));
+    var grid = el("div", "statusgrid");
+    var cur = state.touch[row.__id] || {};
+    STATUSES.forEach(function (s) {
+      var b = el("button", "sbtn " + s.k + (cur.status === s.k ? " on" : ""));
+      b.type = "button";
+      b.appendChild(el("span", "sdot " + s.k));
+      b.appendChild(document.createTextNode(s.label));
+      b.addEventListener("click", function () {
+        var t = state.touch[row.__id] || {};
+        setTouch(row.__id, { status: t.status === s.k ? "" : s.k });
+        refreshLeadSheet(row);
+      });
+      grid.appendChild(b);
+    });
+    s1.appendChild(grid);
+    inner.appendChild(s1);
+
+    /* нотатка */
+    var s2 = el("div", "sect");
+    s2.appendChild(el("span", "eyebrow", "Моя нотатка з розмови"));
+    var ta = el("textarea", "note");
+    ta.placeholder = "Про що домовились, кому передати, що надіслати…";
+    ta.value = cur.note || "";
+    var saveTimer = null;
+    ta.addEventListener("input", function () {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function () { setTouch(row.__id, { note: ta.value }); }, 500);
+    });
+    ta.addEventListener("blur", function () {
+      clearTimeout(saveTimer);
+      setTouch(row.__id, { note: ta.value });
+    });
+    s2.appendChild(ta);
+    var nm = el("div", "notemeta");
+    nm.appendChild(el("span", null, cur.at ? "Оновлено " + shortTime(cur.at) + (cur.by ? " · " + cur.by : "") : "Зберігається автоматично"));
+    s2.appendChild(nm);
+    inner.appendChild(s2);
+
+    /* контакти */
+    var links = [];
+    var email = val(row, "email"), phone = val(row, "phone"), site = val(row, "website");
+    if (phone) links.push(["tel:" + phone.replace(/[^\d+]/g, ""), "Подзвонити", phone, iconPhone()]);
+    if (email) links.push(["mailto:" + email, "Написати", email, iconMail()]);
+    if (site) links.push([site.match(/^https?:/i) ? site : "https://" + site.replace(/^\/+/, ""), "Сайт", site, iconGlobe()]);
+    if (links.length || val(row, "person")) {
+      var s3 = el("div", "sect");
+      s3.appendChild(el("span", "eyebrow", "Контакт"));
+      if (val(row, "person")) {
+        var dl0 = el("dl", "kv");
+        dl0.appendChild(kvRow("Людина", val(row, "person")));
+        if (val(row, "role")) dl0.appendChild(kvRow("Посада", val(row, "role")));
+        s3.appendChild(dl0);
+      }
+      if (links.length) {
+        var lg = el("div", "linkgrid");
+        lg.style.marginTop = val(row, "person") ? "10px" : "0";
+        links.forEach(function (L) {
+          var a = el("a", "linkbtn");
+          a.href = L[0];
+          if (L[1] === "Сайт") { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+          a.innerHTML = L[3];
+          var lab = el("div", "l");
+          lab.appendChild(el("small", null, L[1]));
+          lab.appendChild(el("span", null, L[2]));
+          a.appendChild(lab);
+          lg.appendChild(a);
+        });
+        s3.appendChild(lg);
+      }
+      inner.appendChild(s3);
+    }
+
+    /* підказка від Claude — тільки якщо capability є */
+    if (sampleFn) {
+      var s4 = el("div", "sect");
+      s4.appendChild(el("span", "eyebrow", "Підказка для розмови"));
+      var out = el("div", "hintbox hidden");
+      var gen = el("button", "btn wide", "Підготувати 3 питання цьому ліду");
+      gen.addEventListener("click", function () {
+        gen.disabled = true;
+        out.classList.remove("hidden");
+        out.classList.add("pending");
+        out.textContent = "Думаю…";
+        askClaude(row, out, gen);
+      });
+      s4.appendChild(gen);
+      s4.appendChild(out);
+      inner.appendChild(s4);
+    }
+
+    /* усі поля з бази */
+    var s5 = el("div", "sect");
+    var det = el("details", "raw");
+    var sum = el("summary", null, "Усі поля з бази");
+    det.appendChild(sum);
+    var dl = el("dl", "kv");
+    state.columns.forEach(function (c) {
+      var v = row[c];
+      if (!v) return;
+      dl.appendChild(kvRow(c, v));
+    });
+    det.appendChild(dl);
+    s5.appendChild(det);
+    s5.style.borderBottom = "none";
+    inner.appendChild(s5);
+
+    return sheet;
+  }
+  function kvRow(k, v) {
+    var d = el("div", "kv-row");
+    d.appendChild(el("dt", null, k));
+    var dd = el("dd", /^[\d\s+()\-.]+$/.test(String(v)) ? "mono" : null, String(v));
+    d.appendChild(dd);
+    return d;
+  }
+  function refreshLeadSheet(row) {
+    var old = sheetStack[sheetStack.length - 1];
+    if (!old) return;
+    var fresh = buildLeadSheet(row);
+    var sc = old.querySelector(".sheet-body").scrollTop;
+    old.replaceWith(fresh);
+    sheetStack[sheetStack.length - 1] = fresh;
+    fresh.querySelector(".sheet-body").scrollTop = sc;
+    renderList();
+    renderChips();
+  }
+  function shortTime(iso) {
+    try {
+      var d = new Date(iso);
+      return d.toLocaleString("uk-UA", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+    } catch (e) { return iso; }
+  }
+  function iconPhone() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 6 4z"/></svg>'; }
+  function iconMail() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>'; }
+  function iconGlobe() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.2 5.4 3.2 8.5s-1 6.1-3.2 8.5c-2.2-2.4-3.2-5.4-3.2-8.5S9.8 5.9 12 3.5z"/></svg>'; }
+
+  function askClaude(row, out, btn) {
+    var lines = [];
+    state.columns.forEach(function (c) { if (row[c]) lines.push(c + ": " + row[c]); });
+    var prompt =
+      "Ти помічник менеджера GIS-Point на геопросторовій виставці. Компанія-лід зупинилась біля стенда.\n" +
+      "Дані про ліда:\n" + lines.join("\n") + "\n\n" +
+      "Дай українською, дуже коротко:\n" +
+      "1) Один рядок — хто вони і чим можуть бути корисні.\n" +
+      "2) Три конкретні питання, які варто поставити саме їм.\n" +
+      "3) Один наступний крок після виставки.\n" +
+      "Без вступів і без вигаданих фактів — спирайся лише на дані вище.";
+    sampleFn(prompt, {
+      modelTier: "quick",
+      onText: function (e) { out.classList.remove("pending"); out.textContent = e.text; }
+    }).then(function (r) {
+      out.classList.remove("pending");
+      out.textContent = r.text;
+      btn.disabled = false;
+      btn.textContent = "Переформулювати";
+    }).catch(function (e) {
+      btn.disabled = false;
+      if (e && e.code === "not_granted") {
+        out.classList.add("hidden");
+        btn.classList.add("hidden");
+        return;
+      }
+      out.classList.remove("pending");
+      out.textContent = e && e.text ? e.text : "Не вийшло згенерувати підказку. Спробуй ще раз.";
+    });
+  }
+
+  /* ================= фільтри ================= */
+  function openFilters() {
+    var sheet = el("div", "sheet");
+    sheet.appendChild(sheetHead("Фільтри", popSheet));
+    var body = el("div", "sheet-body"), inner = el("div", "sheet-inner");
+    body.appendChild(inner); sheet.appendChild(body);
+
+    var countries = countBy(function (r) { return val(r, "country"); });
+    var tiers = countBy(function (r) { return r.__tier; });
+
+    if (countries.length) inner.appendChild(filterSection("Країна", countries, state.filters.country, function (v) {
+      state.filters.country = state.filters.country === norm(v) ? null : norm(v);
+      refresh(); popSheet();
+    }, true));
+    if (tiers.length > 1) inner.appendChild(filterSection("Пріоритет", tiers, state.filters.tier, function (v) {
+      state.filters.tier = state.filters.tier === v ? null : v; refresh(); popSheet();
+    }, false));
+    if (state.sources.length > 1) inner.appendChild(filterSection("Джерело", state.sources.map(function (s) {
+      return [s, state.sourceCounts[s]];
+    }), state.filters.source, function (v) {
+      state.filters.source = state.filters.source === v ? null : v; refresh(); popSheet();
+    }, false));
+
+    var reset = el("div", "sect");
+    reset.style.borderBottom = "none";
+    var rb = el("button", "btn wide", "Скинути всі фільтри");
+    rb.addEventListener("click", function () { resetFilters(); popSheet(); });
+    reset.appendChild(rb);
+    inner.appendChild(reset);
+
+    pushSheet(sheet);
+  }
+  function countBy(fn) {
+    var m = {}, order = [];
+    state.rows.forEach(function (r) {
+      var v = fn(r);
+      if (!v) return;
+      if (!m[v]) { m[v] = 0; order.push(v); }
+      m[v]++;
+    });
+    return order.map(function (v) { return [v, m[v]]; })
+      .sort(function (a, b) { return b[1] - a[1]; });
+  }
+  function filterSection(title, items, active, onPick, normalized) {
+    var s = el("div", "sect");
+    s.appendChild(el("span", "eyebrow", title));
+    var box = el("div");
+    box.style.display = "flex";
+    box.style.flexWrap = "wrap";
+    box.style.gap = "7px";
+    items.forEach(function (it) {
+      var v = it[0], n = it[1];
+      var on = normalized ? active === norm(v) : active === v;
+      var c = chip(v, on, n, function () { onPick(v); });
+      box.appendChild(c);
+    });
+    s.appendChild(box);
+    return s;
+  }
+  function resetFilters() {
+    state.filters = { q: "", country: null, tier: null, status: null, source: null, unvisited: false };
+    $("q").value = "";
+    $("clearq").classList.remove("show");
+    refresh();
+  }
+
+  /* ================= меню: база, поля, експорт ================= */
+  function openMenu() {
+    var sheet = el("div", "sheet");
+    sheet.appendChild(sheetHead("База та налаштування", popSheet));
+    var body = el("div", "sheet-body"), inner = el("div", "sheet-inner");
+    body.appendChild(inner); sheet.appendChild(body);
+
+    /* дані */
+    var s1 = el("div", "sect");
+    s1.appendChild(el("span", "eyebrow", "База лідів"));
+    if (state.rows.length) {
+      var info = el("p", "note-inline",
+        state.rows.length + " записів" + (state.isDemo ? " (демо-дані)" : "") +
+        ", " + state.columns.length + " колонок" +
+        (state.sources.length ? ", джерел: " + state.sources.length : ""));
+      s1.appendChild(info);
+      state.sources.forEach(function (src) {
+        var r = el("div", "srcrow");
+        r.appendChild(el("span", null, src));
+        r.appendChild(el("span", "mono", state.sourceCounts[src]));
+        var sp = el("span"); sp.style.flex = "1"; r.appendChild(sp);
+        var x = el("button", "x", "Прибрати");
+        x.addEventListener("click", function () { removeSource(src); popSheet(); openMenu(); });
+        r.appendChild(x);
+        s1.appendChild(r);
+      });
+    } else {
+      s1.appendChild(el("p", "note-inline", "База ще не завантажена."));
+    }
+    var row1 = el("div", "btnrow");
+    row1.style.marginTop = "12px";
+    var add = el("button", "btn primary", state.rows.length && !state.isDemo ? "Додати ще файл" : "Завантажити Excel / CSV");
+    add.addEventListener("click", function () { $("fileInput").click(); });
+    row1.appendChild(add);
+    s1.appendChild(row1);
+    s1.appendChild(el("p", "note-inline", "Файл читається прямо на пристрої. Підтримуються .xlsx, .xls, .csv; кожен аркуш книги стає окремим джерелом."));
+    inner.appendChild(s1);
+
+    /* зіставлення полів */
+    if (state.columns.length) {
+      var s2 = el("div", "sect");
+      s2.appendChild(el("span", "eyebrow", "Які колонки за що відповідають"));
+      s2.appendChild(el("p", "note-inline", "Апка вгадала їх сама. Якщо щось не туди — виправ, список одразу оновиться."));
+      var grid = el("div", "mapgrid");
+      FIELDS.forEach(function (f) {
+        var r = el("div", "maprow");
+        r.appendChild(el("span", null, f.label));
+        var sel = el("select");
+        var o0 = el("option", null, "— немає —");
+        o0.value = "";
+        sel.appendChild(o0);
+        state.columns.forEach(function (c) {
+          var o = el("option", null, c);
+          o.value = c;
+          if (state.map[f.k] === c) o.selected = true;
+          sel.appendChild(o);
+        });
+        sel.addEventListener("change", function () {
+          if (sel.value) state.map[f.k] = sel.value; else delete state.map[f.k];
+          reindex(); persistBase(); refresh();
+          toast("Поле «" + f.label + "» оновлено");
+        });
+        r.appendChild(sel);
+        grid.appendChild(r);
+      });
+      s2.appendChild(grid);
+      inner.appendChild(s2);
+    }
+
+    /* хто я */
+    var s3 = el("div", "sect");
+    s3.appendChild(el("span", "eyebrow", "Хто робить нотатки"));
+    var lab = el("label", "field");
+    lab.appendChild(el("span", null, "Ім'я — підписує твої нотатки для решти команди"));
+    var inp = el("input");
+    inp.type = "text";
+    inp.placeholder = "Напр. Ігор";
+    inp.value = state.me;
+    inp.addEventListener("change", function () {
+      state.me = inp.value.trim();
+      lsSet(LS_ME, state.me);
+      toast("Записано");
+    });
+    lab.appendChild(inp);
+    s3.appendChild(lab);
+    var sync = el("p", "note-inline");
+    sync.id = "syncLine";
+    sync.textContent = db
+      ? "Нотатки синхронізуються з рештою команди."
+      : "Нотатки зберігаються на цьому пристрої.";
+    s3.appendChild(sync);
+    inner.appendChild(s3);
+
+    /* експорт */
+    var s4 = el("div", "sect");
+    s4.appendChild(el("span", "eyebrow", "Забрати результати виставки"));
+    var touched = touchedRows();
+    s4.appendChild(el("p", "note-inline", touched.length
+      ? touched.length + " лідів з позначкою або нотаткою."
+      : "Поки нема жодної позначки — з'явиться, щойно почнеш відмічати."));
+    var row4 = el("div", "btnrow");
+    var bCopy = el("button", "btn", "Скопіювати CSV");
+    bCopy.addEventListener("click", function () { copyCSV(); });
+    row4.appendChild(bCopy);
+    if (downloads) {
+      var bDown = el("button", "btn primary", "Зберегти файл");
+      bDown.addEventListener("click", function () { saveCSV(); });
+      row4.appendChild(bDown);
+    }
+    if (!touched.length) row4.querySelectorAll("button").forEach(function (b) { b.disabled = true; });
+    s4.appendChild(row4);
+    inner.appendChild(s4);
+
+    /* небезпечна зона */
+    var s5 = el("div", "sect");
+    s5.style.borderBottom = "none";
+    s5.appendChild(el("span", "eyebrow", "Очистити"));
+    var row5 = el("div", "btnrow");
+    var bWipe = el("button", "btn", "Стерти базу і нотатки");
+    bWipe.style.color = "var(--hot)";
+    bWipe.addEventListener("click", function () {
+      if (!confirm("Стерти всю базу і всі нотатки? Скасувати буде неможливо.")) return;
+      wipeAll();
+      popSheet();
+    });
+    row5.appendChild(bWipe);
+    s5.appendChild(row5);
+    inner.appendChild(s5);
+
+    pushSheet(sheet);
+  }
+
+  /* ================= sheets ================= */
+  function sheetHead(title, onBack) {
+    var h = el("div", "sheet-head");
+    var b = el("button", "iconbtn");
+    b.setAttribute("aria-label", "Назад");
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5-7 7 7 7"/></svg>';
+    b.addEventListener("click", onBack);
+    h.appendChild(b);
+    h.appendChild(el("div", "sheet-title", title));
+    return h;
+  }
+  function pushSheet(node) {
+    sheetStack.push(node);
+    document.body.appendChild(node);
+    document.body.style.overflow = "hidden";
+    try { history.pushState({ sr: sheetStack.length }, ""); } catch (e) {}
+  }
+  function popSheet(fromHistory) {
+    var node = sheetStack.pop();
+    if (node) node.remove();
+    if (!sheetStack.length) {
+      document.body.style.overflow = "";
+      openLeadId = null;
+    }
+    if (!fromHistory) { try { history.back(); } catch (e) {} }
+  }
+  window.addEventListener("popstate", function () {
+    if (sheetStack.length) popSheet(true);
+  });
+
+  /* ================= нотатки та статуси ================= */
+  function setTouch(id, patch) {
+    var t = state.touch[id] || {};
+    var next = { status: t.status || "", note: t.note || "", by: t.by || "", at: t.at || "" };
+    if (patch.status !== undefined) next.status = patch.status;
+    if (patch.note !== undefined) next.note = patch.note;
+    if (!next.status && !next.note) {
+      delete state.touch[id];
+      persistTouch();
+      if (db) db.doc("touch/" + id).delete().catch(function () {});
+      refresh();
+      return;
+    }
+    next.by = state.me || next.by || "";
+    next.at = nowISO();
+    state.touch[id] = next;
+    persistTouch();
+    if (db) {
+      db.doc("touch/" + id).set(next).catch(function (e) {
+        if (e && e.code === "quota_exceeded") toast("Спільна база заповнена — нотатка збережена лише тут.");
+      });
+    }
+    refresh();
+  }
+  function touchedRows() {
+    return state.rows.filter(function (r) {
+      var t = state.touch[r.__id];
+      return t && (t.status || t.note);
+    });
+  }
+
+  /* ================= збереження ================= */
+  function persistBase() {
+    if (state.isDemo) return;
+    var ok = lsSet(LS_BASE, {
+      columns: state.columns, map: state.map, rows: stripRows(state.rows), version: state.baseVersion
+    });
+    if (!ok) toast("Базу не вдалось зберегти офлайн — забагато даних для пам'яті браузера.");
+  }
+  function persistTouch() { lsSet(LS_TOUCH, state.touch); }
+  function stripRows(rows) {
+    return rows.map(function (r) {
+      var o = {};
+      for (var k in r) if (k.indexOf("__") !== 0 || k === "__source") o[k] = r[k];
+      return o;
+    });
+  }
+
+  /* ================= імпорт ================= */
+  function handleFiles(files) {
+    var list = Array.prototype.slice.call(files);
+    if (!list.length) return;
+    toast("Читаю " + list.length + (list.length === 1 ? " файл…" : " файли…"));
+    Promise.all(list.map(readFile)).then(function (all) {
+      var parts = [];
+      all.forEach(function (p) { parts = parts.concat(p); });
+      parts = parts.filter(function (p) { return p && p.rows.length; });
+      if (!parts.length) { toast("У файлі не знайшлося рядків з даними."); return; }
+
+      var wasDemo = state.isDemo;
+      if (wasDemo) { state.rows = []; state.columns = []; state.isDemo = false; }
+
+      var cols = state.columns.slice();
+      parts.forEach(function (p) {
+        p.columns.forEach(function (c) { if (cols.indexOf(c) === -1) cols.push(c); });
+        state.rows = state.rows.concat(p.rows);
+      });
+      state.columns = cols;
+      state.map = autoMap(cols);
+      state.baseVersion = Date.now();
+      reindex();
+      persistBase();
+      pushBaseToDb();
+      resetFilters();
+      var n = parts.reduce(function (a, p) { return a + p.rows.length; }, 0);
+      toast("Завантажено " + n + " записів");
+      $("demobar").classList.add("hidden");
+    }).catch(function (e) {
+      toast(e && e.message ? e.message : "Не вдалося прочитати файл.");
+    });
+  }
+  function removeSource(src) {
+    state.rows = state.rows.filter(function (r) { return (r.__source || "База") !== src; });
+    state.baseVersion = Date.now();
+    reindex(); persistBase(); pushBaseToDb(); refresh();
+    toast("Джерело прибрано");
+  }
+  function wipeAll() {
+    state.rows = []; state.columns = []; state.map = {}; state.touch = {};
+    state.isDemo = false; state.baseVersion = Date.now();
+    lsDel(LS_BASE); lsDel(LS_TOUCH);
+    reindex();
+    if (db) {
+      db.doc("base/meta").set({ version: state.baseVersion, chunks: 0, columns: [], map: {}, wiped: true }).catch(function () {});
+    }
+    resetFilters();
+    toast("Стерто");
+  }
+
+  /* ================= експорт ================= */
+  function csvCell(v) {
+    var s = String(v == null ? "" : v);
+    return /[",;\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  function buildCSV() {
+    var rows = touchedRows();
+    var head = ["Статус", "Моя нотатка", "Хто", "Коли"].concat(state.columns);
+    var lines = [head.map(csvCell).join(",")];
+    rows.forEach(function (r) {
+      var t = state.touch[r.__id] || {};
+      var line = [STATUS_LABEL[t.status] || "", t.note || "", t.by || "", t.at ? shortTime(t.at) : ""];
+      state.columns.forEach(function (c) { line.push(r[c] || ""); });
+      lines.push(line.map(csvCell).join(","));
+    });
+    return "﻿" + lines.join("\r\n");
+  }
+  function copyCSV() {
+    var csv = buildCSV();
+    var done = function () { toast("CSV у буфері — встав у Excel або Google Таблиці"); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(csv).then(done).catch(fallbackCopy);
+    } else fallbackCopy();
+    function fallbackCopy() {
+      var ta = document.createElement("textarea");
+      ta.value = csv;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); }
+      catch (e) { toast("Скопіювати не вийшло — виділи текст вручну."); }
+      ta.remove();
+    }
+  }
+  function saveCSV() {
+    if (!downloads) return;
+    var name = "stand-radar-" + new Date().toISOString().slice(0, 10) + ".csv";
+    downloads.save({ filename: name, data: buildCSV() })
+      .then(function () { toast("Файл збережено"); })
+      .catch(function () { toast("Збереження скасовано"); });
+  }
+
+  /* ================= синхронізація через db ================= */
+  function chunkRows(rows) {
+    var chunks = [], cur = [], len = 0, i, s;
+    for (i = 0; i < rows.length; i++) {
+      s = JSON.stringify(rows[i]);
+      if (len + s.length > CHUNK_CHARS && cur.length) { chunks.push(cur); cur = []; len = 0; }
+      cur.push(rows[i]); len += s.length + 1;
+    }
+    if (cur.length) chunks.push(cur);
+    return chunks;
+  }
+  function pushBaseToDb() {
+    if (!db || state.isDemo) return;
+    var chunks = chunkRows(stripRows(state.rows));
+    var writes = chunks.map(function (c, i) {
+      return db.doc("base/chunk" + i).set({ rows: c, v: state.baseVersion });
+    });
+    Promise.all(writes).then(function () {
+      return db.doc("base/meta").set({
+        version: state.baseVersion,
+        chunks: chunks.length,
+        columns: state.columns,
+        map: state.map,
+        count: state.rows.length
+      });
+    }).then(function () {
+      toast("База роздана команді");
+    }).catch(function (e) {
+      if (e && e.code === "quota_exceeded") toast("Спільна база переповнена — тут працює, у команди ні.");
+    });
+  }
+  function pullBaseFromDb(meta) {
+    if (!meta || !meta.chunks) return;
+    var gets = [], i;
+    for (i = 0; i < meta.chunks; i++) gets.push(db.doc("base/chunk" + i).get());
+    Promise.all(gets).then(function (snaps) {
+      var rows = [];
+      snaps.forEach(function (s) {
+        var d = s.exists ? s.data() : null;
+        if (d && d.rows) rows = rows.concat(d.rows);
+      });
+      if (!rows.length) return;
+      state.rows = rows;
+      state.columns = meta.columns || state.columns;
+      state.map = meta.map || autoMap(state.columns);
+      state.baseVersion = meta.version || Date.now();
+      state.isDemo = false;
+      reindex();
+      persistBase();
+      $("demobar").classList.add("hidden");
+      refresh();
+      toast("Отримано базу від команди — " + rows.length + " записів");
+    }).catch(function () {});
+  }
+  function initDb() {
+    if (!(window.claude && typeof window.claude.use === "function")) return;
+
+    window.claude.use("downloads").then(function (d) { downloads = d; }).catch(function () {});
+    window.claude.use("sample").then(function (s) { if (typeof s === "function") sampleFn = s; }).catch(function () {});
+
+    window.claude.use("db").then(function (d) {
+      if (!d) return;
+      db = d;
+      var line = $("syncLine");
+      if (line) line.textContent = "Нотатки синхронізуються з рештою команди.";
+
+      dbBaseUnsub = db.doc("base/meta").onSnapshot(function (snap) {
+        if (!snap.exists) {
+          /* сховище порожнє: якщо в нас є справжня база — ділимось нею */
+          if (state.rows.length && !state.isDemo) pushBaseToDb();
+          return;
+        }
+        var meta = snap.data() || {};
+        if (meta.wiped && !meta.chunks) return;
+        if ((meta.version || 0) > state.baseVersion) pullBaseFromDb(meta);
+        else if (state.rows.length && !state.isDemo && (meta.version || 0) < state.baseVersion) pushBaseToDb();
+      }, function () {});
+
+      db.collection("touch").onSnapshot(function (snap) {
+        var changed = false;
+        snap.docChanges().forEach(function (ch) {
+          var id = ch.doc.id;
+          if (ch.type === "removed") {
+            if (state.touch[id]) { delete state.touch[id]; changed = true; }
+            return;
+          }
+          var remote = ch.doc.data() || {};
+          var local = state.touch[id];
+          if (!local || !local.at || (remote.at && remote.at > local.at)) {
+            state.touch[id] = { status: remote.status || "", note: remote.note || "", by: remote.by || "", at: remote.at || "" };
+            changed = true;
+          }
+        });
+        if (changed) { persistTouch(); refresh(); }
+      }, function () {});
+    }).catch(function () {});
+  }
+
+  /* ================= завантаження стану ================= */
+  function boot() {
+    state.me = lsGet(LS_ME) || "";
+    state.touch = lsGet(LS_TOUCH) || {};
+    var saved = lsGet(LS_BASE);
+    if (saved && saved.rows && saved.rows.length) {
+      state.columns = saved.columns || [];
+      state.map = saved.map || autoMap(state.columns);
+      state.rows = saved.rows;
+      state.baseVersion = saved.version || 0;
+      state.isDemo = false;
+    } else {
+      state.columns = DEMO_COLUMNS.slice();
+      state.rows = DEMO_ROWS.map(function (r) {
+        var o = {};
+        DEMO_COLUMNS.forEach(function (c, i) { o[c] = r[i]; });
+        o.__source = "Демо";
+        return o;
+      });
+      state.map = autoMap(state.columns);
+      state.isDemo = true;
+      $("demobar").classList.remove("hidden");
+    }
+    reindex();
+    refresh();
+    initDb();
+  }
+
+  function refresh() {
+    state.limit = Math.max(60, Math.min(state.limit, 600));
+    renderChips();
+    renderList();
+  }
+
+  /* ================= події ================= */
+  var qInput = $("q"), qTimer = null;
+  qInput.addEventListener("input", function () {
+    $("clearq").classList.toggle("show", !!qInput.value);
+    clearTimeout(qTimer);
+    qTimer = setTimeout(function () {
+      state.filters.q = qInput.value;
+      state.limit = 60;
+      renderList();
+    }, 110);
+  });
+  qInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      qInput.blur();
+      var first = document.querySelector(".row");
+      if (first && norm(qInput.value)) first.click();
+    }
+  });
+  $("clearq").addEventListener("click", function () {
+    qInput.value = "";
+    state.filters.q = "";
+    $("clearq").classList.remove("show");
+    renderList();
+    qInput.focus();
+  });
+  $("numToggle").addEventListener("click", function () {
+    state.numMode = !state.numMode;
+    this.classList.toggle("on", state.numMode);
+    qInput.setAttribute("inputmode", state.numMode ? "numeric" : "text");
+    qInput.placeholder = state.numMode ? "Номер стенда…" : "Компанія, стенд, людина…";
+    qInput.focus();
+  });
+  $("filterBtn").addEventListener("click", openFilters);
+  $("menuBtn").addEventListener("click", openMenu);
+  $("demoImport").addEventListener("click", function () { $("fileInput").click(); });
+  $("fileInput").addEventListener("change", function () {
+    handleFiles(this.files);
+    this.value = "";
+  });
+
+  /* перетягування файлу на десктопі */
+  ["dragover", "drop"].forEach(function (ev) {
+    window.addEventListener(ev, function (e) {
+      e.preventDefault();
+      if (ev === "drop" && e.dataTransfer && e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+    });
+  });
+
+  boot();
+})();
+</script>
