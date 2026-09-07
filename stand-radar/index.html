@@ -211,6 +211,10 @@ a{color:var(--accent-ink)}
   background:var(--surface-3);color:var(--text);
   padding:1px 6px;border-radius:4px;letter-spacing:.01em;
 }
+.standchip.unknown{
+  font-family:var(--sans);font-weight:400;font-style:italic;
+  background:none;color:var(--text-dim);padding:1px 0;
+}
 .row .side{
   display:flex;flex-direction:column;align-items:flex-end;justify-content:center;
   gap:5px;padding:11px 13px 11px 6px;flex:none;
@@ -242,16 +246,6 @@ mark{background:var(--accent-soft);color:var(--text);border-radius:2px;padding:0
   margin:0 0 6px;text-wrap:balance;
 }
 .empty p{margin:0 0 16px;font-size:14px}
-
-/* ---------- demo banner ---------- */
-.demobar{
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-  padding:7px 14px;background:var(--warn-soft);
-  border-bottom:1px solid var(--line-soft);
-  font-size:12.5px;color:var(--text);
-}
-.demobar .eyebrow{color:var(--warn)}
-.demobar button{font-weight:600;color:var(--accent-ink);text-decoration:underline}
 
 /* ---------- overlay sheets ---------- */
 .sheet{
@@ -403,6 +397,7 @@ details.raw[open] > summary::after{content:" ▴"}
 
 .toast{
   position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  pointer-events:none;
   z-index:90;background:var(--text);color:var(--bg);
   padding:11px 17px;border-radius:999px;font-size:13.5px;font-weight:500;
   box-shadow:var(--shadow-lift);max-width:88vw;text-align:center;
@@ -411,6 +406,78 @@ details.raw[open] > summary::after{content:" ▴"}
   width:6px;height:6px;border-radius:50%;background:var(--dead);flex:none;
 }
 .syncdot.live{background:var(--accent)}
+
+/* --- статус із бази: не мій результат, а стадія до виставки --- */
+.pbadge{
+  font-size:11px;font-weight:600;letter-spacing:.01em;
+  padding:1.5px 7px;border-radius:999px;white-space:nowrap;
+  background:var(--surface-3);color:var(--text-dim);
+}
+.pbadge.p-meet{background:var(--accent);color:#fff}
+.pbadge.p-warm{background:var(--accent-soft);color:var(--accent-ink)}
+.pbadge.p-need{background:var(--warn-soft);color:var(--warn)}
+.pbadge.p-no{background:var(--dead-soft);color:var(--text-dim)}
+.meetchip{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;
+  color:var(--accent-ink);background:var(--accent-soft);
+  padding:1px 6px;border-radius:4px;
+}
+.iconbtn{position:relative}
+.badge{
+  position:absolute;top:-1px;right:-3px;min-width:15px;height:15px;padding:0 4px;
+  border-radius:999px;background:var(--accent);color:#fff;
+  font-family:var(--mono);font-size:9.5px;font-weight:600;line-height:15px;text-align:center;border:1.5px solid var(--bg);
+}
+.badge:empty{display:none}
+
+/* --- головне по ліду, видно просто зі списку --- */
+.row .summary{
+  display:block;margin-top:5px;font-size:12.5px;line-height:1.4;color:var(--text);
+  border-left:2px solid var(--accent);padding-left:8px;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+input.summary-in{
+  width:100%;padding:11px 12px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);outline:none;font-size:15px;
+}
+input.summary-in:focus{border-color:var(--accent)}
+
+/* --- журнал зустрічей --- */
+.logadd{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.logitem{
+  border-left:2px solid var(--line);padding:0 0 14px 12px;position:relative;
+}
+.logitem:last-child{padding-bottom:0}
+.logitem::before{
+  content:"";position:absolute;left:-5px;top:5px;width:8px;height:8px;
+  border-radius:50%;background:var(--accent);border:2px solid var(--bg);
+}
+.logitem .when{
+  font-family:var(--mono);font-size:11px;color:var(--text-dim);
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.logitem .txt{margin-top:3px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.logitem .acts{display:flex;gap:12px;margin-top:5px}
+.logitem .acts button{font-size:11.5px;font-weight:600;color:var(--text-dim)}
+.logitem .acts button:hover{color:var(--accent-ink)}
+.logempty{font-size:13.5px;color:var(--text-dim);line-height:1.5}
+
+/* --- розклад --- */
+.slot{
+  display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-soft);
+  width:100%;text-align:left;align-items:flex-start;
+}
+.slot .time{
+  font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent-ink);
+  flex:none;width:66px;padding-top:1px;
+}
+.slot .who{flex:1;min-width:0}
+.slot .who .nm{font-family:var(--disp);font-weight:600;font-size:15px;line-height:1.25}
+.slot .who .sub{margin-top:3px;font-size:12.5px;color:var(--text-dim);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.daysep{
+  padding:14px 0 6px;font-family:var(--disp);font-size:11px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--text-dim);
+}
 .hidden{display:none !important}
 </style>
 
@@ -421,6 +488,10 @@ details.raw[open] > summary::after{content:" ▴"}
         <div class="brand"><span class="dot"></span>Стенд-радар</div>
         <span class="brand-sub" id="countLbl">—</span>
         <span class="spacer"></span>
+        <button class="iconbtn" id="agendaBtn" aria-label="Зустрічі" title="Розклад зустрічей">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>
+          <span class="badge" id="agendaBadge"></span>
+        </button>
         <button class="iconbtn" id="filterBtn" aria-label="Фільтри" title="Фільтри">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
         </button>
@@ -441,11 +512,6 @@ details.raw[open] > summary::after{content:" ▴"}
     </div>
   </header>
 
-  <div class="demobar hidden" id="demobar">
-    <span class="eyebrow">Демо</span>
-    <span>Вигадані компанії для показу.</span>
-    <button id="demoImport">Завантажити свою базу</button>
-  </div>
 
   <div class="progress" id="progress"></div>
   <main class="list" id="list"></main>
@@ -453,18 +519,24 @@ details.raw[open] > summary::after{content:" ▴"}
 
 <input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls,.xlsm,.ods" multiple class="hidden">
 
+<script type="application/json" id="base-data">{"version":20260907001,"label":"MSPO 2026","columns":["Статус","Компанія","Стенд","Зустріч","Ім'я","Посада","Країна","Розмір компанії","Гачок","Сегмент","Пріоритет","Група","Збагачення","Email","LinkedIn URL","Канал","Дата останнього фоловапу","Повідомлення (останнє)","Компанія визначена","Ресурс"],"map":{"company":"Компанія","stand":"Стенд","country":"Країна","person":"Ім'я","role":"Посада","email":"Email","website":"LinkedIn URL","tier":"Пріоритет","segment":"Сегмент","offer":"Гачок","note":"Збагачення","pstatus":"Статус","meet":"Зустріч"},"rows":[{"Статус":"Зустріч підтверджено","Компанія":"OSI Maritime Systems","Стенд":"7-D58","Зустріч":"8 вер","Ім'я":"Mark Sullivan","Посада":"Vice President Systems Design","Країна":"Канада","Розмір компанії":"356","Гачок":"Архітектура і бюджет — щоб рішення не застрягло вище","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Sr. SW Engineer, SW Development Manager, Team Lead). Продукт: OSI Software Suite/ECPINS (ECDIS навігація для ВМФ).","Email":"mark.sullivan@osimaritime.com","LinkedIn URL":"https://www.linkedin.com/in/mark-sullivan-08a65215/","Канал":"","Дата останнього фоловапу":"26.08.2026 Лінкедин","Повідомлення (останнє)":"Great to connect Mariana. We will be at MSPO, just not me personally. If you send me an email I will link you with our team. msullivan@osimaritime.com","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Arkeus","Стенд":"7-B01, 7Z-47","Зустріч":"8 вер","Ім'я":"Richard Aplin","Посада":"Director BD (APAC)","Країна":"Австралія","Розмір компанії":"73","Гачок":"Комерційний вхід","Сегмент":"AD-3 Product","Пріоритет":"A","Група":"P2","Збагачення":"Активно наймає (Technical Lead, Senior SW Engineer, Engineering Manager). Продукт: ARK AI Orchestration - автономні оптичні ISR-системи.","Email":"richard.aplin@arkeus.com","LinkedIn URL":"https://www.linkedin.com/in/richard-aplin-668b106/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Good to connect Mariana. Our CEO, Simon Olsen, will be at MSPO as well. He’ll be on at our booth on the Team Defence Australia stand.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Advanced Navigation","Стенд":"7-B01, 7Z-47","Зустріч":"8 вер","Ім'я":"Pawel Michalak","Посада":"Chief Technology Officer","Країна":"Австралія","Розмір компанії":"205","Гачок":"Нав-алгоритми під software-enhanced hardware","Сегмент":"AD-2 EU/AU","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає, команда Software Platforms росте (176 співр.). Продукт: GNSS/INS навігаційні системи, робототехніка.","Email":"pawel.michalak@advancednavigation.com","LinkedIn URL":"https://www.linkedin.com/in/thepawelm/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Hi Ievgen,\n\nSounds good, let's catch up at MSPO. I'll be there, please come to the stand\n\nBest regards,","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Varjo Technologies","Стенд":"не підтверджено","Зустріч":"8 вер, 14:30","Ім'я":"Anant Shiv","Посада":"Head of Solutions Engineering","Країна":"Фінляндія","Розмір компанії":"211","Гачок":"Кастомна розробка під клієнтів","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Кілька відкритих tech-позицій (Senior Embedded SW Engineer). Продукт: VR/XR hardware+software для enterprise.","Email":"anant@varjo.com","LinkedIn URL":"https://www.linkedin.com/in/anantshiv/","Канал":"","Дата останнього фоловапу":"03.09.2026","Повідомлення (останнє)":"I just had a chat with Dawid. Please feel free to write him. He will be expecting your CEO at our booth.\n\n03/09/2026: Great! How about 8 Sept, any time from 11am except 3pm?","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 14:30"},{"Статус":"Зустріч підтверджено","Компанія":"Fotokite","Стенд":"5-B02","Зустріч":"8 вер","Ім'я":"Roland Raith","Посада":"Sales Consultant Europe","Країна":"Швейцарія","Розмір компанії":"63","Гачок":"Швидка відповідь; профіль показує і Dronivo GmbH","Сегмент":"AD-3 Product","Пріоритет":"A","Група":"P2","Збагачення":"Наймає в Software/AI/ML. Продукт: Fotokite Sigma - autonomous tethered UAV, public safety.","Email":"roland.raith@fotokite.com","LinkedIn URL":"https://www.linkedin.com/in/rraith/","Канал":"","Дата останнього фоловапу":"07.09.2026","Повідомлення (останнє)":"Hi Mariana, I will be in Kielce on Tuesday and at the Uniforce booth the most of the day. Your CEO can reach me on my mobile phone +41 79 461 26 45","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Astute Systems","Стенд":"7-B01, 7Z-47","Зустріч":"8 вер","Ім'я":"Ross Newman","Посада":"CEO (Founder)","Країна":"Австралія","Розмір компанії":"7","Гачок":"7 інженерів на 4 primes — найбільший розрив у базі","Сегмент":"AD-4 Exec","Пріоритет":"A","Група":"P3","Збагачення":"Молодий стартап (засн. 2024), швидко зростає, залучає seed-раунд, команда лише 7 людей. Явних вакансій не знайдено, але потребує масштабування. Продукт: GXA-1 - rugged AI-enabled edge computing hardware для оборони.","Email":"ross.newman@astutesys.com","LinkedIn URL":"https://www.linkedin.com/in/rossnewman/","Канал":"","Дата останнього фоловапу":"27.08.2026 Лінкедин","Повідомлення (останнє)":"I don’t think we are your customer but pop by and say hello","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Cellula Robotics","Стенд":"не підтверджено","Зустріч":"8 вер","Ім'я":"Nick Hetherington","Посада":"Senior System Engineer (Controls/Software)","Країна":"Канада","Розмір компанії":"86","Гачок":"ROS-розробники на автономію AUV","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Активно наймає (#wearehiring, 80+ співр.). Продукт: Solus-LR - hydrogen fuel cell AUV.","Email":"nhetherington@cellula.com","LinkedIn URL":"https://www.linkedin.com/in/nicholashetherington/","Канал":"","Дата останнього фоловапу":"03.09.2026","Повідомлення (останнє)":"We'll have two people there - our Director of Sales and one of our Sales Managers, Konrad Mech and Melanie Devaux, respectively. They'll be at the Canadian Pavilion.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"IMSAR","Стенд":"6-B11 (USA Pavilion)","Зустріч":"8 вер","Ім'я":"Mark Nelson","Посада":"Director EMEA Business Development","Країна":"США","Розмір компанії":"138","Гачок":"Європейський напрям","Сегмент":"AD-3 Product","Пріоритет":"B","Група":"P2","Збагачення":"Відкриті позиції, включно з Software Engineer. Продукт: мініатюрні SAR-радари.","Email":"mark.nelson@imsar.com","LinkedIn URL":"https://www.linkedin.com/in/mark-nelson-62107440/","Канал":"","Дата останнього фоловапу":"28.08.2026","Повідомлення (останнє)":"Hi Ievgen,\nOur stand number is 6-B11 in the USA Pavilion. See you there.\nBest regards,","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Clavister","Стенд":"9-D01","Зустріч":"8 вер","Ім'я":"Stefan Brodin","Посада":"Head Of Solutions","Країна":"Швеція","Розмір компанії":"148","Гачок":"Solutions з 2021. ТІЛЬКИ LinkedIn","Сегмент":"AD-2 EU | Email: НЕ ЗНАЙДЕНО","Пріоритет":"B","Група":"P1","Збагачення":"Активний job board. Продукт: мережева безпека/firewall.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/stefanbrodin/","Канал":"","Дата останнього фоловапу":"03.09.2026","Повідомлення (останнє)":"Hi Mariana! \nI will not be at the event myself but please visit my colleagues at our stand. \nThanks","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Bruhn NewTech","Стенд":"9-B01","Зустріч":"8 вер","Ім'я":"René Kundby Nygaard","Посада":"Senior Development Engineer","Країна":"Данія","Розмір компанії":"36","Гачок":"Геопросторове моделювання зон ураження","Сегмент":"AD-2 EU","Пріоритет":"B","Група":"P1","Збагачення":"Активна кар'єрна сторінка. Продукт: CBRN detection/EOD-рішення.","Email":"rkn@newtech.dk","LinkedIn URL":"https://www.linkedin.com/in/razakaze/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"@Mads Vinge-Kaarsberg Will be there from our company, he will be open for talks with Levgen.\n\nHowever I expect it is more technical meetup, but provide Mads will business cards and brochures, and some basic knowledge about your services.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Inertial Labs (VIAVI)","Стенд":"не підтверджено","Зустріч":"8 вер","Ім'я":"Roman Storozhuk","Посада":"Director of Sales Engineering","Країна":"США","Розмір компанії":"94","Гачок":"Слов'янське прізвище — м'якший вхід","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"\"Extending our team\" (Electrical Engineer, Application Engineer). Продукт: IMU/GNSS сенсори, RESEPI (LiDAR remote sensing).","Email":"roman.storozhuk@inertiallabs.com","LinkedIn URL":"https://www.linkedin.com/in/romanstor/","Канал":"","Дата останнього фоловапу":"07.09.2026","Повідомлення (останнє)":"Марʼяно, звісно. Хай пан Євген завітає до нас на стенд:)","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Blighter","Стенд":"2-D05 (Hall 2)","Зустріч":"8 вер, 15:00","Ім'я":"Iain Walsh","Посада":"Sales Director","Країна":"Велика Британія","Розмір компанії":"38","Гачок":"Прямий доступ до техдиректора","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"Активна кар'єрна сторінка, постійно шукають фахівців. Продукт: advanced radar surveillance systems.","Email":"iain.walsh@blighter.com","LinkedIn URL":"https://www.linkedin.com/in/ijwalsh/","Канал":"","Дата останнього фоловапу":"03.09.2026","Повідомлення (останнє)":"Hi Levgen, \nThat time is great for us, I have added it to our calendar and we look forward to meeting you then. \nOur stand is in Hall 2 - D05. \nBest regards, \nCleo Higgins\nMarketing Manager\nBlighter Surveillance Systems Ltd\n\n03.09.2026\nThanks Mariana\n\nLooking forward the conversation at MSPO","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 15:00"},{"Статус":"Без статусу","Компанія":"Blighter","Стенд":"","Зустріч":"8 вер, 15:00","Ім'я":"Nancy Martinez Fasoro","Посада":"Project Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"nancy.martinez-fasoro@blighter.com","LinkedIn URL":"https://www.linkedin.com/in/nancymartinezfasoro/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"0908 15:00"},{"Статус":"Зустріч підтверджено","Компанія":"Upteko","Стенд":"9-B01","Зустріч":"8 вер","Ім'я":"Pernille Sort Jensen","Посада":"HR Manager & Executive Assistant","Країна":"Данія","Розмір компанії":"35","Гачок":"Воротар до CEO — через неї слот","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"32 співробітники, швидко зростають. Продукт: marine-grade long-endurance drones для offshore/wind/maritime.","Email":"pernille.sort@upteko.com","LinkedIn URL":"https://www.linkedin.com/in/pernillesort/","Канал":"","Дата останнього фоловапу":"07.09.2026","Повідомлення (останнє)":"Hi Ievgen,\n\nThank you for your email, and my apologies for the late reply.\n\nYou are very welcome to visit Upteko’s stand at MSPO. Unfortunately, I will not be attending, but representatives from Upteko's sales team will be available to meet with you.\n\nI wish you a great day","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"0908 99:99"},{"Статус":"Зацікавлені","Компанія":"OSI Maritime Systems","Стенд":"7-D58","Зустріч":"","Ім'я":"Jared La Rue","Посада":"Director, Software Programs","Країна":"Канада","Розмір компанії":"356","Гачок":"Підтримка ENC-каталогу як процес: команда під ваш тех-лід","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Sr. SW Engineer, SW Development Manager, Team Lead). Продукт: OSI Software Suite/ECPINS (ECDIS навігація для ВМФ).","Email":"jlarue@osimaritime.com","LinkedIn URL":"https://www.linkedin.com/in/jared-conrad-larue/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"OSI Maritime Systems","Стенд":"","Зустріч":"","Ім'я":"Kate Walsh","Посада":"Team Lead, Systems Engineering","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"kwalsh@osimaritime.com","LinkedIn URL":"https://www.linkedin.com/in/kate-walsh-ceng-miet-87419450/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Arkeus","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Geoffrey Pascoe","Посада":"Head of Software","Країна":"Австралія","Розмір компанії":"73","Гачок":"Після Series A вузьке місце — люди, не капітал","Сегмент":"AD-2 EU/AU","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Technical Lead, Senior SW Engineer, Engineering Manager). Продукт: ARK AI Orchestration - автономні оптичні ISR-системи.","Email":"geoffrey.pascoe@arkeus.com","LinkedIn URL":"https://www.linkedin.com/in/geoffrey-pascoe/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Advanced Navigation","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Mike Stucki","Посада":"Vice President, US Defense","Країна":"Австралія","Розмір компанії":"205","Гачок":"VP US Defense з 06.2026 — будує напрям","Сегмент":"AD-3 Product","Пріоритет":"A","Група":"P2","Збагачення":"Активно наймає, команда Software Platforms росте (176 співр.). Продукт: GNSS/INS навігаційні системи, робототехніка.","Email":"mike.stucki@advancednavigation.com","LinkedIn URL":"https://www.linkedin.com/in/mikestucki/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Stephen Fujiwara (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Stephen Fujiwara","Посада":"Senior Director BD Defense","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/stephenfujiwara/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Varjo Technologies","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Petri Lehtovirta","Посада":"VP, Device Software","Країна":"Фінляндія","Розмір компанії":"211","Гачок":"Device software і 3D-конвеєр","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Кілька відкритих tech-позицій (Senior Embedded SW Engineer). Продукт: VR/XR hardware+software для enterprise.","Email":"petri.lehtovirta@varjo.com","LinkedIn URL":"https://www.linkedin.com/in/petri-lehtovirta/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Varjo Technologies","Стенд":"","Зустріч":"","Ім'я":"Kaj Saarinen","Посада":"Display technology director","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"kaj.saarinen@varjo.com","LinkedIn URL":"https://www.linkedin.com/in/kaj-saarinen-81176b3/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Sky-Watch","Стенд":"9-B01","Зустріч":"","Ім'я":"Martin Løkke","Посада":"VP of Research & Development","Країна":"Данія","Розмір компанії":"143","Гачок":"Місійне ПЗ і ISTAR під US-експансію","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає, шукає Senior Product Manager під софт-платформу. Продукт: RQ-35 Heidrun (ISR UAV).","Email":"ml@sky-watch.com","LinkedIn URL":"https://www.linkedin.com/in/martin-loekke/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"blackned","Стенд":"1-B05","Зустріч":"","Ім'я":"Sohail Shah","Посада":"System Architect","Країна":"Німеччина","Розмір компанії":"205","Гачок":"Java/C++ на middleware RIDUX","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Android, .NET/C#, QA, PM). ~300 співробітників, 5 локацій. Продукт: TACTICAL CORE/RIDUX/XONITOR - tactical middleware.","Email":"sshah@blackned.de","LinkedIn URL":"https://www.linkedin.com/in/sohail-shah-966a97b3/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Hi Mairiana, \nThanks for the Information. Your company sounds interesting and meeting your CEO would be great but unfortunately GIS and interaction with external companies is not part of my job responsibilities. \nNonetheless thank you for reaching out.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Fotokite","Стенд":"5-B02","Зустріч":"","Ім'я":"Chris McCall","Посада":"Chief Executive Officer","Країна":"Швейцарія","Розмір компанії":"63","Гачок":"Новий CEO + вакансія Head of Application Software","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Наймає в Software/AI/ML. Продукт: Fotokite Sigma - autonomous tethered UAV, public safety.","Email":"mccall@fotokite.com","LinkedIn URL":"https://www.linkedin.com/in/chris-mccall/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Fotokite","Стенд":"","Зустріч":"","Ім'я":"Cody Lockwood","Посада":"Chief Revenue Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"cody.lockwood@fotokite.com","LinkedIn URL":"https://www.linkedin.com/in/cody-lockwood-85943816b/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Fotokite","Стенд":"","Зустріч":"","Ім'я":"Alex Lieber","Посада":"Lead Mechanical Engineer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"lieber@fotokite.com","LinkedIn URL":"https://www.linkedin.com/in/alex-lieber-90567049/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Cellula Robotics","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Colleen Hahn","Посада":"VP Technology Transfer and Strategy","Країна":"Канада","Розмір компанії":"86","Гачок":"Технологічні партнерства — її мандат","Сегмент":"AD-3 Product","Пріоритет":"B","Група":"P2","Збагачення":"Активно наймає (#wearehiring, 80+ співр.). Продукт: Solus-LR - hydrogen fuel cell AUV.","Email":"chahn@cellula.com","LinkedIn URL":"https://www.linkedin.com/in/colleenhahncmo/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Cellula Robotics","Стенд":"","Зустріч":"","Ім'я":"Jason Epp","Посада":"Senior Software Engineer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"jepp@cellula.com","LinkedIn URL":"https://www.linkedin.com/in/jasonepp/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"GeoSpectrum Technologies","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Tushant Kaura","Посада":"Software Engineer","Країна":"Канада","Розмір компанії":"218","Гачок":"Підтвердження стеку","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Наймає (Senior SW Engineer, QA Analyst). Продукт: underwater acoustic transducers/sonar.","Email":"tushant.kaura@geospectrum.ca","LinkedIn URL":"https://www.linkedin.com/in/tushantkaura/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Great to hear, Tushant! At GIS-Point, we build custom geospatial software - platforms, pipelines, LiDAR automation - the kind of work that's hard to staff internally. Happy to share more, or if there's someone else on your team who handles this, feel free to loop them in too.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Neros Technologies","Стенд":"6-A04","Зустріч":"","Ім'я":"Ömer Ulu","Посада":"Head of NPI & Test","Країна":"США","Розмір компанії":"182","Гачок":"Тестова автоматизація NPI","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Активно наймає (engineers, operators, builders). Продукт: FPV strike drone (Archer).","Email":"omer.ulu@neros.tech","LinkedIn URL":"https://www.linkedin.com/in/uluomer/","Канал":"","Дата останнього фоловапу":"27.08.2026","Повідомлення (останнє)":"Relaying this to our CTO.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"IMSAR","Стенд":"6-B11 (USA Pavilion)","Зустріч":"","Ім'я":"Ryan Bartley","Посада":"Director of Product Engineering","Країна":"США","Розмір компанії":"138","Гачок":"Обробка SAR і генерація DEM. ТІЛЬКИ LinkedIn","Сегмент":"AD-3 Product | Email: НЕ ЗНАЙДЕНО","Пріоритет":"B","Група":"P2","Збагачення":"Відкриті позиції, включно з Software Engineer. Продукт: мініатюрні SAR-радари.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/ryannbartley/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"IMSAR","Стенд":"","Зустріч":"","Ім'я":"Scott Hillman","Посада":"Senior Director of Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"scott.hillman@imsar.com","LinkedIn URL":"https://www.linkedin.com/in/scott-hillman-449460117/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Rutter Inc.","Стенд":"7-D31","Зустріч":"","Ім'я":"Fraser Edison","Посада":"President","Країна":"Канада","Розмір компанії":"41","Гачок":"Фінальне слово по sigma S6","Сегмент":"AD-4 Exec","Пріоритет":"B","Група":"P3","Збагачення":"Відкриті позиції (Quality & Compliance Coordinator). Продукт: радарні застосування для морської галузі.","Email":"fedison@rutter.ca","LinkedIn URL":"https://www.linkedin.com/in/fraser-edison-38abb028/","Канал":"","Дата останнього фоловапу":"28.08.2026","Повідомлення (останнє)":"You need to contact Blair Wheaton @rutter.ca. I have retired.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Autnhive","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Arnab Ghosh","Посада":"Director of Cyber Security","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Технічний керівник в Індії — конкуруємо з їхніми ставками","Сегмент":"AD-2 EU","Пріоритет":"B","Група":"P1","Збагачення":"Наймає Full Stack Developers (Node.js/Angular). Продукт: AI security/data encryption/CTEM.","Email":"arnab@autnhive.com","LinkedIn URL":"https://www.linkedin.com/in/arnabghosh1984/","Канал":"","Дата останнього фоловапу":"01.09.2026","Повідомлення (останнє)":"At GIS-Point, we build custom geospatial software - platforms, data pipelines, LiDAR automation - for teams that need that capability without building the department in-house. We also have our own product, AllGIS, a cloud workspace for LiDAR/GIS teams. Our CEO Ievgen has all the details and will be at MSPO 8-11 Sep - could be a good chance to meet and go through specifics.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Clavister","Стенд":"9-D01","Зустріч":"","Ім'я":"Andreas Nordin","Посада":"Director of Engineering","Країна":"Швеція","Розмір компанії":"148","Гачок":"Новий керівник інженерії. ТІЛЬКИ LinkedIn","Сегмент":"AD-2 EU | Email: НЕ ЗНАЙДЕНО","Пріоритет":"B","Група":"P1","Збагачення":"Активний job board. Продукт: мережева безпека/firewall.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/andreas-nordin-se/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Bruhn NewTech","Стенд":"9-B01","Зустріч":"","Ім'я":"Erik Juel Redfern","Посада":"Chief Executive Officer","Країна":"Данія","Розмір компанії":"36","Гачок":"CEO з 2017. ТІЛЬКИ LinkedIn","Сегмент":"AD-4 Exec | Email: НЕ ЗНАЙДЕНО","Пріоритет":"B","Група":"P3","Збагачення":"Активна кар'єрна сторінка. Продукт: CBRN detection/EOD-рішення.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/erik-juel-redfern-8655164/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Deep Trekker","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Alex Massiah","Посада":"Product Manager","Країна":"Канада","Розмір компанії":"102","Гачок":"Беклог ПЗ для ROV","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"\"Moving fast and growing\". Продукт: ROV підводні дрони.","Email":"amassiah@deeptrekker.com","LinkedIn URL":"https://www.linkedin.com/in/alexmassiah/","Канал":"","Дата останнього фоловапу":"03.09.2026","Повідомлення (останнє)":"Sure! A common use case is teams whose in-house dev team is stretched thin - we take on a defined chunk of a roadmap, so a feature or project doesn't keep slipping, without you having to hire and manage another engineer.\nBy the way - is anyone else from Deep Trekker planning to be at MSPO? Happy to connect with them too.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Deep Trekker","Стенд":"","Зустріч":"","Ім'я":"Cody Warner","Посада":"Commercial VP & Board Member","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"codywarner@deeptrekker.com","LinkedIn URL":"https://www.linkedin.com/in/cody-warner-b5664580/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Open Ocean Robotics","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Julie Angus","Посада":"Chief Executive Officer","Країна":"Канада","Розмір компанії":"29","Гачок":"CEO і співзасновниця з 2018","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"\"Rapidly growing startup\", відкрита позиція Software Engineer. Продукт: solar-powered USV.","Email":"julie@openoceanrobotics.com","LinkedIn URL":"https://www.linkedin.com/in/julie-angus/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"atlantiq AI","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Nurul B. Ibrahim","Посада":"Founder / CEO","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Дворічна AI-компанія; контакт коштує одне повідомлення","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"Маленька команда (4-5 людей), рання стадія. Продукт: Jarbiz - AI для проектування морських суден.","Email":"nurul@atlantiq.ai","LinkedIn URL":"https://www.linkedin.com/in/nurulbibrahim/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"OceanSync Data Solutions","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Keegan Bizaare","Посада":"Head of Operations","Країна":"Канада","Розмір компанії":"8","Гачок":"8 осіб — максимум 1 підрядник","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"\"Growing quickly\", 8-11 співробітників. Продукт: ship-based weather stations, IoT+Big Data.","Email":"keegan@oceansync.com","LinkedIn URL":"https://www.linkedin.com/in/kbizaare/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Inertial Labs (VIAVI)","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Gene Rigoni","Посада":"Chief Information Officer","Країна":"США","Розмір компанії":"94","Гачок":"Внутрішня розробка — його зона","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"\"Extending our team\" (Electrical Engineer, Application Engineer). Продукт: IMU/GNSS сенсори, RESEPI (LiDAR remote sensing).","Email":"gene.rigoni@inertiallabs.com","LinkedIn URL":"https://www.linkedin.com/in/generigoni/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зацікавлені","Компанія":"Upteko","Стенд":"9-B01","Зустріч":"","Ім'я":"Jacob Støvring Christensen","Посада":"Chief Executive Officer","Країна":"Данія","Розмір компанії":"35","Гачок":"CEO вирішує особисто","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"32 співробітники, швидко зростають. Продукт: marine-grade long-endurance drones для offshore/wind/maritime.","Email":"jacob.christensen@upteko.com","LinkedIn URL":"https://www.linkedin.com/in/jacstch/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Global Spatial Technology Solutions (GSTS)","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"David Mennie","Посада":"Chief Product and Technology Officer","Країна":"Канада","Розмір компанії":"58","Гачок":"Пайплайни збагачення геоданих для OCIANA","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"23 вакансії на Indeed. Продукт: GIS/GPS-рішення для морської галузі.","Email":"david.mennie@gsts.ca","LinkedIn URL":"https://www.linkedin.com/in/davidmennie/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Global Spatial Technology Solutions (GSTS)","Стенд":"","Зустріч":"","Ім'я":"Jeffrey Cameron","Посада":"Director of Engineering","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"jeff.cameron@gsts.ca","LinkedIn URL":"https://www.linkedin.com/in/jeffreycameron/","Канал":"","Дата останнього фоловапу":"30.08.2026","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"NorthStar Earth & Space","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Moncef N.","Посада":"Software Engineering Team Lead","Країна":"Канада","Розмір компанії":"79","Гачок":"Обробка EO-даних без наймання. ТІЛЬКИ LinkedIn","Сегмент":"AD-1 NA | Email: НЕ ЗНАЙДЕНО","Пріоритет":"A","Група":"P1","Збагачення":"+25% зростання команди, активно наймає. Продукт: Space Situational Awareness супутникова констеляція.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/moncef/","Канал":"","Дата останнього фоловапу":"28.08.2026","Повідомлення (останнє)":"I am not attending this event.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"northstar-data.com","Стенд":"","Зустріч":"","Ім'я":"Maxime Therreault","Посада":"Senior Software Developer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"maxime.therreault@northstar-data.com","LinkedIn URL":"https://www.linkedin.com/in/maximetherreault/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"northstar-data.com","Стенд":"","Зустріч":"","Ім'я":"Alexandre Bergeron","Посада":"Software Developer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"alexandre.bergeron@northstar-data.com","LinkedIn URL":"https://www.linkedin.com/in/alexandre-bergeron-957b5520/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Kepler Communications","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Joel Spark","Посада":"Director, Solutions Architect","Країна":"Канада","Розмір компанії":"230","Гачок":"Embedded і наземний сегмент — пік без штату","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"Активна кар'єрна сторінка. Продукт: LEO-супутниковий зв'язок.","Email":"jspark@kepler.space","LinkedIn URL":"https://www.linkedin.com/in/joelspark/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Kepler Communications","Стенд":"","Зустріч":"","Ім'я":"Dave Hylands","Посада":"Principal, Embedded Software","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"dhylands@kepler.space","LinkedIn URL":"https://www.linkedin.com/in/dhylands/","Канал":"","Дата останнього фоловапу":"27.08.2026","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Kepler Communications","Стенд":"","Зустріч":"","Ім'я":"Tyler Gamvrelis","Посада":"Senior Embedded Software Designer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"tgamvrelis@kepler.space","LinkedIn URL":"https://www.linkedin.com/in/tylergamvrelis/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Reveal Technology","Стенд":"5-B02","Зустріч":"","Ім'я":"Garrett Smith","Посада":"Founder / CEO","Країна":"США","Розмір компанії":"124","Гачок":"Гео-інженери, яких не купиш у США","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"\"Expansion and growth\". Продукт: Farsight - geospatial intelligence (карти з дрон-відео).","Email":"garrett@revealtech.ai","LinkedIn URL":"https://www.linkedin.com/in/wgarrettsmith/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Reveal Technology","Стенд":"","Зустріч":"","Ім'я":"Andrew Dixon","Посада":"Founder / COO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"andrew@revealtech.ai","LinkedIn URL":"https://www.linkedin.com/in/andrew-dixon/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Reveal Technology","Стенд":"","Зустріч":"","Ім'я":"Cale Teeter","Посада":"Senior Vice President","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"cale@revealtech.ai","LinkedIn URL":"https://www.linkedin.com/in/cale-teeter-gregg/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Auterion","Стенд":"6-A14","Зустріч":"","Ім'я":"Markus Achtelik","Посада":"Chief Technology Officer","Країна":"США/Швейцарія","Розмір компанії":"199","Гачок":"Модулі флайт-стеку та інтеграції з OEM","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Темп найму сповільнився (1 позиція). Продукт: AuterionOS/Skynode - autonomy platform.","Email":"markus@auterion.com","LinkedIn URL":"https://www.linkedin.com/in/markusachtelik/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Auterion","Стенд":"","Зустріч":"","Ім'я":"Raul Glogovetan","Посада":"Engineering Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"raul.glogovetan@auterion.com","LinkedIn URL":"https://www.linkedin.com/in/glogovetan/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Auterion","Стенд":"","Зустріч":"","Ім'я":"James East","Посада":"Global VP and Head of Auterion UK","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"james@auterion.com","LinkedIn URL":"https://www.linkedin.com/in/james-east-b92926b0/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Arkeus","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Gary Fulvio","Посада":"Senior Software Engineer","Країна":"Австралія","Розмір компанії":"73","Гачок":"Технічний валідатор","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Technical Lead, Senior SW Engineer, Engineering Manager). Продукт: ARK AI Orchestration - автономні оптичні ISR-системи.","Email":"gary.fulvio@arkeus.com","LinkedIn URL":"https://www.linkedin.com/in/gary-fulvio-81b0592/","Канал":"","Дата останнього фоловапу":"01.09.2026","Повідомлення (останнє)":"Hi Mariana, Thanks for reaching out. I won’t be going to any trade shows and I am not in a position to know if we are looking for a GIS vendor at the moment.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Robin Radar Systems","Стенд":"11-C08","Зустріч":"","Ім'я":"Vivien Croes","Посада":"Chief Technology Officer","Країна":"Нідерланди","Розмір компанії":"247","Гачок":"Новий CTO переглядає підрядників","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Багато вакансій (engineering, IT, sales). Продукт: bird/drone radar detection.","Email":"vivien.croes@robinradar.com","LinkedIn URL":"https://www.linkedin.com/in/viviencroes/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Sercan Özbay (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Sercan Özbay","Посада":"New Product Development Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/sercan-özbay-2214a816/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Robin Radar Systems","Стенд":"","Зустріч":"","Ім'я":"Maarten Kalff","Посада":"IT Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"maarten.kalff@robinradar.com","LinkedIn URL":"https://www.linkedin.com/in/koebeest/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"ARX Robotics","Стенд":"11-C28","Зустріч":"","Ім'я":"Ciaran Murphy","Посада":"Chief Technology Officer","Країна":"Німеччина","Розмір компанії":"190","Гачок":"Модулі Mithra OS. Спитати про київський офіс","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Активна кар'єрна сторінка, розширюється. Продукт: GEREON - наземна оборонна робототехніка.","Email":"ciaran.murphy@arx-robotics.com","LinkedIn URL":"https://www.linkedin.com/in/ciaranmurphy/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Paolo Foglino (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Paolo Foglino","Посада":"Technical Engineering Director UK","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/foglino-paolo-2a2b932/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"ARX Robotics","Стенд":"","Зустріч":"","Ім'я":"Roberta Randerath","Посада":"Director Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"roberta.randerath@arx-robotics.com","LinkedIn URL":"https://www.linkedin.com/in/roberta-r-3b2a41111/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Sky-Watch","Стенд":"9-B01","Зустріч":"","Ім'я":"Thor Grønning Johansen","Посада":"Chief Financial Officer","Країна":"Данія","Розмір компанії":"143","Гачок":"Економіка аутстафу в цифрах","Сегмент":"AD-4 Exec","Пріоритет":"A","Група":"P3","Збагачення":"Активно наймає, шукає Senior Product Manager під софт-платформу. Продукт: RQ-35 Heidrun (ISR UAV).","Email":"tgj@sky-watch.com","LinkedIn URL":"https://www.linkedin.com/in/thor-grønning-johansen-62120911/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"b-garrett.com","Стенд":"","Зустріч":"","Ім'я":"David Garrett","Посада":"Director BD US","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"david@b-garrett.com","LinkedIn URL":"https://www.linkedin.com/in/davidwgarrett/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"blackned","Стенд":"1-B05","Зустріч":"","Ім'я":"Dr. René Purainer","Посада":"Senior Vice President Programs","Країна":"Німеччина","Розмір компанії":"205","Гачок":"Розрив між зобов'язаннями і потужністю","Сегмент":"AD-2 EU","Пріоритет":"A","Група":"P1","Збагачення":"Активно наймає (Android, .NET/C#, QA, PM). ~300 співробітників, 5 локацій. Продукт: TACTICAL CORE/RIDUX/XONITOR - tactical middleware.","Email":"rpurainer@blackned.de","LinkedIn URL":"https://www.linkedin.com/in/dr-rené-purainer-521531123/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Quantum Bridge Technologies","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Mark Michael","Посада":"Chief Technology Officer","Країна":"Канада","Розмір компанії":"27","Гачок":"CTO з 02.2026 — переглядає ресурсну модель","Сегмент":"AD-1 NA","Пріоритет":"A","Група":"P1","Збагачення":"Активна кар'єрна сторінка. Продукт: Quantum Internet/Quantum Repeaters.","Email":"mark.michael@qubridge.io","LinkedIn URL":"https://www.linkedin.com/in/mmichael89/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Quantum Bridge Technologies","Стенд":"","Зустріч":"","Ім'я":"Ramanan Sivaranjan","Посада":"Head of Engineering","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"ramanan@qubridge.io","LinkedIn URL":"https://www.linkedin.com/in/rsivaranjan/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Quantum Bridge Technologies","Стенд":"","Зустріч":"","Ім'я":"Mattia Montagna","Посада":"Co-Founder and CEO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"mattia.montagna@qubridge.io","LinkedIn URL":"https://www.linkedin.com/in/mattia-montagna/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Quantum Bridge Technologies","Стенд":"","Зустріч":"","Ім'я":"Heling (Alex) Pu","Посада":"Chief Operating Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"heling.pu@qubridge.io","LinkedIn URL":"https://www.linkedin.com/in/heling-alex-pu/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Praetorian Aeronautics","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Brett Hill","Посада":"Founder and CEO","Країна":"Австралія","Розмір компанії":"55","Гачок":"Продукт тримається на софтверному шарі","Сегмент":"AD-4 Exec","Пріоритет":"A","Група":"P3","Збагачення":"Розбудовують керівництво (новий CTO). Продукт: counter-autonomy capabilities.","Email":"brett.hill@praetorian-aeronautics.com","LinkedIn URL":"https://www.linkedin.com/in/brett-hill-aero/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Praetorian Aeronautics","Стенд":"","Зустріч":"","Ім'я":"Adam Williams","Посада":"Chief Operating Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"adam.williams@praetorian-aeronautics.com","LinkedIn URL":"https://www.linkedin.com/in/adamrwilliams11/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Praetorian Aeronautics","Стенд":"","Зустріч":"","Ім'я":"Emma Watson","Посада":"Head of Executive Operations","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"emma.watson@praetorian-aeronautics.com","LinkedIn URL":"https://www.linkedin.com/in/emma-watson-33671a93/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"GeoSpectrum Technologies","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Liam Keast","Посада":"Technical Development Manager","Країна":"Канада","Розмір компанії":"218","Гачок":"Обробка акустичних даних і керуюче ПЗ","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Наймає (Senior SW Engineer, QA Analyst). Продукт: underwater acoustic transducers/sonar.","Email":"liam.keast@geospectrum.ca","LinkedIn URL":"https://www.linkedin.com/in/liamkeast/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"GeoSpectrum Technologies","Стенд":"","Зустріч":"","Ім'я":"Shweta Pai","Посада":"Senior Technical Product Owner","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"shweta.pai@geospectrum.ca","LinkedIn URL":"https://www.linkedin.com/in/pai-shweta/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Neros Technologies","Стенд":"6-A04","Зустріч":"","Ім'я":"Adam Kibit","Посада":"Director of Firmware","Країна":"США","Розмір компанії":"182","Гачок":"Embedded/firmware при вибуховому зростанні","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Активно наймає (engineers, operators, builders). Продукт: FPV strike drone (Archer).","Email":"adam.kibit@neros.tech","LinkedIn URL":"https://www.linkedin.com/in/adam-kibit-966191b9/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Neros Technologies","Стенд":"","Зустріч":"","Ім'я":"Ross Pedersen","Посада":"Head of Growth","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"ross@neros.tech","LinkedIn URL":"https://www.linkedin.com/in/rosswpedersen/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Rutter Inc.","Стенд":"7-D31","Зустріч":"","Ім'я":"Stephen Hale","Посада":"VP Sales, BD and R&D","Країна":"Канада","Розмір компанії":"41","Гачок":"Одна людина тримає і потребу, і бюджет","Сегмент":"AD-4 Exec","Пріоритет":"B","Група":"P3","Збагачення":"Відкриті позиції (Quality & Compliance Coordinator). Продукт: радарні застосування для морської галузі.","Email":"shale@rutter.ca","LinkedIn URL":"https://www.linkedin.com/in/shale000/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Imagine 4D (з Simthetiq)","Стенд":"7-D19 (Canada Pavilion)","Зустріч":"","Ім'я":"George Karam","Посада":"Chief Executive Officer","Країна":"Канада","Розмір компанії":"21","Гачок":"Контракти більші за команду з 21 особи","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Активна кар'єрна сторінка. Продукт: digital twin software, immersive visualization.","Email":"g.karam@imagine-4d.com","LinkedIn URL":"https://www.linkedin.com/in/george-karam-0a84441/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Psiphon","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Michael Hull","Посада":"President, co-founder","Країна":"Канада","Розмір компанії":"32","Гачок":"Співзасновник з 2006","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Вакансії на кількох job-сайтах. Продукт: Internet censorship circumvention.","Email":"m.hull@psiphon.ca","LinkedIn URL":"https://www.linkedin.com/in/michael-hull-63321713/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Psiphon","Стенд":"","Зустріч":"","Ім'я":"Duncan Leikucs","Посада":"Director, Product & Growth","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"d.leikucs@psiphon.ca","LinkedIn URL":"https://www.linkedin.com/in/duncan-leikucs-3701a6115/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"MicroPilot","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Howard Loewen","Посада":"President","Країна":"Канада","Розмір компанії":"33","Гачок":"Засновник з 1994; HORIZONmp — власна розробка","Сегмент":"AD-1 NA","Пріоритет":"B","Група":"P1","Збагачення":"Активна кар'єрна сторінка. Продукт: professional UAV autopilots.","Email":"hloewen@micropilot.com","LinkedIn URL":"https://www.linkedin.com/in/howard-loewen-1337b17/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Rajeev Chhibber (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Rajeev Chhibber","Посада":"Technical Sales","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/rajeevchhibbermba/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Autnhive","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Dan Conners","Посада":"EVP, Corporate Development & Partnerships","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Відповідає за зовнішні партнерства","Сегмент":"AD-4 Exec","Пріоритет":"B","Група":"P3","Збагачення":"Наймає Full Stack Developers (Node.js/Angular). Продукт: AI security/data encryption/CTEM.","Email":"dconners@autnhive.com","LinkedIn URL":"https://www.linkedin.com/in/dan-conners-81a02624/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"infodas","Стенд":"4-C07","Зустріч":"","Ім'я":"Justus Bach","Посада":"Head of Cybersecurity Consulting","Країна":"Німеччина","Розмір компанії":"221","Гачок":"Консалтинг масштабується людьми. Airbus — несекретні контури","Сегмент":"AD-2 EU","Пріоритет":"B","Група":"P1","Збагачення":"70 відкритих вакансій. Продукт: SecuStack/SDoT - кібербезпека для defense.","Email":"j.bach@infodas.de","LinkedIn URL":"https://www.linkedin.com/in/justus-bach/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Hi Mariana, thank you for reaching out. I will not be there. I am responsible for Cybersecurity Consulting and which is without our or any other products.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"infodas","Стенд":"","Зустріч":"","Ім'я":"Marion Konnerth","Посада":"Head of Projects","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"m.konnerth@infodas.de","LinkedIn URL":"https://www.linkedin.com/in/marionkonnerth/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Markus Kilian (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Markus Kilian","Посада":"Principal Sales Defence","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/markuskilian/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Chess Dynamics","Стенд":"4-D04","Зустріч":"","Ім'я":"Peter Smith","Посада":"Principal Electronics Engineer","Країна":"Велика Британія","Розмір компанії":"190","Гачок":"Real-time обробка відео Vision4ce","Сегмент":"AD-2 EU","Пріоритет":"B","Група":"P1","Збагачення":"Наймає Algorithms Engineer (ML/CV). Продукт: electro-optic gun fire control, C-UAS.","Email":"peter.smith@chess-dynamics.com","LinkedIn URL":"https://www.linkedin.com/in/peterfullprofile/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Chess Dynamics","Стенд":"","Зустріч":"","Ім'я":"Satnam Bains","Посада":"Operations Director","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"satnam.bains@chess-dynamics.com","LinkedIn URL":"https://www.linkedin.com/in/satnam-bains-80972a2/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Silentium Defence","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Simon Palumbo","Посада":"Executive Vice President / Director","Країна":"Австралія","Розмір компанії":"92","Гачок":"Американська експансія і потреба в руках","Сегмент":"AD-3 Product","Пріоритет":"B","Група":"P2","Збагачення":"\"Growing fast\", кілька вакансій. Продукт: passive radar/sensing technology.","Email":"simon.palumbo@silentiumdefence.com.au","LinkedIn URL":"https://www.linkedin.com/in/simon-palumbo/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Silentium Defence","Стенд":"","Зустріч":"","Ім'я":"Thomas Radford","Посада":"Business Development Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"thomas.radford@silentiumdefence.com.au","LinkedIn URL":"https://www.linkedin.com/in/thomas-radford-24676a177/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Systecon Group","Стенд":"9-D01","Зустріч":"","Ім'я":"John Gallagher","Посада":"Chief Executive Officer","Країна":"Швеція","Розмір компанії":"65","Гачок":"CEO ухвалює сам; сидить у UK","Сегмент":"AD-4 Exec","Пріоритет":"B","Група":"P3","Збагачення":"Активний job board. Продукт: Opus Suite - Life Cycle Management software.","Email":"john.gallagher@systecon.co.uk","LinkedIn URL":"https://www.linkedin.com/in/john-gallagher-1b0b1412/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"systecongroup.com","Стенд":"","Зустріч":"","Ім'я":"James Merrington","Посада":"Chief Marketing Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"james.merrington@systecongroup.com","LinkedIn URL":"https://www.linkedin.com/in/james-merrington-b9486312/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Materna Virtual Solution","Стенд":"1-B05","Зустріч":"","Ім'я":"Samy Megalaa","Посада":"Solutions Architect","Країна":"Німеччина","Розмір компанії":"117","Гачок":"Мобільна розробка. ТІЛЬКИ LinkedIn","Сегмент":"AD-2 EU | Email: НЕ ЗНАЙДЕНО","Пріоритет":"B","Група":"P1","Збагачення":"Наймає Cyber Security Architect. Продукт: SecurePIM - secure mobile communication.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/samy-nassiem/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"virtual-solution.com","Стенд":"","Зустріч":"","Ім'я":"Emily Sidka","Посада":"Head Of Marketing","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"emily.sidka@virtual-solution.com","LinkedIn URL":"https://www.linkedin.com/in/emily-sidka-37069a50/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"HOLOGATE","Стенд":"3-B11","Зустріч":"","Ім'я":"Robert-Maximilian Fankhaenel","Посада":"Chief Operating Officer & Co-Founder","Країна":"Німеччина","Розмір компанії":"93","Гачок":"Співзасновник і власник ресурсів","Сегмент":"AD-4 Exec","Пріоритет":"B","Група":"P3","Збагачення":"Активна кар'єрна сторінка. Продукт: AI/XR, VR simulation, digital twins.","Email":"robert@hologate.com","LinkedIn URL":"https://www.linkedin.com/in/fankhi/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"HOLOGATE","Стенд":"","Зустріч":"","Ім'я":"Ferdinand Eppensteiner","Посада":"Head Of Sales","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"ferdinand@hologate.com","LinkedIn URL":"https://www.linkedin.com/in/ferdinand-eppensteiner-917249170/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Franklin Ponceoyola (без компанії)","Стенд":"","Зустріч":"","Ім'я":"Franklin Ponceoyola","Посада":"Senior Technical Artist","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"","LinkedIn URL":"https://www.linkedin.com/in/3dartviz/","Канал":"","Дата останнього фоловапу":"02.09.2026","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Plurilock","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Ian L. Paterson","Посада":"Chief Executive Officer","Країна":"Канада","Розмір компанії":"53","Гачок":"CEO ухвалює сам","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"Активна кар'єрна сторінка. Продукт: кібербезпека (biometrics, ML).","Email":"ian@plurilock.com","LinkedIn URL":"https://www.linkedin.com/in/ianlpaterson/","Канал":"","Дата останнього фоловапу":"31.08.2026","Повідомлення (останнє)":"Thanks, I won’t be there be good to connect","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Plurilock","Стенд":"","Зустріч":"","Ім'я":"Aron Hsiao","Посада":"VP AI + Shared Services","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"aron.hsiao@plurilock.com","LinkedIn URL":"https://www.linkedin.com/in/aronhsiao/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Plurilock","Стенд":"","Зустріч":"","Ім'я":"Tucker Zengerle","Посада":"Chief Operating Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"tucker.zengerle@plurilock.com","LinkedIn URL":"https://www.linkedin.com/in/tucker-zengerle/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Deep Trekker","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Emmeline Bolton","Посада":"Commercial Product Manager","Країна":"Канада","Розмір компанії":"102","Гачок":"Друга продуктова точка входу","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"\"Moving fast and growing\". Продукт: ROV підводні дрони.","Email":"ebolton@deeptrekker.com","LinkedIn URL":"https://www.linkedin.com/in/emmeline-bolton/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Open Ocean Robotics","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Fritz Stahr","Посада":"Chief Technology Officer","Країна":"Канада","Розмір компанії":"29","Гачок":"CTO сам наймає і аутсорсить","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"\"Rapidly growing startup\", відкрита позиція Software Engineer. Продукт: solar-powered USV.","Email":"fritz@openoceanrobotics.com","LinkedIn URL":"https://www.linkedin.com/in/fritz-stahr-7838a72/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Spiri Robotics","Стенд":"не підтверджено","Зустріч":"","Ім'я":"Patrick Edwards-Daugherty","Посада":"Founder and CEO","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Засновник з 2015 — одне повідомлення","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"Наймає, повільне зростання. Продукт: Spiri Mu - autonomous robot.","Email":"patrick@spirirobotics.com","LinkedIn URL":"https://www.linkedin.com/in/somerled/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Spiri Robotics","Стенд":"","Зустріч":"","Ім'я":"Frank Taney","Посада":"Chief Operating Officer / General Counsel","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"frank@spirirobotics.com","LinkedIn URL":"https://www.linkedin.com/in/frank-taney-69770293/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Uncrewed Systems Inc.","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Igor S.","Посада":"Co-Founder & CSDO","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Можлива слов'янська мова. ТІЛЬКИ LinkedIn","Сегмент":"AD-4 Exec | Email: НЕ ЗНАЙДЕНО","Пріоритет":"C","Група":"P3","Збагачення":"Малий дистриб'ютор, немає career-сторінки. Продукт: RMUS + Unmanned Systems Poland дрони, Counter-UAS.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/igor-s-88208a17/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Trakka Systems","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Glen Rowling","Посада":"Vice President","Країна":"Австралія","Розмір компанії":"96","Гачок":"Знає організацію з 2016","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"Нове партнерство з General Atomics (08.2026). Продукт: TrakkaCam/TrakkaBeam - vision tech.","Email":"glen.rowling@trakkasystems.com","LinkedIn URL":"https://www.linkedin.com/in/glen-rowling-28641213/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"Trakka Systems","Стенд":"","Зустріч":"","Ім'я":"Anthony Simmonds","Посада":"Director Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"anthony.simmonds@trakkasystems.com","LinkedIn URL":"https://www.linkedin.com/in/anthony-simmonds-3a08a2220/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"UXV Technologies","Стенд":"9-B01","Зустріч":"","Ім'я":"Frederik Bergenfelt Friis","Посада":"Chief Operating Officer","Країна":"Данія","Розмір компанії":"77","Гачок":"COO з 01.2026 — будує операційну модель","Сегмент":"AD-3 Product","Пріоритет":"C","Група":"P2","Збагачення":"\"Seeking ambitious team members\". Продукт: GCS для UUV/USV/UGV/UAV.","Email":"fbf@uxvtechnologies.com","LinkedIn URL":"https://www.linkedin.com/in/frederik-bergenfelt-friis/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"UXV Technologies","Стенд":"","Зустріч":"","Ім'я":"Kjeld Friberg","Посада":"Chief Security Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"kf@uxvtechnologies.com","LinkedIn URL":"https://www.linkedin.com/in/kfriberg/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"з домену пошти","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Boresight","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Justin Olde","Посада":"Managing Director","Країна":"Австралія","Розмір компанії":"\u003c30","Гачок":"MD з 12.2025","Сегмент":"AD-4 Exec | Email: ⚠ ОСОБИСТИЙ iCloud — краще LinkedIn","Пріоритет":"C","Група":"P3","Збагачення":"Щойно IPO на ASX, залучають кошти на зростання команди. Продукт: BQ-400 Raider - target drones.","Email":"jdbholde@me.com","LinkedIn URL":"https://www.linkedin.com/in/justin-olde-60bb1040/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"boresighttargets.com","Стенд":"","Зустріч":"","Ім'я":"Andrew Windsor","Посада":"Co-Founder and Board Chair","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"andrew@boresighttargets.com","LinkedIn URL":"https://www.linkedin.com/in/asmwindsor/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Без статусу","Компанія":"boresighttargets.com","Стенд":"","Зустріч":"","Ім'я":"Jason Henry","Посада":"Chief Operating Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"","Email":"jason@boresighttargets.com","LinkedIn URL":"https://www.linkedin.com/in/jason-henry-7345bb215/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"домен пошти (назви немає в базі)","Ресурс":"","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Septentrio","Стенд":"4-D17","Зустріч":"","Ім'я":"Bruno Bougard","Посада":"Chief Technology Officer","Країна":"Бельгія","Розмір компанії":"193","Гачок":"193 особи і жодного профілю в Clay, знайдено вручну","Сегмент":"","Пріоритет":"Ручний пошук","Група":"P1","Збагачення":"1 відкрита позиція. Продукт: GNSS receivers/OEM boards.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/brunobougard/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Ocean Software","Стенд":"7-B01, 7Z-47","Зустріч":"","Ім'я":"Ben Goodman","Посада":"Chief Technology Officer","Країна":"Австралія","Розмір компанії":"~100 (51-200)","Гачок":"домен ocean.software (не .com), Clay плутав з індійською тезкою; знайдено вручну","Сегмент":"","Пріоритет":"Ручний пошук","Група":"P1","Збагачення":"Нові контракти (SkyAlyne, угорські ВПС). Продукт: readiness management software для defense.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/ben-goodman/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Uncrewed Systems Inc.","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Igor S.","Посада":"Co-Founder & CSDO","Країна":"Канада","Розмір компанії":"\u003c30","Гачок":"Можлива слов'янська мова, ТІЛЬКИ LinkedIn (email не знайдено)","Сегмент":"AD-4 Exec","Пріоритет":"C","Група":"P3","Збагачення":"Малий дистриб'ютор, немає career-сторінки. Продукт: RMUS + Unmanned Systems Poland дрони, Counter-UAS.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/igor-s-88208a17/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Rutter Inc.","Стенд":"7-D31","Зустріч":"","Ім'я":"Blair Wheaton","Посада":"President & CEO","Країна":"Канада","Розмір компанії":"41","Гачок":"Заміна Fraser Edison (вийшов на пенсію). Тач 0 відправлено 07.09.2026","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Відкриті позиції (Quality & Compliance Coordinator). Продукт: радарні застосування для морської галузі.","Email":"","LinkedIn URL":"https://www.linkedin.com/in/blair-wheaton-aa73bbb6/","Канал":"","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"FLY BY OEM targets","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Відмова","Компанія":"Global Spatial Technology Solutions (GSTS)","Стенд":"7-D32 (Canada Pavilion)","Зустріч":"","Ім'я":"Rob Marshy","Посада":"Chief Solutions Officer","Країна":"Канада","Розмір компанії":"58","Гачок":"Піки навантаження при впровадженнях","Сегмент":"AD-3 Product","Пріоритет":"A","Група":"P2","Збагачення":"23 вакансії на Indeed. Продукт: GIS/GPS-рішення для морської галузі.","Email":"rob.marshy@gsts.ca","LinkedIn URL":"https://www.linkedin.com/in/rob-marshy-9599a732/","Канал":"","Дата останнього фоловапу":"02.09.2026","Повідомлення (останнє)":"Hi Mariana, Thank you for reaching out. Good proposition but at this stage of our company it is no longer relevant. All the best to you at MSPO.","Компанія визначена":"","Ресурс":"MSPO 2026 (ІТ-юніт база)","__source":"ІТ-аутсорсинг","__mkey":"9"},{"Статус":"Зустріч підтверджено","Компанія":"STARK Defence","Стенд":"стенд не підтверджено","Зустріч":"8 вер","Ім'я":"Oliver Newman","Посада":"Head of Business Development & Capture","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Вже має власну GNSS-denied навігацію (visual odometry, Virtus). Щойно (09.2026) придбали стартап Pleno для посилення AI/nav-стеку — конкурентне перетинання, можлива тема для порівняння/партнерства.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Hey, MSPO would be good. I will be there so more than happy to meet\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"LPP s.r.o.","Стенд":"1-D11","Зустріч":"8 вер","Ім'я":"Michael Klega","Посада":"Director of Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Nightray-дрон має власну proprietary visual navigation для GPS-denied польотів (виявлено на Eurosatory 2026). Конкурентне перетинання - варто уточнити обмеження їх рішення (день/ніч, точність).","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Perfect, I am looking forward, thank you for contacting me.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Beyond Vision","Стенд":"9-B03","Зустріч":"8 вер","Ім'я":"Pedro Meireles Figueiredo","Посада":"Business Development & Sales Director","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"RTK базові станції (GPS-залежні), фіксовано-крила VTOL. Явного власного GPS-denied рішення не знайдено - потенційна ніша для Flyby.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"I will be at MSPO also\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Threod Systems","Стенд":"стенд не підтверджено","Зустріч":"8 вер","Ім'я":"Robert Jakobson","Посада":"Chief Product Officer","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Фокус на ISR/launcher-системи (Stream C/Eos C), власний автопілот, але без явної GPS-denied навігації - потенційна ніша.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"I will be at MSPO, to meet him there would be a good option\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Granta Autonomy","Стенд":"2-C15","Зустріч":"8 вер","Ім'я":"Renatas Norkus","Посада":"Ambassador, Business Development Manager","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"GA-10FPV-AI вже має власну AI GPS-denied навігацію, €1M контракт з литовським MoD (2024), 2300+ дронів - конкурентне перетинання.","Email":"","LinkedIn URL":"","Канал":"WhatsApp + Email","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Yes, I will make sure we can have a bilateral meeting in Kielce 8-9 September. I copy my colleague Toma here as well. She will be at MSPO handling all bilaterals.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Canadian UAVs","Стенд":"7-B17","Зустріч":"8 вер","Ім'я":"Christina Pitt","Посада":"Head of Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Не знайдено специфічної інформації про навігаційний стек - потребує додаткового дослідження.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Perfect, see you at 7-B17! We don't have our own booth this year - Ievgen will come find you there.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Trypillian","Стенд":"3Z-02, 3-B09","Зустріч":"8 вер","Ім'я":"Ivan Matveichenko","Посада":"Co-Founder & CEO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Позиціонується як \"operates independently of satellite navigation\" вже в описі продукту (Chorna) - можливе конкурентне перетинання, варто уточнити деталі рішення.","Email":"","LinkedIn URL":"","Канал":"WhatsApp","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Добрий день, підходьте до нашого стенду і там зможете все обговорити\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зустріч підтверджено","Компанія":"Sky-Watch A/S","Стенд":"9-B01","Зустріч":"8 вер","Ім'я":"David Garrett","Посада":"Director Business Development US","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Активно наймає, шукає Senior Product Manager під software-платформу RQ-35 Heidrun - можлива відкритість до зовнішніх nav-рішень.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"I will not be attending but the person he/she should talk to will be. My email is dga@sky-watch.com if you want to send me the details I'll do an intro.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"0908 99:99"},{"Статус":"Зацікавлені, неясно щодо участі","Компанія":"Firestorm Labs","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"David Hubler","Посада":"Director, Army Partnerships","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Щойно залучили $82M (04.2026) на масштабування xCell-виробництва (Tempest/Squall дрони для України). Без власного GPS-denied рішення - сильний фіт, уже підтвердили інтерес.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Short answer: Yes, a requirement/capability we are looking at with some other partners.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Зацікавлені, неясно щодо участі","Компанія":"Altus LSA","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"Elias Glymidakis","Посада":"Director of Research and Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Turnkey ISR-провайдер (NATO/FRONTEX/EMSA/EDA клієнти), стандартні платформи без згадки anti-jam навігації - потенційна ніша.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Hi Mariana, yes it will be interesting\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Зацікавлені, неясно щодо участі","Компанія":"Mach Industries","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"Robert Hochstedler","Посада":"Director BD (Asia-Pacific)","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Не знайдено специфічної інформації про навігаційний стек - потребує додаткового дослідження.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"I will pass an update to him and see what he wants to do - thank you for reaching out\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Height Technologies","Стенд":"5-B02, 2-D15","Зустріч":"","Ім'я":"Ernst Thijsen","Посада":"CEO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Інтегратор GPS-denied рішень.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"UDS (Unmanned Defense Systems)","Стенд":"2-C15","Зустріч":"","Ім'я":"Vytenis J. Buzas","Посада":"CEO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"AI-based swarm drones, платформа Partisan. Литовський виробник, €3.2M залучено (05.2024) на масштабування.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Origin Robotics","Стенд":"2-E08","Зустріч":"","Ім'я":"Agris Kipurs","Посада":"CEO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Blaze - автономний UAV-інтерсептор. Латвійський виробник.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Helsing","Стенд":"11-B14","Зустріч":"","Ім'я":"Dr. Robert Fink","Посада":"CTO","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Софт+AI фокус (не airframe). TACTICAL CORE/AI orchestration для defense-платформ.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Neros Technologies","Стенд":"6-A04","Зустріч":"","Ім'я":"Hugo Crawford","Посада":"EMEA Growth Lead","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"FPV strike drone, GPS-denied nav (114 польотів валідовано власними силами) - можливе конкурентне перетинання.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Vantage Robotics","Стенд":"2-F01","Зустріч":"","Ім'я":"Armen Keuleyan","Посада":"VP Global Sales & Marketing","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"US Army Soldier Borne Sensor, Blue UAS сертифікація.","Email":"","LinkedIn URL":"","Канал":"Email","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Avy","Стенд":"2-F01, 2-D15","Зустріч":"","Ім'я":"Niels Blij","Посада":"Head of Defence Strategy & Relations","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Self-flying aircraft для humanitarian/professional use, fixed-wing VTOL.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"SIA FIXAR-AERO","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"Genādijs Kobenkins","Посада":"Інженер-конструктор","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"FIXAR - гібрид fixed-wing/VTOL (FIXAR 025, MTOW 25кг, дальність 300км). Латвійський виробник. Сам поставив технічні питання про GNSS-точність - явного власного GPS-denied рішення не рекламують, реальна потреба у власника продукту.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"Could you tell me a bit more about the technology...","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"AeroVironment","Стенд":"2-C05, 6Z-03","Зустріч":"","Ім'я":"Gerard Robottom / Pradiptya Ghosh / Cris Sapera","Посада":"Senior Director Int'l BD / Sr. Director Software Autonomy / SVP Engineering","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"MALE/HALE UAS, велика публічна компанія (US Army ISR). Pradiptya Ghosh відповідає саме за Software Autonomy and GNC - потенційно релевантний технічний контакт для GPS-denied теми.","Email":"","LinkedIn URL":"","Канал":"LinkedIn (вручну, без кампанії)","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Orqa","Стенд":"5-B02","Зустріч":"","Ім'я":"Srđan Kovačević","Посада":"CEO & Co-Founder","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"FPV drones, defense (постачає в ЗСУ, партнерство з Baykar). Хорватський виробник.","Email":"","LinkedIn URL":"","Канал":"Email","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Volatus Aerospace","Стенд":"7-C07","Зустріч":"","Ім'я":"Rob Walker","Посада":"VP Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"ISR drone systems, Counter-UAS. Канадський виробник/дистриб'ютор.","Email":"","LinkedIn URL":"","Канал":"Email","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"Rheinmetall AG","Стенд":"7Z-14","Зустріч":"","Ім'я":"Christoph Heckmann","Посада":"","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Loitering munition/recon-strike UAS. Велика публічна компанія (Німеччина).","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Виявити потребу","Компанія":"WB Group","Стенд":"6-C04","Зустріч":"","Ім'я":"Malgorzata Darowska","Посада":"","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"FlyEye, Warmate - MALE/HALE UAS, Tactical UAS. Польський виробник.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Відмова","Компанія":"DEFENDER DYNAMICS LLC (Global Mark)","Стенд":"3Z-02, 3-B09","Зустріч":"","Ім'я":"Anton Sukach","Посада":"Global Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"Не знайдено специфічної інформації про навігаційний стек - потребує додаткового дослідження.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"As for now I am not with GM anymore. :)\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Відмова","Компанія":"Windracers","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"Mark Farrell","Посада":"Sales Director | Defence","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"ULTRA явно \"guided by satellite navigation\" - GPS-залежний, без згаданого GPS-denied backup. Реальна прогалина, пояснює теплу відповідь на наше повідомлення про GNSS-denied підходи.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"HI Mariana, this is always a requirement for autonomous systems. All the best with the research and hope it goes well. Thanks,-Mark\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"},{"Статус":"Відмова","Компанія":"DZYNE Technologies","Стенд":"стенд не знайдено","Зустріч":"","Ім'я":"Florian Limjoco, Jr.","Посада":"Senior Director, International Business Development","Країна":"","Розмір компанії":"","Гачок":"","Сегмент":"","Пріоритет":"","Група":"","Збагачення":"ULTRA Turbo вже \"GPS-hardened\" (anti-jamming), новий рекорд витривалості (60 год, 02.2026) - конкурентне перетинання, менш пріоритетний лід.","Email":"","LinkedIn URL":"","Канал":"LinkedIn","Дата останнього фоловапу":"","Повідомлення (останнє)":"\"Hi Mariana - thank you for the message. I don't work the UAV side of the business, I am on CUAS.\"","Компанія визначена":"","Ресурс":"MSPO 2026 (FlyBy)","__source":"FlyBy","__mkey":"9"}]}</script>
 <script>
 "use strict";
 (function () {
   /* ==================================================================
      Стенд-радар — пошук лідів на виставці.
+
+     Два незалежні виміри статусу, які легко сплутати:
+       «Статус» з бази   — стадія до виставки (зустріч, зацікавлені, …)
+       «Результат»       — що сталося на стенді, ставить користувач
+
      Дані живуть у трьох місцях, у порядку надійності:
-       1) пам'ять вкладки   — те, що бачить екран
-       2) localStorage      — офлайн-копія на цьому телефоні
-       3) db (якщо є)       — спільна база стенда, синхронна для команди
+       1) пам'ять вкладки — те, що бачить екран
+       2) localStorage    — офлайн-копія на цьому телефоні
+       3) db (якщо є)     — спільна база стенда, синхронна для команди
      ================================================================== */
 
-  var LS_BASE = "sr.base.v2", LS_TOUCH = "sr.touch.v2", LS_ME = "sr.me", LS_FILT = "sr.filt.v1";
+  var LS_BASE = "sr.base.v2", LS_TOUCH = "sr.touch.v2", LS_ME = "sr.me";
   var CHUNK_CHARS = 140000;
 
   var STATUSES = [
@@ -478,50 +550,43 @@ details.raw[open] > summary::after{content:" ▴"}
   /* Поля, які апка розуміє. Решта колонок з файлу теж зберігається
      і показується в картці — нічого не губиться. */
   var FIELDS = [
-    { k: "company", label: "Компанія",  syn: ["companyname","company","компані","компанія","компания","назвакомпанії","назва","фірма","организация","організація","account","firma","unternehmen","exhibitor","nazwa","бренд","brand","org"] },
-    { k: "stand",   label: "Стенд",     syn: ["standnumber","boothnumber","standno","stand","booth","стенд","стендномер","номерстенда","hall","зал","павільйон","павильон","stoisko","standnummer","halle","location","місце"] },
+    { k: "company", label: "Компанія",  syn: ["companyname","company","компані","компанія","назва","фірма","организація","організація","account","firma","unternehmen","exhibitor","nazwa","бренд","brand","org"] },
+    { k: "stand",   label: "Стенд",     syn: ["standnumber","boothnumber","standno","stand","booth","стенд","номерстенда","hall","зал","павільйон","павильон","stoisko","standnummer","halle","місце"] },
+    { k: "pstatus", label: "Статус з бази", syn: ["статус","status","стадія","стадия","етап","stage","pipeline","воронка"] },
+    { k: "meet",    label: "Час зустрічі", syn: ["зустріч","часзустрічі","датазустрічі","meeting","meetingtime","appointment","слот","встреча"] },
     { k: "country", label: "Країна",    syn: ["country","країна","страна","land","kraj","countryname","hqcountry"] },
     { k: "city",    label: "Місто",     syn: ["city","місто","город","stadt","miasto","town","hqcity"] },
-    { k: "person",  label: "Контакт",   syn: ["contactperson","fullname","contactname","decisionmaker","лпр","контактн","контакт","особа","контактнаособа","ім'я","имя","person","ansprechpartner","firstname","name","osoba"] },
+    { k: "person",  label: "Контакт",   syn: ["contactperson","fullname","contactname","decisionmaker","лпр","контактн","контакт","особа","ім'я","имя","person","ansprechpartner","firstname","name","osoba"] },
     { k: "role",    label: "Посада",    syn: ["jobtitle","title","position","посада","роль","function","stanowisko","seniority"] },
     { k: "email",   label: "Email",     syn: ["email","emailaddress","e-mail","mail","пошта","емейл","почта"] },
     { k: "phone",   label: "Телефон",   syn: ["phonenumber","phone","tel","telefon","телефон","мобільний","mobile","whatsapp"] },
-    { k: "website", label: "Сайт",      syn: ["website","websiteurl","site","url","сайт","домен","domain","web","linkedin","link"] },
-    { k: "tier",    label: "Пріоритет", syn: ["tier","priority","пріорит","пріоритет","приоритет","рівень","уровень","grade","категорія","категория","клас","класс","score","рейтинг","abc"] },
-    { k: "segment", label: "Сегмент",   syn: ["segment","сегмент","industry","галуз","галузь","індустрі","напрям","отрасль","вертикаль","niche","ніша","category","тип","branche","бізнесмодель"] },
-    { k: "offer",   label: "Що пропонуємо", syn: ["offer","офер","оффер","пропон","пропоз","пропозиція","цінність","рішення","solution","value","предложение","product","продукт","service","послуга","nextstep","наступнийкрок","action","дія","pitch","hook","зачіпка","angle","кут","usecase","кейс"] },
-    { k: "note",    label: "Нотатка з бази", syn: ["notes","note","нотат","приміт","коментар","комент","комментарий","comment","опис","описание","description","insight","інсайт","signal","сигнал","context","контекст","research","дослідження"] }
+    { k: "website", label: "Сайт / LinkedIn", syn: ["linkedinurl","linkedin","website","websiteurl","site","url","сайт","домен","domain","web","link"] },
+    { k: "tier",    label: "Пріоритет", syn: ["tier","priority","пріорит","пріоритет","приоритет","рівень","grade","категорія","клас","score","рейтинг","abc"] },
+    { k: "segment", label: "Сегмент",   syn: ["segment","сегмент","industry","галуз","галузь","індустрі","напрям","вертикаль","niche","ніша","category","branche"] },
+    { k: "offer",   label: "Гачок / що пропонуємо", syn: ["гачок","hook","offer","офер","оффер","пропон","пропоз","пропозиція","цінність","рішення","solution","value","product","продукт","service","послуга","nextstep","наступнийкрок","action","дія","pitch","зачіпка","angle","usecase","кейс"] },
+    { k: "note",    label: "Довідка з бази", syn: ["збагачення","enrichment","notes","note","нотат","приміт","коментар","комент","comment","опис","description","insight","інсайт","signal","сигнал","контекст","research"] }
   ];
 
-  /* --- вигадані компанії, щоб апка не відкривалась порожньою --- */
-  var DEMO_COLUMNS = ["Компанія","Стенд","Країна","Місто","Контакт","Посада","Email","Телефон","Сайт","Пріоритет","Сегмент","Що пропонуємо","Нотатка"];
-  var DEMO_ROWS = [
-    ["Nordkarta Survey AB","3 / B.041","Швеція","Гетеборг","Elin Sandberg","Head of Geodata","elin@example.se","+46 31 000 00","nordkarta.example","A","Кадастр / муніципалітети","Аутсорс обробки LiDAR — розвантажити внутрішню команду","Тендер на аерозйомку регіону, дедлайн у грудні"],
-    ["Alpine Geodesy GmbH","1 / A.118","Німеччина","Мюнхен","Markus Reiter","Geschäftsführer","m.reiter@example.de","+49 89 000 000","alpine-geodesy.example","A","Інженерна геодезія","Топозйомка + камеральна обробка під їхній пік навантаження","Скаржились на брак операторів; шукають підрядника в ЄС"],
-    ["Delta Rail Engineering","4 / C.207","Польща","Вроцлав","Anna Kowalczyk","Project Director","a.kowalczyk@example.pl","+48 71 000 00","deltarail.example","B","Залізниця / інфраструктура","Сканування колії та деформаційний моніторинг","Був контакт торік, не дійшли до пілоту"],
-    ["Meridian Utilities Mapping","2 / D.012","Нідерланди","Роттердам","Joost van Dijk","GIS Manager","joost@example.nl","+31 10 000 000","meridian-um.example","B","Комунальні мережі","Векторизація та ведення мереж у GIS","Мігрують з застарілої системи цього року"],
-    ["Highland Terrain Services","3 / B.066","Велика Британія","Інвернесс","Fiona Grant","Operations Lead","fiona@example.co.uk","+44 1463 000000","highlandterrain.example","C","Гірничодобувна","Обробка дронових даних, обсяги складів","Малий обсяг, але швидкі рішення"],
-    ["Baltic Marine Charting","5 / E.140","Естонія","Таллінн","Rein Kask","Survey Manager","rein@example.ee","+372 600 0000","balticmarine.example","B","Гідрографія","Обробка батиметрії, підготовка карт","Питали про ETL-скрипти під їхній формат"],
-    ["Trasse Ingenieure AG","1 / A.075","Швейцарія","Цюрих","Beat Hofer","Head of BIM","b.hofer@example.ch","+41 44 000 00","trasse.example","A","BIM / проєктування","Scan-to-BIM для тунелів і мостів","Найбільший потенційний чек у списку"],
-    ["Campo Aerial Iberia","4 / C.155","Іспанія","Валенсія","Lucía Moreno","CTO","lucia@example.es","+34 96 000 000","campoaerial.example","C","Сільське господарство","Автоматизація обробки мультиспектру","Технічний співрозмовник, любить деталі"]
-  ];
+  /* класи статусу з бази -> колір бейджа */
+  function pstatusClass(v) {
+    var n = norm(v);
+    if (!n) return "";
+    if (n.indexOf("зустріч") > -1 && n.indexOf("не ") === -1) return "p-meet";
+    if (n.indexOf("зацікав") > -1 || n.indexOf("інтерес") > -1 || n.indexOf("warm") > -1) return "p-warm";
+    if (n.indexOf("потреб") > -1 || n.indexOf("виявити") > -1) return "p-need";
+    if (n.indexOf("відмов") > -1 || n.indexOf("не цікав") > -1 || n.indexOf("lost") > -1) return "p-no";
+    return "";
+  }
 
   /* ================= стан ================= */
   var state = {
-    columns: [],
-    map: {},
-    rows: [],
-    sources: [],
-    isDemo: false,
-    touch: {},
-    me: "",
-    baseVersion: 0,
-    filters: { q: "", country: null, tier: null, status: null, source: null, unvisited: false },
-    numMode: false,
-    limit: 60
+    columns: [], map: {}, rows: [], sources: [], sourceCounts: {},
+    touch: {}, me: "", baseVersion: 0, baseLabel: "",
+    filters: { q: "", country: null, tier: null, status: null, pstatus: null, source: null, unvisited: false },
+    numMode: false, limit: 60
   };
-  var db = null, dbBaseUnsub = null, sampleFn = null, downloads = null;
-  var openLeadId = null, sheetStack = [];
+  var db = null, sampleFn = null, downloads = null;
+  var sheetStack = [];
 
   /* ================= утиліти ================= */
   function $(id) { return document.getElementById(id); }
@@ -553,6 +618,11 @@ details.raw[open] > summary::after{content:" ▴"}
   function lsGet(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
   function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
+  function shortTime(iso) {
+    try {
+      return new Date(iso).toLocaleString("uk-UA", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+    } catch (e) { return iso; }
+  }
 
   var toastTimer = null;
   function toast(msg) {
@@ -566,8 +636,7 @@ details.raw[open] > summary::after{content:" ▴"}
 
   /* ================= читання файлів ================= */
   function sniffDelimiter(text) {
-    var line = text.split(/\r?\n/).slice(0, 5).join("\n");
-    var best = ",", bestN = 0;
+    var line = text.split(/\r?\n/).slice(0, 5).join("\n"), best = ",", bestN = 0;
     [",", ";", "\t", "|"].forEach(function (d) {
       var n = line.split(d).length;
       if (n > bestN) { bestN = n; best = d; }
@@ -586,7 +655,7 @@ details.raw[open] > summary::after{content:" ▴"}
       } else if (c === '"') q = true;
       else if (c === d) { row.push(cur); cur = ""; }
       else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
-      else if (c === "\r") { /* skip */ }
+      else if (c === "\r") { /* пропускаємо */ }
       else cur += c;
     }
     if (cur.length || row.length) { row.push(cur); rows.push(row); }
@@ -611,11 +680,11 @@ details.raw[open] > summary::after{content:" ▴"}
       if (used[nm]) { used[nm]++; nm = nm + " (" + used[nm] + ")"; } else used[nm] = 1;
       return nm;
     });
-    var out = [], i, j, r, obj, any;
+    var out = [], i, j, r, obj, any, v;
     for (i = h + 1; i < matrix.length; i++) {
       r = matrix[i]; obj = {}; any = false;
       for (j = 0; j < header.length; j++) {
-        var v = r[j] == null ? "" : String(r[j]).trim();
+        v = r[j] == null ? "" : String(r[j]).trim();
         if (v) any = true;
         obj[header[j]] = v;
       }
@@ -631,17 +700,17 @@ details.raw[open] > summary::after{content:" ▴"}
       fr.onerror = function () { reject(new Error("Не вдалося прочитати " + file.name)); };
       fr.onload = function () {
         try {
-          var parts = [];
+          var parts = [], got;
           if (isText) {
-            var got = matrixToRows(parseCSV(String(fr.result)), name);
+            got = matrixToRows(parseCSV(String(fr.result)), name);
             if (got) parts.push(got);
           } else {
             if (typeof XLSX === "undefined") throw new Error("Читалка Excel не завантажилась — спробуй CSV або онови сторінку.");
             var wb = XLSX.read(new Uint8Array(fr.result), { type: "array" });
             wb.SheetNames.forEach(function (sn) {
               var m = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, raw: false, defval: "" });
-              var got = matrixToRows(m, wb.SheetNames.length > 1 ? name + " · " + sn : name);
-              if (got && got.rows.length) parts.push(got);
+              var g = matrixToRows(m, wb.SheetNames.length > 1 ? name + " · " + sn : name);
+              if (g && g.rows.length) parts.push(g);
             });
           }
           resolve(parts);
@@ -651,17 +720,16 @@ details.raw[open] > summary::after{content:" ▴"}
     });
   }
 
-  /* ================= автоматичне зіставлення колонок ================= */
+  /* ================= зіставлення колонок ================= */
   function autoMap(columns) {
-    var keys = columns.map(keyify);
-    var map = {}, taken = {};
+    var keys = columns.map(keyify), map = {}, taken = {}, i;
     FIELDS.forEach(function (f) {
       var bestCol = null, bestScore = 0;
-      columns.forEach(function (col, i) {
+      columns.forEach(function (col, ci) {
         if (taken[col]) return;
-        var k = keys[i], score = 0;
-        f.syn.forEach(function (s) {
-          var sk = keyify(s);
+        var k = keys[ci], score = 0;
+        f.syn.forEach(function (syn) {
+          var sk = keyify(syn);
           if (!sk) return;
           if (k === sk) score = Math.max(score, 1000 + sk.length);
           else if (k.indexOf(sk) === 0) score = Math.max(score, 400 + sk.length);
@@ -671,9 +739,8 @@ details.raw[open] > summary::after{content:" ▴"}
       });
       if (bestCol) { map[f.k] = bestCol; taken[bestCol] = true; }
     });
-    /* Без компанії апка марна — беремо першу текстову колонку. */
     if (!map.company) {
-      for (var i = 0; i < columns.length; i++) {
+      for (i = 0; i < columns.length; i++) {
         if (!taken[columns[i]]) { map.company = columns[i]; break; }
       }
     }
@@ -685,34 +752,37 @@ details.raw[open] > summary::after{content:" ▴"}
     return col && row[col] != null ? String(row[col]).trim() : "";
   }
   function leadIdOf(row) {
-    var base = keyify(val(row, "company")) + "_" + keyify(val(row, "stand"));
+    var base = keyify(val(row, "company")) + "_" + keyify(val(row, "person"));
     var slug = base.replace(/[^a-z0-9_]/g, "").slice(0, 48) || "lead";
-    return slug + "-" + hash(val(row, "company") + "|" + val(row, "stand") + "|" + (row.__source || ""));
+    return slug + "-" + hash(val(row, "company") + "|" + val(row, "person") + "|" + val(row, "stand") + "|" + (row.__source || ""));
   }
   function tierOf(row) {
-    var t = norm(val(row, "tier"));
+    var raw = val(row, "tier"), t = norm(raw);
     if (!t) return "";
-    if (/^(a|a\b|1|high|високий|top|tier ?a|критич)/.test(t)) return "A";
-    if (/^(b|2|mid|середн|tier ?b)/.test(t)) return "B";
-    if (/^(c|3|low|низьк|tier ?c)/.test(t)) return "C";
-    return val(row, "tier").slice(0, 3).toUpperCase();
+    if (/^(a|1|high|високий|top)/.test(t)) return "A";
+    if (/^(b|2|mid|середн)/.test(t)) return "B";
+    if (/^(c|3|low|низьк)/.test(t)) return "C";
+    return raw.slice(0, 3).toUpperCase();
   }
 
-  /* ================= індексація для пошуку ================= */
+  /* ================= індексація ================= */
   function reindex() {
     state.rows.forEach(function (r) {
       r.__id = leadIdOf(r);
       r.__tier = tierOf(r);
+      r.__company = val(r, "company") || val(r, "person") || "(без назви)";
+      r.__companyN = norm(r.__company);
+      r.__stand = norm(val(r, "stand"));
+      r.__standDigits = val(r, "stand").replace(/\D/g, "");
+      r.__pstatus = val(r, "pstatus");
+      r.__meet = val(r, "meet");
+      if (!r.__mkey) r.__mkey = r.__meet ? "0000 " + (r.__meet.match(/\d{1,2}:\d{2}/) || ["99:99"])[0] : "9";
       var bag = [];
       for (var k in r) {
         if (k.indexOf("__") === 0) continue;
         if (r[k]) bag.push(r[k]);
       }
       r.__hay = norm(bag.join(" ⋅ "));
-      r.__stand = norm(val(r, "stand"));
-      r.__standDigits = val(r, "stand").replace(/\D/g, "");
-      r.__company = val(r, "company") || "(без назви)";
-      r.__companyN = norm(r.__company);
     });
     state.sources = [];
     var seen = {};
@@ -724,45 +794,9 @@ details.raw[open] > summary::after{content:" ▴"}
   }
 
   function matches(row, tokens, digitsOnly) {
-    var i, t;
-    if (digitsOnly && tokens.length === 1) {
-      /* режим стенда: цифри мають збігатися з номером стенда */
-      return row.__standDigits.indexOf(tokens[0]) > -1;
-    }
-    for (i = 0; i < tokens.length; i++) {
-      t = tokens[i];
-      if (row.__hay.indexOf(t) === -1) return false;
-    }
+    if (digitsOnly && tokens.length === 1) return row.__standDigits.indexOf(tokens[0]) > -1;
+    for (var i = 0; i < tokens.length; i++) if (row.__hay.indexOf(tokens[i]) === -1) return false;
     return true;
-  }
-
-  function currentRows() {
-    var f = state.filters;
-    var qn = norm(f.q);
-    var tokens = qn ? qn.split(" ").filter(Boolean) : [];
-    var digitsOnly = tokens.length === 1 && /^\d+$/.test(tokens[0]);
-    var out = state.rows.filter(function (r) {
-      if (f.country && norm(val(r, "country")) !== f.country) return false;
-      if (f.tier && r.__tier !== f.tier) return false;
-      if (f.source && (r.__source || "База") !== f.source) return false;
-      var st = state.touch[r.__id] && state.touch[r.__id].status;
-      if (f.status && st !== f.status) return false;
-      if (f.unvisited && st) return false;
-      if (tokens.length && !matches(r, tokens, digitsOnly)) return false;
-      return true;
-    });
-    if (tokens.length) {
-      out.sort(function (a, b) { return score(b, tokens, digitsOnly) - score(a, tokens, digitsOnly); });
-    } else {
-      var rank = { A: 0, B: 1, C: 2 };
-      out.sort(function (a, b) {
-        var ra = rank[a.__tier] != null ? rank[a.__tier] : 3;
-        var rb = rank[b.__tier] != null ? rank[b.__tier] : 3;
-        if (ra !== rb) return ra - rb;
-        return a.__companyN < b.__companyN ? -1 : a.__companyN > b.__companyN ? 1 : 0;
-      });
-    }
-    return out;
   }
   function score(row, tokens, digitsOnly) {
     var s = 0;
@@ -775,62 +809,82 @@ details.raw[open] > summary::after{content:" ▴"}
     if (row.__tier === "A") s += 4; else if (row.__tier === "B") s += 2;
     return s;
   }
+  function currentRows() {
+    var f = state.filters, qn = norm(f.q);
+    var tokens = qn ? qn.split(" ").filter(Boolean) : [];
+    var digitsOnly = tokens.length === 1 && /^\d+$/.test(tokens[0]);
+    var out = state.rows.filter(function (r) {
+      if (f.country && norm(val(r, "country")) !== f.country) return false;
+      if (f.tier && r.__tier !== f.tier) return false;
+      if (f.pstatus && r.__pstatus !== f.pstatus) return false;
+      if (f.source && (r.__source || "База") !== f.source) return false;
+      var st = state.touch[r.__id] && state.touch[r.__id].status;
+      if (f.status && st !== f.status) return false;
+      if (f.unvisited && st) return false;
+      if (tokens.length && !matches(r, tokens, digitsOnly)) return false;
+      return true;
+    });
+    if (tokens.length) {
+      out.sort(function (a, b) { return score(b, tokens, digitsOnly) - score(a, tokens, digitsOnly); });
+    } else {
+      var rank = { A: 0, B: 1, C: 2 };
+      out.sort(function (a, b) {
+        /* спершу ті, з ким уже домовлено про зустріч */
+        var ma = a.__meet ? 0 : 1, mb = b.__meet ? 0 : 1;
+        if (ma !== mb) return ma - mb;
+        var ra = rank[a.__tier] != null ? rank[a.__tier] : 3;
+        var rb = rank[b.__tier] != null ? rank[b.__tier] : 3;
+        if (ra !== rb) return ra - rb;
+        return a.__companyN < b.__companyN ? -1 : a.__companyN > b.__companyN ? 1 : 0;
+      });
+    }
+    return out;
+  }
 
-  /* ================= рендер списку ================= */
+  /* ================= список ================= */
   function highlight(text, tokens) {
     if (!tokens.length) return esc(text);
-    var out = esc(text), i;
+    var out = esc(text), i, re;
     for (i = 0; i < tokens.length; i++) {
       if (tokens[i].length < 2) continue;
-      var re = new RegExp("(" + tokens[i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+      re = new RegExp("(" + tokens[i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
       out = out.replace(re, "<mark>$1</mark>");
     }
     return out;
   }
-  /* Показуємо, ЧОМУ рядок знайшовся, якщо збіг не в назві та не в стенді. */
   function whyLine(row, tokens) {
     if (!tokens.length) return null;
     var t = tokens[0];
     if (row.__companyN.indexOf(t) > -1 || row.__stand.indexOf(t) > -1) return null;
     for (var k in row) {
       if (k.indexOf("__") === 0) continue;
-      var v = row[k];
-      if (v && norm(v).indexOf(t) > -1) {
-        return "<b>" + esc(k) + ":</b> " + highlight(String(v).slice(0, 120), tokens);
+      if (row[k] && norm(row[k]).indexOf(t) > -1) {
+        return "<b>" + esc(k) + ":</b> " + highlight(String(row[k]).slice(0, 120), tokens);
       }
     }
     return null;
   }
 
   function renderList() {
-    var list = $("list");
-    var rows = currentRows();
+    var list = $("list"), rows = currentRows();
     var tokens = norm(state.filters.q).split(" ").filter(Boolean);
     list.innerHTML = "";
-
-    $("countLbl").textContent = state.rows.length
-      ? rows.length + " / " + state.rows.length
-      : "база порожня";
+    $("countLbl").textContent = state.rows.length ? rows.length + " / " + state.rows.length : "база порожня";
 
     if (!state.rows.length) {
-      list.appendChild(emptyState(
-        "Тут поки нічого немає",
-        "Завантаж свою базу лідів — Excel або CSV. Файл читається на телефоні, нікуди не відправляється.",
+      list.appendChild(emptyState("Тут поки нічого немає",
+        "Завантаж базу лідів — Excel або CSV. Файл читається на пристрої, нікуди не відправляється.",
         "Завантажити базу", function () { $("fileInput").click(); }));
       return;
     }
     if (!rows.length) {
-      list.appendChild(emptyState(
-        "Нічого не знайшлося",
+      list.appendChild(emptyState("Нічого не знайшлося",
         "Спробуй частину назви, номер стенда або скинь фільтри.",
-        "Скинути все", function () { resetFilters(); }));
+        "Скинути все", resetFilters));
       return;
     }
-
     var frag = document.createDocumentFragment();
-    rows.slice(0, state.limit).forEach(function (r) {
-      frag.appendChild(rowNode(r, tokens));
-    });
+    rows.slice(0, state.limit).forEach(function (r) { frag.appendChild(rowNode(r, tokens)); });
     list.appendChild(frag);
 
     if (rows.length > state.limit) {
@@ -841,7 +895,6 @@ details.raw[open] > summary::after{content:" ▴"}
     }
     renderProgress();
   }
-
   function emptyState(h, p, btnLabel, onClick) {
     var box = el("div", "empty");
     box.appendChild(el("h3", null, h));
@@ -853,7 +906,7 @@ details.raw[open] > summary::after{content:" ▴"}
   }
 
   function rowNode(r, tokens) {
-    var t = state.touch[r.__id];
+    var t = state.touch[r.__id] || {};
     var node = el("button", "row" + (r.__tier === "A" ? " t-a" : r.__tier === "B" ? " t-b" : ""));
     node.type = "button";
     node.appendChild(el("div", "stripe"));
@@ -864,33 +917,42 @@ details.raw[open] > summary::after{content:" ▴"}
     body.appendChild(name);
 
     var meta = el("div", "meta");
+    if (r.__meet) meta.appendChild(el("span", "meetchip", r.__meet));
     var stand = val(r, "stand");
     if (stand) {
-      var sc = el("span", "standchip");
+      var sc = el("span", "standchip" + (/\d/.test(stand) ? "" : " unknown"));
       sc.innerHTML = highlight(stand, tokens);
       meta.appendChild(sc);
     }
-    var place = [val(r, "country"), val(r, "city")].filter(Boolean).join(" · ");
-    if (place) meta.appendChild(el("span", null, place));
-    if (!place && val(r, "segment")) meta.appendChild(el("span", null, val(r, "segment")));
-    if (t && t.status) {
+    var pcls = pstatusClass(r.__pstatus);
+    if (r.__pstatus && !(r.__meet && pcls === "p-meet")) {
+      meta.appendChild(el("span", "pbadge " + pcls, r.__pstatus));
+    }
+    var who = [val(r, "person"), val(r, "country")].filter(Boolean).join(" · ");
+    if (who) meta.appendChild(el("span", null, who));
+    if (t.status) {
       var st = el("span", null, STATUS_LABEL[t.status]);
       st.style.fontWeight = "600";
       meta.appendChild(st);
     }
     body.appendChild(meta);
 
-    var why = whyLine(r, tokens);
-    if (why) {
-      var w = el("span", "hit");
-      w.innerHTML = why;
-      body.appendChild(w);
+    /* головне по ліду видно одразу зі списку */
+    if (t.summary) body.appendChild(el("span", "summary", t.summary));
+    else {
+      var why = whyLine(r, tokens);
+      if (why) {
+        var w = el("span", "hit");
+        w.innerHTML = why;
+        body.appendChild(w);
+      }
     }
     node.appendChild(body);
 
     var side = el("div", "side");
-    if (t && t.status) side.appendChild(el("span", "sdot " + t.status));
+    if (t.status) side.appendChild(el("span", "sdot " + t.status));
     if (r.__tier) side.appendChild(el("span", "tierbadge", r.__tier));
+    if (t.log && t.log.length) side.appendChild(el("span", "tierbadge", t.log.length + " зап."));
     node.appendChild(side);
 
     node.addEventListener("click", function () { openLead(r.__id); });
@@ -920,13 +982,20 @@ details.raw[open] > summary::after{content:" ▴"}
     p.appendChild(lbl);
   }
 
-  /* ================= чіпи швидких фільтрів ================= */
+  /* ================= чіпи ================= */
   function renderChips() {
     var box = $("quickChips");
     box.innerHTML = "";
     if (!state.rows.length) return;
     var f = state.filters;
 
+    /* стадії з бази — головний спосіб розділити цих лідів */
+    countBy(function (r) { return r.__pstatus; }).forEach(function (it) {
+      box.appendChild(chip(it[0], f.pstatus === it[0], it[1], function () {
+        f.pstatus = f.pstatus === it[0] ? null : it[0];
+        state.limit = 60; refresh();
+      }));
+    });
     box.appendChild(chip("Не відвідані", f.unvisited, null, function () {
       f.unvisited = !f.unvisited; if (f.unvisited) f.status = null; refresh();
     }));
@@ -944,11 +1013,12 @@ details.raw[open] > summary::after{content:" ▴"}
     if (f.country) box.appendChild(chip(titleCase(f.country), true, null, function () { f.country = null; refresh(); }));
     if (f.tier) box.appendChild(chip("Пріоритет " + f.tier, true, null, function () { f.tier = null; refresh(); }));
     if (f.source) box.appendChild(chip(f.source, true, null, function () { f.source = null; refresh(); }));
-    if (!f.country || !f.tier) {
-      var open = chip("Ще фільтри", false, null, openFilters);
-      open.classList.add("group");
-      box.appendChild(open);
-    }
+    var open = chip("Ще фільтри", false, null, openFilters);
+    open.classList.add("group");
+    box.appendChild(open);
+
+    var n = state.rows.filter(function (r) { return r.__meet; }).length;
+    $("agendaBadge").textContent = n ? String(n) : "";
   }
   function chip(label, on, n, onClick) {
     var c = el("button", "chip" + (on ? " on" : ""));
@@ -959,66 +1029,138 @@ details.raw[open] > summary::after{content:" ▴"}
     return c;
   }
   function titleCase(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+  function countBy(fn) {
+    var m = {}, order = [];
+    state.rows.forEach(function (r) {
+      var v = fn(r);
+      if (!v) return;
+      if (!m[v]) { m[v] = 0; order.push(v); }
+      m[v]++;
+    });
+    return order.map(function (v) { return [v, m[v]]; }).sort(function (a, b) { return b[1] - a[1]; });
+  }
+
+  /* ================= розклад зустрічей ================= */
+  function openAgenda() {
+    var sheet = el("div", "sheet");
+    sheet.appendChild(sheetHead("Розклад зустрічей", popSheet));
+    var body = el("div", "sheet-body"), inner = el("div", "sheet-inner");
+    body.appendChild(inner); sheet.appendChild(body);
+
+    var meets = state.rows.filter(function (r) { return r.__meet; })
+      .sort(function (a, b) { return a.__mkey < b.__mkey ? -1 : a.__mkey > b.__mkey ? 1 : 0; });
+
+    if (!meets.length) {
+      inner.appendChild(emptyState("Зустрічей у базі немає",
+        "Тут з'являться ліди, у яких заповнена колонка з часом зустрічі.", "Закрити", popSheet));
+      pushSheet(sheet);
+      return;
+    }
+    var done = meets.filter(function (r) { return state.touch[r.__id] && state.touch[r.__id].status; }).length;
+    var head = el("div", "sect");
+    head.appendChild(el("span", "eyebrow", meets.length + " зустрічей · " + done + " вже відмічено"));
+    inner.appendChild(head);
+
+    var lastDay = null;
+    meets.forEach(function (r) {
+      var day = (r.__meet.split(",")[0] || "").trim();
+      if (day !== lastDay) { inner.appendChild(el("div", "daysep", day || "Без дати")); lastDay = day; }
+      var t = state.touch[r.__id] || {};
+      var b = el("button", "slot");
+      b.type = "button";
+      var tm = r.__meet.match(/\d{1,2}:\d{2}/);
+      var timeCell = el("div", "time", tm ? tm[0] : "без часу");
+      if (!tm) { timeCell.style.color = "var(--text-dim)"; timeCell.style.fontSize = "11px"; }
+      b.appendChild(timeCell);
+      var who = el("div", "who");
+      who.appendChild(el("div", "nm", r.__company));
+      var sub = el("div", "sub");
+      if (val(r, "stand")) sub.appendChild(el("span", "standchip", val(r, "stand")));
+      if (val(r, "person")) sub.appendChild(el("span", null, val(r, "person")));
+      if (t.status) {
+        var s = el("span", null, STATUS_LABEL[t.status]);
+        s.style.fontWeight = "600";
+        sub.appendChild(s);
+      }
+      who.appendChild(sub);
+      if (t.summary) who.appendChild(el("span", "summary", t.summary));
+      b.appendChild(who);
+      if (t.status) b.appendChild(el("span", "sdot " + t.status));
+      b.addEventListener("click", function () { openLead(r.__id); });
+      inner.appendChild(b);
+    });
+    pushSheet(sheet);
+  }
 
   /* ================= картка ліда ================= */
   function openLead(id) {
-    var row = null;
-    for (var i = 0; i < state.rows.length; i++) if (state.rows[i].__id === id) { row = state.rows[i]; break; }
+    var row = null, i;
+    for (i = 0; i < state.rows.length; i++) if (state.rows[i].__id === id) { row = state.rows[i]; break; }
     if (!row) return;
-    openLeadId = id;
     pushSheet(buildLeadSheet(row));
   }
 
   function buildLeadSheet(row) {
     var sheet = el("div", "sheet");
-    sheet.appendChild(sheetHead(val(row, "company") || "Лід", function () { popSheet(); }));
-
-    var body = el("div", "sheet-body");
-    var inner = el("div", "sheet-inner");
-    body.appendChild(inner);
-    sheet.appendChild(body);
+    sheet.appendChild(sheetHead(row.__company, popSheet));
+    var body = el("div", "sheet-body"), inner = el("div", "sheet-inner");
+    body.appendChild(inner); sheet.appendChild(body);
+    var cur = state.touch[row.__id] || {};
 
     /* шапка */
     var head = el("div", "lead-head");
     head.appendChild(el("h1", "lead-name", row.__company));
     var facts = el("div", "lead-facts");
+    if (row.__pstatus) facts.appendChild(el("span", "pbadge " + pstatusClass(row.__pstatus), row.__pstatus));
+    if (row.__meet) facts.appendChild(el("span", "fact stand", "Зустріч " + row.__meet));
     var stand = val(row, "stand");
-    if (stand) {
+    if (stand && /\d/.test(stand)) {
       var fs = el("span", "fact stand");
       fs.appendChild(el("small", null, "Стенд"));
       fs.appendChild(el("span", "mono", " " + stand));
       facts.appendChild(fs);
+    } else if (stand) {
+      facts.appendChild(el("span", "fact", "Стенд " + stand));
     }
     if (row.__tier) facts.appendChild(el("span", "fact tier", "Пріоритет " + row.__tier));
-    [["country", val(row, "country")], ["city", val(row, "city")], ["segment", val(row, "segment")]]
-      .forEach(function (pair) { if (pair[1]) facts.appendChild(el("span", "fact", pair[1])); });
+    [val(row, "country"), val(row, "segment")].forEach(function (v) {
+      if (v) facts.appendChild(el("span", "fact", v));
+    });
     if (state.sources.length > 1) facts.appendChild(el("span", "fact", row.__source || "База"));
     head.appendChild(facts);
+    if (row["Компанія визначена"]) {
+      var warn = el("p", "note-inline", "Назву компанії відновлено " + row["Компанія визначена"] + " — у файлі клітинка порожня.");
+      warn.style.margin = "9px 0 0";
+      head.appendChild(warn);
+    }
     inner.appendChild(head);
 
-    /* що робити на стенді */
+    /* що з ним робити */
     var offer = val(row, "offer"), baseNote = val(row, "note");
     if (offer || baseNote) {
       var s0 = el("div", "sect");
       s0.appendChild(el("span", "eyebrow", "Що з ним робити"));
-      var hb = el("div", "hintbox", [offer, baseNote].filter(Boolean).join("\n\n"));
-      s0.appendChild(hb);
+      if (offer) s0.appendChild(el("div", "hintbox", offer));
+      if (baseNote) {
+        var bn = el("p", "note-inline", baseNote);
+        bn.style.margin = offer ? "10px 0 0" : "0";
+        bn.style.color = "var(--text)";
+        s0.appendChild(bn);
+      }
       inner.appendChild(s0);
     }
 
-    /* дія */
+    /* результат на стенді */
     var s1 = el("div", "sect");
-    s1.appendChild(el("span", "eyebrow", "Позначити після розмови"));
+    s1.appendChild(el("span", "eyebrow", "Результат розмови"));
     var grid = el("div", "statusgrid");
-    var cur = state.touch[row.__id] || {};
     STATUSES.forEach(function (s) {
       var b = el("button", "sbtn " + s.k + (cur.status === s.k ? " on" : ""));
       b.type = "button";
       b.appendChild(el("span", "sdot " + s.k));
       b.appendChild(document.createTextNode(s.label));
       b.addEventListener("click", function () {
-        var t = state.touch[row.__id] || {};
-        setTouch(row.__id, { status: t.status === s.k ? "" : s.k });
+        setTouch(row.__id, { status: cur.status === s.k ? "" : s.k });
         refreshLeadSheet(row);
       });
       grid.appendChild(b);
@@ -1026,41 +1168,70 @@ details.raw[open] > summary::after{content:" ▴"}
     s1.appendChild(grid);
     inner.appendChild(s1);
 
-    /* нотатка */
+    /* головне по ліду — один рядок, видно зі списку */
     var s2 = el("div", "sect");
-    s2.appendChild(el("span", "eyebrow", "Моя нотатка з розмови"));
-    var ta = el("textarea", "note");
-    ta.placeholder = "Про що домовились, кому передати, що надіслати…";
-    ta.value = cur.note || "";
-    var saveTimer = null;
-    ta.addEventListener("input", function () {
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(function () { setTouch(row.__id, { note: ta.value }); }, 500);
+    s2.appendChild(el("span", "eyebrow", "Головне по цьому ліду"));
+    var sIn = el("input", "summary-in");
+    sIn.type = "text";
+    sIn.placeholder = "Один рядок: про що домовились, що вирішує";
+    sIn.value = cur.summary || "";
+    var sTimer = null;
+    sIn.addEventListener("input", function () {
+      clearTimeout(sTimer);
+      sTimer = setTimeout(function () { setTouch(row.__id, { summary: sIn.value }, true); }, 600);
     });
-    ta.addEventListener("blur", function () {
-      clearTimeout(saveTimer);
-      setTouch(row.__id, { note: ta.value });
+    sIn.addEventListener("blur", function () {
+      clearTimeout(sTimer);
+      setTouch(row.__id, { summary: sIn.value }, true);
     });
-    s2.appendChild(ta);
-    var nm = el("div", "notemeta");
-    nm.appendChild(el("span", null, cur.at ? "Оновлено " + shortTime(cur.at) + (cur.by ? " · " + cur.by : "") : "Зберігається автоматично"));
-    s2.appendChild(nm);
+    s2.appendChild(sIn);
+    s2.appendChild(el("p", "note-inline", "Цей рядок показується просто в списку — щоб на другій зустрічі не відкривати картку."));
     inner.appendChild(s2);
 
+    /* журнал: кожен контакт окремим записом */
+    var s3 = el("div", "sect");
+    s3.appendChild(el("span", "eyebrow", "Журнал контактів"));
+    var addBox = el("div", "logadd");
+    var ta = el("textarea", "note");
+    ta.placeholder = "Що обговорили, що пообіцяли, кому передати…";
+    var addBtn = el("button", "btn primary", "Додати запис");
+    addBtn.addEventListener("click", function () {
+      var txt = ta.value.trim();
+      if (!txt) { ta.focus(); return; }
+      addLogEntry(row.__id, txt);
+      ta.value = "";
+      refreshLeadSheet(row);
+      toast("Записано");
+    });
+    addBox.appendChild(ta);
+    addBox.appendChild(addBtn);
+    s3.appendChild(addBox);
+
+    var log = (cur.log || []).slice().sort(function (a, b) { return a.at < b.at ? 1 : -1; });
+    if (!log.length) {
+      s3.appendChild(el("p", "logempty", "Записів ще немає. Кожен запис отримує час і автора — так видно всю історію контактів з лідом."));
+    } else {
+      log.forEach(function (entry) { s3.appendChild(logNode(row, entry)); });
+    }
+    inner.appendChild(s3);
+
     /* контакти */
-    var links = [];
-    var email = val(row, "email"), phone = val(row, "phone"), site = val(row, "website");
+    var links = [], email = val(row, "email"), phone = val(row, "phone"), site = val(row, "website");
     if (phone) links.push(["tel:" + phone.replace(/[^\d+]/g, ""), "Подзвонити", phone, iconPhone()]);
     if (email) links.push(["mailto:" + email, "Написати", email, iconMail()]);
-    if (site) links.push([site.match(/^https?:/i) ? site : "https://" + site.replace(/^\/+/, ""), "Сайт", site, iconGlobe()]);
+    if (site) {
+      var isLi = /linkedin/i.test(site);
+      links.push([site.match(/^https?:/i) ? site : "https://" + site.replace(/^\/+/, ""),
+        isLi ? "LinkedIn" : "Сайт", site.replace(/^https?:\/\/(www\.)?/, ""), iconGlobe()]);
+    }
     if (links.length || val(row, "person")) {
-      var s3 = el("div", "sect");
-      s3.appendChild(el("span", "eyebrow", "Контакт"));
+      var s4 = el("div", "sect");
+      s4.appendChild(el("span", "eyebrow", "Контакт"));
       if (val(row, "person")) {
         var dl0 = el("dl", "kv");
         dl0.appendChild(kvRow("Людина", val(row, "person")));
         if (val(row, "role")) dl0.appendChild(kvRow("Посада", val(row, "role")));
-        s3.appendChild(dl0);
+        s4.appendChild(dl0);
       }
       if (links.length) {
         var lg = el("div", "linkgrid");
@@ -1068,7 +1239,7 @@ details.raw[open] > summary::after{content:" ▴"}
         links.forEach(function (L) {
           var a = el("a", "linkbtn");
           a.href = L[0];
-          if (L[1] === "Сайт") { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+          if (L[1] !== "Подзвонити" && L[1] !== "Написати") { a.target = "_blank"; a.rel = "noopener noreferrer"; }
           a.innerHTML = L[3];
           var lab = el("div", "l");
           lab.appendChild(el("small", null, L[1]));
@@ -1076,15 +1247,15 @@ details.raw[open] > summary::after{content:" ▴"}
           a.appendChild(lab);
           lg.appendChild(a);
         });
-        s3.appendChild(lg);
+        s4.appendChild(lg);
       }
-      inner.appendChild(s3);
+      inner.appendChild(s4);
     }
 
-    /* підказка від Claude — тільки якщо capability є */
+    /* підказка від Claude — тільки якщо можливість доступна */
     if (sampleFn) {
-      var s4 = el("div", "sect");
-      s4.appendChild(el("span", "eyebrow", "Підказка для розмови"));
+      var s5 = el("div", "sect");
+      s5.appendChild(el("span", "eyebrow", "Підказка для розмови"));
       var out = el("div", "hintbox hidden");
       var gen = el("button", "btn wide", "Підготувати 3 питання цьому ліду");
       gen.addEventListener("click", function () {
@@ -1094,52 +1265,84 @@ details.raw[open] > summary::after{content:" ▴"}
         out.textContent = "Думаю…";
         askClaude(row, out, gen);
       });
-      s4.appendChild(gen);
-      s4.appendChild(out);
-      inner.appendChild(s4);
+      s5.appendChild(gen);
+      s5.appendChild(out);
+      inner.appendChild(s5);
     }
 
-    /* усі поля з бази */
-    var s5 = el("div", "sect");
+    /* усі поля */
+    var s6 = el("div", "sect");
+    s6.style.borderBottom = "none";
     var det = el("details", "raw");
-    var sum = el("summary", null, "Усі поля з бази");
-    det.appendChild(sum);
+    det.appendChild(el("summary", null, "Усі поля з бази"));
     var dl = el("dl", "kv");
-    state.columns.forEach(function (c) {
-      var v = row[c];
-      if (!v) return;
-      dl.appendChild(kvRow(c, v));
-    });
+    state.columns.forEach(function (c) { if (row[c]) dl.appendChild(kvRow(c, row[c])); });
     det.appendChild(dl);
-    s5.appendChild(det);
-    s5.style.borderBottom = "none";
-    inner.appendChild(s5);
+    s6.appendChild(det);
+    inner.appendChild(s6);
 
     return sheet;
   }
+
+  function logNode(row, entry) {
+    var n = el("div", "logitem");
+    var when = el("div", "when");
+    when.appendChild(el("span", null, shortTime(entry.at)));
+    if (entry.by) when.appendChild(el("span", null, "· " + entry.by));
+    n.appendChild(when);
+
+    var txt = el("div", "txt", entry.text);
+    n.appendChild(txt);
+
+    var acts = el("div", "acts");
+    var edit = el("button", null, "Змінити");
+    var del = el("button", null, "Видалити");
+    acts.appendChild(edit);
+    acts.appendChild(del);
+    n.appendChild(acts);
+
+    edit.addEventListener("click", function () {
+      var ta = el("textarea", "note");
+      ta.value = entry.text;
+      var save = el("button", "btn primary", "Зберегти");
+      var cancel = el("button", "btn", "Скасувати");
+      var bar = el("div", "btnrow");
+      bar.style.marginTop = "8px";
+      bar.appendChild(save);
+      bar.appendChild(cancel);
+      txt.replaceWith(ta);
+      acts.replaceWith(bar);
+      ta.focus();
+      save.addEventListener("click", function () {
+        updateLogEntry(row.__id, entry.id, ta.value.trim());
+        refreshLeadSheet(row);
+      });
+      cancel.addEventListener("click", function () { refreshLeadSheet(row); });
+    });
+    del.addEventListener("click", function () {
+      if (!confirm("Видалити цей запис?")) return;
+      updateLogEntry(row.__id, entry.id, "");
+      refreshLeadSheet(row);
+    });
+    return n;
+  }
+
   function kvRow(k, v) {
     var d = el("div", "kv-row");
     d.appendChild(el("dt", null, k));
-    var dd = el("dd", /^[\d\s+()\-.]+$/.test(String(v)) ? "mono" : null, String(v));
-    d.appendChild(dd);
+    d.appendChild(el("dd", /^[\d\s+()\-.]+$/.test(String(v)) ? "mono" : null, String(v)));
     return d;
   }
   function refreshLeadSheet(row) {
     var old = sheetStack[sheetStack.length - 1];
     if (!old) return;
-    var fresh = buildLeadSheet(row);
     var sc = old.querySelector(".sheet-body").scrollTop;
+    var fresh = buildLeadSheet(row);
     old.replaceWith(fresh);
     sheetStack[sheetStack.length - 1] = fresh;
     fresh.querySelector(".sheet-body").scrollTop = sc;
     renderList();
     renderChips();
-  }
-  function shortTime(iso) {
-    try {
-      var d = new Date(iso);
-      return d.toLocaleString("uk-UA", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-    } catch (e) { return iso; }
   }
   function iconPhone() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 6 4z"/></svg>'; }
   function iconMail() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>'; }
@@ -1148,12 +1351,17 @@ details.raw[open] > summary::after{content:" ▴"}
   function askClaude(row, out, btn) {
     var lines = [];
     state.columns.forEach(function (c) { if (row[c]) lines.push(c + ": " + row[c]); });
+    var t = state.touch[row.__id];
+    if (t && t.summary) lines.push("Мій підсумок: " + t.summary);
+    if (t && t.log && t.log.length) {
+      lines.push("Історія контактів: " + t.log.map(function (e) { return e.text; }).join(" // "));
+    }
     var prompt =
-      "Ти помічник менеджера GIS-Point на геопросторовій виставці. Компанія-лід зупинилась біля стенда.\n" +
+      "Ти помічник менеджера GIS-Point на виставці MSPO. Компанія-лід підходить до стенда.\n" +
       "Дані про ліда:\n" + lines.join("\n") + "\n\n" +
       "Дай українською, дуже коротко:\n" +
       "1) Один рядок — хто вони і чим можуть бути корисні.\n" +
-      "2) Три конкретні питання, які варто поставити саме їм.\n" +
+      "2) Три конкретні питання саме їм.\n" +
       "3) Один наступний крок після виставки.\n" +
       "Без вступів і без вигаданих фактів — спирайся лише на дані вище.";
     sampleFn(prompt, {
@@ -1166,11 +1374,7 @@ details.raw[open] > summary::after{content:" ▴"}
       btn.textContent = "Переформулювати";
     }).catch(function (e) {
       btn.disabled = false;
-      if (e && e.code === "not_granted") {
-        out.classList.add("hidden");
-        btn.classList.add("hidden");
-        return;
-      }
+      if (e && e.code === "not_granted") { out.classList.add("hidden"); btn.classList.add("hidden"); return; }
       out.classList.remove("pending");
       out.textContent = e && e.text ? e.text : "Не вийшло згенерувати підказку. Спробуй ще раз.";
     });
@@ -1185,19 +1389,25 @@ details.raw[open] > summary::after{content:" ▴"}
 
     var countries = countBy(function (r) { return val(r, "country"); });
     var tiers = countBy(function (r) { return r.__tier; });
+    var segs = countBy(function (r) { return val(r, "segment"); });
 
     if (countries.length) inner.appendChild(filterSection("Країна", countries, state.filters.country, function (v) {
       state.filters.country = state.filters.country === norm(v) ? null : norm(v);
-      refresh(); popSheet();
+      state.limit = 60; refresh(); popSheet();
     }, true));
     if (tiers.length > 1) inner.appendChild(filterSection("Пріоритет", tiers, state.filters.tier, function (v) {
-      state.filters.tier = state.filters.tier === v ? null : v; refresh(); popSheet();
+      state.filters.tier = state.filters.tier === v ? null : v; state.limit = 60; refresh(); popSheet();
     }, false));
-    if (state.sources.length > 1) inner.appendChild(filterSection("Джерело", state.sources.map(function (s) {
-      return [s, state.sourceCounts[s]];
-    }), state.filters.source, function (v) {
-      state.filters.source = state.filters.source === v ? null : v; refresh(); popSheet();
+    if (segs.length > 1) inner.appendChild(filterSection("Сегмент", segs, null, function (v) {
+      state.filters.q = v; $("q").value = v; $("clearq").classList.add("show");
+      state.limit = 60; refresh(); popSheet();
     }, false));
+    if (state.sources.length > 1) inner.appendChild(filterSection("Джерело",
+      state.sources.map(function (s) { return [s, state.sourceCounts[s]]; }),
+      state.filters.source, function (v) {
+        state.filters.source = state.filters.source === v ? null : v;
+        state.limit = 60; refresh(); popSheet();
+      }, false));
 
     var reset = el("div", "sect");
     reset.style.borderBottom = "none";
@@ -1205,19 +1415,7 @@ details.raw[open] > summary::after{content:" ▴"}
     rb.addEventListener("click", function () { resetFilters(); popSheet(); });
     reset.appendChild(rb);
     inner.appendChild(reset);
-
     pushSheet(sheet);
-  }
-  function countBy(fn) {
-    var m = {}, order = [];
-    state.rows.forEach(function (r) {
-      var v = fn(r);
-      if (!v) return;
-      if (!m[v]) { m[v] = 0; order.push(v); }
-      m[v]++;
-    });
-    return order.map(function (v) { return [v, m[v]]; })
-      .sort(function (a, b) { return b[1] - a[1]; });
   }
   function filterSection(title, items, active, onPick, normalized) {
     var s = el("div", "sect");
@@ -1227,64 +1425,56 @@ details.raw[open] > summary::after{content:" ▴"}
     box.style.flexWrap = "wrap";
     box.style.gap = "7px";
     items.forEach(function (it) {
-      var v = it[0], n = it[1];
-      var on = normalized ? active === norm(v) : active === v;
-      var c = chip(v, on, n, function () { onPick(v); });
-      box.appendChild(c);
+      var on = normalized ? active === norm(it[0]) : active === it[0];
+      box.appendChild(chip(it[0], on, it[1], function () { onPick(it[0]); }));
     });
     s.appendChild(box);
     return s;
   }
   function resetFilters() {
-    state.filters = { q: "", country: null, tier: null, status: null, source: null, unvisited: false };
+    state.filters = { q: "", country: null, tier: null, status: null, pstatus: null, source: null, unvisited: false };
+    state.limit = 60;
     $("q").value = "";
     $("clearq").classList.remove("show");
     refresh();
   }
 
-  /* ================= меню: база, поля, експорт ================= */
+  /* ================= меню ================= */
   function openMenu() {
     var sheet = el("div", "sheet");
     sheet.appendChild(sheetHead("База та налаштування", popSheet));
     var body = el("div", "sheet-body"), inner = el("div", "sheet-inner");
     body.appendChild(inner); sheet.appendChild(body);
 
-    /* дані */
     var s1 = el("div", "sect");
     s1.appendChild(el("span", "eyebrow", "База лідів"));
     if (state.rows.length) {
-      var info = el("p", "note-inline",
-        state.rows.length + " записів" + (state.isDemo ? " (демо-дані)" : "") +
-        ", " + state.columns.length + " колонок" +
-        (state.sources.length ? ", джерел: " + state.sources.length : ""));
-      s1.appendChild(info);
+      s1.appendChild(el("p", "note-inline", (state.baseLabel ? state.baseLabel + " · " : "") +
+        state.rows.length + " записів, " + state.columns.length + " колонок"));
       state.sources.forEach(function (src) {
         var r = el("div", "srcrow");
         r.appendChild(el("span", null, src));
-        r.appendChild(el("span", "mono", state.sourceCounts[src]));
+        r.appendChild(el("span", "mono", String(state.sourceCounts[src])));
         var sp = el("span"); sp.style.flex = "1"; r.appendChild(sp);
         var x = el("button", "x", "Прибрати");
         x.addEventListener("click", function () { removeSource(src); popSheet(); openMenu(); });
         r.appendChild(x);
         s1.appendChild(r);
       });
-    } else {
-      s1.appendChild(el("p", "note-inline", "База ще не завантажена."));
-    }
+    } else s1.appendChild(el("p", "note-inline", "База ще не завантажена."));
     var row1 = el("div", "btnrow");
     row1.style.marginTop = "12px";
-    var add = el("button", "btn primary", state.rows.length && !state.isDemo ? "Додати ще файл" : "Завантажити Excel / CSV");
+    var add = el("button", "btn primary", state.rows.length ? "Додати ще файл" : "Завантажити Excel / CSV");
     add.addEventListener("click", function () { $("fileInput").click(); });
     row1.appendChild(add);
     s1.appendChild(row1);
     s1.appendChild(el("p", "note-inline", "Файл читається прямо на пристрої. Підтримуються .xlsx, .xls, .csv; кожен аркуш книги стає окремим джерелом."));
     inner.appendChild(s1);
 
-    /* зіставлення полів */
     if (state.columns.length) {
       var s2 = el("div", "sect");
       s2.appendChild(el("span", "eyebrow", "Які колонки за що відповідають"));
-      s2.appendChild(el("p", "note-inline", "Апка вгадала їх сама. Якщо щось не туди — виправ, список одразу оновиться."));
+      s2.appendChild(el("p", "note-inline", "Якщо щось не туди — виправ, список оновиться одразу."));
       var grid = el("div", "mapgrid");
       FIELDS.forEach(function (f) {
         var r = el("div", "maprow");
@@ -1311,11 +1501,10 @@ details.raw[open] > summary::after{content:" ▴"}
       inner.appendChild(s2);
     }
 
-    /* хто я */
     var s3 = el("div", "sect");
     s3.appendChild(el("span", "eyebrow", "Хто робить нотатки"));
     var lab = el("label", "field");
-    lab.appendChild(el("span", null, "Ім'я — підписує твої нотатки для решти команди"));
+    lab.appendChild(el("span", null, "Ім'я — підписує твої записи для решти команди"));
     var inp = el("input");
     inp.type = "text";
     inp.placeholder = "Напр. Ігор";
@@ -1327,46 +1516,50 @@ details.raw[open] > summary::after{content:" ▴"}
     });
     lab.appendChild(inp);
     s3.appendChild(lab);
-    var sync = el("p", "note-inline");
-    sync.id = "syncLine";
-    sync.textContent = db
-      ? "Нотатки синхронізуються з рештою команди."
-      : "Нотатки зберігаються на цьому пристрої.";
-    s3.appendChild(sync);
+    s3.appendChild(el("p", "note-inline", db
+      ? "Записи синхронізуються з рештою команди."
+      : "Записи зберігаються на цьому пристрої."));
     inner.appendChild(s3);
 
-    /* експорт */
     var s4 = el("div", "sect");
     s4.appendChild(el("span", "eyebrow", "Забрати результати виставки"));
     var touched = touchedRows();
     s4.appendChild(el("p", "note-inline", touched.length
-      ? touched.length + " лідів з позначкою або нотаткою."
+      ? touched.length + " лідів з результатом, підсумком або записами в журналі."
       : "Поки нема жодної позначки — з'явиться, щойно почнеш відмічати."));
     var row4 = el("div", "btnrow");
     var bCopy = el("button", "btn", "Скопіювати CSV");
-    bCopy.addEventListener("click", function () { copyCSV(); });
+    bCopy.addEventListener("click", copyCSV);
     row4.appendChild(bCopy);
     if (downloads) {
       var bDown = el("button", "btn primary", "Зберегти файл");
-      bDown.addEventListener("click", function () { saveCSV(); });
+      bDown.addEventListener("click", saveCSV);
       row4.appendChild(bDown);
     }
-    if (!touched.length) row4.querySelectorAll("button").forEach(function (b) { b.disabled = true; });
+    if (!touched.length) {
+      row4.querySelectorAll("button").forEach(function (b) { b.disabled = true; });
+    }
     s4.appendChild(row4);
     inner.appendChild(s4);
 
-    /* небезпечна зона */
     var s5 = el("div", "sect");
     s5.style.borderBottom = "none";
     s5.appendChild(el("span", "eyebrow", "Очистити"));
     var row5 = el("div", "btnrow");
-    var bWipe = el("button", "btn", "Стерти базу і нотатки");
+    var bNotes = el("button", "btn", "Стерти лише мої записи");
+    bNotes.addEventListener("click", function () {
+      if (!confirm("Стерти всі результати, підсумки та журнали? База лідів залишиться.")) return;
+      wipeNotes();
+      popSheet();
+    });
+    var bWipe = el("button", "btn", "Стерти все");
     bWipe.style.color = "var(--hot)";
     bWipe.addEventListener("click", function () {
-      if (!confirm("Стерти всю базу і всі нотатки? Скасувати буде неможливо.")) return;
+      if (!confirm("Стерти всю базу і всі записи? Скасувати буде неможливо.")) return;
       wipeAll();
       popSheet();
     });
+    row5.appendChild(bNotes);
     row5.appendChild(bWipe);
     s5.appendChild(row5);
     inner.appendChild(s5);
@@ -1380,7 +1573,7 @@ details.raw[open] > summary::after{content:" ▴"}
     var b = el("button", "iconbtn");
     b.setAttribute("aria-label", "Назад");
     b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5-7 7 7 7"/></svg>';
-    b.addEventListener("click", onBack);
+    b.addEventListener("click", function () { onBack(); });
     h.appendChild(b);
     h.appendChild(el("div", "sheet-title", title));
     return h;
@@ -1394,60 +1587,84 @@ details.raw[open] > summary::after{content:" ▴"}
   function popSheet(fromHistory) {
     var node = sheetStack.pop();
     if (node) node.remove();
-    if (!sheetStack.length) {
-      document.body.style.overflow = "";
-      openLeadId = null;
-    }
-    if (!fromHistory) { try { history.back(); } catch (e) {} }
+    if (!sheetStack.length) document.body.style.overflow = "";
+    if (fromHistory !== true) { try { history.back(); } catch (e) {} }
   }
-  window.addEventListener("popstate", function () {
-    if (sheetStack.length) popSheet(true);
-  });
+  window.addEventListener("popstate", function () { if (sheetStack.length) popSheet(true); });
 
-  /* ================= нотатки та статуси ================= */
-  function setTouch(id, patch) {
-    var t = state.touch[id] || {};
-    var next = { status: t.status || "", note: t.note || "", by: t.by || "", at: t.at || "" };
-    if (patch.status !== undefined) next.status = patch.status;
-    if (patch.note !== undefined) next.note = patch.note;
-    if (!next.status && !next.note) {
+  /* ================= записи по ліду ================= */
+  function blankTouch() { return { status: "", summary: "", log: [], by: "", at: "" }; }
+  function getTouch(id) {
+    var t = state.touch[id];
+    if (!t) return blankTouch();
+    if (!t.log) t.log = [];
+    /* міграція зі старої версії, де була одна нотатка */
+    if (t.note) {
+      t.log.push({ id: "m" + hash(t.note), at: t.at || nowISO(), by: t.by || "", text: t.note });
+      delete t.note;
+    }
+    return t;
+  }
+  function saveTouch(id, t) {
+    if (!t.status && !t.summary && (!t.log || !t.log.length)) {
       delete state.touch[id];
       persistTouch();
       if (db) db.doc("touch/" + id).delete().catch(function () {});
       refresh();
       return;
     }
-    next.by = state.me || next.by || "";
-    next.at = nowISO();
-    state.touch[id] = next;
+    t.by = state.me || t.by || "";
+    t.at = nowISO();
+    state.touch[id] = t;
     persistTouch();
     if (db) {
-      db.doc("touch/" + id).set(next).catch(function (e) {
-        if (e && e.code === "quota_exceeded") toast("Спільна база заповнена — нотатка збережена лише тут.");
+      db.doc("touch/" + id).set(t).catch(function (e) {
+        if (e && e.code === "quota_exceeded") toast("Спільна база заповнена — запис лишився лише тут.");
       });
     }
     refresh();
   }
+  function setTouch(id, patch, quiet) {
+    var t = getTouch(id);
+    if (patch.status !== undefined) t.status = patch.status;
+    if (patch.summary !== undefined) t.summary = patch.summary;
+    var before = JSON.stringify(state.touch[id] || null);
+    saveTouch(id, t);
+    if (quiet && before === JSON.stringify(state.touch[id] || null)) return;
+  }
+  function addLogEntry(id, text) {
+    var t = getTouch(id);
+    t.log.push({ id: hash(text + nowISO() + Math.random()), at: nowISO(), by: state.me || "", text: text });
+    saveTouch(id, t);
+  }
+  function updateLogEntry(id, entryId, text) {
+    var t = getTouch(id);
+    if (!text) t.log = t.log.filter(function (e) { return e.id !== entryId; });
+    else t.log.forEach(function (e) { if (e.id === entryId) { e.text = text; e.editedAt = nowISO(); } });
+    saveTouch(id, t);
+  }
   function touchedRows() {
     return state.rows.filter(function (r) {
       var t = state.touch[r.__id];
-      return t && (t.status || t.note);
+      return t && (t.status || t.summary || (t.log && t.log.length));
     });
   }
 
   /* ================= збереження ================= */
   function persistBase() {
-    if (state.isDemo) return;
     var ok = lsSet(LS_BASE, {
-      columns: state.columns, map: state.map, rows: stripRows(state.rows), version: state.baseVersion
+      columns: state.columns, map: state.map, rows: stripRows(state.rows),
+      version: state.baseVersion, label: state.baseLabel
     });
     if (!ok) toast("Базу не вдалось зберегти офлайн — забагато даних для пам'яті браузера.");
   }
   function persistTouch() { lsSet(LS_TOUCH, state.touch); }
   function stripRows(rows) {
     return rows.map(function (r) {
-      var o = {};
-      for (var k in r) if (k.indexOf("__") !== 0 || k === "__source") o[k] = r[k];
+      var o = {}, k;
+      for (k in r) {
+        if (k.indexOf("__") !== 0 || k === "__source" || k === "__mkey") o[k] = r[k];
+      }
       return o;
     });
   }
@@ -1463,24 +1680,21 @@ details.raw[open] > summary::after{content:" ▴"}
       parts = parts.filter(function (p) { return p && p.rows.length; });
       if (!parts.length) { toast("У файлі не знайшлося рядків з даними."); return; }
 
-      var wasDemo = state.isDemo;
-      if (wasDemo) { state.rows = []; state.columns = []; state.isDemo = false; }
-
       var cols = state.columns.slice();
       parts.forEach(function (p) {
         p.columns.forEach(function (c) { if (cols.indexOf(c) === -1) cols.push(c); });
         state.rows = state.rows.concat(p.rows);
       });
+      var newCols = cols.filter(function (c) { return state.columns.indexOf(c) === -1; });
       state.columns = cols;
-      state.map = autoMap(cols);
+      /* якщо файл приніс свої колонки — перезіставляємо все */
+      if (newCols.length) state.map = autoMap(cols);
       state.baseVersion = Date.now();
       reindex();
       persistBase();
       pushBaseToDb();
       resetFilters();
-      var n = parts.reduce(function (a, p) { return a + p.rows.length; }, 0);
-      toast("Завантажено " + n + " записів");
-      $("demobar").classList.add("hidden");
+      toast("Завантажено " + parts.reduce(function (a, p) { return a + p.rows.length; }, 0) + " записів");
     }).catch(function (e) {
       toast(e && e.message ? e.message : "Не вдалося прочитати файл.");
     });
@@ -1491,14 +1705,21 @@ details.raw[open] > summary::after{content:" ▴"}
     reindex(); persistBase(); pushBaseToDb(); refresh();
     toast("Джерело прибрано");
   }
+  function wipeNotes() {
+    var ids = Object.keys(state.touch);
+    state.touch = {};
+    persistTouch();
+    if (db) ids.forEach(function (id) { db.doc("touch/" + id).delete().catch(function () {}); });
+    refresh();
+    toast("Записи стерто");
+  }
   function wipeAll() {
-    state.rows = []; state.columns = []; state.map = {}; state.touch = {};
-    state.isDemo = false; state.baseVersion = Date.now();
-    lsDel(LS_BASE); lsDel(LS_TOUCH);
+    wipeNotes();
+    state.rows = []; state.columns = []; state.map = {};
+    state.baseVersion = Date.now(); state.baseLabel = "";
+    lsDel(LS_BASE);
     reindex();
-    if (db) {
-      db.doc("base/meta").set({ version: state.baseVersion, chunks: 0, columns: [], map: {}, wiped: true }).catch(function () {});
-    }
+    if (db) db.doc("base/meta").set({ version: state.baseVersion, chunks: 0, columns: [], map: {}, wiped: true }).catch(function () {});
     resetFilters();
     toast("Стерто");
   }
@@ -1509,12 +1730,15 @@ details.raw[open] > summary::after{content:" ▴"}
     return /[",;\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
   }
   function buildCSV() {
-    var rows = touchedRows();
-    var head = ["Статус", "Моя нотатка", "Хто", "Коли"].concat(state.columns);
+    var head = ["Результат", "Головне по ліду", "Журнал", "Записів", "Хто", "Оновлено"].concat(state.columns);
     var lines = [head.map(csvCell).join(",")];
-    rows.forEach(function (r) {
+    touchedRows().forEach(function (r) {
       var t = state.touch[r.__id] || {};
-      var line = [STATUS_LABEL[t.status] || "", t.note || "", t.by || "", t.at ? shortTime(t.at) : ""];
+      var log = (t.log || []).slice().sort(function (a, b) { return a.at < b.at ? -1 : 1; })
+        .map(function (e) { return shortTime(e.at) + (e.by ? " (" + e.by + ")" : "") + ": " + e.text; })
+        .join("\n");
+      var line = [STATUS_LABEL[t.status] || "", t.summary || "", log,
+        String((t.log || []).length), t.by || "", t.at ? shortTime(t.at) : ""];
       state.columns.forEach(function (c) { line.push(r[c] || ""); });
       lines.push(line.map(csvCell).join(","));
     });
@@ -1522,10 +1746,7 @@ details.raw[open] > summary::after{content:" ▴"}
   }
   function copyCSV() {
     var csv = buildCSV();
-    var done = function () { toast("CSV у буфері — встав у Excel або Google Таблиці"); };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(csv).then(done).catch(fallbackCopy);
-    } else fallbackCopy();
+    var done = function () { toast("CSV у буфері — встав в Excel або Google Таблиці"); };
     function fallbackCopy() {
       var ta = document.createElement("textarea");
       ta.value = csv;
@@ -1534,19 +1755,23 @@ details.raw[open] > summary::after{content:" ▴"}
       document.body.appendChild(ta);
       ta.select();
       try { document.execCommand("copy"); done(); }
-      catch (e) { toast("Скопіювати не вийшло — виділи текст вручну."); }
+      catch (e) { toast("Скопіювати не вийшло — спробуй «Зберегти файл»."); }
       ta.remove();
     }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(csv).then(done).catch(fallbackCopy);
+    } else fallbackCopy();
   }
   function saveCSV() {
     if (!downloads) return;
-    var name = "stand-radar-" + new Date().toISOString().slice(0, 10) + ".csv";
-    downloads.save({ filename: name, data: buildCSV() })
-      .then(function () { toast("Файл збережено"); })
+    downloads.save({
+      filename: "stand-radar-" + new Date().toISOString().slice(0, 10) + ".csv",
+      data: buildCSV()
+    }).then(function () { toast("Файл збережено"); })
       .catch(function () { toast("Збереження скасовано"); });
   }
 
-  /* ================= синхронізація через db ================= */
+  /* ================= синхронізація ================= */
   function chunkRows(rows) {
     var chunks = [], cur = [], len = 0, i, s;
     for (i = 0; i < rows.length; i++) {
@@ -1558,21 +1783,16 @@ details.raw[open] > summary::after{content:" ▴"}
     return chunks;
   }
   function pushBaseToDb() {
-    if (!db || state.isDemo) return;
+    if (!db || !state.rows.length) return;
     var chunks = chunkRows(stripRows(state.rows));
-    var writes = chunks.map(function (c, i) {
+    Promise.all(chunks.map(function (c, i) {
       return db.doc("base/chunk" + i).set({ rows: c, v: state.baseVersion });
-    });
-    Promise.all(writes).then(function () {
+    })).then(function () {
       return db.doc("base/meta").set({
-        version: state.baseVersion,
-        chunks: chunks.length,
-        columns: state.columns,
-        map: state.map,
-        count: state.rows.length
+        version: state.baseVersion, chunks: chunks.length,
+        columns: state.columns, map: state.map,
+        label: state.baseLabel, count: state.rows.length
       });
-    }).then(function () {
-      toast("База роздана команді");
     }).catch(function (e) {
       if (e && e.code === "quota_exceeded") toast("Спільна база переповнена — тут працює, у команди ні.");
     });
@@ -1592,15 +1812,14 @@ details.raw[open] > summary::after{content:" ▴"}
       state.columns = meta.columns || state.columns;
       state.map = meta.map || autoMap(state.columns);
       state.baseVersion = meta.version || Date.now();
-      state.isDemo = false;
+      state.baseLabel = meta.label || state.baseLabel;
       reindex();
       persistBase();
-      $("demobar").classList.add("hidden");
       refresh();
       toast("Отримано базу від команди — " + rows.length + " записів");
     }).catch(function () {});
   }
-  function initDb() {
+  function initCapabilities() {
     if (!(window.claude && typeof window.claude.use === "function")) return;
 
     window.claude.use("downloads").then(function (d) { downloads = d; }).catch(function () {});
@@ -1609,19 +1828,12 @@ details.raw[open] > summary::after{content:" ▴"}
     window.claude.use("db").then(function (d) {
       if (!d) return;
       db = d;
-      var line = $("syncLine");
-      if (line) line.textContent = "Нотатки синхронізуються з рештою команди.";
-
-      dbBaseUnsub = db.doc("base/meta").onSnapshot(function (snap) {
-        if (!snap.exists) {
-          /* сховище порожнє: якщо в нас є справжня база — ділимось нею */
-          if (state.rows.length && !state.isDemo) pushBaseToDb();
-          return;
-        }
+      db.doc("base/meta").onSnapshot(function (snap) {
+        if (!snap.exists) { pushBaseToDb(); return; }
         var meta = snap.data() || {};
         if (meta.wiped && !meta.chunks) return;
         if ((meta.version || 0) > state.baseVersion) pullBaseFromDb(meta);
-        else if (state.rows.length && !state.isDemo && (meta.version || 0) < state.baseVersion) pushBaseToDb();
+        else if (state.rows.length && (meta.version || 0) < state.baseVersion) pushBaseToDb();
       }, function () {});
 
       db.collection("touch").onSnapshot(function (snap) {
@@ -1632,10 +1844,13 @@ details.raw[open] > summary::after{content:" ▴"}
             if (state.touch[id]) { delete state.touch[id]; changed = true; }
             return;
           }
-          var remote = ch.doc.data() || {};
-          var local = state.touch[id];
+          var remote = ch.doc.data() || {}, local = state.touch[id];
           if (!local || !local.at || (remote.at && remote.at > local.at)) {
-            state.touch[id] = { status: remote.status || "", note: remote.note || "", by: remote.by || "", at: remote.at || "" };
+            state.touch[id] = {
+              status: remote.status || "", summary: remote.summary || "",
+              log: Array.isArray(remote.log) ? remote.log : [],
+              by: remote.by || "", at: remote.at || ""
+            };
             changed = true;
           }
         });
@@ -1644,36 +1859,37 @@ details.raw[open] > summary::after{content:" ▴"}
     }).catch(function () {});
   }
 
-  /* ================= завантаження стану ================= */
+  /* ================= старт ================= */
+  function embedded() {
+    var node = document.getElementById("base-data");
+    if (!node) return null;
+    try { return JSON.parse(node.textContent); } catch (e) { return null; }
+  }
   function boot() {
     state.me = lsGet(LS_ME) || "";
     state.touch = lsGet(LS_TOUCH) || {};
-    var saved = lsGet(LS_BASE);
-    if (saved && saved.rows && saved.rows.length) {
+
+    var saved = lsGet(LS_BASE), packed = embedded();
+    /* вшита база — те, з чим апка приїхала; збережена перемагає, якщо новіша */
+    if (saved && saved.rows && saved.rows.length && (!packed || (saved.version || 0) >= packed.version)) {
       state.columns = saved.columns || [];
       state.map = saved.map || autoMap(state.columns);
       state.rows = saved.rows;
       state.baseVersion = saved.version || 0;
-      state.isDemo = false;
-    } else {
-      state.columns = DEMO_COLUMNS.slice();
-      state.rows = DEMO_ROWS.map(function (r) {
-        var o = {};
-        DEMO_COLUMNS.forEach(function (c, i) { o[c] = r[i]; });
-        o.__source = "Демо";
-        return o;
-      });
-      state.map = autoMap(state.columns);
-      state.isDemo = true;
-      $("demobar").classList.remove("hidden");
+      state.baseLabel = saved.label || "";
+    } else if (packed) {
+      state.columns = packed.columns;
+      state.map = packed.map;
+      state.rows = packed.rows;
+      state.baseVersion = packed.version;
+      state.baseLabel = packed.label || "";
+      persistBase();
     }
     reindex();
     refresh();
-    initDb();
+    initCapabilities();
   }
-
   function refresh() {
-    state.limit = Math.max(60, Math.min(state.limit, 600));
     renderChips();
     renderList();
   }
@@ -1711,15 +1927,13 @@ details.raw[open] > summary::after{content:" ▴"}
     qInput.placeholder = state.numMode ? "Номер стенда…" : "Компанія, стенд, людина…";
     qInput.focus();
   });
+  $("agendaBtn").addEventListener("click", openAgenda);
   $("filterBtn").addEventListener("click", openFilters);
   $("menuBtn").addEventListener("click", openMenu);
-  $("demoImport").addEventListener("click", function () { $("fileInput").click(); });
   $("fileInput").addEventListener("change", function () {
     handleFiles(this.files);
     this.value = "";
   });
-
-  /* перетягування файлу на десктопі */
   ["dragover", "drop"].forEach(function (ev) {
     window.addEventListener(ev, function (e) {
       e.preventDefault();
