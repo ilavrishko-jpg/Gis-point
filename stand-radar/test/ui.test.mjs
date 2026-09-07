@@ -387,11 +387,88 @@ ok("запис друком додається попри блок диктув�
   `${before} -> ${(await p3.$$(".logitem")).length}`);
 await p3.close();
 
-section("[17] Помилки виконання");
+section("[17] Сценарії розмови");
+const p5 = await ctx.newPage();
+const errors5 = [];
+p5.on("pageerror", (e) => errors5.push(String(e)));
+await p5.goto(URL); await p5.waitForTimeout(1500);
+
+// лід з бази FlyBy -> технічний сценарій
+await p5.fill("#q", "Beyond Vision"); await p5.waitForTimeout(400);
+await p5.click(".row"); await p5.waitForTimeout(400);
+const pbHead = await p5.$$eval(".pb-head .eyebrow", (e) => e.map((x) => x.textContent));
+ok("лід FlyBy отримав технічний сценарій",
+  pbHead[0].includes("виробник БПЛА"), pbHead[0]);
+const pbGroups = await p5.$$eval(".pb-group summary", (e) => e.map((x) => x.textContent));
+ok("чотири групи питань", pbGroups.length === 4, JSON.stringify(pbGroups));
+ok("є група про технічні характеристики", pbGroups.includes("Технічні характеристики"));
+ok("є група про того, хто вирішує", pbGroups.includes("Хто вирішує"));
+await p5.$$eval(".pb-group summary", (e) => e.forEach((x) => x.click()));
+await p5.waitForTimeout(300);
+const qs = await p5.$$eval(".pb-list li", (e) => e.map((x) => x.textContent));
+ok("питання видно без мережі", qs.length >= 14, qs.length + " питань");
+ok("питання про висоту польоту під наші межі", qs.some((q) => q.includes("110–280")), "");
+ok("питання про автопілот", qs.some((q) => q.includes("автопілот")));
+ok("питання про ліцензію на платформу", qs.some((q) => q.includes("платформ")));
+ok("активна вкладка — FlyBy",
+  (await p5.$eval(".pb-tab.on", (e) => e.textContent)) === "FlyBy");
+
+// лід з ІТ-бази -> сценарій виявлення потреби
+await p5.click(".sheet-head .iconbtn"); await p5.waitForTimeout(300);
+await p5.fill("#q", "Advanced Navigation"); await p5.waitForTimeout(400);
+await p5.click(".row"); await p5.waitForTimeout(400);
+ok("лід ІТ-бази отримав сценарій виявлення потреби",
+  (await p5.$eval(".pb-head .eyebrow", (e) => e.textContent)).includes("виявити потребу"),
+  await p5.$eval(".pb-head .eyebrow", (e) => e.textContent));
+const itGroups = await p5.$$eval(".pb-group summary", (e) => e.map((x) => x.textContent));
+ok("є група про дотик через карти", itGroups.includes("Дотик через карти й навігацію"), JSON.stringify(itGroups));
+ok("є група про того, хто відповідає за розробку", itGroups.includes("Хто відповідає за розробку"));
+await p5.$$eval(".pb-group summary", (e) => e.forEach((x) => x.click()));
+await p5.waitForTimeout(300);
+const itQs = await p5.$$eval(".pb-list li", (e) => e.map((x) => x.textContent));
+ok("питання про гео в їхньому продукті", itQs.some((q) => q.includes("координати") || q.includes("гео-дані")));
+ok("питання про вакансії як сигнал", itQs.some((q) => q.includes("вакансії")));
+
+// ручний перехід на інший сценарій зберігається
+await p5.$$eval(".pb-tab", (b) => b.find((x) => x.textContent === "FlyBy").click());
+await p5.waitForTimeout(500);
+ok("сценарій перемикається вручну",
+  (await p5.$eval(".pb-head .eyebrow", (e) => e.textContent)).includes("виробник БПЛА"));
+await p5.click(".sheet-head .iconbtn"); await p5.waitForTimeout(300);
+await p5.click(".row"); await p5.waitForTimeout(450);
+ok("вибір сценарію запамʼятався",
+  (await p5.$eval(".pb-head .eyebrow", (e) => e.textContent)).includes("виробник БПЛА"));
+await p5.$$eval(".pb-tab", (b) => b.find((x) => x.textContent === "FlyBy").click());
+await p5.waitForTimeout(450);
+ok("повторний тап знімає ручний вибір",
+  (await p5.$eval(".pb-head .eyebrow", (e) => e.textContent)).includes("виявити потребу"));
+
+// довідка про нас
+await p5.click(".sheet-head .iconbtn"); await p5.waitForTimeout(300);
+await p5.fill("#q", ""); await p5.click("#menuBtn"); await p5.waitForTimeout(400);
+const briefs = await p5.$$eval("textarea.brief", (e) => e.map((x) => x.value));
+ok("дві довідки в меню", briefs.length === 2, briefs.length + "");
+ok("довідка FlyBy має реальні цифри з флаєра",
+  briefs[0].includes("13.2") && briefs[0].includes("110–280") && briefs[0].includes("3.34"),
+  briefs[0].slice(0, 80));
+ok("довідка ІТ називає гео-спеціалізацію",
+  briefs[1].includes("SAR") && briefs[1].includes("ENC") && briefs[1].includes("FLY BY"),
+  briefs[1].slice(0, 80));
+await p5.fill("textarea.brief", "Змінений текст довідки");
+await p5.$eval("textarea.brief", (e) => e.blur());
+await p5.waitForTimeout(500);
+await p5.reload(); await p5.waitForTimeout(1500);
+await p5.click("#menuBtn"); await p5.waitForTimeout(400);
+ok("правка довідки переживає перезавантаження",
+  (await p5.$$eval("textarea.brief", (e) => e.map((x) => x.value)))[0] === "Змінений текст довідки");
+await p5.close();
+
+section("[18] Помилки виконання");
 ok("без винятків на основній сторінці", errors.length === 0, JSON.stringify(errors));
 ok("без винятків на сторінці імпорту", errors2.length === 0, JSON.stringify(errors2));
 ok("без винятків на сторінці смуги годин", errors3.length === 0, JSON.stringify(errors3));
 ok("без винятків на сторінці контактів компанії", errors4.length === 0, JSON.stringify(errors4));
+ok("без винятків на сторінці сценаріїв", errors5.length === 0, JSON.stringify(errors5));
 
 await browser.close();
 fs.rmSync(TMP, { recursive: true, force: true });

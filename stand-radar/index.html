@@ -550,6 +550,34 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
 .micnote{margin:8px 0 0;font-size:12.5px;color:var(--text-dim);line-height:1.5}
 .micnote.err{color:var(--hot)}
 
+
+/* --- сценарій розмови --- */
+.pb-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.pb-switch{display:flex;gap:6px;margin-bottom:10px}
+.pb-tab{
+  flex:1;padding:8px 10px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);
+  font-size:13px;font-weight:600;color:var(--text-dim);
+}
+.pb-tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+details.pb-group{border-bottom:1px solid var(--line-soft)}
+details.pb-group:last-of-type{border-bottom:none}
+details.pb-group > summary{
+  font-family:var(--sans);font-size:14px;font-weight:600;
+  letter-spacing:0;text-transform:none;color:var(--text);
+  padding:10px 0;
+}
+.pb-list{margin:0 0 10px;padding:0 0 0 18px;display:flex;flex-direction:column;gap:7px}
+.pb-list li{font-size:14px;line-height:1.5;color:var(--text-prose,var(--text))}
+.pb-list li::marker{color:var(--accent)}
+textarea.brief{
+  width:100%;min-height:150px;resize:vertical;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surface);padding:11px 12px;outline:none;
+  font-size:14px;line-height:1.5;
+}
+textarea.brief:focus{border-color:var(--accent)}
+
 .hidden{display:none !important}
 </style>
 
@@ -609,7 +637,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
        3) db (якщо є)     — спільна база стенда, синхронна для команди
      ================================================================== */
 
-  var LS_BASE = "sr.base.v2", LS_TOUCH = "sr.touch.v2", LS_ME = "sr.me";
+  var LS_BASE = "sr.base.v2", LS_TOUCH = "sr.touch.v2", LS_ME = "sr.me", LS_BRIEF = "sr.brief.v1";
   var CHUNK_CHARS = 140000;
 
   var STATUSES = [
@@ -654,7 +682,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
   /* ================= стан ================= */
   var state = {
     columns: [], map: {}, alt: {}, rows: [], sources: [], sourceCounts: {},
-    touch: {}, me: "", baseVersion: 0, baseLabel: "",
+    touch: {}, me: "", baseVersion: 0, baseLabel: "", brief: null,
     filters: { q: "", country: null, tier: null, status: null, pstatus: null, source: null, unvisited: false },
     numMode: false, limit: 60
   };
@@ -1317,6 +1345,185 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
     pushSheet(sheet);
   }
 
+  /* ================= сценарії розмови =================
+     Два продукти — дві різні розмови. FlyBy продають виробнику дрона:
+     там технічна кваліфікація під design-in. ІТ-аутсорс продають тому,
+     хто не встигає наймати: там виявлення потреби через сигнал найму
+     і дотик через карти й навігацію.
+
+     Довідка про нас редагується в меню — тут лише те, з чим апка
+     приїхала, узяте з флаєра FlyBy та з формулювань самої бази. */
+
+  var BRIEF_DEFAULT = {
+    flyby:
+      "FLY BY — навігація для БПЛА без GNSS. GIS-Point Ltd (UK 15059660), " +
+      "розроблено й перевірено в полі в Україні.\n" +
+      "Як працює: пасивна камера вниз зіставляє рельєф зі звичайним супутниковим " +
+      "знімком і дає абсолютну позицію на борту. GPS у рішенні не бере участі.\n" +
+      "Цифри з польотів: медіана 13.2 м проти бортового GPS на шести наборах даних; " +
+      "3.34 м проти RTK на ортофото, зафіксовано 100% кадрів; дрейф інерціалки " +
+      "306 м → 7.5 м без GPS; найкращий фікс 1.8 м; ~0.8 с на кадр.\n" +
+      "Умови: 110–280 м AGL, денне світло; нічний режим у кваліфікації.\n" +
+      "Вхід: камера вниз + бортовий обчислювач. Вихід: абсолютна позиція та " +
+      "впевненість, з чесним «немає фіксу».\n" +
+      "Переваги: нуль радіовипромінювання — РЕБ нічого не бачить; знімок не мусить " +
+      "бути свіжим, зйомка місцевості не потрібна; це шар, автопілот лишається " +
+      "арбітром рішення; екіпаж нічого нового не вчить.\n" +
+      "Інтеграція з автопілотами відкритих стандартів.\n" +
+      "Комерція: OEM design-in, ліцензія на платформу, NDA на запит.",
+    itout:
+      "ІТ-юніт GIS-Point — інженерні команди під замовника, з геопросторовою " +
+      "спеціалізацією. Продаємо не «розробку взагалі», а руки там, де компанія " +
+      "не встигає наймати сама.\n" +
+      "Де ми сильні: навігаційні алгоритми та флайт-стек; обробка геоданих — " +
+      "EO, SAR, генерація DEM, LiDAR, батиметрія; картографія та підтримка " +
+      "ENC-каталогів; 3D-конвеєри й scan-to-BIM; ROS та автономія; real-time " +
+      "обробка відео; embedded і firmware; тестова автоматизація.\n" +
+      "Дотик, який відрізняє нас від будь-якого аутсорсера: ми самі робимо " +
+      "навігаційний продукт (FLY BY) і рішення на картах — тож розмовляємо з " +
+      "їхніми інженерами однією мовою.\n" +
+      "Формат: команда під їхнього тех-ліда, аутстаф або проєкт під ключ; " +
+      "закриваємо пік навантаження без розширення штату."
+  };
+
+  var PLAYBOOKS = {
+    flyby: {
+      key: "flyby",
+      short: "FlyBy",
+      name: "FlyBy — виробник БПЛА",
+      lead: "Це виробник або інтегратор БПЛА. Мета розмови — технічно кваліфікувати його як OEM-замовника FLY BY.",
+      groups: [
+        ["Чи їм це взагалі треба", [
+          "Як у вас зараз поводиться борт, коли GNSS глушать — що бачить оператор?",
+          "Що вже пробували проти глушіння і де воно ламається?",
+          "Хто з ваших замовників найбільше страждає від втрати позиції?"
+        ]],
+        ["Технічні характеристики", [
+          "На яких висотах реально літають ваші борти — і скільки часу з них у діапазоні 110–280 м?",
+          "Який обчислювач стоїть на борту і скільки на ньому лишається вільного ресурсу?",
+          "Камера вниз уже є, чи її треба закладати?",
+          "Який автопілот і чи відкритий він для стороннього джерела позиції?",
+          "Яка точність вас влаштує — і з чим ви її порівнюєте?",
+          "Денні місії чи нічні теж?"
+        ]],
+        ["Хто вирішує", [
+          "Хто у вас каже «так» новому компоненту в польотному стеку?",
+          "Як у вас виглядає шлях від тесту до серійної закупівлі?",
+          "Хто веде інтеграцію з боку вашої інженерії?"
+        ]],
+        ["Що ще випитати", [
+          "Скільки платформ на рік — щоб порахувати ліцензію на платформу?",
+          "Чи є борт, на якому можна поставити оцінку найближчим часом?",
+          "Які вимоги до сертифікації та експортного контролю у вашій країні?",
+          "З ким ще ви це порівнюєте?"
+        ]]
+      ],
+      task:
+        "Мета — технічно кваліфікувати цього виробника як OEM-замовника FLY BY.\n" +
+        "1) ХТО ВОНИ — один рядок: що виробляють і де в їхньому продукті болить позиціонування.\n" +
+        "2) ЧИ ЇМ ТРЕБА — два питання, які перевіряють потребу. Якщо з даних видно, що в них уже " +
+        "є власна візуальна або GNSS-denied навігація — не питай наївно «чи цікаво», а став питання " +
+        "про межі їхнього рішення й про те, де наше може стати другим джерелом.\n" +
+        "3) ТЕХНІЧНІ ХАРАКТЕРИСТИКИ — чотири питання під наші межі: висоти, бортовий обчислювач, " +
+        "камера вниз, автопілот, потрібна точність, день чи ніч.\n" +
+        "4) ХТО ВИРІШУЄ — як за розмову з'ясувати, хто ухвалює design-in і хто закупівлю.\n" +
+        "5) ЩО ЩЕ ВИПИТАТИ — обсяги платформ, тестовий борт, сертифікація й експорт, з ким порівнюють.\n" +
+        "6) ЧЕРВОНІ ПРАПОРЦІ — що саме в даних натякає, що це не наш клієнт або що розмова буде важкою."
+    },
+    itout: {
+      key: "itout",
+      short: "ІТ-аутсорс",
+      name: "ІТ-аутсорсинг — виявити потребу",
+      lead: "Це продуктова компанія, якій може бракувати інженерів. Мета — знайти дотик через карти й навігацію і виявити потребу в командах.",
+      groups: [
+        ["Сигнал потреби", [
+          "Кого ви зараз шукаєте в інженерію і як довго ці вакансії відкриті?",
+          "Що не встигаєте випустити через брак рук?",
+          "Що станеться з роадмапом, якщо ці ролі не закрити до кінця кварталу?"
+        ]],
+        ["Хто відповідає за розробку", [
+          "Хто у вас володіє розробкою ПЗ — і хто вирішує брати команду ззовні?",
+          "Ви вже працюєте з підрядниками? Що в тому досвіді не влаштувало?",
+          "Хто буде тех-лідом з вашого боку, якщо команда прийде ззовні?"
+        ]],
+        ["Дотик через карти й навігацію", [
+          "Де у вашому продукті з'являються координати, карти або гео-дані?",
+          "Хто у вас робить навігаційну частину — свої чи купуєте?",
+          "Скільки у вас коду навколо обробки знімків, DEM, LiDAR чи батиметрії?",
+          "Що з цього ви робите неохоче, бо це не ваша основна цінність?"
+        ]],
+        ["Умови й вхід", [
+          "Які обмеження щодо громадянства, допуску або юрисдикції команди?",
+          "Як у вас виглядає пілот — з чого починається співпраця з новим підрядником?",
+          "Який бюджетний цикл і хто його тримає?"
+        ]]
+      ],
+      task:
+        "Мета — виявити потребу в інженерних командах і знайти дотик через карти й навігацію.\n" +
+        "1) ХТО ВОНИ І ЯКИЙ СИГНАЛ — один рядок: що за продукт і який саме сигнал потреби видно " +
+        "в даних (кого наймають, який стек, яка стадія). Спирайся на довідку про ліда, а не на здогади.\n" +
+        "2) ХТО ВІДПОВІДАЄ ЗА РОЗРОБКУ — хто це ймовірно за даними, і одне питання, яким це підтвердити " +
+        "в розмові, не питаючи в лоб «хто у вас головний».\n" +
+        "3) ДОТИК ЧЕРЕЗ ГЕО — де саме в їхньому продукті є карти, координати, знімки, DEM, LiDAR, " +
+        "батиметрія чи навігація. Якщо гео там не очевидне — чесно скажи це і запропонуй інший дотик " +
+        "через наш стек.\n" +
+        "4) ЧОТИРИ ПИТАННЯ, щоб виявити потребу — відкриті, не «так/ні», кожне чіпляється за конкретний " +
+        "факт з даних про ліда.\n" +
+        "5) ЩО ПРОПОНУЄМО — дві-три конкретні позиції з нашого списку послуг саме під цей випадок, " +
+        "з поясненням чому саме ці.\n" +
+        "6) ЧЕРВОНІ ПРАПОРЦІ — що в даних натякає на складність: свій великий штат, дешевший офшор, " +
+        "вимоги до допуску."
+    }
+  };
+
+  /* Вибір сценарію: ручний вибір людини головніший за здогад апки. */
+  function pickPlaybook(row) {
+    var t = state.touch[row.__id];
+    if (t && t.playbook && PLAYBOOKS[t.playbook]) return PLAYBOOKS[t.playbook];
+    var src = norm(row.__source || "");
+    if (src.indexOf("flyby") > -1 || src.indexOf("fly by") > -1) return PLAYBOOKS.flyby;
+    /* лід з ІТ-бази, помічений як ціль FLY BY, теж іде за технічним сценарієм */
+    if (row.__hay && (row.__hay.indexOf("fly by oem") > -1 || row.__hay.indexOf("flyby oem") > -1)) {
+      return PLAYBOOKS.flyby;
+    }
+    return PLAYBOOKS.itout;
+  }
+
+  function buildPrompt(row, pb) {
+    var lines = [];
+    state.columns.forEach(function (c) { if (row[c]) lines.push(c + ": " + row[c]); });
+    var t = state.touch[row.__id];
+    if (t && t.summary) lines.push("Мій підсумок: " + t.summary);
+    if (t && t.log && t.log.length) {
+      lines.push("Історія контактів: " + t.log.map(function (e) {
+        return shortTime(e.at) + " — " + e.text;
+      }).join(" // "));
+    }
+    return [
+      "Ти — досвідчений технічний продавець GIS-Point на виставці MSPO 2026. " +
+      "Готуєш менеджера до розмови біля стенда: за пів хвилини він має зрозуміти, про що питати.",
+      "",
+      "ПРО НАШЕ РІШЕННЯ (це факти, не виходь за них і не додавай характеристик, яких тут немає):",
+      pb.key === "flyby" ? state.brief.flyby : state.brief.itout,
+      "",
+      "ЛІД:",
+      lines.join("\n"),
+      "",
+      pb.lead,
+      pb.task,
+      "",
+      "ЯК ВІДПОВІДАТИ:",
+      "— Українською, стисло, без вступів і без ввічливих формул.",
+      "— Кожне питання має чіплятися за конкретний факт з даних про ліда. Загальні питання, " +
+      "які годяться будь-кому, не пиши.",
+      "— Не питай про те, що вже написано в даних. Якщо факт відомий — став наступне питання, глибше.",
+      "— Питання відкриті: на них не можна відповісти «так» або «ні».",
+      "— Де даних бракує, прямо напиши, що це треба з'ясувати першим, і як саме спитати.",
+      "— Нічого не вигадуй про цю компанію: якщо чогось не знаєш — так і скажи.",
+      "— Розділи відповідь заголовками з завдання, по кілька рядків у кожному."
+    ].join("\n");
+  }
+
   /* ================= картка ліда ================= */
   function openLead(id) {
     var row = null, i;
@@ -1508,23 +1715,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
       inner.appendChild(s4);
     }
 
-    /* підказка від Claude — тільки якщо можливість доступна */
-    if (sampleFn) {
-      var s5 = el("div", "sect");
-      s5.appendChild(el("span", "eyebrow", "Підказка для розмови"));
-      var out = el("div", "hintbox hidden");
-      var gen = el("button", "btn wide", "Підготувати 3 питання цьому ліду");
-      gen.addEventListener("click", function () {
-        gen.disabled = true;
-        out.classList.remove("hidden");
-        out.classList.add("pending");
-        out.textContent = "Думаю…";
-        askClaude(row, out, gen);
-      });
-      s5.appendChild(gen);
-      s5.appendChild(out);
-      inner.appendChild(s5);
-    }
+    inner.appendChild(playbookSection(row));
 
     /* усі поля */
     var s6 = el("div", "sect");
@@ -1667,6 +1858,55 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
     return wrap;
   }
 
+  /* Сценарій розмови. Чеклист видно завжди — у залі без мережі він
+     і є основним інструментом; підказка від Claude лише підганяє його
+     під конкретного ліда. */
+  function playbookSection(row) {
+    var pb = pickPlaybook(row);
+    var sect = el("div", "sect");
+    var head = el("div", "pb-head");
+    head.appendChild(el("span", "eyebrow", "Про що питати · " + pb.name));
+    sect.appendChild(head);
+
+    /* перемикач, якщо лід потрапив не в той сценарій */
+    var sw = el("div", "pb-switch");
+    ["flyby", "itout"].forEach(function (k) {
+      var b = el("button", "pb-tab" + (pb.key === k ? " on" : ""), PLAYBOOKS[k].short);
+      b.type = "button";
+      b.addEventListener("click", function () {
+        setTouch(row.__id, { playbook: pb.key === k ? "" : k });
+        refreshLeadSheet(row);
+      });
+      sw.appendChild(b);
+    });
+    sect.appendChild(sw);
+
+    pb.groups.forEach(function (g) {
+      var d = el("details", "raw pb-group");
+      d.appendChild(el("summary", null, g[0]));
+      var ul = el("ul", "pb-list");
+      g[1].forEach(function (q) { ul.appendChild(el("li", null, q)); });
+      d.appendChild(ul);
+      sect.appendChild(d);
+    });
+
+    if (sampleFn) {
+      var out = el("div", "hintbox hidden");
+      var gen = el("button", "btn wide", "Підготувати під цього ліда");
+      gen.style.marginTop = "12px";
+      gen.addEventListener("click", function () {
+        gen.disabled = true;
+        out.classList.remove("hidden");
+        out.classList.add("pending");
+        out.textContent = "Думаю…";
+        askClaude(row, pb, out, gen);
+      });
+      sect.appendChild(gen);
+      sect.appendChild(out);
+    }
+    return sect;
+  }
+
   function logNode(row, entry) {
     var n = el("div", "logitem");
     var when = el("div", "when");
@@ -1731,24 +1971,9 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
   function iconMail() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>'; }
   function iconGlobe() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.2 5.4 3.2 8.5s-1 6.1-3.2 8.5c-2.2-2.4-3.2-5.4-3.2-8.5S9.8 5.9 12 3.5z"/></svg>'; }
 
-  function askClaude(row, out, btn) {
-    var lines = [];
-    state.columns.forEach(function (c) { if (row[c]) lines.push(c + ": " + row[c]); });
-    var t = state.touch[row.__id];
-    if (t && t.summary) lines.push("Мій підсумок: " + t.summary);
-    if (t && t.log && t.log.length) {
-      lines.push("Історія контактів: " + t.log.map(function (e) { return e.text; }).join(" // "));
-    }
-    var prompt =
-      "Ти помічник менеджера GIS-Point на виставці MSPO. Компанія-лід підходить до стенда.\n" +
-      "Дані про ліда:\n" + lines.join("\n") + "\n\n" +
-      "Дай українською, дуже коротко:\n" +
-      "1) Один рядок — хто вони і чим можуть бути корисні.\n" +
-      "2) Три конкретні питання саме їм.\n" +
-      "3) Один наступний крок після виставки.\n" +
-      "Без вступів і без вигаданих фактів — спирайся лише на дані вище.";
-    sampleFn(prompt, {
-      modelTier: "quick",
+  function askClaude(row, pb, out, btn) {
+    sampleFn(buildPrompt(row, pb), {
+      modelTier: "default",
       onText: function (e) { out.classList.remove("pending"); out.textContent = e.text; }
     }).then(function (r) {
       out.classList.remove("pending");
@@ -1911,6 +2136,33 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
       : "Записи зберігаються на цьому пристрої."));
     inner.appendChild(s3);
 
+    /* довідка, з якої Claude бере факти — щоб не вигадував характеристик */
+    var sB = el("div", "sect");
+    sB.appendChild(el("span", "eyebrow", "Про наші рішення"));
+    sB.appendChild(el("p", "note-inline", "Звідси беруться факти для підказок. Claude не має права виходити за межі цього тексту, тож тримай його точним."));
+    [["flyby", "FLY BY — для виробників БПЛА"], ["itout", "ІТ-аутсорсинг — послуги та дотик"]].forEach(function (pair) {
+      var lab = el("label", "field");
+      lab.appendChild(el("span", null, pair[1]));
+      var ta = el("textarea", "brief");
+      ta.value = state.brief[pair[0]] || "";
+      ta.addEventListener("change", function () {
+        state.brief[pair[0]] = ta.value;
+        saveBrief();
+        toast("Довідку оновлено");
+      });
+      lab.appendChild(ta);
+      sB.appendChild(lab);
+    });
+    var resetB = el("button", "btn", "Повернути початковий текст");
+    resetB.addEventListener("click", function () {
+      if (!confirm("Повернути довідку до тексту, з яким приїхала апка?")) return;
+      state.brief = { flyby: BRIEF_DEFAULT.flyby, itout: BRIEF_DEFAULT.itout };
+      saveBrief();
+      replaceSheet(buildMenuSheet());
+    });
+    sB.appendChild(resetB);
+    inner.appendChild(sB);
+
     var s4 = el("div", "sect");
     s4.appendChild(el("span", "eyebrow", "Забрати результати виставки"));
     var touched = touchedRows();
@@ -1989,7 +2241,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
   window.addEventListener("popstate", function () { if (sheetStack.length) popSheet(true); });
 
   /* ================= записи по ліду ================= */
-  function blankTouch() { return { status: "", summary: "", meetAt: "", log: [], by: "", at: "" }; }
+  function blankTouch() { return { status: "", summary: "", meetAt: "", playbook: "", log: [], by: "", at: "" }; }
   function getTouch(id) {
     var t = state.touch[id];
     if (!t) return blankTouch();
@@ -2002,7 +2254,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
     return t;
   }
   function saveTouch(id, t) {
-    if (!t.status && !t.summary && !t.meetAt && (!t.log || !t.log.length)) {
+    if (!t.status && !t.summary && !t.meetAt && !t.playbook && (!t.log || !t.log.length)) {
       delete state.touch[id];
       persistTouch();
       if (db) db.doc("touch/" + id).delete().catch(function () {});
@@ -2025,6 +2277,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
     if (patch.status !== undefined) t.status = patch.status;
     if (patch.summary !== undefined) t.summary = patch.summary;
     if (patch.meetAt !== undefined) t.meetAt = patch.meetAt;
+    if (patch.playbook !== undefined) t.playbook = patch.playbook;
     var before = JSON.stringify(state.touch[id] || null);
     saveTouch(id, t);
     if (quiet && before === JSON.stringify(state.touch[id] || null)) return;
@@ -2056,6 +2309,10 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
     if (!ok) toast("Базу не вдалось зберегти офлайн — забагато даних для пам'яті браузера.");
   }
   function persistTouch() { lsSet(LS_TOUCH, state.touch); }
+  function saveBrief() {
+    lsSet(LS_BRIEF, state.brief);
+    if (db) db.doc("config/brief").set(state.brief).catch(function () {});
+  }
   function stripRows(rows) {
     return rows.map(function (r) {
       var o = {}, k;
@@ -2236,6 +2493,14 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
         else if (state.rows.length && (meta.version || 0) < state.baseVersion) pushBaseToDb();
       }, function () {});
 
+      db.doc("config/brief").onSnapshot(function (snap) {
+        if (!snap.exists) return;
+        var d = snap.data() || {};
+        if (d.flyby) state.brief.flyby = d.flyby;
+        if (d.itout) state.brief.itout = d.itout;
+        lsSet(LS_BRIEF, state.brief);
+      }, function () {});
+
       db.collection("touch").onSnapshot(function (snap) {
         var changed = false;
         snap.docChanges().forEach(function (ch) {
@@ -2248,7 +2513,7 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
           if (!local || !local.at || (remote.at && remote.at > local.at)) {
             state.touch[id] = {
               status: remote.status || "", summary: remote.summary || "",
-              meetAt: remote.meetAt || "",
+              meetAt: remote.meetAt || "", playbook: remote.playbook || "",
               log: Array.isArray(remote.log) ? remote.log : [],
               by: remote.by || "", at: remote.at || ""
             };
@@ -2269,6 +2534,11 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
   function boot() {
     state.me = lsGet(LS_ME) || "";
     state.touch = lsGet(LS_TOUCH) || {};
+    var savedBrief = lsGet(LS_BRIEF) || {};
+    state.brief = {
+      flyby: savedBrief.flyby || BRIEF_DEFAULT.flyby,
+      itout: savedBrief.itout || BRIEF_DEFAULT.itout
+    };
 
     var saved = lsGet(LS_BASE), packed = embedded();
     /* вшита база — те, з чим апка приїхала; збережена перемагає, якщо новіша */
