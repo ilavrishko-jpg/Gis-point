@@ -205,7 +205,9 @@ const csv = await p.evaluate(() => navigator.clipboard.readText());
 const table = parseCSV(csv);
 const head = table[0];
 ok("BOM на початку — Excel відкриє кирилицю", csv.charCodeAt(0) === 0xFEFF);
-ok("шапка з журналом", head.slice(0, 6).join(",") === "Результат,Головне по ліду,Журнал,Записів,Хто,Оновлено", head.slice(0, 6).join(","));
+ok("шапка з журналом і годиною",
+  head.slice(0, 7).join(",") === "Результат,Головне по ліду,Зустріч (фікс),Журнал,Записів,Хто,Оновлено",
+  head.slice(0, 7).join(","));
 ok("усі колонки бази поруч", head.length >= 26, head.length + " колонок");
 ok("шапка + 3 ліда", table.length === 4, table.length + " рядків");
 ok("однакова кількість колонок у всіх рядках", new Set(table.map((r) => r.length)).size === 1);
@@ -252,7 +254,41 @@ ok("вшиті джерела не зламались",
   sources.some((s) => s.includes("ІТ-аутсорсинг")) && sources.some((s) => s.includes("FlyBy")));
 await p2.$$eval(".srcrow .x", (bs) => bs[2].click()); await p2.waitForTimeout(800);
 ok("джерело прибирається", (await p2.textContent("#countLbl")).trim() === "146 / 146");
+
+// Регресія: колонка «Контакт» зі стороннього файлу колись перехоплювала роль
+// «Ім'я», через що мінялись ідентифікатори лідів і губились усі нотатки.
+const mapAfter = await p2.$$eval(".maprow select", (s) => s.map((x) => x.options[x.selectedIndex].textContent));
+const labels = await p2.$$eval(".maprow > span", (s) => s.map((x) => x.firstChild.textContent.trim()));
+const mapOf = Object.fromEntries(labels.map((l, i) => [l, mapAfter[i]]));
+ok("після імпорту «Контакт» лишився зіставленим на «Ім'я»", mapOf["Контакт"] === "Ім'я", mapOf["Контакт"]);
+ok("«Компанія» не поїхала", mapOf["Компанія"] === "Компанія", mapOf["Компанія"]);
+ok("«Гачок» не поїхав", mapOf["Гачок / що пропонуємо"] === "Гачок", mapOf["Гачок / що пропонуємо"]);
+await p2.click(".sheet-head .iconbtn"); await p2.waitForTimeout(300);
+await p2.fill("#q", "Mark Sullivan"); await p2.waitForTimeout(350);
+ok("ліди досі шукаються за людиною після імпорту",
+  (await p2.$$eval(".row .name", (n) => n.map((x) => x.textContent)))[0] === "OSI Maritime Systems");
 await p2.close();
+
+section("[13b] Два контакти однієї компанії — різні записи");
+const p4 = await ctx.newPage();
+const errors4 = [];
+p4.on("pageerror", (e) => errors4.push(String(e)));
+await p4.goto(URL); await p4.waitForTimeout(1500);
+await p4.fill("#q", "OSI Maritime"); await p4.waitForTimeout(400);
+const osiRows = await p4.$$eval(".row .name", (n) => n.map((x) => x.textContent));
+ok("в OSI кілька контактів", osiRows.length >= 2, osiRows.length + " рядків");
+await p4.$$eval(".row", (rs) => rs[0].click()); await p4.waitForTimeout(400);
+await p4.fill(".summary-in", "Нотатка першого контакту");
+await p4.waitForTimeout(700);
+await p4.click(".sheet-head .iconbtn"); await p4.waitForTimeout(400);
+const summaries = await p4.$$eval(".row", (rs) => rs.map((r) => {
+  const s = r.querySelector(".summary");
+  return s ? s.textContent : "";
+}));
+ok("нотатка лягла лише на один контакт",
+  summaries.filter((x) => x.includes("Нотатка першого")).length === 1,
+  JSON.stringify(summaries));
+await p4.close();
 
 section("[14] Обидві теми");
 for (const scheme of ["dark", "light"]) {
@@ -273,9 +309,89 @@ for (const scheme of ["dark", "light"]) {
   await themed.close();
 }
 
-section("[15] Помилки виконання");
+section("[15] Смуга фіксованих годин");
+const p3 = await ctx.newPage();
+const errors3 = [];
+p3.on("pageerror", (e) => errors3.push(String(e)));
+await p3.goto(URL); await p3.waitForTimeout(1500);
+const tl = () => p3.$$eval("#timeline .tcard .t", (e) => e.map((x) => x.textContent.trim()));
+ok("смуга видима — у базі 3 фікс години", !(await p3.$eval("#timeline", (e) => e.classList.contains("hidden"))));
+ok("три картки за зростанням", (await tl()).join(",") === "14:30,15:00,15:00", (await tl()).join(","));
+ok("перша майбутня позначена «наступна»",
+  (await p3.$$eval("#timeline .tcard", (c) => c.map((x) => x.className))).some((c) => c.includes("next")));
+ok("ліди лише з датою у смугу не потрапили", (await tl()).length === 3);
+
+// смуга слухається фільтра — це «відфільтрована контактна книга»
+await p3.$$eval("#quickChips .chip", (cs) => cs.find((x) => x.textContent.includes("Відмова")).click());
+await p3.waitForTimeout(400);
+ok("під фільтром без зустрічей смуга ховається",
+  await p3.$eval("#timeline", (e) => e.classList.contains("hidden")));
+await p3.$$eval("#quickChips .chip", (cs) => cs.find((x) => x.textContent.includes("Відмова")).click());
+await p3.waitForTimeout(400);
+ok("смуга повертається", !(await p3.$eval("#timeline", (e) => e.classList.contains("hidden"))));
+
+// власна година: лід без часу в базі має з'явитися у смузі
+await p3.fill("#q", "OSI Maritime"); await p3.waitForTimeout(350);
+await p3.click(".row"); await p3.waitForTimeout(400);
+ok("поле години порожнє, бо в базі лише день", (await p3.$eval(".meet-in", (e) => e.value)) === "");
+ok("підказка пояснює, що стоїть лише день",
+  (await p3.textContent(".sect .note-inline")).includes("лише день") ||
+  (await p3.$$eval(".note-inline", (e) => e.map((x) => x.textContent))).some((t) => t.includes("лише день")));
+const soon = new Date(Date.now() + 30 * 60000);
+const pad = (n) => String(n).padStart(2, "0");
+const localValue = `${soon.getFullYear()}-${pad(soon.getMonth() + 1)}-${pad(soon.getDate())}T${pad(soon.getHours())}:${pad(soon.getMinutes())}`;
+await p3.fill(".meet-in", localValue); await p3.waitForTimeout(600);
+await p3.click(".sheet-head .iconbtn"); await p3.waitForTimeout(400);
+await p3.fill("#q", ""); await p3.waitForTimeout(400);
+const cards = await p3.$$eval("#timeline .tcard", (c) => c.map((x) => ({ cls: x.className, txt: x.textContent })));
+ok("виставлена година додала лід у смугу", cards.length === 4, cards.length + " карток");
+const osi = cards.find((c) => c.txt.includes("OSI"));
+ok("лід стоїть першим — зустріч найближча", cards[0].txt.includes("OSI"), cards[0].txt.slice(0, 30));
+ok("показано «через N хв»", /через \d+ хв/.test(osi.txt), osi.txt);
+ok("картка підсвічена як наступна", osi.cls.includes("next"), osi.cls);
+await p3.fill("#q", "OSI Maritime"); await p3.waitForTimeout(350);
+ok("година видно в рядку списку як фікс",
+  (await p3.$$eval(".row .meetchip", (e) => e.map((x) => x.className))).some((c) => c.includes("fixed")));
+// прибрати годину
+await p3.click(".row"); await p3.waitForTimeout(400);
+await p3.$$eval(".note-inline button", (bs) => { const b = bs.find((x) => x.textContent.includes("Прибрати годину")); if (b) b.click(); });
+await p3.waitForTimeout(500);
+ok("година прибирається", (await p3.$eval(".meet-in", (e) => e.value)) === "");
+await p3.click(".sheet-head .iconbtn"); await p3.waitForTimeout(400);
+await p3.fill("#q", ""); await p3.waitForTimeout(400);
+ok("смуга повернулась до трьох", (await tl()).length === 3, String((await tl()).length));
+
+section("[16] Голосова нотатка");
+await p3.fill("#q", "Arkeus"); await p3.waitForTimeout(350);
+await p3.click(".row"); await p3.waitForTimeout(400);
+const hasSR = await p3.evaluate(() => !!(window.SpeechRecognition || window.webkitSpeechRecognition));
+const tools = await p3.$eval(".logtools", (e) => e.textContent);
+if (hasSR) {
+  ok("кнопка «Диктувати» є", tools.includes("Диктувати"), tools);
+  ok("перемикач мови є", (await p3.$$(".langbtn")).length === 1);
+  const before = await p3.$eval(".langbtn", (e) => e.textContent);
+  await p3.click(".langbtn"); await p3.waitForTimeout(250);
+  const after = await p3.$eval(".langbtn", (e) => e.textContent);
+  ok("мова перемикається УКР ↔ ENG", before !== after, `${before} -> ${after}`);
+} else {
+  ok("без підтримки — чесне пояснення замість мертвої кнопки",
+    tools.includes("Chrome") && tools.includes("Safari"), tools);
+}
+ok("поле журналу лишається робочим", (await p3.$$(".logadd textarea")).length === 1);
+const before = (await p3.$$(".logitem")).length;
+await p3.fill(".logadd textarea", "Надруковано вручну");
+await p3.click(".logadd .btn.primary"); await p3.waitForTimeout(400);
+ok("запис друком додається попри блок диктування",
+  (await p3.$$(".logitem")).length === before + 1 &&
+  (await p3.$$eval(".logitem .txt", (e) => e.map((x) => x.textContent))).includes("Надруковано вручну"),
+  `${before} -> ${(await p3.$$(".logitem")).length}`);
+await p3.close();
+
+section("[17] Помилки виконання");
 ok("без винятків на основній сторінці", errors.length === 0, JSON.stringify(errors));
 ok("без винятків на сторінці імпорту", errors2.length === 0, JSON.stringify(errors2));
+ok("без винятків на сторінці смуги годин", errors3.length === 0, JSON.stringify(errors3));
+ok("без винятків на сторінці контактів компанії", errors4.length === 0, JSON.stringify(errors4));
 
 await browser.close();
 fs.rmSync(TMP, { recursive: true, force: true });
