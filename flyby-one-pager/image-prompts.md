@@ -1,14 +1,19 @@
 # FLY BY — image prompts for GPT Image / Nano Banana
 
-Derived from the real flyby.gis-point.com pages, not invented. The house image
-style there is one consistent thing: **a desaturated documentary photograph,
-warm-toned, with a luminous scan cone and thin white technical vector overlays
-drawn on top, and a monospace caption bar along the bottom.**
+**Audience: UAV manufacturers and integrators who will install this on their own
+airframes.** Not investors. That changes what the pictures have to do: an
+investor image sells the size of the problem, a customer image shows the thing
+working on an aircraft like theirs. Every prompt below is built to answer
+"what goes on my airframe, and what does it give me back".
+
+Style is lifted from the real flyby.gis-point.com pages: a desaturated
+documentary photograph, warm-toned, with a luminous scan cone and thin white
+technical vector overlays, and a monospace caption bar along the bottom.
 
 ## Paste this first — the style block
 
-Give this to the model once, then any of the prompts below. Keeping it verbatim
-across assets is what makes them look like a set.
+Give this to the model once, then any scene below. Keeping it verbatim across
+assets is what makes them look like a set.
 
 > **Style: FLY BY house style.** Desaturated documentary photograph, almost
 > monochrome, graded to a warm sepia-brown duotone — deep warm near-black
@@ -22,59 +27,87 @@ across assets is what makes them look like a set.
 > ground footprint. Restrained and editorial, closer to a defence white paper
 > than to game art. No text, no letters, no numbers, no logos, no watermarks.
 
-## Prompt 1 — Hero (the main marketing image)
+## Prompt 1 — Hero: it holds position on your aircraft
 
-Matches the site's own hero. Ask for **16:9** or **3:4**.
+The main marketing image. **16:9** or **3:4**.
 
-> A fixed-wing reconnaissance drone seen from slightly behind and above,
-> banking gently over a wide patchwork of farmland, rivers and treelines far
-> below. The horizon sits high in the frame; the ground is soft with haze. A
-> single luminous pale shaft of light descends vertically from the aircraft's
-> belly to the ground, widening slightly, marking what the camera sees. Thin
-> white technical overlays: a crosshair where the shaft meets the ground, a
-> faint ellipse around that point, two dashed vector lines running off toward
-> the horizon, and small corner brackets framing one field boundary. Warm sepia
-> duotone, flat overcast light, matte, fine grain. No text, no logos.
+> A fixed-wing UAV in level flight, seen from behind and slightly above, over a
+> wide patchwork of farmland and treelines. The aircraft is close enough to read
+> as a working airframe rather than a distant speck — a plain unmarked survey
+> platform. A luminous pale shaft of light descends from a small downward-facing
+> camera under its nose to the ground, widening slightly. Where it meets the
+> ground, thin white technical overlays lock on: a crosshair on a field
+> junction, a faint ellipse around the footprint, corner brackets framing two
+> matched field boundaries, and a dashed line continuing along the flight track.
+> Warm sepia duotone, flat overcast light, matte, fine grain. No text, no logos,
+> no visible antennas or radio masts on the aircraft.
 
-## Prompt 2 — GNSS-denied envelope (the problem image)
+The "no antennas" clause matters: the whole pitch is that nothing radiates.
 
-Matches the site's problem section. **16:9**, works well cropped to a band.
+## Prompt 2 — Integration: what actually goes in the bay
 
-> A low, flat horizon at dusk. On the left, the dark silhouette of a military
-> ground vehicle bristling with antenna masts, seen in profile. Concentric thin
-> white arcs radiate outward from its antennas across the sky, evenly spaced,
-> like a broadcast pattern. On the right and higher in the frame, the small
-> silhouette of a fixed-wing drone, with a luminous pale trapezoid of light
-> descending from it to the ground, a thin white crosshair centred inside that
-> beam. The two forms do not touch. Near-monochrome, warm grey-brown duotone,
-> heavy atmospheric haze, matte, fine grain. No text, no logos.
+The image a customer wants most and almost nobody makes. **3:2** or **1:1**.
 
-## Prompt 3 — Terrain match (close on the mechanism)
+> A close, slightly overhead view into the open equipment bay of a fixed-wing
+> UAV fuselage on a workbench. Inside, a small plain anodised aluminium
+> enclosure is bracket-mounted beside existing avionics, with a short ribbon
+> cable running to a compact downward-facing camera set into a circular
+> aperture in the airframe's underside. Neat cable routing, visible mounting
+> screws, honest engineering rather than a product render. Matte grey-brown
+> palette, soft even workshop light, shallow depth of field, fine grain. Thin
+> white technical overlays: corner brackets around the enclosure and a leader
+> line running out to empty space at the frame edge. No text, no logos, no
+> brand marks on the hardware.
 
-For a square or a wide band. **1:1** or **16:9**.
+> ⚠ Keep the enclosure **generic** — plain box, no connectors that imply a
+> specific part number, no badge. The delivered form is still unsettled between
+> your site ("a software module for open-standard autopilot stacks") and master
+> doc v1.2 ("hardware + software, one integrated module"). Until that is
+> resolved, a photorealistic image of a specific device is a promise you may
+> not want to have made in print.
+
+## Prompt 3 — Terrain match: the mechanism, close up
+
+Explains how it works without a word of copy. **1:1** or **16:9**.
 
 > A near-vertical aerial view straight down onto farmland — irregular field
 > polygons, a curving river, a single road cutting diagonally. Rendered as a
 > desaturated warm-grey aerial photograph. Over it, thin white technical
 > overlays lock onto ground features: four small crosshair markers on field
 > corners and the road junction, each ringed by a thin circle, plus corner
-> brackets framing the centre of the frame. A faint one-pixel grid overlays the
-> whole image, slightly offset from the terrain beneath it. Matte, flat light,
-> fine grain, no colour beyond warm neutral. No text, no numbers, no logos.
+> brackets framing the centre. A faint one-pixel grid overlays the whole image,
+> slightly offset from the terrain beneath it, as though a reference map were
+> being slid into alignment. Matte, flat light, fine grain, no colour beyond
+> warm neutral. No text, no numbers, no logos.
+
+## Prompt 4 — GNSS-denied envelope (secondary)
+
+Your site's problem image. Useful on a booth screen; not needed on a customer
+one-pager, where the buyer already knows jamming is real. **16:9**.
+
+> A low, flat horizon at dusk. On the left, the dark silhouette of a military
+> ground vehicle bristling with antenna masts, in profile. Concentric thin white
+> arcs radiate outward from its antennas across the sky, evenly spaced. On the
+> right and higher in the frame, the small silhouette of a fixed-wing drone,
+> with a luminous pale trapezoid of light descending from it to the ground, a
+> thin white crosshair centred inside the beam. The two forms do not touch.
+> Near-monochrome warm grey-brown duotone, heavy atmospheric haze, matte, fine
+> grain. No text, no logos.
 
 ## Working notes
 
-- **Never let the model set type.** The site puts real captions over its images
-  (`GNSS-DENIED ENVELOPE`, `L1 · L2 · L5`) — those are laid on in the page, in
-  letter-spaced uppercase mono, not baked into the photograph. Do the same:
-  generate clean, add the caption bar in the layout.
-- Generate large and downsample. A full-bleed A4 band needs ~2400 px wide to
-  survive 300 dpi.
-- Pick candidates on **silhouette legibility at thumbnail size**, and check each
-  one in grayscale — the whole palette is nearly monochrome already, so if it
-  falls apart in mono it was relying on the copper, which the style says should
-  be doing almost nothing.
-- If a generator balks, drop "military" and "drone" for "survey aircraft" and
+- **Never let the model set type.** The site puts its captions over images
+  (`GNSS-DENIED ENVELOPE`, `L1 · L2 · L5`) in the page, in letter-spaced
+  uppercase mono, not baked into the photograph. Do the same — generate clean,
+  add the caption bar in the layout, and it stays crisp at 300 dpi.
+- Show the airframe as **unmarked and generic**. A customer should be able to
+  see their own platform in it; a recognisable competitor airframe reads as an
+  endorsement you do not have.
+- Generate large and downsample. A full-bleed A4 band needs ~2400 px wide.
+- Judge candidates at thumbnail size and check each in grayscale. The palette is
+  nearly monochrome already, so anything that collapses in mono was leaning on
+  the copper, which this style says should be doing almost nothing.
+- If a generator balks, swap "military" and "drone" for "survey aircraft" and
   "ground station". The composition carries the meaning, not the vocabulary.
 
 ## The brand system these were pulled from
@@ -83,7 +116,7 @@ Sampled from the page screenshots, so these are the real values.
 
 | Role | Value |
 | --- | --- |
-| Paper | `#F8F6F0` (warm off-white; a second, warmer `#F2EEE5` also appears) |
+| Paper | `#F8F6F0` (warm off-white; a warmer `#F2EEE5` also appears) |
 | Ground | `#1A1411` (warm near-black, not blue-black) |
 | Copper on light | `#815837` — eyebrow labels, the live logo dot |
 | Copper on dark | `#C7956D` — labels and figures on dark sections |
@@ -91,16 +124,14 @@ Sampled from the page screenshots, so these are the real values.
 | Body text | `#413D39` secondary, `#6D6965` for mono metadata |
 | Hairline | `#D2CFCA` on screen; darkened to `#ADA79D` in print so it survives |
 
-**Type roles** — four, and each does one job:
-- **Headlines: a serif, sentence case.** Never all-caps. "Optical
-  terrain-matching. No satellite signal. No survey flight."
-- **Figures: a light geometric sans.** `46,000+`, `+300%`, `$3.7B`.
-- **Body: a neutral sans**, generous line-height, around 1.6–1.7.
+**Type roles** — four, each doing one job:
+- **Headlines: a serif, sentence case.** Never all-caps.
+- **Figures: a light geometric sans.**
+- **Body: a neutral sans**, line-height around 1.6–1.7.
 - **Every label, source line and piece of metadata: uppercase monospace with
-  wide letter-spacing.** This is the strongest single signature of the brand.
-- Section openers are a short rule followed by a spaced copper mono word —
-  `—— SOLUTION`, `—— PROBLEM`.
+  wide letter-spacing.** The strongest single signature of the brand.
+- Section openers are a short rule then a spaced copper mono word.
 
 The flyer approximates the serif with **Newsreader** and the figures with
-**Jost**. Both are stand-ins picked by eye from screenshots; send the font names
-from the site's CSS and I will swap them for the real ones.
+**Jost** — stand-ins picked by eye from screenshots. Send the font names from
+the site's CSS and I will swap in the real ones.

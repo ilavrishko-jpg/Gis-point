@@ -14,12 +14,13 @@ generated `flyby-exhibition-flyer.html`.
 
 ## Brief
 
-**Audience.** UAV OEM navigation and integration engineers, plus tier-1
-integrators, walking a trade floor. Not end units — the channel is OEM
-design-in, so the flyer sells a component decision, not a capability.
+**Audience.** UAV manufacturers and integrators who will install FLY BY on
+their own airframes. **Not investors.** The page has to answer an installer's
+questions — what goes on the aircraft, what it gives back, what autopilot it
+talks to, what envelope it holds — not size a market.
 
 **Job.** Stop an engineer in three seconds, prove the numbers in thirty, and
-produce a booked technical call.
+get one airframe committed to an evaluation.
 
 **One thing to remember.** FLY BY holds absolute position when GPS is gone,
 passively, as a layer inside the OEM's existing stack.
