@@ -548,6 +548,12 @@ input.summary-in:focus,input.meet-in:focus{border-color:var(--accent)}
   color:var(--text-dim);
 }
 .micnote{margin:8px 0 0;font-size:12.5px;color:var(--text-dim);line-height:1.5}
+.difflink{
+  padding:9px 4px;font-size:12.5px;font-weight:600;
+  color:var(--text-dim);text-decoration:underline;
+}
+.difflink:hover{color:var(--accent-ink)}
+.opentab{width:100%}
 .micnote.err{color:var(--hot)}
 
 
@@ -1731,19 +1737,71 @@ textarea.brief:focus{border-color:var(--accent)}
     return sheet;
   }
 
-  /* Диктування. Розпізнає сам браузер (Chrome, Safari) — аудіо нікуди
-     не зберігається, у журнал лягає готовий текст. Якщо мікрофон у рамці
-     заблоковано, кнопка чесно про це каже замість того, щоб мовчки не працювати. */
+  /* Диктування.
+
+     Розпізнає сам браузер — аудіо нікуди не пишеться, у журнал лягає текст.
+     Головна причина, чому воно не вмикається: сторінка живе у вбудованому
+     вікні (iframe), і доступ до мікрофона туди не делегований. Зсередини
+     сторінки це не полагодити, тож апка мусить чесно сказати про це і дати
+     робочий обхід: відкрити себе окремою вкладкою, де дозвіл належить самій
+     сторінці, або надиктувати з клавіатури телефона. */
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   var LANGS = [["uk-UA", "УКР"], ["en-US", "ENG"]];
+  var IS_FRAMED = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+  var IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  function micErrorText(name) {
+    switch (name) {
+      case "NotAllowedError":
+      case "SecurityError":
+        return IS_FRAMED
+          ? "Мікрофон недоступний у вбудованому вікні — дозвіл сюди не передається. Відкрий апку окремою вкладкою, там диктування працює."
+          : "Браузер не дав доступ до мікрофона. Дозволь його для цього сайту в налаштуваннях і спробуй ще раз.";
+      case "NotFoundError":
+      case "OverconstrainedError":
+        return "Мікрофон не знайдено — підключеного входу немає. Диктуй з клавіатури телефона.";
+      case "NotReadableError":
+        return "Мікрофон зайнятий іншою програмою — закрий її і спробуй ще раз.";
+      default:
+        return "Мікрофон не увімкнувся (" + name + ").";
+    }
+  }
+
   function voiceTools(textarea) {
     var wrap = el("div", "logtools");
+    var note = el("p", "micnote");
+    note.style.width = "100%";
+
+    /* Клавіатура телефона диктує в будь-яке поле і не залежить від дозволів
+       сторінки — у залі це найнадійніший шлях, тож кажемо про нього одразу. */
+    var tip = el("p", "micnote");
+    tip.style.width = "100%";
+    tip.textContent = "Порада: на телефоні можна натиснути мікрофон на клавіатурі — це диктує прямо в поле й працює завжди.";
+
+    function setNote(text, isErr) {
+      note.textContent = text || "";
+      note.classList.toggle("err", !!isErr);
+    }
+    /* Кнопка, що відкриває цю ж сторінку верхнім рівнем: там дозвіл на
+       мікрофон належить сторінці, а не господарю рамки. */
+    function offerNewTab() {
+      if (wrap.querySelector(".opentab")) return;
+      var a = el("a", "btn opentab", "Відкрити окремою вкладкою");
+      a.href = location.href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.style.marginTop = "8px";
+      wrap.appendChild(a);
+    }
+
     if (!SR) {
-      var no = el("p", "micnote", "Диктування працює в Chrome і Safari — цей браузер його не підтримує.");
-      no.style.margin = "0";
-      wrap.appendChild(no);
+      setNote("Цей браузер не вміє розпізнавати мову. Працює в Chrome і Safari — або диктуй з клавіатури телефона.");
+      wrap.appendChild(note);
+      wrap.appendChild(tip);
       return wrap;
     }
+
     var lang = lsGet("sr.lang") || "uk-UA";
     var rec = null, recording = false, baseText = "";
 
@@ -1765,29 +1823,30 @@ textarea.brief:focus{border-color:var(--accent)}
       lang = LANGS[(i + 1) % LANGS.length][0];
       lsSet("sr.lang", lang);
       langLabel();
-      if (recording) { stop(); }
+      if (recording) stop();
     });
 
-    var note = el("p", "micnote");
-    note.style.width = "100%";
-    note.textContent = "";
-
-    function setNote(text, isErr) {
-      note.textContent = text || "";
-      note.classList.toggle("err", !!isErr);
-    }
     function stop() {
       recording = false;
       btn.classList.remove("rec");
       label.textContent = "Диктувати";
-      if (rec) { try { rec.stop(); } catch (e) {} rec = null; }
+      if (rec) {
+        try { rec.onend = null; rec.stop(); } catch (e) {}
+        rec = null;
+      }
     }
-    function start() {
-      try { rec = new SR(); } catch (e) { setNote("Диктування недоступне в цьому браузері.", true); return; }
+
+    function startRecognition() {
+      try { rec = new SR(); } catch (e) {
+        setNote("Розпізнавання не запустилось (" + e.name + ").", true);
+        stop();
+        return;
+      }
       rec.lang = lang;
-      rec.continuous = true;
+      /* На iOS безперервний режим обривається після першої фрази —
+         там слухаємо короткими відрізками і перезапускаємось самі. */
+      rec.continuous = !IS_IOS;
       rec.interimResults = true;
-      baseText = textarea.value ? textarea.value.replace(/\s+$/, "") + " " : "";
       rec.onresult = function (e) {
         var fin = "", interim = "", i;
         for (i = e.resultIndex; i < e.results.length; i++) {
@@ -1800,29 +1859,58 @@ textarea.brief:focus{border-color:var(--accent)}
       };
       rec.onerror = function (e) {
         var code = e && e.error;
+        if (code === "no-speech") { setNote("Не почув голосу — говори ближче до мікрофона."); return; }
+        if (code === "aborted") return;
         if (code === "not-allowed" || code === "service-not-allowed") {
-          setNote("Мікрофон заблоковано. Дозволь доступ у браузері, або відкрий апку в окремій вкладці — у вбудованому вікні мікрофон часто недоступний.", true);
-        } else if (code === "no-speech") {
-          setNote("Не почув голосу — спробуй ще раз ближче до мікрофона.");
+          setNote(micErrorText("NotAllowedError"), true);
+          if (IS_FRAMED) offerNewTab();
         } else if (code === "network") {
-          setNote("Розпізнавання потребує інтернету — у залі без мережі надрукуй текст.", true);
-        } else if (code !== "aborted") {
-          setNote("Не вдалося розпізнати (" + code + "). Спробуй ще раз.", true);
+          setNote("Розпізнавання потребує інтернету — без мережі надрукуй текст або диктуй з клавіатури телефона.", true);
+        } else if (code === "audio-capture") {
+          setNote("Браузер не отримав звук з мікрофона. Перевір, чи він не зайнятий іншою програмою і чи вибраний правильний вхід.", true);
+        } else if (code === "language-not-supported") {
+          setNote("Браузер не знає цієї мови — перемкни УКР / ENG сусідньою кнопкою.", true);
+        } else {
+          setNote("Не вдалося розпізнати (" + code + "). Спробуй ще раз або диктуй з клавіатури.", true);
         }
         stop();
       };
-      rec.onend = function () { if (recording) stop(); };
+      rec.onend = function () {
+        /* сам обірвався, хоча ми ще пишемо — піднімаємо назад */
+        if (recording) { try { rec.start(); } catch (e) { stop(); } }
+      };
       try {
         rec.start();
         recording = true;
         btn.classList.add("rec");
         label.textContent = "Зупинити";
-        setNote("Говори — текст з\'являється в полі вище. Аудіо нікуди не зберігається.");
+        setNote("Говори — текст зʼявляється в полі вище. Аудіо нікуди не зберігається.");
       } catch (e) {
-        setNote("Не вдалося увімкнути мікрофон.", true);
+        setNote("Не вдалося увімкнути мікрофон (" + e.name + ").", true);
         stop();
       }
     }
+
+    /* Спершу просимо мікрофон явно: так браузер показує запит і, головне,
+       віддає зрозумілу помилку. Сам розпізнавач у рамці часто мовчки
+       не стартує, не пояснюючи причини. */
+    function start() {
+      baseText = textarea.value ? textarea.value.replace(/\s+$/, "") + " " : "";
+      if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+        startRecognition();
+        return;
+      }
+      setNote("Прошу доступ до мікрофона…");
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        startRecognition();
+      }).catch(function (e) {
+        setNote(micErrorText(e && e.name ? e.name : "UnknownError"), true);
+        if (IS_FRAMED) offerNewTab();
+        stop();
+      });
+    }
+
     btn.addEventListener("click", function () { if (recording) stop(); else start(); });
 
     wrap.appendChild(btn);
@@ -1854,8 +1942,53 @@ textarea.brief:focus{border-color:var(--accent)}
       });
       wrap.appendChild(tidy);
     }
+
+    /* Діагностика: коли не працює, треба знати чому, а не гадати. */
+    var diag = el("button", "difflink", "Перевірити мікрофон");
+    diag.type = "button";
+    diag.addEventListener("click", function () { runMicCheck(note); });
+    wrap.appendChild(diag);
+
     wrap.appendChild(note);
+    wrap.appendChild(tip);
     return wrap;
+  }
+
+  /* Звіт про те, що саме заважає: його можна прочитати або переслати. */
+  function runMicCheck(note) {
+    note.classList.remove("err");
+    note.textContent = "Перевіряю…";
+    var lines = [];
+    lines.push("Сторінка у вбудованому вікні: " + (IS_FRAMED ? "так" : "ні"));
+    lines.push("Захищене зʼєднання: " + (window.isSecureContext ? "так" : "ні"));
+    lines.push("Розпізнавання мови в браузері: " + (SR ? "є" : "немає"));
+    lines.push("Доступ до мікрофона в API: " +
+      (navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? "є" : "немає"));
+
+    function finish(extra) {
+      note.textContent = lines.concat(extra || []).join("\n") + "\n" +
+        (IS_FRAMED ? "Висновок: відкрий апку окремою вкладкою або диктуй з клавіатури телефона."
+                   : "Висновок: якщо доступ дано, а диктування мовчить — перевір інтернет.");
+      note.style.whiteSpace = "pre-wrap";
+    }
+    if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { finish(); return; }
+
+    var perm = Promise.resolve("невідомо");
+    if (navigator.permissions && navigator.permissions.query) {
+      perm = navigator.permissions.query({ name: "microphone" })
+        .then(function (s) { return s.state; })
+        .catch(function () { return "невідомо"; });
+    }
+    perm.then(function (state) {
+      lines.push("Дозвіл на мікрофон: " + state);
+      return navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        finish(["Мікрофон відкрився — диктування має працювати."]);
+      }).catch(function (e) {
+        note.classList.add("err");
+        finish(["Мікрофон не відкрився: " + (e && e.name)]);
+      });
+    });
   }
 
   /* Сценарій розмови. Чеклист видно завжди — у залі без мережі він

@@ -366,6 +366,9 @@ await p3.fill("#q", "Arkeus"); await p3.waitForTimeout(350);
 await p3.click(".row"); await p3.waitForTimeout(400);
 const hasSR = await p3.evaluate(() => !!(window.SpeechRecognition || window.webkitSpeechRecognition));
 const tools = await p3.$eval(".logtools", (e) => e.textContent);
+ok("порада про мікрофон клавіатури видно одразу",
+  (await p3.$$eval(".micnote", (e) => e.map((x) => x.textContent)))
+    .some((t) => t.includes("мікрофон на клавіатурі")), tools.slice(0, 60));
 if (hasSR) {
   ok("кнопка «Диктувати» є", tools.includes("Диктувати"), tools);
   ok("перемикач мови є", (await p3.$$(".langbtn")).length === 1);
@@ -373,6 +376,19 @@ if (hasSR) {
   await p3.click(".langbtn"); await p3.waitForTimeout(250);
   const after = await p3.$eval(".langbtn", (e) => e.textContent);
   ok("мова перемикається УКР ↔ ENG", before !== after, `${before} -> ${after}`);
+  // без мікрофона апка мусить пояснити причину і повернути кнопку в спокій
+  await p3.click(".micbtn"); await p3.waitForTimeout(1800);
+  const note = await p3.$eval(".micnote", (e) => e.textContent);
+  ok("невдача пояснена словами, а не мовчанням", note.length > 15 && /мікрофон|розпізна/i.test(note), note.slice(0, 80));
+  ok("кнопка повернулась у стан спокою",
+    (await p3.$eval(".micbtn", (e) => e.textContent)).includes("Диктувати") &&
+    !(await p3.$eval(".micbtn", (e) => e.classList.contains("rec"))));
+  // діагностика
+  await p3.click(".difflink"); await p3.waitForTimeout(1800);
+  const diag = await p3.$eval(".micnote", (e) => e.textContent);
+  ok("звіт діагностики перелічує умови",
+    diag.includes("вбудованому вікні") && diag.includes("Розпізнавання мови") &&
+    diag.includes("Дозвіл на мікрофон") && diag.includes("Висновок"), diag.slice(0, 90));
 } else {
   ok("без підтримки — чесне пояснення замість мертвої кнопки",
     tools.includes("Chrome") && tools.includes("Safari"), tools);
