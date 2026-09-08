@@ -205,9 +205,11 @@ const csv = await p.evaluate(() => navigator.clipboard.readText());
 const table = parseCSV(csv);
 const head = table[0];
 ok("BOM на початку — Excel відкриє кирилицю", csv.charCodeAt(0) === 0xFEFF);
-ok("шапка з журналом і годиною",
-  head.slice(0, 7).join(",") === "Результат,Головне по ліду,Зустріч (фікс),Журнал,Записів,Хто,Оновлено",
-  head.slice(0, 7).join(","));
+ok("шапка з журналом, годиною і скринінгом",
+  head.slice(0, 3).join(",") === "Результат,Головне по ліду,Зустріч (фікс)" &&
+  ["Вердикт", "Тип клієнта", "Маршрути", "Гіпотези", "Що надсилаємо", "Пообіцяли",
+   "Фолоу-ап надіслано", "Наступне вікно", "Відповіді скринінгу", "Журнал"].every((c) => head.includes(c)),
+  head.slice(0, 13).join(","));
 ok("усі колонки бази поруч", head.length >= 26, head.length + " колонок");
 ok("шапка + 3 ліда", table.length === 4, table.length + " рядків");
 ok("однакова кількість колонок у всіх рядках", new Set(table.map((r) => r.length)).size === 1);
@@ -479,12 +481,154 @@ ok("правка довідки переживає перезавантажен�
   (await p5.$$eval("textarea.brief", (e) => e.map((x) => x.value)))[0] === "Змінений текст довідки");
 await p5.close();
 
-section("[18] Помилки виконання");
+section("[18] Скринінг ліда");
+const p6 = await ctx.newPage();
+const errors6 = [];
+p6.on("pageerror", (e) => errors6.push(String(e)));
+await p6.goto(URL); await p6.waitForTimeout(1500);
+const scrText = () => p6.$eval(".scr-q", (e) => e.textContent);
+const optClick = (label) => p6.$$eval(".opt", (bs, l) => {
+  const b = bs.find((x) => x.textContent.includes(l));
+  if (b) b.click();
+  return !!b;
+}, label);
+
+await p6.fill("#q", "STARK Defence"); await p6.waitForTimeout(400);
+await p6.click(".row"); await p6.waitForTimeout(450);
+ok("у картці є блок скринінгу",
+  (await p6.$$eval(".eyebrow", (e) => e.map((x) => x.textContent))).includes("Скринінг"));
+await p6.locator(".sheet").last().getByText("Почати скринінг", { exact: true }).click();
+await p6.waitForTimeout(450);
+
+// вибір типу
+const types = await p6.$$eval(".type-name", (e) => e.map((x) => x.textContent));
+ok("сім типів клієнта", types.length === 7, JSON.stringify(types));
+ok("лід з бази FlyBy отримав підказку типу",
+  (await p6.$$(".type-sug")).length === 1);
+await p6.$$eval(".type-btn", (bs) => bs.find((x) => x.textContent.includes("Виробник БПЛА")).click());
+await p6.waitForTimeout(400);
+
+// набір питань
+ok("перше питання UAV_OEM англійською",
+  (await scrText()).startsWith("How many units do you ship a year"), await scrText());
+ok("прогрес 1 / 5", (await p6.$eval(".scr-progress", (e) => e.textContent)) === "1 / 5");
+ok("є українська підказка під питанням",
+  (await p6.$eval(".scr-hint", (e) => e.textContent)).includes("tens, hundreds"));
+await p6.fill(".scr-in", "500");
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+ok("друге питання — про бортове рішення",
+  (await scrText()).startsWith("Today, how do you solve that on board"), await scrText());
+ok("дискваліфікаційний варіант позначено", (await p6.$$(".opt-stop")).length === 1);
+
+// назад не втрачає відповідь
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Назад").click());
+await p6.waitForTimeout(350);
+ok("назад повертає введене", (await p6.$eval(".scr-in", (e) => e.value)) === "500");
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+
+// проходимо набір до кінця з 6 гіпотезами
+await optClick("own development"); await p6.waitForTimeout(350);
+ok("вибір варіанта веде далі сам",
+  (await scrText()).startsWith("What's the hard ceiling"), await scrText());
+ok("підказка нагадує не обіцяти ТТХ",
+  (await p6.$eval(".scr-hint", (e) => e.textContent)).includes("engineering team"));
+await p6.fill(".scr-field textarea", "1200 g, 40 W, 60 mm");
+await p6.locator(".scr-field .flagbox input").last().click();
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+await p6.fill(".scr-field textarea", "Septentrio, picked on size");
+await p6.locator(".scr-field .flagbox input").last().click();
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+ok("останнє питання — про вікно ревізії",
+  (await scrText()).startsWith("When's your next platform revision"), await scrText());
+const soonDate = new Date(Date.now() + 90 * 864e5).toISOString().slice(0, 10);
+await p6.fill(".scr-in", soonDate);
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+ok("тумблер H6 про платний пілот",
+  (await scrText()).includes("paid evaluation"), await scrText());
+await optClick("Yes"); await p6.waitForTimeout(400);
+
+// фінальний екран
+ok("вердикт HOT", (await p6.$eval(".verdict-l", (e) => e.textContent)) === "HOT",
+  await p6.$eval(".verdict-l", (e) => e.textContent));
+const hyps = await p6.$$eval(".hyp-row.on .hyp-k", (e) => e.map((x) => x.textContent));
+ok("усі шість гіпотез підтверджені", hyps.length === 6, hyps.join(","));
+ok("рекомендація маршруту K",
+  (await p6.$eval(".followup li", (e) => e.textContent)).includes("eval unit"),
+  await p6.$eval(".followup li", (e) => e.textContent));
+await p6.locator(".scr .summary-in, .sect .summary-in").last().fill("Специфікація до пʼятниці");
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Зберегти").click());
+await p6.waitForTimeout(600);
+ok("картка показує збережений вердикт",
+  (await p6.$eval(".verdict-l", (e) => e.textContent)) === "HOT");
+ok("обіцянка збережена",
+  (await p6.$$eval(".note-inline", (e) => e.map((x) => x.textContent))).some((t) => t.includes("Специфікація до")));
+ok("скринінг лягає в журнал",
+  (await p6.$$eval(".logitem .txt", (e) => e.map((x) => x.textContent))).some((t) => t.includes("Скринінг: HOT")));
+await p6.click(".sheet-head .iconbtn"); await p6.waitForTimeout(400);
+ok("вердикт видно у списку",
+  (await p6.$$eval(".row .vbadge", (e) => e.map((x) => x.textContent))).includes("HOT"));
+
+// дискваліфікатор обриває набір
+await p6.fill("#q", "Beyond Vision"); await p6.waitForTimeout(400);
+await p6.click(".row"); await p6.waitForTimeout(450);
+await p6.locator(".sheet").last().getByText("Почати скринінг", { exact: true }).click();
+await p6.waitForTimeout(450);
+await p6.$$eval(".type-btn", (bs) => bs.find((x) => x.textContent.includes("Геосервіс, обробка в себе")).click());
+await p6.waitForTimeout(400);
+ok("набір GEO_INHOUSE на 5 питань",
+  (await p6.$eval(".scr-progress", (e) => e.textContent)) === "1 / 5");
+await p6.fill(".scr-in", "40");
+await p6.$$eval(".scr-nav .btn", (bs) => bs.find((x) => x.textContent === "Далі").click());
+await p6.waitForTimeout(350);
+await optClick("US / Canada"); await p6.waitForTimeout(350);
+ok("третє питання — про дельверабли",
+  (await scrText()).startsWith("What do you actually deliver"), await scrText());
+await optClick("capture only"); await p6.waitForTimeout(500);
+ok("дискваліфікатор обриває набір і дає STOP",
+  (await p6.$eval(".verdict-l", (e) => e.textContent)) === "STOP");
+ok("пропонує змінити тип",
+  (await p6.$$eval(".btn", (e) => e.map((x) => x.textContent))).some((t) => t.includes("Тільки польовий збір")));
+ok("три готові фрази на вихід",
+  (await p6.locator(".sheet").last().locator(".pb-group").count()) === 3,
+  String(await p6.locator(".sheet").last().locator(".pb-group").count()));
+await p6.$$eval(".btn", (bs) => bs.find((x) => x.textContent.includes("Зберегти візитку")).click());
+await p6.waitForTimeout(600);
+ok("STOP збережено в картці",
+  (await p6.$eval(".verdict-l", (e) => e.textContent)) === "STOP");
+ok("на STOP нічого не надсилаємо",
+  (await p6.$eval(".followup li", (e) => e.textContent)).includes("нічого не надсилаємо"));
+
+// зміна типу миттєво міняє набір
+await p6.locator(".sheet").last().getByText("Пройти ще раз", { exact: true }).click();
+await p6.waitForTimeout(450);
+await p6.$$eval(".type-btn", (bs) => bs.find((x) => x.textContent.includes("Дефіцит людей")).click());
+await p6.waitForTimeout(400);
+ok("тип змінено — набір інший",
+  (await scrText()).startsWith("What's your team hiring for"), await scrText());
+// регресія: закриття вкладеного екрана не має забирати з собою картку ліда
+ok("два екрани відкриті одночасно", (await p6.$$(".sheet")).length === 2,
+  String((await p6.$$(".sheet")).length));
+await p6.locator(".sheet").last().locator(".sheet-head .iconbtn").click();
+await p6.waitForTimeout(500);
+ok("закрився лише скринінг, картка лишилась", (await p6.$$(".sheet")).length === 1,
+  String((await p6.$$(".sheet")).length));
+await p6.click(".sheet-head .iconbtn"); await p6.waitForTimeout(400);
+ok("картка теж закривається", (await p6.$$(".sheet")).length === 0);
+ok("без винятків у скринінгу", errors6.length === 0, JSON.stringify(errors6));
+await p6.close();
+
+section("[19] Помилки виконання");
 ok("без винятків на основній сторінці", errors.length === 0, JSON.stringify(errors));
 ok("без винятків на сторінці імпорту", errors2.length === 0, JSON.stringify(errors2));
 ok("без винятків на сторінці смуги годин", errors3.length === 0, JSON.stringify(errors3));
 ok("без винятків на сторінці контактів компанії", errors4.length === 0, JSON.stringify(errors4));
 ok("без винятків на сторінці сценаріїв", errors5.length === 0, JSON.stringify(errors5));
+ok("без винятків на сторінці скринінгу", errors6.length === 0, JSON.stringify(errors6));
 
 await browser.close();
 fs.rmSync(TMP, { recursive: true, force: true });
