@@ -1,83 +1,80 @@
 # Схема бази і статуси пайплайну
 
-Дві таблиці. Один рядок `companies` = одна юридична компанія (дедуплікація за доменом).
-Один рядок `contacts` = одна людина, прив'язана до `company_id`.
+База виставки — **не окрема система**, а тимчасовий шар над базою 🏢 **Акаунти**. Поля, що вже є
+в Акаунтах, називаються так само, щоб рядки заливались назад без перемапування.
 
-## Статуси пайплайну (`status_stage`)
+## Поля, спільні з базою 🏢 Акаунти (не перейменовувати)
+
+| Поле | Роль | Хто пише |
+|---|---|---|
+| `ICP-клас` | вхід Fit-1a + Gate G-A | людина / збагачення |
+| `Company size` (Розмір) | вхід Fit-1b + Gate G-B | людина / збагачення |
+| `Країна` | вхід Fit-1c | людина / збагачення |
+| `Сигнал (цитата)` · `Дата сигналу` | вхід Intent-2a | людина |
+| `Контакти` (реляція) · `Email статус` | вхід Intent-2b | людина |
+| `Скор` | Fit (0–100) або Fit+Intent | **система** |
+| `Тір` | Tier 1 / 2 / 3 / Nurture / Anti-ICP | **система** |
+| `ICP-чек (G4)` | «Пройшов» = усі Gates ОК | **система** |
+| `Статус` | В роботу / До збагачення / ICP-fail | **система** |
+
+## Поля, специфічні для виставки (додаються на час події)
+
+| Поле | Значення | Крок |
+|---|---|---|
+| `expo` | назва і рік виставки | 0 |
+| `exhibitor_catalog_url` | сторінка в каталозі учасників | 1 |
+| `stand_hall` · `stand_number` | хол і номер | 1 |
+| `catalog_categories` | категорії з каталогу | 1 |
+| `stand_type` | own-large · own-small · speaker-only · national-pavilion · co-exhibitor · catalog-only · delegation-only · unknown | 3 |
+| `co_exhibitor_of` | чий стенд | 3 |
+| `access` | 3–20 (з таблиці `stand_type`) | 3 |
+| `size_source` | звідки взято розмір | 4 |
+| `target_unit` | U1 · U2 | 5 |
+| `offer` | конкретна сходинка драбини | 5 |
+| `pain_hypothesis` · `case_ref` · `value_metric` · `first_question` | гіпотеза | 7 |
+| `hypothesis_confidence` | H · M · L | 7 |
+| `fit_score` · `intent_score` | 0–100 кожен | 8 |
+| `account_type` | new · **expand** (наш клієнт) · competitor · partner | 2 |
+| `owner` | хто з BD веде | 8 |
+| `expo_stage` | див. нижче | всі |
+| `next_action` · `next_action_date` | зобов'язання з дати | 9+ |
+| `notes` · `sources` | нотатки й джерела | всі |
+
+## Статуси виставкового пайплайну (`expo_stage`)
 
 | Статус | Означає | Крок |
 |---|---|---|
 | `S0` | Сирий рядок зі списку учасників | — |
 | `S1` | Нормалізовано (домен, країна, стенд) | 1 |
-| `S2` | Сегментовано, пройшов відсів релевантності | 2 |
-| `S3` | Стенд валідовано | 3 |
-| `S4` | Розмір валідовано | 4 |
-| `S5` | BU і оффер призначено | 5 |
-| `S6` | ЛПР знайдено | 6 |
+| `S2` | Gates пройдено, ICP-клас присвоєно | 2 |
+| `S3` | Стенд валідовано (Access) | 3 |
+| `S4` | Розмір і гео валідовані → Fit порахований | 4 |
+| `S5` | Юніт, оффер і сигнал призначені | 5 |
+| `S6` | ЛПР знайдено → Intent порахований | 6 |
 | `S7` | Гіпотезу сформовано | 7 |
-| `S8` | Проскоровано, тір присвоєно | 8 |
-| `S9` | Аутріч відправлено | 9 |
-| `M` | Зустріч підтверджено | 9 |
-| `E` | Зустрілись на виставці | 10 |
+| `S8` | Тір присвоєно, тактика обрана | 8 |
+| `S9` | Дотик до виставки відправлено | 9 |
+| `M` | Слот на виставці підтверджено | 9 |
+| `E` | Розмова на стенді відбулась | 10 |
 | `F` | У follow-up | 12 |
 | `SQL` | Кваліфікований лід, переданий у продаж | 12 |
-| `DQ` | Дискваліфіковано (обов'язково `disqualify_reason`) | будь-який |
+| `Out` | Gate-fail / Anti-ICP (обов'язково `disqualify_reason`) | будь-який |
+| `Hold-Enrich` | ICP-клас не визначено — збагатити й пере-скорити | 2 |
 
-Рядок не переходить на наступний статус, поки поля поточного кроку не заповнені (значення `unknown` — валідне заповнення).
+Рядок не переходить далі, поки поля поточного кроку не заповнені (`unknown` — валідне заповнення).
 
-## Таблиця `companies`
-
-| Поле | Тип / значення | Крок |
-|---|---|---|
-| `id` | унікальний | 1 |
-| `company` | назва | 1 |
-| `domain` | ключ дедуплікації | 1 |
-| `country`, `hq_city` | | 1 |
-| `exhibitor_catalog_url` | | 1 |
-| `stand_hall`, `stand_number` | | 1 |
-| `catalog_categories` | категорії з каталогу | 1 |
-| `segment_archetype` | UAV-OEM · SENSOR · EO-DATA · SURVEY · GIS-SW · DEF-INT · INFRA · GOV · ACAD · OTHER | 2 |
-| `relevance` | H · M · L | 2 |
-| `stand_type` | own-large · own-small · national-pavilion · co-exhibitor · speaker-only · catalog-only · delegation-only · unknown | 3 |
-| `co_exhibitor_of` | чий стенд | 3 |
-| `size_headcount`, `size_source`, `size_band` | | 4 |
-| `size_track` | Nurture · Fast · Core · Divisional · Enterprise | 4 |
-| `rnd_team_size`, `revenue_band`, `funding_stage`, `ownership` | | 4 |
-| `tech_signals` | сенсори, стек, вакансії, патенти | 4 |
-| `target_bu` | BU-1 · BU-2 · BU-3 (+ alt) | 5 |
-| `offer` | конкретний оффер | 5 |
-| `trigger` | факт + джерело | 5 |
-| `pain_hypothesis` | | 7 |
-| `case_ref` | № кейсу з профілю | 7 |
-| `value_metric` | число з кейсу | 7 |
-| `first_question` | перше питання на стенді | 7 |
-| `hypothesis_confidence` | H · M · L | 7 |
-| `score_fit`, `score_size`, `score_access`, `score_dm`, `score_hypothesis`, `score_total` | 0–100 | 8 |
-| `tier` | A · B · C | 8 |
-| `status_stage` | див. вище | всі |
-| `owner` | хто з BD веде | 8 |
-| `disqualify_reason` | | будь-який |
-| `next_action`, `next_action_date` | | 9+ |
-| `notes`, `sources` | | всі |
-
-## Таблиця `contacts`
-
-| Поле | Значення | Крок |
-|---|---|---|
-| `contact_id`, `company_id` | | 6 |
-| `full_name`, `title` | | 6 |
-| `bu_role_type` | ЛПР · економічний · чемпіон · гейткіпер | 6 |
-| `seniority` | C-level · VP/Director · Head/Manager · Senior IC | 6 |
-| `linkedin_url`, `source_url` | | 6 |
-| `email`, `email_status` | verified · pattern · unknown | 6 |
-| `at_expo` | confirmed · speaker · likely · unknown | 6 |
-| `confidence` | H · M · L | 6 |
-| `outreach_status` | not-started · connected · replied · booked · met · no-reply | 9+ |
-| `last_touch`, `next_touch` | дата | 9+ |
-| `notes` | зафіксоване з розмови | 10 |
+## Дві таблиці
+- **companies** — один рядок = одна компанія, ключ дедуплікації = **домен** (не назва).
+- **contacts** — один рядок = одна людина: `full_name` · `title` · `bu_role_type` (ЛПР / економічний /
+  чемпіон / гейткіпер) · `seniority` · `linkedin_url` · `email` · `email_status`
+  (verified / pattern / unknown) · `at_expo` (confirmed / speaker / likely / unknown) · `confidence` ·
+  `outreach_status` · `last_touch` · `next_touch` · `notes` · `source_url`.
 
 ## Гігієна бази
-- Порожнє поле заборонене — пиши `unknown`. Порожнє = «не дійшли руки», `unknown` = «перевірили, не знайшли».
-- Кожен рядок має власника (`owner`) з моменту `S8`.
-- Один прохід = одна виставка; база копіюється в наступну як джерело збагачення, не як робочий файл.
-- Персональні дані видаляємо/архівуємо за запитом суб'єкта; у базі не тримаємо нічого поза бізнес-контекстом.
+- Порожнє поле заборонене — пиши `unknown`. Порожнє = «не дійшли руки»; `unknown` = «перевірили, не знайшли».
+- Кожен рядок має `owner` з моменту `S8`.
+- **Стоп-фільтри перед скорингом:** наші клієнти → `account_type = expand` (веде акаунт-власник),
+  конкуренти → `Out`.
+- Після виставки рядки Tier 1–2 заливаються в 🏢 Акаунти; решта лишається як джерело збагачення
+  для наступної події.
+- Персональні дані — тільки бізнес-контекст; за запитом суб'єкта видаляємо.
