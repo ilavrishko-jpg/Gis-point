@@ -13,6 +13,7 @@
 | priorities-quarterly-theme | Виконання | active | Топ-5 + №1, тема кварталу |
 | kpi-scorecard | Виконання | active | KPI / «розумні числа» |
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
+| expo-lead-engine | Стратегія | proposed | Ліди з виставок: валідація стендів і розміру, BU→оффер, ЛПР, гіпотеза з кейсів, скоринг A/B/C |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
 
