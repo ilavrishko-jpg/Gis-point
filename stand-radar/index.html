@@ -117,10 +117,10 @@ a{color:var(--accent-ink)}
   border-bottom:1px solid var(--line-soft);
 }
 .topbar-inner{max-width:920px;margin:0 auto;padding:10px 14px 8px}
-.brandrow{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.brandrow{display:flex;align-items:center;gap:8px;margin-bottom:9px;min-width:0}
 .brand{
   font-family:var(--disp);font-weight:800;font-size:17px;letter-spacing:-.025em;
-  display:flex;align-items:baseline;gap:7px;
+  display:flex;align-items:baseline;gap:7px;white-space:nowrap;flex:none;
 }
 .brand .dot{
   width:7px;height:7px;border-radius:50%;background:var(--accent);
@@ -128,7 +128,7 @@ a{color:var(--accent-ink)}
 }
 .brand-sub{
   font-family:var(--mono);font-size:11px;color:var(--text-dim);
-  letter-spacing:.02em;
+  letter-spacing:.02em;white-space:nowrap;overflow:hidden;min-width:0;
 }
 .spacer{flex:1}
 .iconbtn{
@@ -688,6 +688,45 @@ textarea.brief:focus{border-color:var(--accent)}
 .vbadge.lead{background:var(--accent);color:#fff}
 .vbadge.stop{background:var(--dead-soft);color:var(--text-dim)}
 
+
+/* --- спільна робота: видно, чи записи доходять до команди --- */
+/* Коли все добре — сама крапка. Слова з'являються там, де є що пояснити. */
+.syncbtn{
+  display:flex;align-items:center;gap:5px;flex:none;
+  font-size:11px;font-weight:600;color:var(--text-dim);
+  padding:4px;border-radius:999px;border:1px solid transparent;
+  background:none;white-space:nowrap;
+}
+.syncbtn.local{padding:3px 9px;border-color:var(--warn-soft);background:var(--warn-soft)}
+.syncbtn #syncTxt:empty{display:none}
+.syncbtn.local{color:var(--warn)}
+.syncdot{width:6px;height:6px;border-radius:50%;background:var(--dead);flex:none}
+.syncdot.live{background:var(--accent)}
+.syncdot.local{background:var(--warn)}
+
+.whobar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 14px;background:var(--accent-soft);
+  border-bottom:1px solid var(--line-soft);font-size:13px;
+}
+.whobar input{
+  flex:1;min-width:120px;padding:8px 11px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface);outline:none;font-size:15px;
+}
+.whobar input:focus{border-color:var(--accent)}
+.whobar .lbl{width:100%;color:var(--text)}
+.whobar button{font-weight:700;font-size:13px;color:var(--accent-ink);padding:8px 4px}
+.teamrow{
+  display:flex;align-items:baseline;gap:10px;padding:8px 0;
+  border-bottom:1px solid var(--line-soft);font-size:14px;
+}
+.teamrow:last-child{border-bottom:none}
+.teamrow .n{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--text-dim)}
+.teamrow .me{
+  font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent-ink);background:var(--accent-soft);padding:1px 6px;border-radius:999px;
+}
+
 .hidden{display:none !important}
 </style>
 
@@ -697,6 +736,9 @@ textarea.brief:focus{border-color:var(--accent)}
       <div class="brandrow">
         <div class="brand"><span class="dot"></span>Стенд-радар</div>
         <span class="brand-sub" id="countLbl">—</span>
+        <button class="syncbtn" id="syncBtn" title="Спільна база команди">
+          <span class="syncdot" id="syncDot"></span><span id="syncTxt">…</span>
+        </button>
         <span class="spacer"></span>
         <button class="iconbtn" id="agendaBtn" aria-label="Зустрічі" title="Розклад зустрічей">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>
@@ -723,6 +765,7 @@ textarea.brief:focus{border-color:var(--accent)}
   </header>
 
 
+  <div class="whobar hidden" id="whobar"></div>
   <div class="progress" id="progress"></div>
   <div class="timeline hidden" id="timeline"></div>
   <main class="list" id="list"></main>
@@ -1221,7 +1264,7 @@ window.SR_SCREENING = (function () {
   /* ================= стан ================= */
   var state = {
     columns: [], map: {}, alt: {}, rows: [], sources: [], sourceCounts: {},
-    touch: {}, me: "", baseVersion: 0, baseLabel: "", brief: null,
+    touch: {}, me: "", baseVersion: 0, baseLabel: "", brief: null, dbState: "checking",
     filters: { q: "", country: null, tier: null, status: null, pstatus: null, source: null, unvisited: false },
     numMode: false, limit: 60
   };
@@ -3253,9 +3296,40 @@ window.SR_SCREENING = (function () {
     });
     lab.appendChild(inp);
     s3.appendChild(lab);
-    s3.appendChild(el("p", "note-inline", db
-      ? "Записи синхронізуються з рештою команди."
-      : "Записи зберігаються на цьому пристрої."));
+    var st = el("p", "note-inline");
+    if (state.dbState === "live") {
+      st.textContent = "Спільна база підключена — статуси, підсумки, години та журнали розходяться між усіма, кому ти дав доступ.";
+    } else if (state.dbState === "checking") {
+      st.textContent = "Перевіряю спільну базу…";
+    } else {
+      st.style.color = "var(--warn)";
+      st.textContent = "Спільна база недоступна — записи лишаються на цьому пристрої й до команди не потраплять. Так буває, якщо апку відкрито як звичайний файл, а не за посиланням.";
+    }
+    s3.appendChild(st);
+
+    /* хто вже щось писав — видно з підписів у самих записах */
+    var who = {}, order = [];
+    Object.keys(state.touch).forEach(function (id) {
+      var t = state.touch[id];
+      var names = [];
+      if (t.by) names.push(t.by);
+      (t.log || []).forEach(function (e) { if (e.by) names.push(e.by); });
+      names.forEach(function (n) {
+        if (!who[n]) { who[n] = 0; order.push(n); }
+        who[n]++;
+      });
+    });
+    if (order.length) {
+      s3.appendChild(el("span", "eyebrow", "Хто вже працює в базі"));
+      order.sort(function (a, b) { return who[b] - who[a]; }).forEach(function (n) {
+        var r = el("div", "teamrow");
+        r.appendChild(el("span", null, n));
+        if (n === state.me) r.appendChild(el("span", "me", "це ти"));
+        r.appendChild(el("span", "n", String(who[n])));
+        s3.appendChild(r);
+      });
+      s3.appendChild(el("p", "note-inline", "Рахуються записи з підписом. Безіменні сюди не потрапляють."));
+    }
     inner.appendChild(s3);
 
     /* довідка, з якої Claude бере факти — щоб не вигадував характеристик */
@@ -3622,14 +3696,25 @@ window.SR_SCREENING = (function () {
     }).catch(function () {});
   }
   function initCapabilities() {
-    if (!(window.claude && typeof window.claude.use === "function")) return;
+    if (!(window.claude && typeof window.claude.use === "function")) {
+      state.dbState = "local";
+      renderSync();
+      return;
+    }
+    /* якщо ніхто не відповів — не лишаємо вічне «перевіряю» */
+    setTimeout(function () {
+      if (state.dbState === "checking") { state.dbState = "local"; renderSync(); renderWhoBar(); }
+    }, 11000);
 
     window.claude.use("downloads").then(function (d) { downloads = d; }).catch(function () {});
     window.claude.use("sample").then(function (s) { if (typeof s === "function") sampleFn = s; }).catch(function () {});
 
     window.claude.use("db").then(function (d) {
-      if (!d) return;
+      if (!d) { state.dbState = "local"; renderSync(); return; }
       db = d;
+      state.dbState = "live";
+      renderSync();
+      renderWhoBar();
       db.doc("base/meta").onSnapshot(function (snap) {
         if (!snap.exists) { pushBaseToDb(); return; }
         var meta = snap.data() || {};
@@ -3708,9 +3793,65 @@ window.SR_SCREENING = (function () {
     refresh();
     initCapabilities();
   }
+  function renderSync() {
+    var btn = $("syncBtn"), dot = $("syncDot"), txt = $("syncTxt");
+    if (!btn) return;
+    btn.className = "syncbtn " + state.dbState;
+    dot.className = "syncdot " + state.dbState;
+    txt.textContent = state.dbState === "local" ? "лише тут" : "";
+    btn.title = state.dbState === "live"
+      ? "Записи розходяться по команді"
+      : state.dbState === "local"
+        ? "Спільна база недоступна — записи лишаються на цьому пристрої"
+        : "Перевіряю спільну базу…";
+  }
+
+  /* Безіменні записи в спільній базі марні: не видно, хто що зробив. */
+  function renderWhoBar() {
+    var bar = $("whobar");
+    if (!bar) return;
+    if (state.me || state.dbState !== "live" || lsGet("sr.who.skip")) {
+      bar.classList.add("hidden");
+      bar.innerHTML = "";
+      return;
+    }
+    if (bar.dataset.built === "1") { bar.classList.remove("hidden"); return; }
+    bar.dataset.built = "1";
+    bar.classList.remove("hidden");
+    bar.innerHTML = "";
+    bar.appendChild(el("span", "lbl", "Підпиши свої записи — команда бачитиме, хто з ким говорив."));
+    var inp = el("input");
+    inp.type = "text";
+    inp.placeholder = "Твоє ім'я";
+    inp.autocomplete = "name";
+    var save = el("button", null, "Готово");
+    save.addEventListener("click", function () {
+      var v = inp.value.trim();
+      if (!v) { inp.focus(); return; }
+      state.me = v;
+      lsSet(LS_ME, v);
+      bar.dataset.built = "";
+      renderWhoBar();
+      toast("Записи підписуються як «" + v + "»");
+    });
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") save.click(); });
+    var skip = el("button", null, "Пізніше");
+    skip.style.color = "var(--text-dim)";
+    skip.addEventListener("click", function () {
+      lsSet("sr.who.skip", 1);
+      bar.dataset.built = "";
+      renderWhoBar();
+    });
+    bar.appendChild(inp);
+    bar.appendChild(save);
+    bar.appendChild(skip);
+  }
+
   function refresh() {
     renderChips();
     renderList();
+    renderSync();
+    renderWhoBar();
   }
   /* «Через 25 хв» має лишатися правдою, поки телефон лежить у кишені */
   setInterval(function () { if (!sheetStack.length) renderTimeline(currentRows()); }, 60000);
@@ -3748,6 +3889,7 @@ window.SR_SCREENING = (function () {
     qInput.placeholder = state.numMode ? "Номер стенда…" : "Компанія, стенд, людина…";
     qInput.focus();
   });
+  $("syncBtn").addEventListener("click", openMenu);
   $("agendaBtn").addEventListener("click", openAgenda);
   $("filterBtn").addEventListener("click", openFilters);
   $("menuBtn").addEventListener("click", openMenu);

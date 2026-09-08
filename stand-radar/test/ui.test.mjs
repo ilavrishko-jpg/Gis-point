@@ -622,13 +622,57 @@ ok("картка теж закривається", (await p6.$$(".sheet")).lengt
 ok("без винятків у скринінгу", errors6.length === 0, JSON.stringify(errors6));
 await p6.close();
 
-section("[19] Помилки виконання");
+section("[19] Спільна робота команди");
+const p7 = await ctx.newPage();
+const errors7 = [];
+p7.on("pageerror", (e) => errors7.push(String(e)));
+await p7.goto(URL); await p7.waitForTimeout(1500);
+// поза артефактом спільної бази немає — апка мусить це сказати, а не мовчати
+ok("індикатор у шапці є", (await p7.$$("#syncBtn")).length === 1);
+await p7.waitForTimeout(600);
+ok("без спільної бази показано «лише тут»",
+  (await p7.textContent("#syncTxt")) === "лише тут", await p7.textContent("#syncTxt"));
+ok("заголовок не переноситься через індикатор",
+  (await p7.$eval(".brand", (e) => e.getBoundingClientRect().height)) < 30,
+  String(await p7.$eval(".brand", (e) => e.getBoundingClientRect().height)));
+ok("індикатор позначено як локальний",
+  await p7.$eval("#syncBtn", (e) => e.classList.contains("local")));
+ok("підказка пояснює наслідок",
+  (await p7.$eval("#syncBtn", (e) => e.title)).includes("на цьому пристрої"));
+ok("смуга з іменем не набридає, коли команди немає",
+  await p7.$eval("#whobar", (e) => e.classList.contains("hidden")));
+await p7.click("#syncBtn"); await p7.waitForTimeout(450);
+const menuNotes = await p7.$$eval(".note-inline", (e) => e.map((x) => x.textContent));
+ok("індикатор відкриває меню з поясненням",
+  menuNotes.some((t) => t.includes("до команди не потраплять")), JSON.stringify(menuNotes.slice(0, 3)));
+// ім'я підписує записи і показує автора в журналі
+await p7.locator(".sheet").last().locator("input[type=text]").first().fill("Ігор");
+await p7.$eval(".field input", (e) => e.dispatchEvent(new Event("change", { bubbles: true })));
+await p7.waitForTimeout(400);
+await p7.click(".sheet-head .iconbtn"); await p7.waitForTimeout(400);
+await p7.fill("#q", "Arkeus"); await p7.waitForTimeout(350);
+await p7.click(".row"); await p7.waitForTimeout(400);
+await p7.fill(".logadd textarea", "Перший запис від імені");
+await p7.click(".logadd .btn.primary"); await p7.waitForTimeout(400);
+ok("запис підписано автором",
+  (await p7.$eval(".logitem .when", (e) => e.textContent)).includes("Ігор"),
+  await p7.$eval(".logitem .when", (e) => e.textContent));
+await p7.click(".sheet-head .iconbtn"); await p7.waitForTimeout(400);
+await p7.click("#menuBtn"); await p7.waitForTimeout(450);
+const team = await p7.$$eval(".teamrow", (e) => e.map((x) => x.textContent));
+ok("у меню видно, хто працює в базі", team.length >= 1 && team[0].includes("Ігор"), JSON.stringify(team));
+ok("власний підпис позначено", (await p7.$$(".teamrow .me")).length === 1);
+ok("без винятків", errors7.length === 0, JSON.stringify(errors7));
+await p7.close();
+
+section("[20] Помилки виконання");
 ok("без винятків на основній сторінці", errors.length === 0, JSON.stringify(errors));
 ok("без винятків на сторінці імпорту", errors2.length === 0, JSON.stringify(errors2));
 ok("без винятків на сторінці смуги годин", errors3.length === 0, JSON.stringify(errors3));
 ok("без винятків на сторінці контактів компанії", errors4.length === 0, JSON.stringify(errors4));
 ok("без винятків на сторінці сценаріїв", errors5.length === 0, JSON.stringify(errors5));
 ok("без винятків на сторінці скринінгу", errors6.length === 0, JSON.stringify(errors6));
+ok("без винятків на сторінці команди", errors7.length === 0, JSON.stringify(errors7));
 
 await browser.close();
 fs.rmSync(TMP, { recursive: true, force: true });
