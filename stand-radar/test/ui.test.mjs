@@ -302,8 +302,8 @@ for (const scheme of ["dark", "light"]) {
   const bg = await pt.evaluate(() => getComputedStyle(document.body).backgroundColor);
   const fg = await pt.evaluate(() => getComputedStyle(document.querySelector(".row .name")).color);
   const badge = await pt.evaluate(() => getComputedStyle(document.querySelector(".pbadge")).backgroundColor);
-  const wantBg = scheme === "dark" ? "rgb(12, 22, 20)" : "rgb(241, 244, 241)";
-  const wantFg = scheme === "dark" ? "rgb(232, 239, 235)" : "rgb(18, 33, 29)";
+  const wantBg = scheme === "dark" ? "rgb(10, 23, 17)" : "rgb(239, 246, 241)";
+  const wantFg = scheme === "dark" ? "rgb(231, 240, 234)" : "rgb(15, 38, 27)";
   ok(`${scheme}: фон`, bg === wantBg, bg);
   ok(`${scheme}: текст`, fg === wantFg, fg);
   ok(`${scheme}: бейдж має свій фон`, badge !== "rgba(0, 0, 0, 0)", badge);
