@@ -90,6 +90,70 @@ single-source figure. Treat the extended pool as an upper bound, clearly labelle
 
 ---
 
+## 4b. Two segments added 10 Sep 2026
+
+### Road / corridor mobile mapping — a qualifier, not a new code
+
+Firms capturing road networks at scale (mobile LiDAR + panoramic imagery, highway asset
+inventory, right-of-way feature extraction). **These file under NAICS 541370 and are already
+inside the core pool** — adding a code for them would double-count. Treat this as a filter
+applied *on top of* the core pool.
+
+How to identify them in a list — any two of:
+
+- Owns or operates a mobile mapping vehicle system (Trimble MX series, Leica Pegasus, Riegl VMX, Topcon IP-S3)
+- Site language: "mobile LiDAR", "360° panoramic imagery", "right-of-way", "highway asset inventory", "roadway asset data collection", "pavement condition"
+- DOT / county / municipal roadway contracts, or LPA / HPMS deliverables
+- Sells feature extraction or asset inventory as a deliverable, not just the raw point cloud
+
+**Why this is the strongest sub-segment for us.** Corridor capture generates enormous,
+*repeating* classification and feature-extraction volume — hundreds of miles per campaign,
+re-flown on a cycle. That is exactly the "high, repeatable processing volume" and "variable,
+peak-driven load" the qualification gates ask for, matched to the powerline/utility corridor
+and MMS classification lines we already sell. The catch is that the same profile attracts
+in-house automation, so the "no bench" gate does the real filtering here.
+
+### Facilities-based broadband operators — a genuinely new pool
+
+Internet providers that **own their outside plant** (fiber, conduit, poles, ducts) and run
+utility assets, up to 500 people.
+
+| NAICS | Title | Vintage |
+| --- | --- | --- |
+| **517111** | Wired Telecommunications Carriers | NAICS 2022 (CBP 2023+) |
+| **517311** | Wired Telecommunications Carriers | NAICS 2017 (CBP ≤2022) |
+
+The code was renumbered between CBP vintages; the script sends the right one for the year.
+
+**Excluded on purpose:**
+
+| Excluded | Why |
+| --- | --- |
+| 517121 Telecommunications Resellers | No plant. No assets means no as-built backlog — nothing to map. |
+| 517112 Wireless Carriers | Tower/spectrum assets, not linear plant; different workflow. |
+| The national carriers | AT&T, Verizon, Comcast, Charter, Lumen, Frontier and peers are all far above the 500-person ceiling. |
+
+Who is actually left: rural ILECs, municipal broadband utilities, regional fiber overbuilders,
+and electric co-operatives running broadband subsidiaries.
+
+**What we sell them.** Owning linear plant creates a permanent as-built documentation problem:
+network records in CAD or on paper, no authoritative GIS asset database, locate requests
+answered by hand. That maps onto the Utility Database Development / Utility Mapping & Asset
+Management (PAS128) line and the Utility Surveyor role in the substitution map. Federal
+broadband build-out funding has been forcing exactly this documentation work.
+
+**Two anti-ICP risks that bite harder here than in the core pool:**
+
+1. **Route to market.** Operators often buy this through their engineering or OSP contractor
+   rather than direct — so the contractor may be the real account, and the operator only the
+   end client. Qualify who actually holds the budget before working the operator.
+2. **Data sovereignty.** Critical-infrastructure network records carry restrictions that can
+   forbid offshore processing outright. This is an explicit anti-ICP gate and it disqualifies
+   more accounts in this segment than anywhere else. Test it early — it is cheap to ask and
+   expensive to discover late.
+
+---
+
 ## 5. Size buckets
 
 You asked for `10-15 / 51-200 / 201-500 / 500+`. Two things to flag:

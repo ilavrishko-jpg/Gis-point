@@ -46,11 +46,29 @@ CORE_NAICS = {
     "541370": "Surveying and Mapping (except Geophysical) Services",
 }
 
+# Facilities-based broadband operators: they own outside plant (fiber, conduit,
+# poles, ducts), which is what creates the as-built / network-documentation /
+# utility-GIS demand. Resellers and MVNOs own no plant and are excluded on
+# purpose — no assets means no mapping backlog.
+# CBP switched NAICS vintage in 2023, and this is one of the codes that moved:
+# 517311 (NAICS 2017) became 517111 (NAICS 2022). Keyed by vintage so the
+# right code is sent for the requested year.
+TELECOM_NAICS = {
+    "NAICS2022": {"517111": "Wired Telecommunications Carriers"},
+    "NAICS2017": {"517311": "Wired Telecommunications Carriers"},
+}
+
 EXTENDED_NAICS = {
     "541330": "Engineering Services",
     "541310": "Architectural Services",
     "541990": "All Other Professional, Scientific & Technical Services",
 }
+
+# Road / corridor mobile mapping (LiDAR + panoramic imagery capture) is NOT a
+# separate NAICS code — these firms file under 541370 and are already inside
+# the core pool. Adding a code for them would double-count. It is a qualifier
+# applied on top of the core pool, not an addition to it; see
+# icp1-filter-spec.md section 4b for how to identify them in a list.
 
 # --- Target bucket definitions ----------------------------------------------
 # (label, lower bound inclusive, upper bound inclusive or None for open-ended)
@@ -371,6 +389,8 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--year", type=int, default=2023,
                     help="CBP reference year (default: 2023)")
+    ap.add_argument("--telecom", action="store_true",
+                    help="include facilities-based broadband operators (own outside plant)")
     ap.add_argument("--extended", action="store_true",
                     help="include the extended NAICS pool (upper bound, needs a fit rate)")
     ap.add_argument("--api-key", default=os.environ.get("CENSUS_API_KEY"),
@@ -379,6 +399,8 @@ def main() -> int:
     args = ap.parse_args()
 
     naics_map = dict(CORE_NAICS)
+    if args.telecom:
+        naics_map.update(TELECOM_NAICS[naics_variable(args.year)])
     if args.extended:
         naics_map.update(EXTENDED_NAICS)
         print("NOTE: extended pool is an UPPER BOUND. Apply a fit rate from your win "
