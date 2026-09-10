@@ -32,20 +32,22 @@ export CENSUS_API_KEY=...             # free: https://api.census.gov/data/key_si
 
 | File | Contents |
 | --- | --- |
-| `output/icp1_usa_native.csv` | Raw Census size bands, no interpolation. **Use this for anything you publish.** |
+| `output/icp1_usa_tier1.csv` | **The answer: ICP1 (30–200) per state**, with below/above splits |
 | `output/icp1_usa_requested.csv` | Your four buckets: 10-50 / 51-200 / 201-500 / 500+ |
-| `output/icp1_usa_tiers.csv` | Your tier ladder: T3 0-10 / T2 10-30 / T1 30-200 / T4 200-500 |
-| `output/icp1_usa_summary.md` | States ranked by in-ICP1 count, plus national totals |
+| `output/icp1_usa_tiers.csv` | Full tier ladder: T3 0-10 / T2 10-30 / T1 30-200 / T4 200-500 |
+| `output/icp1_usa_native.csv` | Raw Census size bands, no interpolation. **Use this for anything you publish.** |
+| `output/icp1_usa_summary.md` | States ranked by ICP1 count with running cumulative %, plus national totals |
 
 ## Three things worth knowing before you read the output
 
-**1. "ICP1" is read as Unit 1, not Tier 1.** Your size split runs to 500+, and Tier 1 alone is
-capped at 30–200 people. Unit 1 (GIS/production) is the only ICP spanning 0–500. Unit 2 (IT
-Unit) is segmented by market, not headcount, and is excluded so the two GTM motions don't
-double-count.
+**1. ICP1 = Tier 1: 30–200 people.** ~$3M–$60M revenue, from $5K per project or a retainer,
+54% of your revenue. That is the headline number. Tiers 2, 3 and 4 are reported around it for
+context but are not the target. Unit 2 (IT Unit) is excluded entirely.
 
-**2. `500+` is outside your own ICP.** Tier 4 stops at 500 people. The script reports the 500+
-column but excludes it from the "In-ICP1" total, so it can never quietly inflate a TAM slide.
+**2. The headline number is not the sum of your buckets.** `51-200` sits entirely inside
+Tier 1, but `10-50` straddles the Tier 1 floor at 30 people, and `201-500` / `500+` are outside
+it. So the script computes the 30–200 cut directly from the Census bands and reports it in its
+own column, with your four buckets alongside as the full distribution.
 
 **3. Census counts establishments, not companies.** A 12-office survey firm counts twelve
 times and each office is sized by its own headcount. This *overstates* company count and

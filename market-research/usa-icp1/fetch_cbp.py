@@ -56,10 +56,20 @@ EXTENDED_NAICS = {
 # (label, lower bound inclusive, upper bound inclusive or None for open-ended)
 
 REQUESTED_BUCKETS = [
-    ("10-50", 10, 50),
-    ("51-200", 51, 200),
-    ("201-500", 201, 500),
-    ("500+", 501, None),  # outside the ICP1 ceiling — reported, but flagged
+    ("10-50", 10, 50),      # straddles: 30-50 is ICP1, 10-29 is Tier 2
+    ("51-200", 51, 200),    # entirely ICP1
+    ("201-500", 201, 500),  # Tier 4, outside ICP1
+    ("500+", 501, None),    # outside every tier
+]
+
+# ICP1 = Tier 1 of the GIS/production unit: 30-200 people, ~$3M-$60M, 54% of
+# revenue. This is the headline number. It is computed directly from the Census
+# bands rather than by summing the requested buckets, because the 10-50 bucket
+# straddles the Tier 1 floor at 30 and would otherwise have to be split twice.
+ICP1_FOCUS = [
+    ("Below ICP1 (<30, Tier 2/3)", 0, 29),
+    ("ICP1 · Tier 1 (30-200)", 30, 200),
+    ("Above ICP1 (200+, Tier 4 and up)", 201, None),
 ]
 
 TIER_BUCKETS = [
@@ -205,10 +215,11 @@ def fetch(year: int, naics: str, api_key: str | None):
 # --- Aggregation -------------------------------------------------------------
 
 def build(year: int, naics_map: dict, api_key: str | None):
-    """Returns (native, requested, tiers, suppressed) keyed by state."""
+    """Returns (native, requested, tiers, icp1, suppressed) keyed by state."""
     native = defaultdict(lambda: defaultdict(float))
     requested = defaultdict(lambda: defaultdict(float))
     tiers = defaultdict(lambda: defaultdict(float))
+    icp1 = defaultdict(lambda: defaultdict(float))
     below_floor = defaultdict(float)
     suppressed = []
 
@@ -246,10 +257,13 @@ def build(year: int, naics_map: dict, api_key: str | None):
             for bucket, alloc in allocate(lo, hi, count, TIER_BUCKETS).items():
                 tiers[state][bucket] += alloc
 
+            for bucket, alloc in allocate(lo, hi, count, ICP1_FOCUS).items():
+                icp1[state][bucket] += alloc
+
     for state, count in below_floor.items():
         requested[state]["<10 (below your buckets)"] = count
 
-    return native, requested, tiers, suppressed
+    return native, requested, tiers, icp1, suppressed
 
 
 def write_csv(path: Path, rows_by_state: dict, columns: list[str]):
@@ -268,65 +282,75 @@ def write_csv(path: Path, rows_by_state: dict, columns: list[str]):
     print(f"  wrote {path}", file=sys.stderr)
 
 
-def write_summary(path: Path, requested: dict, tiers: dict, year: int,
+ICP1_LABEL = "ICP1 · Tier 1 (30-200)"
+
+
+def write_summary(path: Path, requested: dict, tiers: dict, icp1: dict, year: int,
                   naics_map: dict, suppressed: list):
-    icp_cols = ["10-50", "51-200", "201-500"]
-    ranked = sorted(
-        requested,
-        key=lambda s: sum(requested[s].get(c, 0.0) for c in icp_cols),
-        reverse=True,
-    )
+    ranked = sorted(icp1, key=lambda s: icp1[s].get(ICP1_LABEL, 0.0), reverse=True)
+    grand_total = sum(icp1[s].get(ICP1_LABEL, 0.0) for s in icp1) or 1.0
 
     lines = [
-        "# ICP1 — USA market size by state",
+        "# ICP1 (Tier 1) — USA market size by state",
         "",
         f"Source: US Census County Business Patterns {year}. "
         f"NAICS: {', '.join(sorted(naics_map))}.",
         "",
-        "`In-ICP1` = the 10-50, 51-200 and 201-500 buckets summed. The 500+ column is "
-        "shown but excluded from that total, because the ICP1 tier ladder stops at 500 "
-        "people (see icp1-filter-spec.md).",
+        "**ICP1 = Tier 1 of the GIS/production unit: 30–200 people, ~$3M–$60M, "
+        "from $5K/project or retainer — 54% of revenue.**",
         "",
-        "| Rank | State | 10-50 | 51-200 | 201-500 | **In-ICP1** | 500+ (out) | <10 (T3) |",
-        "| ---: | :--- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "The `ICP1` column is the headline number. The size buckets to its right are the "
+        "full distribution you asked for, so you can see what sits either side of Tier 1: "
+        "`51-200` is entirely inside it, `10-50` straddles the Tier 1 floor at 30 people, "
+        "and `201-500` / `500+` are outside it (Tier 4 and above).",
+        "",
+        "| Rank | State | **ICP1 (30-200)** | % of US | cum % | 10-50 | 51-200 | 201-500 | 500+ | <10 |",
+        "| ---: | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
+    cumulative = 0.0
     for i, state in enumerate(ranked, 1):
-        row = requested[state]
-        in_icp = sum(row.get(c, 0.0) for c in icp_cols)
+        row = requested.get(state, {})
+        core = icp1[state].get(ICP1_LABEL, 0.0)
+        cumulative += core
         lines.append(
             f"| {i} | {state} "
+            f"| **{round(core):,}** "
+            f"| {core / grand_total * 100:.1f}% "
+            f"| {cumulative / grand_total * 100:.1f}% "
             f"| {round(row.get('10-50', 0)):,} "
             f"| {round(row.get('51-200', 0)):,} "
             f"| {round(row.get('201-500', 0)):,} "
-            f"| **{round(in_icp):,}** "
             f"| {round(row.get('500+', 0)):,} "
             f"| {round(row.get('<10 (below your buckets)', 0)):,} |"
         )
 
     national = {
         c: sum(requested[s].get(c, 0.0) for s in requested)
-        for c in icp_cols + ["500+", "<10 (below your buckets)"]
+        for c in ["10-50", "51-200", "201-500", "500+", "<10 (below your buckets)"]
     }
-    total_in_icp = sum(national[c] for c in icp_cols)
     lines += [
         "",
         "## National",
         "",
-        f"- **In-ICP1 establishments (10–500 people): {round(total_in_icp):,}**",
+        f"- **ICP1 — Tier 1 establishments (30–200 people): {round(grand_total):,}**",
+        "",
+        "Full size distribution:",
+        "",
         f"- 10–50: {round(national['10-50']):,}",
         f"- 51–200: {round(national['51-200']):,}",
-        f"- 201–500: {round(national['201-500']):,}",
-        f"- 500+ (outside ICP1): {round(national['500+']):,}",
-        f"- <10 (Tier 3, minimise): {round(national['<10 (below your buckets)']):,}",
+        f"- 201–500: {round(national['201-500']):,}  (Tier 4)",
+        f"- 500+: {round(national['500+']):,}  (outside every tier)",
+        f"- <10: {round(national['<10 (below your buckets)']):,}  (Tier 3, minimise)",
         "",
-        "## By GIS-Point tier",
+        "## Where Tier 1 sits in the full ladder",
         "",
         "| Tier | Establishments |",
         "| :--- | ---: |",
     ]
     for label, _, _ in TIER_BUCKETS:
         total = sum(tiers[s].get(label, 0.0) for s in tiers)
-        lines.append(f"| {label} | {round(total):,} |")
+        mark = "  ← **ICP1**" if label.startswith("T1") else ""
+        lines.append(f"| {label}{mark} | {round(total):,} |")
 
     if suppressed:
         lines += [
@@ -361,7 +385,7 @@ def main() -> int:
               "data before quoting it — see icp1-filter-spec.md section 4.", file=sys.stderr)
 
     print(f"Fetching CBP {args.year} for {len(naics_map)} NAICS code(s):", file=sys.stderr)
-    native, requested, tiers, suppressed = build(args.year, naics_map, args.api_key)
+    native, requested, tiers, icp1, suppressed = build(args.year, naics_map, args.api_key)
 
     if not requested:
         raise SystemExit("No rows returned — check the year and NAICS vintage.")
@@ -374,7 +398,8 @@ def main() -> int:
     write_csv(args.out / "icp1_usa_requested.csv", requested,
               [b[0] for b in REQUESTED_BUCKETS] + ["<10 (below your buckets)"])
     write_csv(args.out / "icp1_usa_tiers.csv", tiers, [b[0] for b in TIER_BUCKETS])
-    write_summary(args.out / "icp1_usa_summary.md", requested, tiers,
+    write_csv(args.out / "icp1_usa_tier1.csv", icp1, [b[0] for b in ICP1_FOCUS])
+    write_summary(args.out / "icp1_usa_summary.md", requested, tiers, icp1,
                   args.year, naics_map, suppressed)
 
     print("Done.", file=sys.stderr)

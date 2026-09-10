@@ -3,10 +3,13 @@
 Source of truth: **`GisPoint_ICP_Segmentation_v4`**, tab **`ICP · GIS Dept`** (Google Drive,
 `1DAV-8NoBiYi3Sr6O1COoI8DE2j3IAZ00zf9NubXaAFg`).
 
-"ICP1" is read here as **Unit 1 — the GIS/production unit**, not Tier 1. Rationale: the
-requested size split runs up to 500+, and Tier 1 alone is capped at 30–200 people. Unit 1 is
-the only ICP whose tier ladder spans 0–500. Unit 2 (IT Unit — GeoTech SaaS / AgriTech /
-Defence) is segmented by *market segment*, not headcount, and is explicitly out of scope here.
+**ICP1 = Tier 1 of the GIS/production unit: 30–200 people, ~$3M–$60M, from $5K per project
+or a retainer — 54% of revenue.** (Confirmed with Ievgen, 10 Sep 2026.)
+
+Everything else is scope context, not the target: Tier 2 (10–30), Tier 3 (0–10) and Tier 4
+(200–500) are reported so you can see what sits either side of the core, but the headline
+number is Tier 1 only. Unit 2 (IT Unit — GeoTech SaaS / AgriTech / Defence) is segmented by
+*market segment* rather than headcount and is out of scope entirely.
 
 ---
 
@@ -17,12 +20,15 @@ Defence) is segmented by *market segment*, not headcount, and is explicitly out 
 | Industry | Surveying / Geospatial / GIS / AEC / Architecture bureaus (production geospatial firms) |
 | Sub-industry | Drone-LiDAR, topo/geodetic survey, GIS consultancies, Scan-to-BIM, CAD-to-GIS, mobile mapping, heritage |
 | Geography | USA, Canada, DACH, UK |
-| Tier 1 (CORE) | 30–200 people · ~$3M–$60M · from $5K/project or retainer · **54% of revenue** |
+| **→ ICP1 · Tier 1 (CORE)** | **30–200 people · ~$3M–$60M · from $5K/project or retainer · 54% of revenue** |
 | Tier 2 (GROW) | 10–30 people · ~$1M–$10M · $2–5K |
 | Tier 3 (MINIMIZE) | 0–10 people · <$2M · $0.5–2K · no outbound, productise, ≤10% of time |
 | Tier 4 (GROW) | 200–500 people · ~$5M+ · from $5K |
 
-**The ICP1 ceiling is 500 people.** Nothing above 500 is in ICP1 as currently written.
+Tier 1's motion is dedicated team / retainer, multi-touch, with QBRs — which is why the
+30–200 band is the one worth sizing precisely. Reference accounts in this band: GEODROM
+($255K), Airborne Hydro Mapping ($216K), GEO net solution ($132K), MDP GEO ($103K),
+GeoFly ($101K), GlobeZenit ($81K).
 
 ## 2. Qualification — must pass ALL seven
 
@@ -91,8 +97,19 @@ You asked for `10-15 / 51-200 / 201-500 / 500+`. Two things to flag:
 1. **`10-15` is read as `10-50`.** As written it leaves 16–50 unassigned while the next bucket
    starts at 51, so it is almost certainly a typo for the standard 10–50 (LinkedIn's 11–50)
    band. Say the word if you actually meant 10–15 and the script takes it.
-2. **`500+` sits outside ICP1.** Your own Tier 4 stops at 500. The script reports it, but it is
-   labelled out-of-ICP so it never silently inflates a TAM slide.
+2. **Only part of this range is ICP1.** With ICP1 fixed at Tier 1 (30–200), your four buckets
+   land like this:
+
+   | Bucket | Relationship to ICP1 |
+   | --- | --- |
+   | `10-50` | **Straddles.** 30–50 is ICP1; 10–29 is Tier 2. |
+   | `51-200` | **Entirely ICP1.** |
+   | `201-500` | Outside — Tier 4. |
+   | `500+` | Outside every tier. |
+
+   So the headline ICP1 number is *not* the sum of any subset of these buckets. The script
+   computes it directly from the Census bands as a clean 30–200 cut and reports it in its own
+   column, with the four buckets alongside for the full distribution.
 
 ### Census bands vs. your buckets
 
@@ -116,11 +133,13 @@ The script therefore emits **both**:
   interpolation within the band (firm-size distributions are Pareto-like, so log-uniform beats
   linear). The split factor is a single documented constant in the script, not a hidden fudge.
 
-### Also emitted: your real tier bands
+### Also emitted: the full tier ladder
 
 Your pricing and motion are driven by the tier ladder, not by the LinkedIn buckets, so the
-script also rolls up to `0-10 / 10-30 / 30-200 / 200-500` (Tier 3 / 2 / 1 / 4). This is the cut
-that actually tells you where the $5K+ retainer money is.
+script also rolls up to `0-10 / 10-30 / 30-200 / 200-500` (Tier 3 / 2 / 1 / 4) plus an
+"above ICP1" catch-all so the totals reconcile. Tier 1 is marked in the output. This is the
+cut that tells you where the $5K+ retainer money actually sits, and it shows how much Tier 2
+upgrade pipeline sits just below the ICP1 floor.
 
 ---
 
