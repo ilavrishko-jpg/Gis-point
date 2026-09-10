@@ -161,12 +161,12 @@ footer a{color:var(--ink-2)}
 <header>
   <p class="eyebrow">GIS-Point · Market research</p>
   <h1>How big is ICP1 in the United States?</h1>
-  <p class="lede">Tier 1 — production geospatial firms of 30–200 people — plus the two segments
-  added on 10 September: road/corridor mobile mapping, and facilities-based broadband operators.</p>
+  <p class="lede">Tier 1 — production geospatial firms of 30–200 people — plus segment RDC
+  (Road Data Contractors) and facilities-based broadband operators.</p>
   <div class="meta">
-    <span>10 SEP 2026</span>
+    <span>10 SEP 2026 · v2</span>
     <span>ICP1 = TIER 1 · 30–200 PEOPLE</span>
-    <span>SOURCE: IBISWORLD 2025 · BLS · BROADBANDNOW</span>
+    <span>SOURCE: IBISWORLD 2025 · BLS · BROADBANDNOW · FHWA</span>
   </div>
 </header>
 
@@ -255,27 +255,56 @@ footer a{color:var(--ink-2)}
 
   <div class="seg">
     <div class="seg-head">
-      <h3>2 · Road &amp; corridor mobile mapping</h3>
+      <h3>2 · Road Data Contractors — segment RDC</h3>
+      <span class="tag new">ICP v1.0</span>
       <span class="tag sub">Subset of segment 1 — not additive</span>
     </div>
-    <p>Firms capturing road networks at scale: mobile LiDAR, 360° panoramic imagery, highway
-    asset inventory, right-of-way feature extraction. <strong>These file under NAICS 541370 —
-    they are already counted in segment 1.</strong> Adding them as a separate pool would
-    double-count the market.</p>
+    <p>25–250 person engineering-survey firms (sweet spot 40–120) that own a fleet of
+    instrumented measurement vehicles, win public tenders to survey road networks, and capture
+    far more LiDAR, 360° imagery and pavement-profile data than they can process. Per
+    <a href="https://claude.ai/code/artifact/824810b3-6f59-44af-b5d8-c15811bea4e8">Road Data
+    Contractors ICP v1.0</a>. <strong>They file under NAICS 541370 — already counted in
+    segment 1.</strong> Listing them as a separate pool would double-count.</p>
     <div class="tscroll">
     <table>
       <caption>US totals</caption>
       <tr><th>Measure</th><th class="n">Value</th><th>Basis</th></tr>
-      <tr><td>Firms with a real mobile-mapping line</td><td class="n">60–120</td><td class="src">DERIVED</td></tr>
-      <tr class="hi"><td>Of those, at 30–200 people</td><td class="n">25–50</td><td class="src">DERIVED</td></tr>
+      <tr><td>Network-level state DOT contractors</td><td class="n">10–20</td><td class="src">DERIVED</td></tr>
+      <tr><td>County / municipal road-data firms</td><td class="n">40–90</td><td class="src">DERIVED</td></tr>
+      <tr class="hi"><td>In the ICP band, 25–250 people</td><td class="n">35–70</td><td class="src">DERIVED</td></tr>
+      <tr><td>In the 40–120 sweet spot</td><td class="n">20–35</td><td class="src">DERIVED</td></tr>
     </table>
     </div>
-    <p><strong>Strategically the best sub-segment you have.</strong> Corridor capture produces
-    enormous <em>repeating</em> classification and extraction volume — hundreds of miles per
-    campaign, re-flown on a cycle — which is precisely the "high, repeatable volume" and
-    "peak-driven load" your qualification gates ask for. It maps straight onto the MMS
-    classification and powerline/utility corridor lines you already sell. The catch: the same
-    profile attracts in-house automation, so the "no bench" gate does the real filtering.</p>
+
+    <h3 style="margin-top:22px">The US regulatory driver is stronger than the EU one</h3>
+    <p>The RDC profile rests on EU Directive 2019/1936 — a network-wide safety assessment at
+    least every five years. The US equivalent, <strong>23 CFR Part 490 + HPMS</strong>, bites
+    considerably harder.</p>
+    <div class="tscroll">
+    <table>
+      <tr><th></th><th>EU · RISM</th><th>USA · 23 CFR 490</th></tr>
+      <tr><td>Metrics</td><td>Network-wide safety assessment</td><td>IRI, cracking %, rutting, faulting</td></tr>
+      <tr class="hi"><td>Core network</td><td>≥ every 5 years</td><td>Annually, full extent</td></tr>
+      <tr><td>Secondary network</td><td>—</td><td>Non-Interstate NHS, biennially</td></tr>
+      <tr><td>In force</td><td>2024 first cycle</td><td>2018 Interstate · 2020 NHS</td></tr>
+      <tr><td>Standards</td><td>ZEB · DSN/BIKB · SCANNER</td><td>AASHTO R36 · PP69 · PP70</td></tr>
+    </table>
+    </div>
+    <p>Annual full-extent reporting on the Interstate is federally mandated, non-optional,
+    recurring volume — the same force the ICP is built on, running on a tighter clock.</p>
+
+    <h3 style="margin-top:22px">But the US pool is tiny and already consolidated</h3>
+    <p>Network-level DOT work is served by a handful of specialists — <strong>Pathway
+    Services</strong> (reported to serve more than half of US state DOTs), Fugro Roadware,
+    Mandli Communications, Dynatest and WayLink, with IMS, Roadway Asset Services, ICC-IMS and
+    Transmap behind them. Below that sits a longer tail doing county and municipal pavement
+    management.</p>
+    <p>Two consequences. <strong>It is a named-account market, not a segment</strong> — 35–70
+    firms in the ICP band means you can enumerate the entire US pool in a week, so research
+    depth per account beats list volume. And <strong>the say-no test removes the biggest
+    names</strong>: Fugro, Stantec, WSP, Michael Baker and ARA are all far above 250 people, and
+    several run exactly the "30+ person in-house processing centre" the profile calls out as
+    competitor rather than customer.</p>
   </div>
 
   <div class="seg">
@@ -320,7 +349,20 @@ footer a{color:var(--ink-2)}
 </section>
 
 <section>
-  <h2>Two things worth arguing about</h2>
+  <h2>Three things worth arguing about</h2>
+
+  <div class="callout">
+    <h3>RDC v1.0 puts the USA outside Tier 1 — and this is US research</h3>
+    <p>The Road Data Contractors profile tiers its geography as Tier 1 = Poland, DACH, CEE,
+    UK/Ireland, Benelux, Nordics; Tier 2 = France, Iberia, Italy, Western Balkans; Tier 3 =
+    Gulf, ANZ, Canada. The three US firms it names — Pathway Services, Roadway Asset Services,
+    ICC-IMS — sit under "Tier 3, opportunistic".</p>
+    <p>So the newest ICP deliberately deprioritises the market this report covers. That is a
+    defensible call: the anchor account is Polish, the statutory cycles are European, and the US
+    pool is small and consolidated. But it needs settling before it drives spend — either the US
+    moves up a tier for RDC on the strength of the 23 CFR 490 annual cycle, or RDC is a
+    Europe-first play and the US work stays on segments 1 and 3.</p>
+  </div>
 
   <div class="callout">
     <h3>Telecom has a route-to-market problem</h3>
@@ -349,9 +391,16 @@ footer a{color:var(--ink-2)}
     <li><strong>The 10–30 band is your upgrade pipeline, not noise.</strong> ~1,250 firms sit
     directly below the Tier 1 floor. Tier 2 today, Tier 1 in two years, and far cheaper to hold
     a relationship with now than to win cold later.</li>
+    <li><strong>RDC is 35–70 accounts, so treat it as a list, not a funnel.</strong> The whole
+    US pool fits on one page. That inverts the economics: a week of research per account is
+    proportionate, and the paid-pilot offer in the ICP — 50–100 km on their own spec, reported
+    as hours/km, QC first-pass rate and cost/km — is the right instrument for a market this
+    small. Volume outbound would exhaust it in a month.</li>
     <li><strong>Texas, California and Florida are ~25% of national capacity</strong> —
     9.8%, 8.9% and 6.0% of US licensed land surveyors respectively. Three states carry a quarter
-    of the market; a territory plan that treats all 50 equally wastes most of its effort.</li>
+    of the market; a territory plan that treats all 50 equally wastes most of its effort. For
+    RDC specifically the unit is the state DOT, not the state population — all 52 procure on
+    the same federal clock regardless of size.</li>
     <li><strong>Telecom roughly doubles the ICP1 count</strong> but on a different motion, a
     different buyer and a harder sovereignty gate. Treat it as a second beachhead to test, not
     as a bolt-on to the existing surveying play.</li>
@@ -381,6 +430,10 @@ footer a{color:var(--ink-2)}
   <a href="https://broadbandnow.com/All-Providers">BroadbandNow — All Providers</a> ·
   <a href="https://www.bls.gov/oes/current/oes171021.htm">BLS OEWS</a> ·
   <a href="https://www.zippia.com/land-surveyor-jobs/demographics/">Zippia — Land surveyor demographics by state</a> ·
+  <a href="https://www.ecfr.gov/current/title-23/chapter-I/subchapter-E/part-490/subpart-C">eCFR — 23 CFR Part 490 Subpart C</a> ·
+  <a href="https://www.fhwa.dot.gov/policyinformation/hpms/fieldmanual/page01.cfm">FHWA — HPMS Field Manual</a> ·
+  <a href="https://www.pathwayservices.com/services/">Pathway Services</a> ·
+  <a href="https://claude.ai/code/artifact/824810b3-6f59-44af-b5d8-c15811bea4e8">Road Data Contractors ICP v1.0</a> ·
   <a href="https://www.census.gov/programs-surveys/cbp.html">US Census County Business Patterns</a></p>
 </footer>
 

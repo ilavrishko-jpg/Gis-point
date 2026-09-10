@@ -92,26 +92,69 @@ single-source figure. Treat the extended pool as an upper bound, clearly labelle
 
 ## 4b. Two segments added 10 Sep 2026
 
-### Road / corridor mobile mapping — a qualifier, not a new code
+### Segment RDC — Road Data Contractors — a qualifier, not a new code
 
-Firms capturing road networks at scale (mobile LiDAR + panoramic imagery, highway asset
-inventory, right-of-way feature extraction). **These file under NAICS 541370 and are already
-inside the core pool** — adding a code for them would double-count. Treat this as a filter
-applied *on top of* the core pool.
+Full profile: **[Road Data Contractors ICP v1.0](https://claude.ai/code/artifact/824810b3-6f59-44af-b5d8-c15811bea4e8)**
+(anchor account Lehmann + Partner Polska, fit score 100/100). This section is only the **US
+translation** of it — NAICS mapping, the US regulatory driver, and who is actually in the US
+pool. The linked profile stays the source of truth for the definition, personas, fit score and
+say-no test.
 
-How to identify them in a list — any two of:
+Definition in one line: a **25–250 person engineering-survey company (sweet spot 40–120)** that
+owns a fleet of instrumented measurement vehicles, wins public tenders to survey road networks,
+and captures far more LiDAR, 360° imagery and pavement-profile data than it can process.
 
-- Owns or operates a mobile mapping vehicle system (Trimble MX series, Leica Pegasus, Riegl VMX, Topcon IP-S3)
-- Site language: "mobile LiDAR", "360° panoramic imagery", "right-of-way", "highway asset inventory", "roadway asset data collection", "pavement condition"
-- DOT / county / municipal roadway contracts, or LPA / HPMS deliverables
-- Sells feature extraction or asset inventory as a deliverable, not just the raw point cloud
+**No new NAICS code.** These firms file under **541370** (already the core pool), with some
+under 541330. Adding a code would double-count — RDC is a filter applied *on top of* the core
+pool, not an addition to it.
 
-**Why this is the strongest sub-segment for us.** Corridor capture generates enormous,
-*repeating* classification and feature-extraction volume — hundreds of miles per campaign,
-re-flown on a cycle. That is exactly the "high, repeatable processing volume" and "variable,
-peak-driven load" the qualification gates ask for, matched to the powerline/utility corridor
-and MMS classification lines we already sell. The catch is that the same profile attracts
-in-house automation, so the "no bench" gate does the real filtering here.
+#### ⚠ The RDC profile puts the USA outside Tier 1
+
+Its geography tiers are Tier 1 = Poland, DACH, CEE, UK/Ireland, Benelux, Nordics; Tier 2 =
+France, Iberia, Italy, Western Balkans; **Tier 3 = Gulf, ANZ, Canada** — and the three US firms
+it names (Pathway Services, Roadway Asset Services, ICC-IMS) sit under "Tier 3, opportunistic".
+So the newest ICP deliberately deprioritises the market this research covers. Worth settling
+before it drives spend: either the US moves up a tier for RDC, or RDC is a Europe-first play and
+the US work stays on segments 1 and 3.
+
+#### The US driver is stronger than the EU one
+
+The RDC profile rests on EU Directive 2019/1936 (network-wide safety assessment, at least every
+five years). The US equivalent is **23 CFR Part 490 + HPMS**, and it bites harder:
+
+| | EU (RISM) | USA (23 CFR 490) |
+| --- | --- | --- |
+| Metrics | Network-wide safety assessment | IRI, cracking %, rutting, faulting |
+| Interstate / core network | ≥ every 5 years | **Annually, full extent** |
+| Secondary network | — | Non-Interstate NHS, **biennially, full extent** |
+| In force since | 2024 first cycle | 2018 Interstate · 2020 non-Interstate NHS |
+| Standards | National (ZEB, DSN/BIKB, SCANNER) | AASHTO R36 · PP69 · PP70 |
+
+Annual full-extent reporting on the Interstate is non-optional, federally mandated, recurring
+volume — a stronger version of the same force the profile is built on.
+
+#### But the US pool is tiny and already consolidated
+
+Network-level state DOT work is served by a handful of specialists: **Pathway Services**
+(reported to serve more than half of US state DOTs), **Fugro Roadware**, **Mandli
+Communications**, **Dynatest**, **WayLink**, plus IMS Infrastructure Management Services,
+Roadway Asset Services, ICC-IMS and Transmap. Below them sits a longer tail doing county and
+municipal pavement management (ASTM D6433 PCI).
+
+Two consequences:
+
+1. **It is a named-account market, not a segment.** Roughly 35–70 US firms fall in the 25–250
+   band. You can enumerate the whole thing in a week — so research depth per account matters
+   far more than list volume.
+2. **The say-no test disqualifies the biggest names.** Fugro, Stantec, WSP, Michael Baker and
+   ARA are all far above 250 people, and several run exactly the "30+ person in-house
+   processing centre" the profile calls out as competitor rather than customer. What is left in
+   the ICP band is a short list of independents.
+
+**Why it is still the strongest sub-segment.** Corridor capture generates enormous *repeating*
+classification and extraction volume, on a statutory clock, matched to the MMS classification
+and utility-corridor lines we already sell. The catch is unchanged: the same profile attracts
+in-house automation, so the "no bench" gate does the real filtering.
 
 ### Facilities-based broadband operators — a genuinely new pool
 
