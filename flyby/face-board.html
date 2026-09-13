@@ -1,4 +1,4 @@
-<title>Карта відповідальності FLY BY</title>
+<title>Оргструктура FLY BY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -8,12 +8,11 @@
     --ink: #0F1A19; --ink-2: #354745; --muted: #5E7370;
     --line: #C6D1CE; --line-soft: #DCE4E1;
     --nav: #14625D; --nav-soft: #E0EDEB;
-    --beacon: #A85C0C; --beacon-soft: #F6E9D8;
-    --alert: #9C332D;
+    --beacon: #A85C0C; --beacon-soft: #F6E9D8; --alert: #9C332D;
     --f-display: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
     --f-body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
     --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    --wrap: 1120px; --r: 3px;
+    --wrap: 1140px; --r: 3px;
   }
   :root:not([data-theme="light"]) { color-scheme: light dark; }
   @media (prefers-color-scheme: dark) {
@@ -35,10 +34,7 @@
   }
 
   * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--paper); color: var(--ink);
-    font-family: var(--f-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
-  }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 20px; }
   h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; font-weight: 600; }
   p { margin: 0; }
@@ -50,26 +46,16 @@
   .mast-grid { display: flex; flex-wrap: wrap; gap: 28px 40px; align-items: flex-end; justify-content: space-between; }
   h1 { font-size: clamp(30px, 5.2vw, 46px); line-height: 1.04; letter-spacing: -.015em; margin-top: 10px; }
   .lede { color: var(--ink-2); max-width: 58ch; margin-top: 12px; font-size: 15.5px; }
-  .facts { display: grid; gap: 7px; font-size: 13px; min-width: 264px; }
+  .facts { display: grid; gap: 7px; font-size: 13px; min-width: 260px; }
   .fact { display: flex; gap: 12px; align-items: baseline; border-bottom: 1px dotted var(--line); padding-bottom: 6px; }
-  .fact dt { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); flex: 0 0 76px; }
+  .fact dt { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); flex: 0 0 78px; }
   .fact dd { margin: 0; color: var(--ink-2); }
 
   .deck { position: sticky; top: 0; z-index: 20; background: var(--surface-2); border-bottom: 1px solid var(--line); }
-  .deck .wrap { padding-block: 12px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
-  .meter { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .load { display: inline-flex; align-items: baseline; gap: 7px; border: 1px solid var(--line); border-radius: var(--r); padding: 5px 10px; background: var(--surface); font-size: 13px; }
-  .load b { font-family: var(--f-mono); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .load.is-hot { border-color: var(--beacon); background: var(--beacon-soft); }
-  .load.is-open b { color: var(--beacon); }
-  .load .who { max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .deck-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .deck .wrap { padding-block: 12px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
   .progress { font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-
-  button {
-    font: inherit; cursor: pointer; color: inherit; background: var(--surface);
-    border: 1px solid var(--line); border-radius: var(--r); padding: 6px 11px; font-size: 13px;
-  }
+  .deck-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  button { font: inherit; cursor: pointer; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 11px; font-size: 13px; }
   button:hover { border-color: var(--nav); }
   button[aria-pressed="true"] { background: var(--nav); border-color: var(--nav); color: #fff; }
   :focus-visible { outline: 2px solid var(--nav); outline-offset: 2px; }
@@ -78,79 +64,63 @@
   .roster .wrap { padding-block: 16px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: flex-end; }
   .roster-field { display: grid; gap: 4px; }
   .roster-field label { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .roster-field input {
-    font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2);
-    border: 1px solid var(--line); border-radius: var(--r); padding: 6px 9px; width: 190px; max-width: 100%;
-  }
-  .roster-note { color: var(--muted); font-size: 12.5px; max-width: 38ch; }
+  .roster-field input { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 9px; width: 200px; max-width: 100%; }
+  .roster-note { color: var(--muted); font-size: 12.5px; max-width: 34ch; }
 
   section { border-bottom: 1px solid var(--line-soft); }
   .sec-head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin-bottom: 16px; }
   .sec-head h2 { font-size: 21px; letter-spacing: -.01em; }
+  .sec-head h3 { font-size: 17px; }
   .sec-head .note { color: var(--muted); font-size: 13px; max-width: 62ch; }
 
-  .lvl1 .wrap { padding-block: 28px; }
-  .zonecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .zonecard { background: var(--surface); padding: 16px; display: grid; gap: 9px; align-content: start; border-top: 3px solid var(--nav); }
-  .zonecard[data-open="1"] { border-top-color: var(--beacon); }
-  .zonecard.is-core { border-top-color: var(--muted); }
-  .zc-top { display: flex; align-items: baseline; gap: 9px; }
+  /* org chart */
+  .org .wrap { padding-block: 28px; }
+  .orgchart { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .col { background: var(--surface); padding: 14px 16px; display: grid; gap: 10px; align-content: start; border-top: 3px solid var(--nav); }
+  .col.is-open { border-top-color: var(--beacon); }
+  .col-name { font-family: var(--f-display); font-size: 16.5px; font-weight: 600; }
+  .col-count { font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
+  .zlist { display: flex; flex-wrap: wrap; gap: 5px; }
+  .zchip { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .04em; border: 1px solid var(--nav); color: var(--nav); background: var(--nav-soft); border-radius: 2px; padding: 3px 7px; }
+  .zchip.is-deputy { border-color: var(--line); color: var(--muted); background: transparent; border-style: dashed; }
+  .zchip.is-free { border-color: var(--beacon); color: var(--beacon); background: transparent; }
+  .col-empty { color: var(--muted); font-size: 13px; }
+
+  /* zone cards */
+  .zones .wrap { padding-block: 28px; }
+  .zonegrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .zcard { background: var(--surface); padding: 15px 16px; display: grid; gap: 8px; align-content: start; }
+  .zc-top { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
   .zc-code { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .12em; background: var(--ink); color: var(--paper); padding: 3px 7px; border-radius: 2px; }
-  .zc-name { font-family: var(--f-display); font-size: 17px; font-weight: 600; }
-  .zc-mission { color: var(--ink-2); font-size: 13px; }
-  .zc-nums { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); }
-  .zc-owner { font-family: var(--f-mono); font-size: 14px; color: var(--nav); }
-  .zc-owner[data-open="1"] { color: var(--beacon); }
-  .zc-count { font-size: 12px; color: var(--muted); }
-  .zc-actions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
-  .zc-fill { font-size: 12px; padding: 4px 9px; }
-
-  .choose { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 18px; }
-  .q { background: var(--surface); padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
-  .q b { font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; color: var(--nav); }
-  .q p { font-size: 13.5px; color: var(--ink-2); }
-
-  .board .wrap { padding-block: 28px 10px; }
-  .zone { margin-bottom: 34px; }
-  .zone-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-  .zone-head h3 { font-size: 19px; }
-  .zone-head .zone-owner { font-family: var(--f-mono); font-size: 12.5px; color: var(--nav); margin-left: auto; }
-  .zone-head .zone-owner[data-open="1"] { color: var(--beacon); }
-
-  .strip {
-    display: grid; grid-template-columns: 104px minmax(0, 1fr) minmax(228px, 286px);
-    gap: 0 18px; padding: 14px 0 14px 12px;
-    border-bottom: 1px solid var(--line-soft); border-left: 3px solid transparent; align-items: start;
-  }
-  .strip[data-state="free"] { border-left-color: var(--beacon); background: linear-gradient(90deg, var(--beacon-soft), transparent 42%); }
-  .strip[data-state="set"] { border-left-color: var(--nav); }
-  .s-rail { display: grid; gap: 6px; justify-items: start; }
-  .s-code { font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; color: var(--ink); letter-spacing: .04em; }
-  .tag { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; border: 1px solid; }
-  .tag-hire { color: var(--alert); border-color: var(--alert); }
-  .tag-out { color: var(--muted); border-color: var(--muted); }
-  .tag-fix { color: var(--nav); border-color: var(--nav); background: var(--nav-soft); }
-  .tag-free { color: var(--beacon); border-color: var(--beacon); border-style: dashed; }
-
-  .s-body { display: grid; gap: 5px; min-width: 0; }
-  .s-name { font-family: var(--f-display); font-size: 16.5px; font-weight: 600; }
-  .s-what { color: var(--ink-2); font-size: 13.5px; }
-  .s-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
-  .s-meta strong { color: var(--ink-2); font-weight: 500; }
-  .s-flag { font-size: 12.5px; color: var(--ink-2); border-left: 2px solid var(--beacon); padding-left: 9px; margin-top: 3px; }
-
-  .s-assign { display: grid; gap: 6px; }
+  .zc-name { font-family: var(--f-display); font-size: 16.5px; font-weight: 600; }
+  .zc-about { color: var(--ink-2); font-size: 13px; }
+  .zc-nums { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+  .pickline { display: grid; gap: 4px; margin-top: 3px; }
+  .pickline > span { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   .chips { display: flex; flex-wrap: wrap; gap: 4px; }
-  .chip {
-    font-size: 12.5px; padding: 4px 9px; border-radius: 12px;
-    border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
-    max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
+  .chip { font-size: 12.5px; padding: 4px 9px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .chip:hover { border-color: var(--nav); color: var(--ink); }
   .chip[aria-pressed="true"] { background: var(--nav); border-color: var(--nav); color: #fff; font-weight: 500; }
-  .s-note { font: inherit; font-size: 12.5px; color: var(--ink); width: 100%; background: transparent; border: 0; border-bottom: 1px dotted var(--line); padding: 3px 2px; }
-  .s-note::placeholder { color: var(--muted); }
-  .s-note:focus { border-bottom-color: var(--nav); outline: none; }
+  .chip.sm { font-size: 12px; padding: 3px 8px; }
+  .chip.sm[aria-pressed="true"] { background: transparent; color: var(--nav); border-color: var(--nav); font-weight: 600; }
+
+  /* functions */
+  .fns .wrap { padding-block: 28px 10px; }
+  .zone { margin-bottom: 30px; }
+  .zone-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  .zone-head h3 { font-size: 18px; }
+  .zone-head .zone-owner { font-family: var(--f-mono); font-size: 12px; color: var(--nav); margin-left: auto; }
+  .zone-head .zone-owner[data-open="1"] { color: var(--beacon); }
+  .ftable { width: 100%; font-size: 13.5px; }
+  .ftable th, .ftable td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .ftable thead th { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .ftable td.code { font-family: var(--f-mono); font-size: 12px; white-space: nowrap; color: var(--ink); font-weight: 600; }
+  .ftable td.kpi { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); }
+  .ftable td.who { white-space: nowrap; }
+  .who-tag { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; border: 1px solid var(--muted); color: var(--muted); }
+  .who-tag.hire { border-color: var(--alert); color: var(--alert); }
+  .fname { font-weight: 500; }
+  .fwhat { color: var(--ink-2); font-size: 13px; }
 
   .ref .wrap { padding-block: 30px; }
   .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
@@ -162,13 +132,25 @@
   table.grid td.num { font-family: var(--f-mono); font-size: 13px; color: var(--alert); font-weight: 600; white-space: nowrap; }
   table.grid tbody tr:last-child td { border-bottom: 0; }
   .mono-cell { font-family: var(--f-mono); font-size: 12px; }
+  table.grid td.filled { font-weight: 500; }
+  table.grid td.blank { color: var(--beacon); font-family: var(--f-mono); font-size: 12px; }
+
+  .checks { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 18px; }
+  .check { background: var(--surface); padding: 11px 16px; display: flex; gap: 11px; align-items: flex-start; font-size: 13.5px; color: var(--ink-2); }
+  .check input { margin: 3px 0 0; width: 16px; height: 16px; accent-color: var(--nav); flex: 0 0 auto; }
+  .signline { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 18px; }
+  .sign { background: var(--surface); padding: 16px; display: grid; gap: 14px; }
+  .sign .who2 { font-family: var(--f-display); font-size: 15.5px; font-weight: 600; }
+  .sign .zones2 { font-size: 12.5px; color: var(--ink-2); min-height: 2.6em; }
+  .sign .rule { border-bottom: 1px solid var(--line); padding-top: 16px; }
+  .sign .rule-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 
   .rows { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .row2 { background: var(--surface); padding: 13px 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 4px 22px; }
-  .row2 h4 { font-size: 15.5px; }
-  .row2 .risk { color: var(--ink-2); font-size: 13px; }
+  .row2 { background: var(--surface); padding: 13px 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 4px 22px; }
+  .row2 h4 { font-size: 15px; }
+  .row2 .between { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .08em; color: var(--nav); }
   .row2 .fix { font-size: 13px; color: var(--ink-2); border-left: 2px solid var(--nav); padding-left: 12px; grid-row: 1 / span 2; grid-column: 2; }
-  .row2 .fix em { font-family: var(--f-mono); font-style: normal; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+  .row2 .fix em { font-family: var(--f-mono); font-style: normal; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
 
   ol.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); counter-reset: r; }
   ol.plain li { background: var(--surface); padding: 12px 16px; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; align-items: baseline; font-size: 13.5px; color: var(--ink-2); }
@@ -188,12 +170,13 @@
   .status { font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; }
 
   @media (max-width: 860px) {
-    .strip { grid-template-columns: 84px minmax(0, 1fr); }
-    .s-assign { grid-column: 1 / -1; margin-top: 10px; }
     .row2 { grid-template-columns: 1fr; }
     .row2 .fix { grid-column: 1; grid-row: auto; }
     ol.agenda li { grid-template-columns: 60px minmax(0, 1fr); }
     ol.agenda .out { grid-column: 2; }
+    .ftable thead { display: none; }
+    .ftable td { display: block; border-bottom: 0; padding: 2px 0; }
+    .ftable tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
   }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
@@ -202,19 +185,19 @@
   <div class="wrap">
     <div class="mast-grid">
       <div>
-        <p class="eyebrow">FLY BY / ONS · Карта зон відповідальності · v1.0</p>
-        <h1>Карта відповідальності</h1>
+        <p class="eyebrow">FLY BY / ONS · Організаційна структура · v2.0</p>
+        <h1>Оргструктура і зони</h1>
         <p class="lede">
-          Документ описує <strong>функції, а не людей</strong>. Чотири зони, 37 функцій, у кожної —
-          що входить, головне число і рекомендація, чим її закривати: партнером, наймом або підрядником.
-          Імена вписуються за столом: оберіть власника зони, далі пройдіть по функціях усередині.
+          Одинадцять зон, 57 функцій. У кожної зони — <strong>один власник і один заступник</strong>.
+          Проставте власників на картках нижче: оргструктура і форма узгодження зберуться самі.
+          Документ описує функції, а не людей — імена вписуються за столом.
         </p>
       </div>
       <dl class="facts">
-        <div class="fact"><dt>Продукт</dt><dd>Апаратно-програмний навігаційний модуль + підписка на карти</dd></div>
+        <div class="fact"><dt>Продукт</dt><dd>Навігаційний модуль: софт + залізо + підписка на карти</dd></div>
         <div class="fact"><dt>Канал</dt><dd>OEM design-in</dd></div>
         <div class="fact"><dt>Стадія</dt><dd>pre-MVP, відкритий pre-seed</dd></div>
-        <div class="fact"><dt>Методика</dt><dd>Function Accountability Chart (Harnish)</dd></div>
+        <div class="fact"><dt>Перегляд</dt><dd>раз на квартал</dd></div>
       </dl>
     </div>
   </div>
@@ -222,68 +205,79 @@
 
 <div class="roster">
   <div class="wrap">
-    <div class="roster-field">
-      <label for="p1">Партнер 1</label>
-      <input id="p1" data-owner="p1" value="Партнер 1" autocomplete="off">
-    </div>
-    <div class="roster-field">
-      <label for="p2">Партнер 2</label>
-      <input id="p2" data-owner="p2" value="Партнер 2" autocomplete="off">
-    </div>
-    <div class="roster-field">
-      <label for="p3">Партнер 3</label>
-      <input id="p3" data-owner="p3" value="Партнер 3" autocomplete="off">
-    </div>
-    <p class="roster-note">Впишіть імена — вони підставляться в усі 37 рядків і в підсумок.</p>
+    <div class="roster-field"><label for="p1">Партнер 1</label><input id="p1" data-owner="p1" value="Партнер 1" autocomplete="off"></div>
+    <div class="roster-field"><label for="p2">Партнер 2</label><input id="p2" data-owner="p2" value="Партнер 2" autocomplete="off"></div>
+    <div class="roster-field"><label for="p3">Партнер 3</label><input id="p3" data-owner="p3" value="Партнер 3" autocomplete="off"></div>
+    <p class="roster-note">Впишіть імена — вони підставляться в оргструктуру і у форму узгодження.</p>
   </div>
 </div>
 
 <div class="deck">
   <div class="wrap">
-    <div class="meter" id="meter"></div>
+    <span class="progress" id="progress"></span>
     <div class="deck-actions">
-      <span class="progress" id="progress"></span>
-      <button id="f-open" aria-pressed="false">Тільки нерозподілене</button>
       <button id="copy">Скопіювати підсумок</button>
+      <button id="print">Друк / PDF форми</button>
     </div>
   </div>
 </div>
 
-<section class="lvl1">
+<section class="org">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Рівень 1 — чотири зони</h2>
-      <p class="note">Три зони розподіляються між партнерами. Ядро тримає той, хто бере роль CEO, — поверх своєї зони. Кнопка «Заповнити зону» проставляє обраного власника в усі функції зони, які рекомендовано закривати партнером.</p>
+      <h2>Оргструктура</h2>
+      <p class="note">Збирається автоматично з розподілу нижче. Суцільна плашка — зона у власності, пунктирна — де партнер заступник.</p>
     </div>
-    <div class="zonecards" id="zonecards"></div>
-
-    <div class="sec-head" style="margin-top:30px">
-      <h3>Три питання перед вибором зони</h3>
-      <p class="note">Кожен відповідає вголос. Якщо двоє претендують на одну зону — виграє той, хто називає більше конкретних функцій із її середини, а не саму зону.</p>
-    </div>
-    <div class="choose">
-      <div class="q"><b>Питання 1</b><p>Яку найризикованішу функцію цієї зони я закрию особисто, а не делегую?</p></div>
-      <div class="q"><b>Питання 2</b><p>Що я не віддам нікому — навіть якщо це формально не моя зона?</p></div>
-      <div class="q"><b>Питання 3</b><p>Чим я готовий не займатися наступні 12 місяців? Це і є зони, які беруть інші.</p></div>
-    </div>
+    <div class="orgchart" id="orgchart"></div>
   </div>
 </section>
 
-<section class="board">
+<section class="zones">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Рівень 1 — одинадцять зон</h2>
+      <p class="note">Власник відповідає за результат зони. Заступник не робить роботу, але знає стан справ і ухвалює невідкладні рішення, коли власник недоступний.</p>
+    </div>
+    <div class="zonegrid" id="zonegrid"></div>
+  </div>
+</section>
+
+<section class="fns">
   <div class="wrap">
     <div class="sec-head">
       <h2>Рівень 2 — функції всередині зон</h2>
-      <p class="note">До 60 секунд на функцію. Підпис на рейці — рекомендація документа, а не рішення: воно ухвалюється за столом.</p>
+      <p class="note">За замовчуванням усі функції зони — на її власникові. Колонка «Хто» показує, що рекомендовано закривати наймом або підрядником.</p>
     </div>
-    <div id="board"></div>
+    <div id="fnlist"></div>
   </div>
 </section>
 
 <section class="ref">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Рівень 3 — чим закриваємо те, що не бере партнер</h2>
-      <p class="note">Черга найму за тригером, а не за датою: наймаємо, коли настала подія.</p>
+      <h2>Форма узгодження</h2>
+      <p class="note">Заповнюється на сесії. Кнопка «Друк / PDF» вгорі віддає цей розділ разом з оргструктурою у вигляді, придатному для підпису.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="grid">
+        <thead><tr><th>Код</th><th>Зона</th><th>Власник</th><th>Заступник</th><th>Головне число зони</th></tr></thead>
+        <tbody id="signoff"></tbody>
+      </table>
+    </div>
+
+    <div class="sec-head" style="margin-top:26px"><h3>Що ми узгодили</h3></div>
+    <div class="checks" id="checks"></div>
+
+    <div class="sec-head" style="margin-top:26px"><h3>Підписи партнерів</h3></div>
+    <div class="signline" id="signs"></div>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Черга найму</h2>
+      <p class="note">За тригером, а не за датою: наймаємо, коли настала подія.</p>
     </div>
     <div class="tablewrap">
       <table class="grid">
@@ -291,20 +285,13 @@
         <tbody id="hires"></tbody>
       </table>
     </div>
-    <div class="sec-head" style="margin-top:26px">
-      <h3>Підрядники — беремо, не чекаючи раунду</h3>
-    </div>
+    <div class="sec-head" style="margin-top:26px"><h3>Підрядники — беремо, не чекаючи раунду</h3></div>
     <div class="tablewrap">
       <table class="grid">
         <thead><tr><th>Хто</th><th>Закриває</th><th>Чому зараз</th></tr></thead>
         <tbody id="outs"></tbody>
       </table>
     </div>
-    <p class="callout">
-      <strong>Більшість наймів припадає на Зону B.</strong> Це властивість апаратно-програмного продукту:
-      технологію створює команда засновників, а відтворюваність, дані й сервіс потребують окремих рук
-      майже одразу після першого пілота.
-    </p>
   </div>
 </section>
 
@@ -312,7 +299,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Матриця прав рішень</h2>
-      <p class="note">Власник функції вирішує самостійно і інформує решту. Партнерська рада збирається тільки там, де на кону спільна власність.</p>
+      <p class="note">Власник зони вирішує самостійно в межах своєї зони і інформує решту. Партнерська рада — тільки там, де на кону спільна власність або перетин зон.</p>
     </div>
     <div class="tablewrap">
       <table class="grid">
@@ -321,9 +308,9 @@
       </table>
     </div>
     <p class="callout">
-      <strong>Пункт про публічні ТТХ — правило репутації.</strong> Поки технічний гейт не пройдено,
-      різниця між цільовим і підтвердженим показником має бути видимою в усіх зовнішніх матеріалах,
-      і підписує цю цифру власник гейтів, а не автор матеріалу.
+      <strong>Публічні ТТХ — правило репутації.</strong> Поки технічний гейт не пройдено, різниця між
+      цільовим і підтвердженим показником має бути видимою в усіх зовнішніх матеріалах, і підписує
+      цю цифру власник QA, а не автор матеріалу.
     </p>
   </div>
 </section>
@@ -332,7 +319,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Прикордонні питання</h2>
-      <p class="note">Місця, де відповідальність природно розмивається між зонами. Кожне закривається рішенням або датою рішення.</p>
+      <p class="note">Місця, де дві зони перетинаються і відповідальність природно розмивається.</p>
     </div>
     <div class="rows" id="borders"></div>
   </div>
@@ -340,10 +327,7 @@
 
 <section class="ref">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Рекомендації</h2>
-      <p class="note">Не рішення, а те, що варто врахувати за столом.</p>
-    </div>
+    <div class="sec-head"><h2>Рекомендації</h2><p class="note">Не рішення, а те, що варто врахувати за столом.</p></div>
     <ol class="plain" id="recs"></ol>
   </div>
 </section>
@@ -351,8 +335,8 @@
 <section class="ref">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Сесія розподілу — 90 хвилин</h2>
-      <p class="note">Готово: у кожної зони є ім'я; у кожної функції є статус; жодна функція не має двох власників; три ключові числа розведені мінімум на двох людей; кожна діра має тригер закриття.</p>
+      <h2>Сесія узгодження — 90 хвилин</h2>
+      <p class="note">Три питання перед вибором зони: яку найризикованішу функцію зони я закрию особисто · що я не віддам нікому · чим готовий не займатися 12 місяців.</p>
     </div>
     <ol class="agenda" id="agenda"></ol>
   </div>
@@ -360,7 +344,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Карта описує функції, а не людей. Імена вписуються на сесії розподілу і переглядаються раз на квартал.</p>
+    <p>Документ описує функції, а не людей. Імена вписуються на сесії узгодження і переглядаються раз на квартал.</p>
     <p class="status" id="status">режим: локальний · зміни зберігаються у цьому браузері</p>
   </div>
 </footer>
@@ -369,262 +353,227 @@
 (function () {
   "use strict";
 
-  var OWNERS = [
-    { id: "p1" }, { id: "p2" }, { id: "p3" },
-    { id: "hire", label: "Найм" },
-    { id: "out", label: "Підрядник" },
-    { id: "none", label: "Не розподілено" }
-  ];
+  var PARTNERS = ["p1", "p2", "p3"];
+  var PICKS = [{ id: "p1" }, { id: "p2" }, { id: "p3" }, { id: "none", label: "—" }];
 
   var ZONES = [
-    {
-      id: "a", code: "A", name: "Продукт і технологія",
-      mission: "Продукт існує, працює без GNSS і проходить власні технічні гейти.",
-      nums: "CEP на еталонному маршруті, м · статус R&D-гейтів",
-      fns: [
-        { id: "a1", code: "A1", name: "Продукт: бачення, PRD, скоуп",
-          what: "Що входить у реліз і що свідомо не входить; принцип «шар, а не система» і «no new button»; форма продукту.",
-          kpi: "Змін скоупу після заморозки (ціль 0)", rec: "партнер",
-          flag: "Прикордонна: вхідні дає Зона C, рішення — власник Зони A, вето у власника Зони C на ринкову невідповідність." },
-        { id: "a2", code: "A2", name: "Наука і алгоритми навігації",
-          what: "Метчинг зображення по карті, фьюжн з IMU, холодний старт, бюджет похибки.",
-          kpi: "CEP на еталонному маршруті, м", rec: "партнер" },
-        { id: "a3", code: "A3", name: "Архітектура і технічний борг",
-          what: "Межі модулів, рішення, які дорого змінювати, реєстр боргу і план його гасіння.",
-          kpi: "Частка спринтів на борг, %", rec: "партнер" },
-        { id: "a4", code: "A4", name: "Софт та інтеграція в автопілоти",
-          what: "API, ArduPilot/PX4, вихід confidence, поведінка при деградації сигналу.",
-          kpi: "Час інтеграції на новій платформі, год", rec: "партнер" },
-        { id: "a5", code: "A5", name: "Залізо, механіка, BOM",
-          what: "Камера й обчислювач, кріплення, віброзахист, дроп-тест, форм-фактор drop-in.",
-          kpi: "BOM на юніт, $", rec: "найм №1", hire: 1 },
-        { id: "a6", code: "A6", name: "Релізи, версіонування, прошивки",
-          what: "Політика LTS, канали оновлень, відкат, сумісність версій.",
-          kpi: "Невдалих оновлень, % (ціль 0)", rec: "партнер" },
-        { id: "a7", code: "A7", name: "R&D-гейти і ризик-реєстр",
-          what: "Формулювання гейтів, критерії проходження, go/no-go, реєстр технічних ризиків.",
-          kpi: "Статус гейтів; ризиків знято за квартал", rec: "партнер" },
-        { id: "a8", code: "A8", name: "Випробування і валідація ТТХ",
-          what: "Протокол польових і лабораторних тестів, методика вимірювання, звіти.",
-          kpi: "Розбіжність заявлено/виміряно, %", rec: "партнер" },
-        { id: "a9", code: "A9", name: "Інфраструктура, середовища, CI/CD",
-          what: "Складання, автотести, стенд для bench-інтеграції, відтворюваність збірки.",
-          kpi: "Час від коміту до перевіреної збірки, хв", rec: "підрядник", out: 1 },
-        { id: "a10", code: "A10", name: "Документація і SDK для інтеграторів",
-          what: "Інтеграційний гайд, приклади, довідник API, чек-лист монтажу.",
-          kpi: "Питань від інтегратора на одну інтеграцію", rec: "партнер" },
-        { id: "a11", code: "A11", name: "Безпека продукту",
-          what: "Підписані прошивки, захищене завантаження, захист бортових даних і журналів.",
-          kpi: "Критичних вразливостей, відкритих > 30 днів", rec: "партнер" }
-      ]
-    },
-    {
-      id: "b", code: "B", name: "Дані, виробництво і сервіс",
-      mission: "Продукт відтворюється серійно, дані свіжі, у полі він живе без заводу.",
-      nums: "Юнітів/тиждень · вік карти, дні · простій після відмови, год",
-      fns: [
-        { id: "b1", code: "B1", name: "Референсна картографічна база",
-          what: "Покриття, компактність, конвеєр збирання і оновлення, вимоги до якості шару.",
-          kpi: "МБ на 1000 км²; покриття маршруту, %", rec: "партнер" },
-        { id: "b2", code: "B2", name: "Актуальний шар і виявлення змін",
-          what: "Частота оновлення, зйомка, детекція змін на рухомій ділянці.",
-          kpi: "Вік шару, дні; зйомка → борт, год", rec: "найм №2", hire: 1 },
-        { id: "b3", code: "B3", name: "Права на дані й ліцензії",
-          what: "Джерела знімків, умови ліцензій, право перепродажу, пакування SKU на країну.",
-          kpi: "Функцій на даних без ліцензії (ціль 0)", rec: "партнер + підрядник",
-          flag: "Прикордонна: фіксувати одночасно з C4 — від умов ліцензій залежить модель ціни." },
-        { id: "b4", code: "B4", name: "Телеметрія з бортів і зворотний зв'язок",
-          what: "Що повертається з поля, як потрапляє в поліпшення алгоритму і карти.",
-          kpi: "Бортів, що віддають телеметрію, %", rec: "партнер" },
-        { id: "b5", code: "B5", name: "Закупівля і постачальники",
-          what: "Критичні компоненти, два джерела на позицію, ціни, строки, запас.",
-          kpi: "Lead time критичного компонента, тижні", rec: "найм №5", hire: 1 },
-        { id: "b6", code: "B6", name: "Збірка, калібрування, прошивка",
-          what: "Виробничий маршрут: хто фізично збирає, де калібрує, чим шиє.",
-          kpi: "Юнітів/тиждень", rec: "найм №3", hire: 1 },
-        { id: "b7", code: "B7", name: "Логістика і митний контур",
-          what: "Доставка до замовника, режими, супровідні документи.",
-          kpi: "Днів «готовий модуль → замовник»", rec: "партнер" },
-        { id: "b8", code: "B8", name: "Якість на потоці",
-          what: "Вхідний контроль компонентів, вихідний тест кожного юніта, простежуваність партій.",
-          kpi: "Придатних з першого разу, %", rec: "найм №3", hire: 1 },
-        { id: "b9", code: "B9", name: "Сервіс і підтримка",
-          what: "Відновлення силами користувача, польова перекалібровка, RMA, SLA, діагностичні журнали.",
-          kpi: "Простій після відмови, год; повернень на завод", rec: "найм №4", hire: 1,
-          flag: "Для модуля, який живе на борту в полі, швидкість відновлення без заводу — така сама характеристика, як точність." },
-        { id: "b10", code: "B10", name: "Навчання користувачів",
-          what: "Інструкція оператора, коротке навчання підрозділу, типові помилки монтажу.",
-          kpi: "Звернень на перші 100 модулів", rec: "партнер" }
-      ]
-    },
-    {
-      id: "c", code: "C", name: "Ринок і капітал",
-      mission: "Продукт куплений, інтегрований і профінансований.",
-      nums: "Підписаних LOI / design-in · місяців runway",
-      fns: [
-        { id: "c1", code: "C1", name: "Discovery і вимоги ринку",
-          what: "Інтерв'ю з виробниками й операторами, ICP, сценарії застосування, реєстр вимог.",
-          kpi: "Інтерв'ю/тиждень", rec: "партнер" },
-        { id: "c2", code: "C2", name: "Позиціонування і матеріали",
-          what: "Формулювання цінності, дек, сайт, виставки; межі того, що можна заявляти назовні.",
-          kpi: "Конверсія контакт → зустріч, %", rec: "партнер" },
-        { id: "c3", code: "C3", name: "OEM design-in і партнерства",
-          what: "Воронка інтеграцій, вибір якорних партнерів, LOI/MoU, пілоти.",
-          kpi: "Інтеграцій у роботі; підписаних LOI", rec: "партнер", key: "Власник верхнього рядка" },
-        { id: "c4", code: "C4", name: "Ціни й пакування",
-          what: "Модель ціни на модуль, підписка на карти, ліцензування ПЗ, межі знижок.",
-          kpi: "Ціна/юніт; частка регулярної виручки, %", rec: "партнер",
-          flag: "Прикордонна: залежить від умов ліцензій на дані (B3) — фіксувати парою." },
-        { id: "c5", code: "C5", name: "Експортні ринки і канали",
-          what: "Партнери-інтегратори автопілотів, закордонні виробники, виставки.",
-          kpi: "Зустрічей на нових ринках/квартал", rec: "партнер" },
-        { id: "c6", code: "C6", name: "Фандрейзинг та стосунки з інвесторами",
-          what: "Раунд, інструмент, пайплайн інвесторів, регулярний апдейт.",
-          kpi: "Закрито $ від цілі, %; апдейт раз на міс", rec: "партнер" },
-        { id: "c7", code: "C7", name: "Non-dilutive фінансування",
-          what: "Гранти, акселератори, оборонні програми; відсів за критеріями допуску.",
-          kpi: "Заявок/квартал; отримано $", rec: "партнер" },
-        { id: "c8", code: "C8", name: "Юніт-економіка і фінмодель",
-          what: "Собівартість і маржа, сценарії, модель для інвестора.",
-          kpi: "Маржа на юніт, %", rec: "партнер + підрядник", key: "Власник нижнього рядка" },
-        { id: "c9", code: "C9", name: "Кеш, облік, звітність",
-          what: "Платежі, бухгалтерія, витрати, банк, звітність юрособи.",
-          kpi: "Burn/міс; місяців runway", rec: "підрядник", out: 1, key: "Власник кешу" },
-        { id: "c10", code: "C10", name: "Контракти, NDA, IP",
-          what: "Договори з клієнтами й підрядниками, NDA, оформлення прав на розробки.",
-          kpi: "Активів без оформлених прав (ціль 0)", rec: "партнер + підрядник" },
-        { id: "c11", code: "C11", name: "Експортний контроль і dual-use",
-          what: "Ліцензії, обмеження щодо кінцевого користувача, вимоги юрисдикцій.",
-          kpi: "Поставок без перевіреного статусу (ціль 0)", rec: "партнер + підрядник" }
-      ]
-    },
-    {
-      id: "k", code: "ЯДРО", name: "Керівництво", core: true,
-      mission: "Команда рухається в одному напрямку і домовляється без ескалацій. Тримає той, хто бере роль CEO, — поверх своєї зони.",
+    { id: "ker", code: "КЕР", name: "Керівництво і стратегія",
+      about: "Куди йдемо, як ухвалюємо рішення, як тримаємо ритм.",
       nums: "Гейтів у строк, % · відкритих прикордонних питань",
       fns: [
-        { id: "k1", code: "K1", name: "Стратегія і гейти",
-          what: "Мапа стадій, рішення go/no-go на межах, план на одну сторінку.",
-          kpi: "Гейтів у строк, %", rec: "партнер" },
-        { id: "k2", code: "K2", name: "Партнерська рада і кап-тейбл",
-          what: "Частки, vesting, вхід і вихід партнера, регламент спірних рішень.",
-          kpi: "Відкритих прикордонних питань", rec: "партнер + підрядник" },
-        { id: "k3", code: "K3", name: "Операційний ритм і трекер",
-          what: "Тижневий синк, огляд гейтів, актуальний трекер задач.",
-          kpi: "Задач із власником і дедлайном, %", rec: "партнер",
-          flag: "Рекомендовано віддати не тому, хто тримає Ядро: ритм не має залежати від завантаженості однієї людини." },
-        { id: "k4", code: "K4", name: "Найм і онбординг",
-          what: "Скоркарта ролі, два інтерв'ю — на результати і на цінності, перші 90 днів.",
-          kpi: "Днів на закриття вакансії", rec: "партнер" },
-        { id: "k5", code: "K5", name: "Цінності й культура",
-          what: "Як ухвалюємо рішення, як сперечаємось, регулярне ретро партнерів.",
-          kpi: "Ретро проведено: так / ні", rec: "партнер",
-          flag: "Рекомендовано віддати не тому, хто тримає Ядро — потрібна противага." }
-      ]
-    }
+        ["КЕР-1", "Стратегія, стадії і гейти", "Мапа стадій продукту, критерії go/no-go, план на одну сторінку.", "Гейтів у строк, %", "партнер"],
+        ["КЕР-2", "Операційний ритм", "Тижневий синк, огляд гейтів, квартальний перегляд цієї карти.", "Проведених синків, %", "партнер"],
+        ["КЕР-3", "Партнерська рада і кап-тейбл", "Частки, vesting, вхід і вихід партнера, регламент спірних рішень.", "Відкритих питань кап-тейблу", "партнер + юрист"],
+        ["КЕР-4", "Внутрішні інструменти і документообіг", "Трекер задач, єдине джерело правди, доступи, шаблони.", "Задач із власником і дедлайном, %", "партнер"]
+      ] },
+    { id: "soft", code: "SOFT", name: "Продукт IT (софт)",
+      about: "Алгоритми, ПЗ, інтеграція, релізи.",
+      nums: "CEP на еталонному маршруті, м · час інтеграції, год",
+      fns: [
+        ["SOFT-1", "Продукт: бачення, PRD, скоуп", "Що входить у реліз і що свідомо не входить; «шар, а не система», «no new button».", "Змін скоупу після заморозки (ціль 0)", "партнер"],
+        ["SOFT-2", "Алгоритми навігації", "Метчинг зображення по карті, фьюжн з IMU, холодний старт, бюджет похибки.", "CEP на еталонному маршруті, м", "партнер"],
+        ["SOFT-3", "Архітектура і технічний борг", "Межі модулів, дорогі до зміни рішення, реєстр боргу і план гасіння.", "Частка часу на борг, %", "партнер"],
+        ["SOFT-4", "Інтеграція в автопілоти, API", "ArduPilot/PX4, вихід confidence, поведінка при деградації сигналу.", "Час інтеграції на новій платформі, год", "партнер"],
+        ["SOFT-5", "Релізи, версіонування, прошивки", "Політика LTS, канали оновлень, відкат, сумісність версій.", "Невдалих оновлень, % (ціль 0)", "партнер"],
+        ["SOFT-6", "Інфраструктура, середовища, CI/CD", "Складання, автотести, стенд bench-інтеграції, відтворюваність збірки.", "Час від коміту до перевіреної збірки, хв", "підрядник"],
+        ["SOFT-7", "Документація і SDK для інтеграторів", "Інтеграційний гайд, приклади, довідник API, чек-лист монтажу.", "Питань від інтегратора на інтеграцію", "партнер"],
+        ["SOFT-8", "Безпека продукту", "Підписані прошивки, захищене завантаження, захист бортових даних і журналів.", "Критичних вразливостей > 30 днів", "партнер"]
+      ] },
+    { id: "hard", code: "HARD", name: "Продукт HARD (залізо)",
+      about: "Електроніка, оптика, механіка, вартість юніта.",
+      nums: "BOM на юніт, $ · маса і габарит · деградація CEP після ресурсних випробувань",
+      fns: [
+        ["HARD-1", "Обчислювальний модуль і схемотехніка", "Вибір платформи, плата, живлення, інтерфейси до автопілота.", "Споживання, Вт; маса, г", "найм №1"],
+        ["HARD-2", "Оптика і сенсорний тракт", "Камера, об'єктив, поле зору, робота вночі, схема калібрування.", "Робоча освітленість; стабільність калібрування", "найм №1"],
+        ["HARD-3", "Механіка, корпус, кріплення", "Корпус, віброзахист, жорстка база «камера + IMU», ресурс кріплення.", "Деградація CEP після 100 посадок, %", "найм №1"],
+        ["HARD-4", "BOM і вартість юніта", "Вибір компонентів під ціну, альтернативи, цільова собівартість.", "BOM на юніт, $", "найм №1"],
+        ["HARD-5", "Прототипування і КД", "Ітерації прототипів, конструкторська документація, передача у виробництво.", "Днів на ітерацію прототипу", "найм №1"]
+      ] },
+    { id: "data", code: "DATA", name: "Дані і картографія",
+      about: "Референсна база, актуальний шар, права на дані.",
+      nums: "Вік шару, дні · МБ на 1000 км² · покриття маршруту, %",
+      fns: [
+        ["DATA-1", "Референсна база", "Покриття, компактність, конвеєр збирання і оновлення, вимоги до якості шару.", "МБ на 1000 км²; покриття, %", "партнер"],
+        ["DATA-2", "Актуальний шар і виявлення змін", "Частота оновлення, зйомка, детекція змін на рухомій ділянці.", "Вік шару, дні; зйомка → борт, год", "найм №2"],
+        ["DATA-3", "Права на дані й ліцензії", "Джерела знімків, умови ліцензій, право перепродажу, SKU на країну.", "Функцій на даних без ліцензії (ціль 0)", "партнер + юрист"],
+        ["DATA-4", "Телеметрія з бортів", "Що повертається з поля і як потрапляє в поліпшення алгоритму й карти.", "Бортів, що віддають телеметрію, %", "партнер"],
+        ["DATA-5", "Зберігання і доставка карт на борт", "Формат, стиснення, оновлення шару на модулі, перевірка цілісності.", "Час завантаження шару на борт, хв", "партнер"]
+      ] },
+    { id: "qa", code: "QA", name: "Тестування і якість",
+      about: "Методика, польові випробування, валідація ТТХ, якість на потоці.",
+      nums: "Розбіжність заявлено/виміряно, % · придатних з першого разу, %",
+      fns: [
+        ["QA-1", "Методика вимірювання і лабораторні тести", "Як саме міряємо точність, повторюваність, умови, еталонні маршрути.", "Повторюваність результату, %", "партнер"],
+        ["QA-2", "Польові випробування", "Протокол польотів, у тому числі в умовах РЕБ; фіксація і розбір результатів.", "Валідованих польотів за квартал", "партнер"],
+        ["QA-3", "Валідація заявлених ТТХ", "Звірка того, що заявлено назовні, з тим, що підтверджено випробуваннями.", "Розбіжність заявлено/виміряно, %", "партнер"],
+        ["QA-4", "Якість на потоці", "Вхідний контроль компонентів, вихідний тест кожного юніта, простежуваність партій.", "Придатних з першого разу, %", "найм №3"],
+        ["QA-5", "Відповідність вимогам замовника", "Вимоги OEM до приймання, протоколи, документи на партію.", "Приймань з першого разу, %", "партнер"]
+      ] },
+    { id: "prod", code: "PROD", name: "Виробництво і поставки",
+      about: "Закупівля, збірка, калібрування, логістика.",
+      nums: "Юнітів/тиждень · lead time критичного компонента, тижні",
+      fns: [
+        ["PROD-1", "Закупівля і постачальники", "Критичні компоненти, два джерела на позицію, ціни, строки.", "Lead time критичного компонента, тижні", "найм №5"],
+        ["PROD-2", "Збірка і монтаж", "Виробничий маршрут: хто фізично збирає і де, оснащення.", "Юнітів/тиждень", "найм №3"],
+        ["PROD-3", "Калібрування і прошивка на виробництві", "Стенд калібрування, процедура, журнал параметрів кожного юніта.", "Час калібрування на юніт, хв", "найм №3"],
+        ["PROD-4", "Логістика і митний контур", "Доставка до замовника, режими, супровідні документи.", "Днів «готовий модуль → замовник»", "партнер"],
+        ["PROD-5", "Запас і планування", "Складський запас критичних позицій, планування під попит.", "Днів запасу по критичних позиціях", "найм №5"]
+      ] },
+    { id: "serv", code: "SERV", name: "Сервіс і підтримка",
+      about: "Життя продукту в полі: відновлення, SLA, навчання.",
+      nums: "Простій після відмови, год · повернень на завод за 12 міс",
+      fns: [
+        ["SERV-1", "Сервісна автономність", "Відновлення силами користувача, польова перекалібровка, відкат прошивки.", "Простій після відмови, год", "найм №4"],
+        ["SERV-2", "Технічна підтримка і SLA", "Канал звернень, час реакції, діагностичні журнали.", "Час першої відповіді, год", "найм №4"],
+        ["SERV-3", "RMA, ремонт, гарантія", "Порядок повернення, ремонтний фонд, аналіз причин відмов.", "Повернень на завод за 12 міс", "найм №4"],
+        ["SERV-4", "Навчання користувачів", "Інструкція оператора, коротке навчання підрозділу, типові помилки монтажу.", "Звернень на перші 100 модулів", "партнер"]
+      ] },
+    { id: "gtm", code: "GTM", name: "Продажі і ринок",
+      about: "Discovery, позиціонування, design-in, ціни.",
+      nums: "Підписаних LOI · інтеграцій у роботі",
+      fns: [
+        ["GTM-1", "Discovery і вимоги ринку", "Інтерв'ю з виробниками й операторами, ICP, сценарії, реєстр вимог.", "Інтерв'ю/тиждень", "партнер"],
+        ["GTM-2", "Позиціонування і матеріали", "Формулювання цінності, дек, сайт, виставки; межі заявленого назовні.", "Конверсія контакт → зустріч, %", "партнер"],
+        ["GTM-3", "OEM design-in і партнерства", "Воронка інтеграцій, вибір якорних партнерів, LOI/MoU, пілоти.", "Підписаних LOI; інтеграцій у роботі", "партнер"],
+        ["GTM-4", "Ціни й пакування", "Ціна модуля, підписка на карти, ліцензування ПЗ, межі знижок.", "Ціна/юніт; частка регулярної виручки, %", "партнер"],
+        ["GTM-5", "Експортні ринки і канали", "Партнери-інтегратори автопілотів, закордонні виробники, виставки.", "Зустрічей на нових ринках/квартал", "партнер"],
+        ["GTM-6", "CRM і пайплайн", "Єдина база контактів і угод, етапи воронки, регулярний огляд.", "Угод на кожному етапі воронки", "партнер"]
+      ] },
+    { id: "fin", code: "FIN", name: "Фінанси та інвестиції",
+      about: "Раунд, гранти, економіка, кеш, облік.",
+      nums: "Місяців runway · закрито $ від цілі раунду, %",
+      fns: [
+        ["FIN-1", "Фандрейзинг та стосунки з інвесторами", "Раунд, інструмент, пайплайн інвесторів, регулярний апдейт.", "Закрито $ від цілі, %", "партнер"],
+        ["FIN-2", "Non-dilutive фінансування", "Гранти, акселератори, оборонні програми; відсів за критеріями допуску.", "Заявок/квартал; отримано $", "партнер"],
+        ["FIN-3", "Юніт-економіка і фінмодель", "Собівартість і маржа, сценарії, модель для інвестора.", "Маржа на юніт, %", "партнер + консультант"],
+        ["FIN-4", "Кеш, бюджет, runway", "Платіжний календар, бюджет по зонах, контроль витрат.", "Burn/міс; місяців runway", "партнер"],
+        ["FIN-5", "Бухгалтерія і звітність", "Облік, звітність юрособи, банк, податки.", "Звітів у строк, %", "підрядник"]
+      ] },
+    { id: "leg", code: "LEG", name: "Юридичні, IP і комплаєнс",
+      about: "Структура, права, контракти, експортний контроль.",
+      nums: "Активів без оформлених прав · поставок без перевіреного статусу",
+      fns: [
+        ["LEG-1", "Корпоративна структура", "Юрособи, холдинг, SPV, стосунки з материнською компанією.", "Структура зафіксована: так / ні", "партнер + юрист"],
+        ["LEG-2", "IP: права на розробки", "Оформлення прав на код, алгоритми і дані, патенти і ноу-хау.", "Активів без оформлених прав (ціль 0)", "партнер + юрист"],
+        ["LEG-3", "Контракти і NDA", "Договори з клієнтами й підрядниками, умови поставки, шаблони.", "Угод без підписаного договору (ціль 0)", "партнер + юрист"],
+        ["LEG-4", "Експортний контроль і dual-use", "Ліцензії, обмеження щодо кінцевого користувача, вимоги юрисдикцій.", "Поставок без перевіреного статусу (ціль 0)", "партнер + юрист"],
+        ["LEG-5", "Захист інформації і OPSEC", "Що показуємо назовні, зберігання польових даних, доступи, режим на демо.", "Інцидентів розкриття (ціль 0)", "партнер"]
+      ] },
+    { id: "hr", code: "HR", name: "Найм і люди",
+      about: "План найму, скоркарти, онбординг, культура.",
+      nums: "Днів на закриття вакансії · % нових із результатом за 90 днів",
+      fns: [
+        ["HR-1", "План найму і пріоритети ролей", "Яка роль наступна, під який тригер, у який бюджет.", "Закритих ролей від плану, %", "партнер"],
+        ["HR-2", "Пошук, скоркарти, інтерв'ю", "Скоркарта ролі, канали пошуку, два інтерв'ю — на результат і на цінності.", "Днів на закриття вакансії", "партнер"],
+        ["HR-3", "Онбординг перших 90 днів", "План входу в роль, наставник, контрольні точки 30/60/90.", "Нових із результатом за 90 днів, %", "партнер"],
+        ["HR-4", "Компенсації і мотивація", "Вилки, перегляд, опціонний пул і правила його розподілу.", "Відхилених оферів, %", "партнер + рада"],
+        ["HR-5", "Цінності й культура", "Як ухвалюємо рішення, як сперечаємось, регулярне ретро.", "Ретро проведено: так / ні", "партнер"]
+      ] }
   ];
 
   var HIRES = [
-    ["1", "Інженер-конструктор (залізо, механіка)", "A5", "Пройдено перший технічний гейт або закрито раунд"],
-    ["2", "Картограф / data-інженер", "B2, посилення B1", "Перший пілот у замовника або закрито раунд"],
-    ["3", "Технолог виробництва", "B6, B8", "Потреба понад 20 юнітів/міс"],
-    ["4", "Сервіс-інженер", "B9", "Перші 50 модулів у полі"],
-    ["5", "Закупівля і логістика", "B5, посилення B7", "Понад два критичні постачальники або старт експорту"]
+    ["1", "Інженер-конструктор (електроніка, оптика, механіка)", "уся зона HARD", "Пройдено перший технічний гейт або закрито раунд"],
+    ["2", "Картограф / data-інженер", "DATA-2, посилення DATA-1", "Перший пілот у замовника або закрито раунд"],
+    ["3", "Технолог виробництва", "PROD-2, PROD-3, QA-4", "Потреба понад 20 юнітів/міс"],
+    ["4", "Сервіс-інженер", "SERV-1, SERV-2, SERV-3", "Перші 50 модулів у полі"],
+    ["5", "Закупівля і логістика", "PROD-1, PROD-5", "Понад два критичні постачальники або старт експорту"]
   ];
 
   var OUTSOURCE = [
-    ["Бухгалтер", "C9", "Щоб runway був числом у таблиці, а не оцінкою"],
-    ["Юрист: корпоративне право, IP, експортний контроль", "C10, C11, K2, частково B3", "Ці функції блокують раунд і перші поставки, а не супроводжують їх"],
-    ["Фінансовий консультант", "C8", "Незалежна перевірка моделі перед показом інвестору"],
-    ["DevOps на частину ставки", "A9", "Дешевше за втрачений час команди на ручні збірки"]
+    ["Бухгалтер", "FIN-5", "Щоб runway був числом у таблиці, а не оцінкою"],
+    ["Юрист: корпоративне право, IP, експортний контроль", "LEG-1…LEG-4, КЕР-3, DATA-3", "Ці функції блокують раунд і перші поставки, а не супроводжують їх"],
+    ["Фінансовий консультант", "FIN-3", "Незалежна перевірка моделі перед показом інвестору"],
+    ["DevOps на частину ставки", "SOFT-6", "Дешевше за втрачений час команди на ручні збірки"]
   ];
 
   var MATRIX = [
-    ["Форма продукту і його межі", "A2 + C1", "A1", "Власник Зони C — на ринкову невідповідність", 0],
-    ["Цільовий сегмент", "C1", "K1", "—", 0],
-    ["Заморозка скоупу релізу", "A1", "A1", "Власник Зони C", 0],
-    ["Проходження технічного гейта", "A7", "A7", "— гейт не переглядається під тиском строків", 0],
-    ["Ціна; знижка до 15%", "C3", "C4", "—", 0],
-    ["Знижка понад 25% або нестандартні умови", "C4", "Партнерська рада", "—", 1],
-    ["Публічна заява про ТТХ", "C2", "A7", "Власник Зони A", 0],
-    ["Вибір якорного партнера для пілота", "C3", "C3", "Власник Зони A — за ризиком для R&D-ресурсу", 0],
-    ["Витрата до $5 000", "будь-хто", "Власник функції", "—", 0],
-    ["Витрата понад $5 000", "Власник функції", "C6", "—", 0],
-    ["Умови інвестора й оцінка компанії", "C6", "Партнерська рада, одноголосно", "Кожен партнер", 1],
-    ["Найм із часткою або вхід партнера", "K4", "Партнерська рада, одноголосно", "Кожен партнер", 1],
-    ["Зупинка або зміна напрямку", "K1", "Партнерська рада, одноголосно", "Кожен партнер", 1]
+    ["Форма продукту і його межі", "SOFT + HARD + GTM", "SOFT-1", "Власник GTM — на ринкову невідповідність", 0],
+    ["Цільовий сегмент", "GTM-1", "КЕР-1", "—", 0],
+    ["Заморозка скоупу релізу", "SOFT-1", "SOFT-1", "Власник GTM", 0],
+    ["Проходження технічного гейта", "QA-3", "КЕР-1 за поданням QA", "— гейт не переглядається під тиском строків", 0],
+    ["Публічна заява про ТТХ", "GTM-2", "QA-3", "Власник QA", 0],
+    ["Вибір компонента, що змінює BOM > 10%", "HARD-4", "HARD-4", "Власник FIN — за економікою", 0],
+    ["Ціна; знижка до 15%", "GTM-3", "GTM-4", "—", 0],
+    ["Знижка понад 25% або нестандартні умови", "GTM-4", "Партнерська рада", "—", 1],
+    ["Вибір якорного партнера для пілота", "GTM-3", "GTM-3", "Власник SOFT — за ризиком для ресурсу розробки", 0],
+    ["Витрата до $5 000", "будь-хто", "Власник зони", "—", 0],
+    ["Витрата понад $5 000", "Власник зони", "FIN-4", "—", 0],
+    ["Умови інвестора й оцінка компанії", "FIN-1", "Партнерська рада, одноголосно", "Кожен партнер", 1],
+    ["Найм із часткою або вхід партнера", "HR-1", "Партнерська рада, одноголосно", "Кожен партнер", 1],
+    ["Зупинка або зміна напрямку", "КЕР-1", "Партнерська рада, одноголосно", "Кожен партнер", 1]
   ];
 
   var BORDERS = [
-    ["Заявлені ТТХ проти підтверджених", "Втрата довіри інтегратора на етапі приймання.", "Правило з матриці: назовні йде лише підтверджена цифра, підписана власником гейтів."],
-    ["Картографічні дані — R&D чи виробництво", "Функція без власника: нею не займається ніхто системно.", "Дані повністю в Зоні B; Зона A формулює вимоги до шару."],
-    ["Два експертні голоси в одній технічній темі", "Рішення ухвалюються в розмові, а не за критерієм гейта.", "Один власник архітектури; решта — консультативний голос, зафіксований у реєстрі ризиків."],
-    ["Спільні ресурси з материнською компанією", "Незрозуміло, чий час і гроші витрачено і як це враховано.", "Договір між юрособами або зафіксована квота годин і ціна години."],
-    ["Хто веде комунікацію з виробниками", "Кілька різних обіцянок одному клієнту.", "Один власник каналу (C3); решта долучаються на його запрошення."],
-    ["Хто веде комунікацію з інвесторами", "Розбіжні цифри в різних матеріалах.", "Один власник (C6); усі цифри з однієї версії моделі."],
-    ["Що робимо, якщо зона не рухається", "Питання відкладається до конфлікту.", "Домовитись заздалегідь: зона без руху два квартали — переприсвоєння, без переходу на особистості."],
-    ["Внески партнерів у проєкт", "Форма внеску не оформлена до появи зовнішнього інвестора.", "Зафіксувати форму (внесок / позика / інструмент) до відкриття раунду."]
+    ["QA ↔ GTM", "Заявлені ТТХ проти підтверджених", "Назовні йде лише підтверджена цифра, підписана власником QA."],
+    ["SOFT ↔ DATA", "Карта — частина алгоритму чи окремий продукт", "Дані повністю в DATA; SOFT формулює вимоги до шару."],
+    ["SOFT ↔ HARD", "Хто відповідає за точність: алгоритм чи механіка кріплення", "Бюджет похибки розписаний по внесках, кожен внесок має власника."],
+    ["HARD ↔ PROD", "Де закінчується конструювання і починається виробництво", "Межа — затверджена конструкторська документація: до неї HARD, після — PROD."],
+    ["QA ↔ PROD", "Вихідний контроль — це якість чи виробництво", "Методика за QA, виконання на потоці за PROD."],
+    ["SERV ↔ SOFT", "Хто відповідає за оновлення, що «поклало» модуль у полі", "Політика оновлень за SOFT; відновлення в полі за SERV."],
+    ["DATA ↔ LEG", "Права на дані", "Умови ліцензій перевіряє LEG, застосовує DATA; жодної функції на неперевірених даних."],
+    ["FIN ↔ GTM", "Хто називає ціну інвестору і хто — клієнту", "Ціна для клієнта за GTM-4; цифри для інвестора з однієї версії моделі FIN-3."],
+    ["КЕР ↔ усі", "Що робимо, коли зона не рухається", "Зона без руху два квартали — переприсвоєння, без переходу на особистості."],
+    ["Партнери ↔ материнська компанія", "Спільні ресурси, час і гроші", "Договір між юрособами або зафіксована квота годин і ціна години."]
   ];
 
   var RECS = [
-    "<strong>Одна людина — не більше ніж одна зона плюс Ядро.</strong> Дві зони на одному власнику означають, що одна з них не рухається; це стає видно через квартал, коли вже дорого.",
-    "<strong>Зона A найємніша за годинами.</strong> Її власнику доцільно не брати Ядро.",
-    "<strong>Функція, закрита підрядником, усе одно потребує партнера-замовника</strong> — того, хто ставить задачу, приймає роботу і відповідає за результат перед рештою.",
-    "<strong>Перший найм закриває найбільший ризик, а не найбільший обсяг роботи.</strong> Обсяг можна перетерпіти квартал; нескладений технічний гейт — ні.",
-    "<strong>Прикордонні функції фіксуйте першими</strong> — A1 (продукт), B3 (права на дані), C4 (ціни). Саме на їхніх межах виникає більшість суперечок.",
-    "<strong>Три ключові числа розведіть мінімум на двох людей</strong> — верхній рядок (C3), економіка (C8), кеш (C9). Якщо всі три сходяться на одній людині, це видно інвестору на першій же зустрічі.",
-    "<strong>Числа важливіші за назви.</strong> Якщо на функцію не знайшлося показника, її формулювання недостатньо конкретне, щоб хтось міг за неї відповідати.",
+    "<strong>Одна людина — 3–4 зони, не більше.</strong> Одинадцять зон на трьох — це вже щільно; п'ять зон на одному означає, що дві з них не рухаються.",
+    "<strong>Не давайте одній людині SOFT і HARD одночасно.</strong> Це два різні цикли: тижневі ітерації проти місячних, і вони конкурують за той самий час.",
+    "<strong>QA має бути не в того, хто розробляє.</strong> Інакше валідація ТТХ перетворюється на самоперевірку — і це перше, що помітить інтегратор.",
+    "<strong>Три ключові числа розведіть мінімум на двох людей:</strong> виручка (GTM-3), економіка (FIN-3), кеш (FIN-4).",
+    "<strong>Зона без заступника — ризик.</strong> Заступник не робить роботу, але знає стан справ і може ухвалити невідкладне рішення.",
+    "<strong>HARD і PROD зараз майже повністю під найм.</strong> Партнер, який візьме ці зони, найближчі місяці більше наймає і будує процес, ніж робить руками — це варто проговорити відкрито.",
+    "<strong>LEG закривається підрядником, але потребує партнера-замовника</strong> — того, хто ставить задачу юристу і приймає роботу.",
     "<strong>Перегляд раз на квартал</strong>, 30 хвилин: що змінилось, що передаємо далі, що знімаємо."
   ];
 
+  var CHECKS = [
+    "У кожної з 11 зон є один власник і один заступник.",
+    "Матриця прав рішень прийнята в поточному вигляді або з правками, зафіксованими на сесії.",
+    "Черга найму і склад підрядників підтверджені.",
+    "Усі прикордонні питання закриті або мають дату рішення.",
+    "Призначено дату наступного перегляду карти."
+  ];
+
   var AGENDA = [
-    ["0–10", "Правила: одна функція — одне ім'я; «спільно» не приймається; «не знаю» — у парковку з датою", "Формат узгоджено"],
-    ["10–35", "Рівень 1: три питання вибору зони, далі розподіл чотирьох зон", "4 імені"],
-    ["35–65", "Рівень 2: прохід по функціях, до 60 сек на кожну", "Статус у кожної функції"],
-    ["65–75", "Рівень 3: підтвердити чергу найму і склад підрядників", "План закриття дір"],
-    ["75–85", "Прикордонні питання і матриця прав рішень", "8 рішень або дат"],
-    ["85–90", "Три ключові числа: C3, C8, C9 — перевірити, що вони не в однієї людини", "Підтверджено"]
+    ["0–10", "Правила: одна зона — одне ім'я; «спільно» не приймається; «не знаю» — у парковку з датою", "Формат узгоджено"],
+    ["10–20", "Кожен відповідає на три питання вибору зони", "Заявки озвучені"],
+    ["20–50", "Розподіл 11 зон: власник і заступник", "Форма, розділ 1"],
+    ["50–65", "Прохід по функціях у спірних зонах", "Уточнення"],
+    ["65–75", "Черга найму і підрядники", "Підтверджено"],
+    ["75–85", "Прикордонні питання і матриця рішень", "Рішення або дати"],
+    ["85–90", "Підписи, дата наступного перегляду", "Форма, розділи 2–4"]
   ];
 
   // ---------- state ----------
-  var FNS = [];
-  ZONES.forEach(function (z) { z.fns.forEach(function (f) { f.zone = z.id; FNS.push(f); }); });
-
-  var state = {};
-  FNS.forEach(function (f) { state[f.id] = { owner: "none", fixed: false, note: "" }; });
   var zoneState = {};
-  ZONES.forEach(function (z) { zoneState[z.id] = { owner: "none", fixed: false }; });
+  ZONES.forEach(function (z) { zoneState[z.id] = { owner: "none", deputy: "none" }; });
   var roster = { p1: "Партнер 1", p2: "Партнер 2", p3: "Партнер 3" };
-  var onlyOpen = false;
+  var checks = {};
   var db = null;
 
-  function ownerLabel(id) {
+  function label(id) {
     if (roster[id]) return roster[id];
-    for (var i = 0; i < OWNERS.length; i++) if (OWNERS[i].id === id) return OWNERS[i].label || id;
-    return "Не розподілено";
+    return id === "none" ? "—" : id;
   }
-  function isOpen(id) { var s = state[id]; return !s.fixed || s.owner === "none"; }
+  function assignedName(id) {
+    return id && id !== "none" ? label(id) : null;
+  }
 
-  var LS = "flyby-face-v3";
+  var LS = "flyby-org-v1";
   function saveLocal() {
     if (db) return;
-    try { localStorage.setItem(LS, JSON.stringify({ state: state, zones: zoneState, roster: roster })); } catch (e) {}
+    try { localStorage.setItem(LS, JSON.stringify({ zones: zoneState, roster: roster, checks: checks })); } catch (e) {}
   }
   function loadLocal() {
     try {
       var raw = localStorage.getItem(LS); if (!raw) return;
       var v = JSON.parse(raw);
-      if (v.state) Object.keys(v.state).forEach(function (k) { if (state[k]) state[k] = v.state[k]; });
       if (v.zones) Object.keys(v.zones).forEach(function (k) { if (zoneState[k]) zoneState[k] = v.zones[k]; });
       if (v.roster) Object.keys(v.roster).forEach(function (k) { if (roster[k] !== undefined) roster[k] = v.roster[k]; });
+      if (v.checks) checks = v.checks;
     } catch (e) {}
   }
-
-  var boardEl = document.getElementById("board");
-  var cardsEl = document.getElementById("zonecards");
-  var meterEl = document.getElementById("meter");
-  var progressEl = document.getElementById("progress");
-  var statusEl = document.getElementById("status");
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -632,46 +581,53 @@
     if (text !== undefined) n.textContent = text;
     return n;
   }
-  function chipRow(scope, id, current, fixed) {
+
+  var gridEl = document.getElementById("zonegrid");
+  var orgEl = document.getElementById("orgchart");
+  var progressEl = document.getElementById("progress");
+  var statusEl = document.getElementById("status");
+
+  function chipRow(role, zoneId, current) {
     var chips = el("div", "chips");
-    OWNERS.forEach(function (o) {
-      var b = el("button", "chip", ownerLabel(o.id));
+    PICKS.forEach(function (o) {
+      var b = el("button", "chip" + (role === "deputy" ? " sm" : ""), label(o.id));
       b.type = "button";
+      b.dataset.role = role;
+      b.dataset.zone = zoneId;
       b.dataset.pick = o.id;
-      b.dataset.scope = scope;
-      b.dataset.target = id;
-      b.setAttribute("aria-pressed", current === o.id && fixed ? "true" : "false");
+      b.setAttribute("aria-pressed", current === o.id && o.id !== "none" ? "true" : "false");
       chips.appendChild(b);
     });
     return chips;
   }
 
-  function buildCards() {
-    cardsEl.textContent = "";
+  function buildZones() {
+    gridEl.textContent = "";
     ZONES.forEach(function (z) {
-      var card = el("div", "zonecard" + (z.core ? " is-core" : ""));
+      var card = el("div", "zcard");
       card.dataset.zone = z.id;
       var top = el("div", "zc-top");
       top.appendChild(el("span", "zc-code", z.code));
       top.appendChild(el("span", "zc-name", z.name));
       card.appendChild(top);
-      card.appendChild(el("p", "zc-mission", z.mission));
+      card.appendChild(el("p", "zc-about", z.about));
       card.appendChild(el("p", "zc-nums", z.nums));
-      card.appendChild(el("p", "zc-owner", ""));
-      card.appendChild(el("p", "zc-count", ""));
-      card.appendChild(el("div", "zc-chips"));
-      var acts = el("div", "zc-actions");
-      var fill = el("button", "zc-fill", "Заповнити зону");
-      fill.type = "button";
-      fill.dataset.fill = z.id;
-      acts.appendChild(fill);
-      card.appendChild(acts);
-      cardsEl.appendChild(card);
+      card.appendChild(el("p", "zc-nums", z.fns.length + " функцій"));
+      var o = el("div", "pickline");
+      o.appendChild(el("span", null, "власник"));
+      o.appendChild(el("div", "owner-slot"));
+      card.appendChild(o);
+      var d = el("div", "pickline");
+      d.appendChild(el("span", null, "заступник"));
+      d.appendChild(el("div", "deputy-slot"));
+      card.appendChild(d);
+      gridEl.appendChild(card);
     });
   }
 
-  function buildBoard() {
-    boardEl.textContent = "";
+  function buildFns() {
+    var host = document.getElementById("fnlist");
+    host.textContent = "";
     ZONES.forEach(function (z) {
       var sec = el("div", "zone");
       sec.dataset.zone = z.id;
@@ -681,213 +637,145 @@
       head.appendChild(el("span", "zone-owner", ""));
       sec.appendChild(head);
 
+      var t = el("table", "ftable");
+      var thead = el("thead");
+      var tr = el("tr");
+      ["Код", "Функція", "Головне число", "Хто"].forEach(function (h) { tr.appendChild(el("th", null, h)); });
+      thead.appendChild(tr); t.appendChild(thead);
+      var tb = el("tbody");
       z.fns.forEach(function (f) {
-        var strip = el("div", "strip");
-        strip.dataset.fn = f.id;
-
-        var rail = el("div", "s-rail");
-        rail.appendChild(el("span", "s-code", f.code));
-        var recTag = el("span", "tag " + (f.hire ? "tag-hire" : (f.out ? "tag-out" : "tag-out")), f.rec);
-        rail.appendChild(recTag);
-        var mark = el("span", "tag", "");
-        mark.dataset.role = "mark";
-        rail.appendChild(mark);
-        strip.appendChild(rail);
-
-        var body = el("div", "s-body");
-        body.appendChild(el("p", "s-name", f.name));
-        body.appendChild(el("p", "s-what", f.what));
-        var meta = el("div", "s-meta");
-        var kpi = el("span");
-        kpi.appendChild(el("strong", null, "Число: "));
-        kpi.appendChild(document.createTextNode(f.kpi));
-        meta.appendChild(kpi);
-        if (f.key) {
-          var k = el("span");
-          k.appendChild(el("strong", null, "Ключове: "));
-          k.appendChild(document.createTextNode(f.key));
-          meta.appendChild(k);
-        }
-        body.appendChild(meta);
-        if (f.flag) body.appendChild(el("p", "s-flag", f.flag));
-        strip.appendChild(body);
-
-        var assign = el("div", "s-assign");
-        assign.appendChild(chipRow("fn", f.id, state[f.id].owner, state[f.id].fixed));
-        var note = el("input", "s-note");
-        note.type = "text";
-        note.id = "note-" + f.id;
-        note.placeholder = "нотатка або дата рішення";
-        note.dataset.note = f.id;
-        assign.appendChild(note);
-        strip.appendChild(assign);
-
-        sec.appendChild(strip);
+        var r = el("tr");
+        r.appendChild(el("td", "code", f[0]));
+        var td = el("td");
+        td.appendChild(el("div", "fname", f[1]));
+        td.appendChild(el("div", "fwhat", f[2]));
+        r.appendChild(td);
+        r.appendChild(el("td", "kpi", f[3]));
+        var w = el("td", "who");
+        var tag = el("span", "who-tag" + (f[4].indexOf("найм") === 0 ? " hire" : ""), f[4]);
+        w.appendChild(tag);
+        r.appendChild(w);
+        tb.appendChild(r);
       });
-      boardEl.appendChild(sec);
+      t.appendChild(tb);
+      sec.appendChild(t);
+      host.appendChild(sec);
     });
   }
 
   function paint() {
+    // zone cards
     ZONES.forEach(function (z) {
-      var card = cardsEl.querySelector('.zonecard[data-zone="' + z.id + '"]');
+      var card = gridEl.querySelector('.zcard[data-zone="' + z.id + '"]');
       if (!card) return;
       var zs = zoneState[z.id];
-      var open = !zs.fixed || zs.owner === "none";
-      card.dataset.open = open ? "1" : "0";
-      var own = card.querySelector(".zc-owner");
-      own.textContent = open ? "власник не визначений" : ownerLabel(zs.owner);
-      own.dataset.open = open ? "1" : "0";
+      var os = card.querySelector(".owner-slot");
+      os.textContent = ""; os.appendChild(chipRow("owner", z.id, zs.owner));
+      var ds = card.querySelector(".deputy-slot");
+      ds.textContent = ""; ds.appendChild(chipRow("deputy", z.id, zs.deputy));
 
-      var held = 0, holes = 0, outs = 0;
-      z.fns.forEach(function (f) {
-        var o = state[f.id].owner;
-        if (o === "hire" || o === "none") holes++;
-        else if (o === "out") outs++;
-        else held++;
-      });
-      card.querySelector(".zc-count").textContent =
-        z.fns.length + " функцій · на партнерах: " + held +
-        (outs ? " · підрядник: " + outs : "") + " · відкрито: " + holes;
-
-      var holder = card.querySelector(".zc-chips");
-      holder.textContent = "";
-      holder.appendChild(chipRow("zone", z.id, zs.owner, zs.fixed));
-
-      var zoneOwnerEl = boardEl.querySelector('.zone[data-zone="' + z.id + '"] .zone-owner');
-      if (zoneOwnerEl) {
-        zoneOwnerEl.textContent = open ? "власник не визначений" : "власник зони: " + ownerLabel(zs.owner);
-        zoneOwnerEl.dataset.open = open ? "1" : "0";
+      var zo = document.querySelector('#fnlist .zone[data-zone="' + z.id + '"] .zone-owner');
+      if (zo) {
+        var name = assignedName(zs.owner);
+        zo.textContent = name ? "власник: " + name : "власник не визначений";
+        zo.dataset.open = name ? "0" : "1";
       }
     });
 
-    FNS.forEach(function (f) {
-      var strip = boardEl.querySelector('.strip[data-fn="' + f.id + '"]');
-      if (!strip) return;
-      var s = state[f.id];
-      var open = isOpen(f.id);
-      strip.dataset.state = open ? "free" : "set";
-
-      var mark = strip.querySelector('[data-role="mark"]');
-      if (!open) { mark.className = "tag tag-fix"; mark.textContent = "закріплено"; }
-      else { mark.className = "tag tag-free"; mark.textContent = "відкрито"; }
-
-      var chips = strip.querySelectorAll(".chip");
-      for (var i = 0; i < chips.length; i++) {
-        var id = chips[i].dataset.pick;
-        chips[i].textContent = ownerLabel(id);
-        chips[i].setAttribute("aria-pressed", (s.owner === id && s.fixed) ? "true" : "false");
+    // org chart
+    orgEl.textContent = "";
+    PARTNERS.forEach(function (p) {
+      var col = el("div", "col");
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; });
+      var dep = ZONES.filter(function (z) { return zoneState[z.id].deputy === p; });
+      if (!owned.length) col.classList.add("is-open");
+      col.appendChild(el("p", "col-name", label(p)));
+      col.appendChild(el("p", "col-count", "зон у власності: " + owned.length + " · заступник у: " + dep.length));
+      if (owned.length || dep.length) {
+        var list = el("div", "zlist");
+        owned.forEach(function (z) { list.appendChild(el("span", "zchip", z.code)); });
+        dep.forEach(function (z) { list.appendChild(el("span", "zchip is-deputy", z.code)); });
+        col.appendChild(list);
+      } else {
+        col.appendChild(el("p", "col-empty", "зони ще не призначені"));
       }
-      var noteEl = strip.querySelector(".s-note");
-      if (noteEl && document.activeElement !== noteEl && noteEl.value !== s.note) noteEl.value = s.note || "";
-
-      strip.hidden = onlyOpen && !open;
+      orgEl.appendChild(col);
     });
+    var free = ZONES.filter(function (z) { return zoneState[z.id].owner === "none"; });
+    var fcol = el("div", "col");
+    if (free.length) fcol.classList.add("is-open");
+    fcol.appendChild(el("p", "col-name", "Без власника"));
+    fcol.appendChild(el("p", "col-count", "зон: " + free.length + " з " + ZONES.length));
+    if (free.length) {
+      var fl = el("div", "zlist");
+      free.forEach(function (z) { fl.appendChild(el("span", "zchip is-free", z.code)); });
+      fcol.appendChild(fl);
+    } else {
+      fcol.appendChild(el("p", "col-empty", "усі зони розподілені"));
+    }
+    orgEl.appendChild(fcol);
 
+    // sign-off table
+    var so = document.getElementById("signoff");
+    so.textContent = "";
     ZONES.forEach(function (z) {
-      var sec = boardEl.querySelector('.zone[data-zone="' + z.id + '"]');
-      if (!sec) return;
-      var any = false;
-      z.fns.forEach(function (f) {
-        var st = sec.querySelector('.strip[data-fn="' + f.id + '"]');
-        if (st && !st.hidden) any = true;
-      });
-      sec.hidden = !any;
+      var zs = zoneState[z.id];
+      var tr = el("tr");
+      tr.appendChild(el("td", "mono-cell", z.code));
+      tr.appendChild(el("td", null, z.name));
+      var on = assignedName(zs.owner);
+      tr.appendChild(el("td", on ? "filled" : "blank", on || "____________"));
+      var dn = assignedName(zs.deputy);
+      tr.appendChild(el("td", dn ? "filled" : "blank", dn || "____________"));
+      tr.appendChild(el("td", "kpi mono-cell", z.nums.split(" · ")[0]));
+      so.appendChild(tr);
     });
 
-    var counts = {}; OWNERS.forEach(function (o) { counts[o.id] = 0; });
-    var fixedCount = 0;
-    FNS.forEach(function (f) {
-      var s = state[f.id];
-      var o = s.fixed ? s.owner : "none";
-      counts[o] = (counts[o] || 0) + 1;
-      if (s.fixed && s.owner !== "none") fixedCount++;
-    });
-    var max = 0; ["p1", "p2", "p3"].forEach(function (k) { if (counts[k] > max) max = counts[k]; });
-
-    meterEl.textContent = "";
-    ["p1", "p2", "p3", "hire", "out", "none"].forEach(function (k) {
-      var pill = el("div", "load");
-      if ((k === "p1" || k === "p2" || k === "p3") && max >= 13 && counts[k] === max) pill.classList.add("is-hot");
-      if (k === "none" && counts[k] > 0) pill.classList.add("is-open");
-      pill.appendChild(el("b", null, String(counts[k] || 0)));
-      pill.appendChild(el("span", "who", ownerLabel(k)));
-      meterEl.appendChild(pill);
+    // signatures
+    var sg = document.getElementById("signs");
+    sg.textContent = "";
+    PARTNERS.forEach(function (p) {
+      var box = el("div", "sign");
+      box.appendChild(el("p", "who2", label(p)));
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; }).map(function (z) { return z.code; });
+      box.appendChild(el("p", "zones2", owned.length ? "Беру зони: " + owned.join(", ") : "Зони ще не призначені"));
+      var r1 = el("div", "rule"); box.appendChild(r1);
+      box.appendChild(el("p", "rule-label", "дата"));
+      var r2 = el("div", "rule"); box.appendChild(r2);
+      box.appendChild(el("p", "rule-label", "підпис"));
+      sg.appendChild(box);
     });
 
-    var zonesFixed = 0;
-    ZONES.forEach(function (z) { if (zoneState[z.id].fixed && zoneState[z.id].owner !== "none") zonesFixed++; });
-    progressEl.textContent = "зони: " + zonesFixed + " / " + ZONES.length + " · функції: " + fixedCount + " / " + FNS.length;
+    var assigned = ZONES.length - free.length;
+    var deputies = ZONES.filter(function (z) { return zoneState[z.id].deputy !== "none"; }).length;
+    progressEl.textContent = "зони з власником: " + assigned + " / " + ZONES.length + " · із заступником: " + deputies + " / " + ZONES.length;
   }
 
-  function pushFn(id) {
-    saveLocal();
-    if (!db) return;
-    var s = state[id];
-    db.doc("face/" + id).set({ owner: s.owner, fixed: !!s.fixed, note: s.note || "" }).catch(function () {});
-  }
   function pushZone(id) {
     saveLocal();
     if (!db) return;
-    var z = zoneState[id];
-    db.doc("zonemap/" + id).set({ owner: z.owner, fixed: !!z.fixed }).catch(function () {});
+    db.doc("org/" + id).set({ owner: zoneState[id].owner, deputy: zoneState[id].deputy }).catch(function () {});
   }
   function pushRoster() {
     saveLocal();
     if (!db) return;
     db.doc("config/team").set({ names: roster }).catch(function () {});
   }
+  function pushChecks() {
+    saveLocal();
+    if (!db) return;
+    db.doc("config/signoff").set({ checks: checks }).catch(function () {});
+  }
 
-  function onChipClick(e) {
+  gridEl.addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest(".chip") : null;
     if (!b) return;
-    var pick = b.dataset.pick;
-    var target = b.dataset.target;
-    if (b.dataset.scope === "zone") {
-      zoneState[target].owner = pick;
-      zoneState[target].fixed = pick !== "none";
-      paint();
-      pushZone(target);
-    } else {
-      state[target].owner = pick;
-      state[target].fixed = pick !== "none";
-      paint();
-      pushFn(target);
-    }
-  }
-  cardsEl.addEventListener("click", onChipClick);
-  boardEl.addEventListener("click", onChipClick);
-
-  cardsEl.addEventListener("click", function (e) {
-    var b = e.target.closest ? e.target.closest("[data-fill]") : null;
-    if (!b) return;
-    var zid = b.dataset.fill;
-    var owner = zoneState[zid].owner;
-    if (owner === "none" || !zoneState[zid].fixed) {
-      b.textContent = "Спершу оберіть власника";
-      setTimeout(function () { b.textContent = "Заповнити зону"; }, 1800);
-      return;
-    }
-    ZONES.forEach(function (z) {
-      if (z.id !== zid) return;
-      z.fns.forEach(function (f) {
-        if (f.hire || f.out) return;
-        state[f.id].owner = owner;
-        state[f.id].fixed = true;
-        pushFn(f.id);
-      });
-    });
+    var zid = b.dataset.zone, role = b.dataset.role, pick = b.dataset.pick;
+    zoneState[zid][role] = pick;
+    if (role === "owner" && pick !== "none" && zoneState[zid].deputy === pick) zoneState[zid].deputy = "none";
+    if (role === "deputy" && pick !== "none" && zoneState[zid].owner === pick) zoneState[zid].owner = "none";
     paint();
-  });
-
-  var noteTimers = {};
-  boardEl.addEventListener("input", function (e) {
-    var t = e.target;
-    if (!t.dataset || !t.dataset.note) return;
-    var id = t.dataset.note;
-    state[id].note = t.value;
-    clearTimeout(noteTimers[id]);
-    noteTimers[id] = setTimeout(function () { pushFn(id); }, 700);
+    pushZone(zid);
   });
 
   var rosterTimer;
@@ -900,26 +788,20 @@
     });
   });
 
-  var fOpen = document.getElementById("f-open");
-  fOpen.addEventListener("click", function () {
-    onlyOpen = !onlyOpen;
-    fOpen.setAttribute("aria-pressed", onlyOpen ? "true" : "false");
-    paint();
-  });
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
 
   document.getElementById("copy").addEventListener("click", function () {
-    var lines = ["FLY BY — карта зон відповідальності, " + new Date().toISOString().slice(0, 10), ""];
+    var lines = ["FLY BY — оргструктура і зони відповідальності, " + new Date().toISOString().slice(0, 10), ""];
     ZONES.forEach(function (z) {
       var zs = zoneState[z.id];
-      lines.push("## Зона " + z.code + " — " + z.name + " → " +
-        (zs.fixed && zs.owner !== "none" ? ownerLabel(zs.owner) : "не розподілено"));
-      z.fns.forEach(function (f) {
-        var s = state[f.id];
-        lines.push("- " + f.code + " " + f.name + " → " +
-          (s.fixed && s.owner !== "none" ? ownerLabel(s.owner) : "не розподілено") +
-          " [рекомендація: " + f.rec + "]" + (s.note ? " — " + s.note : ""));
-      });
-      lines.push("");
+      lines.push(z.code + " · " + z.name +
+        " → власник: " + (assignedName(zs.owner) || "не призначено") +
+        " · заступник: " + (assignedName(zs.deputy) || "не призначено"));
+    });
+    lines.push("");
+    PARTNERS.forEach(function (p) {
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; }).map(function (z) { return z.code; });
+      lines.push(label(p) + ": " + (owned.length ? owned.join(", ") : "—"));
     });
     var txt = lines.join("\n");
     var btn = this;
@@ -929,6 +811,7 @@
     } else { done(false); }
   });
 
+  // static tables
   function fillTable(id, rows, opts) {
     var tb = document.getElementById(id);
     rows.forEach(function (r) {
@@ -949,13 +832,14 @@
   fillTable("outs", OUTSOURCE, { mono: [1] });
   fillTable("matrix", MATRIX, { skip: 4, mono: [1, 2], decide: 2, flag: 4 });
 
-  BORDERS.forEach(function (z) {
+  BORDERS.forEach(function (b) {
     var d = el("div", "row2");
-    d.appendChild(el("h4", null, z[0]));
-    d.appendChild(el("p", "risk", z[1]));
+    var h = el("h4", null, b[1]);
+    d.appendChild(h);
+    d.appendChild(el("p", "between", b[0]));
     var fix = el("div", "fix");
     fix.appendChild(el("em", null, "рекомендоване рішення"));
-    fix.appendChild(document.createTextNode(z[2]));
+    fix.appendChild(document.createTextNode(b[2]));
     d.appendChild(fix);
     document.getElementById("borders").appendChild(d);
   });
@@ -968,6 +852,20 @@
     document.getElementById("recs").appendChild(li);
   });
 
+  CHECKS.forEach(function (c, i) {
+    var row = el("div", "check");
+    var cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = "chk-" + i;
+    cb.addEventListener("change", function () { checks["c" + i] = cb.checked; pushChecks(); });
+    var lab = document.createElement("label");
+    lab.setAttribute("for", cb.id);
+    lab.textContent = c;
+    row.appendChild(cb);
+    row.appendChild(lab);
+    document.getElementById("checks").appendChild(row);
+  });
+
   AGENDA.forEach(function (a) {
     var li = document.createElement("li");
     li.appendChild(el("span", "t", a[0] + " хв"));
@@ -976,10 +874,18 @@
     document.getElementById("agenda").appendChild(li);
   });
 
-  buildCards();
-  buildBoard();
+  function applyChecks() {
+    CHECKS.forEach(function (c, i) {
+      var cb = document.getElementById("chk-" + i);
+      if (cb) cb.checked = !!checks["c" + i];
+    });
+  }
+
+  buildZones();
+  buildFns();
   loadLocal();
   document.querySelectorAll("input[data-owner]").forEach(function (inp) { inp.value = roster[inp.dataset.owner]; });
+  applyChecks();
   paint();
 
   if (window.claude && window.claude.use) {
@@ -987,25 +893,15 @@
       if (!d) return;
       db = d;
       statusEl.textContent = "режим: спільний · зміни бачать усі партнери одразу";
-      db.collection("face").onSnapshot(function (snap) {
-        snap.docs.forEach(function (doc) {
-          var v = doc.data() || {};
-          if (!state[doc.id]) return;
-          state[doc.id].owner = v.owner || "none";
-          state[doc.id].fixed = !!v.fixed;
-          state[doc.id].note = typeof v.note === "string" ? v.note : "";
-        });
-        paint();
-      }, function () { statusEl.textContent = "режим: локальний · спільне збереження недоступне"; });
-      db.collection("zonemap").onSnapshot(function (snap) {
+      db.collection("org").onSnapshot(function (snap) {
         snap.docs.forEach(function (doc) {
           var v = doc.data() || {};
           if (!zoneState[doc.id]) return;
           zoneState[doc.id].owner = v.owner || "none";
-          zoneState[doc.id].fixed = !!v.fixed;
+          zoneState[doc.id].deputy = v.deputy || "none";
         });
         paint();
-      }, function () {});
+      }, function () { statusEl.textContent = "режим: локальний · спільне збереження недоступне"; });
       db.doc("config/team").onSnapshot(function (doc) {
         var v = doc.exists ? doc.data() : null;
         if (v && v.names) {
@@ -1015,6 +911,10 @@
           });
           paint();
         }
+      }, function () {});
+      db.doc("config/signoff").onSnapshot(function (doc) {
+        var v = doc.exists ? doc.data() : null;
+        if (v && v.checks) { checks = v.checks; applyChecks(); }
       }, function () {});
     }, function () {});
   }
