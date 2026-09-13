@@ -9,6 +9,7 @@
 | lean-process-writer | Наскрізна | active | SOP/регламенти без бюрократії |
 | one-page-strategic-plan | Стратегія | active | ОСП, 7 рівнів, BHAG |
 | people-accountability | Люди | active | Accountability Chart, A/B/C, найм |
+| partner-accountability-split | Люди | proposed | Зони відповідальності між співвласниками: FACe + права рішень + сірі зони |
 | meeting-rhythm | Виконання | active | Ритм зустрічей |
 | priorities-quarterly-theme | Виконання | active | Топ-5 + №1, тема кварталу |
 | kpi-scorecard | Виконання | active | KPI / «розумні числа» |
