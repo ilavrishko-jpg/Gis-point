@@ -13,6 +13,7 @@
 | priorities-quarterly-theme | Виконання | active | Топ-5 + №1, тема кварталу |
 | kpi-scorecard | Виконання | active | KPI / «розумні числа» |
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
+| insurance-geo-icp | Стратегія | proposed | Сегментація й кваліфікація страховиків як покупців гео-даних |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
 
