@@ -1,0 +1,62 @@
+{
+  "workspace_slug": "REPLACE_ME",
+  "project": {
+    "name": "GIS-Point Operations",
+    "identifier": "OPS",
+    "description": "Operational board for GIS-Point: weekly, monthly, quarterly, semiannual and annual plans and tasks, run as a kanban.",
+    "network": 2
+  },
+  "states": [
+    { "name": "Backlog",     "group": "backlog",   "color": "#8B8D98", "description": "Captured, not committed yet. Everything starts here." },
+    { "name": "Todo",        "group": "unstarted", "color": "#3A86FF", "description": "Committed for the current horizon, ready to be pulled." },
+    { "name": "In Progress", "group": "started",   "color": "#F59E0B", "description": "Actively being worked on. Respect the WIP limit." },
+    { "name": "In Review",   "group": "started",   "color": "#8B5CF6", "description": "Work is done, waiting on review, approval or hand-off." },
+    { "name": "Done",        "group": "completed", "color": "#16A34A", "description": "Accepted and finished." },
+    { "name": "Cancelled",   "group": "cancelled", "color": "#EF4444", "description": "Dropped on purpose. Keep it for the record, do not delete." }
+  ],
+  "labels": [
+    { "name": "Weekly",     "color": "#22C55E" },
+    { "name": "Monthly",    "color": "#3B82F6" },
+    { "name": "Quarterly",  "color": "#A855F7" },
+    { "name": "Semiannual", "color": "#F97316" },
+    { "name": "Annual",     "color": "#DC2626" }
+  ],
+  "members": [],
+  "seed_issues": [
+    {
+      "name": "Weekly ops review: board hygiene and blockers",
+      "state": "Todo",
+      "labels": ["Weekly"],
+      "priority": "high",
+      "description": "Every Monday: walk the board right to left, clear anything stuck In Review, re-pull from Todo, and make sure each active card has an assignee."
+    },
+    {
+      "name": "Monthly operations report",
+      "state": "Backlog",
+      "labels": ["Monthly"],
+      "priority": "medium",
+      "description": "Close the month: delivery numbers, utilisation, what slipped and why, what changes next month."
+    },
+    {
+      "name": "Q+1 operations plan",
+      "state": "Backlog",
+      "labels": ["Quarterly"],
+      "priority": "medium",
+      "description": "Set the quarterly priorities for operations and break them down into monthly work items."
+    },
+    {
+      "name": "Half-year operations audit",
+      "state": "Backlog",
+      "labels": ["Semiannual"],
+      "priority": "low",
+      "description": "Review processes, tooling and supplier contracts. Decide what to keep, fix or retire for the second half of the year."
+    },
+    {
+      "name": "Annual operations roadmap",
+      "state": "Backlog",
+      "labels": ["Annual"],
+      "priority": "low",
+      "description": "Company-level operational goals for the year, split into quarterly themes that feed this board."
+    }
+  ]
+}
