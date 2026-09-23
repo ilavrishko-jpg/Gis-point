@@ -13,6 +13,7 @@
 | priorities-quarterly-theme | Виконання | active | Топ-5 + №1, тема кварталу |
 | kpi-scorecard | Виконання | active | KPI / «розумні числа» |
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
+| gtm-hypothesis-prioritization | Стратегія + Гроші | proposed | Формування, скоринг і портфель GTM-гіпотез, підбір/збирання оферу |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
 
