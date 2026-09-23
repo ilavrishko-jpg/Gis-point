@@ -9,10 +9,13 @@
 
 | Показник | Чинне значення |
 |---|---|
-| Потреба ринку | **~10 000 од./міс** (20+ інтерв'ю, Лип–Сер 2026) |
+| Потреба ринку | **~10 000 од./міс** (10+ інтерв'ю, Лип–Сер 2026) |
 | Виробники усно готові купувати | **600+ од./міс** — усні домовленості, письмових LOI немає |
 | Ціль першого етапу | **600 од./міс** |
 | Раунд | **$500K pre-seed** — чинна сума для всіх аудиторій |
+| Старт проєкту | **травень 2026** — п'ять місяців до сьогодні |
+| Конкурентна позиція | 15 м — **паритет** із наявними рішеннями; диференціація — швидкість фіксації для 600 км/год і ненакопичувана похибка |
+| Години на тиждень | CTO 40+, CEO 20, Chief Scientist 20 |
 | Нічний канал | **у дорожній карті** → Q18 йде за Варіантом А |
 | Метрика точності | CEP ≈ медіанна радіальна похибка, тому **≤5 m CEP** і «15 m median» сумісні |
 
@@ -35,8 +38,9 @@
 
 ### Фінальний текст
 
-> In July 2026, through Defence Builder, we met a military end-user expert, and then interviewed
-> 20+ Ukrainian UAV manufacturers and operators (Jul–Aug 2026).
+> Fly By started in May 2026. In July, through Defence Builder, we met a military end-user
+> expert, and then interviewed 10+ Ukrainian UAV manufacturers and operators (Jul–Aug 2026),
+> including military operators currently flying competing systems.
 >
 > Key learnings:
 >
@@ -51,6 +55,10 @@
 >    reasons we are applying.
 > 4. Units buy integrated systems from manufacturers, so our channel is OEM design-in rather
 >    than direct sales.
+> 5. We also collected feedback from military operators currently flying competing systems, not
+>    only from the manufacturers who integrate them. That gave us both sides of the same
+>    problem — what breaks during integration and what fails in the field — and we have designed
+>    around those failure modes rather than around a competitor spec sheet.
 >
 > Together these findings reshaped both our roadmap and our business model.
 
@@ -60,6 +68,11 @@
   через це 15 м виглядають як недосягнута ціль замість уже наявного результату. Це найсильніше,
   що є в цій відповіді, і воно було втрачене.
 - Пункт 1: «hold a valid position» замість «hold position» — точніше.
+- **Додано дату старту в першому реченні.** «Fly By started in May 2026» перетворює весь абзац:
+  усе нижче прочитується як зроблене за п'ять місяців, а не колись.
+- **Додано пункт 5** про відгуки від військових, які літають на конкурентних рішеннях. Це
+  найцінніше, що у вас є з customer discovery: більшість команд опитують виробників, майже
+  ніхто — операторів конкурентів. Те, що ви маєте обидва боки, і є справжнім активом.
 - Прибрав «These findings reshaped our roadmap and business model» як окреме речення без опори —
   тепер воно спирається на конкретику вище.
 
@@ -67,7 +80,11 @@
 
 ## Business & Traction — до трьох ключових результатів
 
-> **Customer discovery.** 20+ structured interviews with Ukrainian UAV manufacturers and
+> Fly By started in May 2026. In five months we have gone from nothing to a working algorithm
+> and software system, a prototype in flight testing, and direct feedback from 10+ Ukrainian UAV
+> manufacturers and operators. Three milestones from that period:
+>
+> **Customer discovery.** 10+ structured interviews with Ukrainian UAV manufacturers and
 > operators (Jul–Aug 2026) established a sector-wide requirement in the order of 10,000
 > GPS-denied navigation units per month. Within that, manufacturers have verbally indicated
 > readiness to purchase 600+ units per month; 600 units/month is our first-stage target. The
@@ -76,7 +93,7 @@
 > **Industry pipeline.** 9 meetings with European UAV manufacturers and navigation suppliers at
 > MSPO 2026 (September), with technical follow-ups in progress — including an inbound proposal
 > from an IMU/INS supplier to explore integration. [ЗАПОВНИТИ: скільки з 9 мають наступний крок
-> із датою — одне речення додає цьому пункту вагу]
+> із датою]
 >
 > **Flight-test partnership.** Partner test range secured and prototype units in flight testing,
 > measured at 15 m median error under live jamming and spoofing with GPS excluded from the
@@ -84,15 +101,17 @@
 
 **Що змінив і чому:**
 
-- **Три рівні попиту розведені явно:** ринок 10 000 → усна готовність 600+ → ціль першого
-  етапу 600. У чернетці була одна цифра 10 000, подана як підтверджений попит — це запрошувало
-  питання «як 20 інтерв'ю підтверджують 10 000 на місяць?».
-- **«verbally indicated» залишено свідомо.** Та сама аудиторія питає про це в DD, і там
-  чесна відповідь — «усно, LOI немає». Заявка має говорити те саме, інакше розбіжність
-  спливе саме тоді, коли перевірятимуть.
-- **Прибрав «280+ OEM leads in outreach».** Ліди в аутрічі — активність, не тракшен. Рядок
-  запрошує питання «скільки відповіли?» і розбавляє два сильні пункти.
-- **Додав виміряну цифру в польотний пункт** — це єдиний із трьох, де є результат, а не процес.
+- **Додано арку «травень → вересень».** Це найсильніше, чого бракувало: без дати старту три
+  віхи читаються як звичайний прогрес, а з нею — як п'ять місяців від нуля до польотів.
+  Для акселератора швидкість команди важить не менше за сам результат.
+- **10+ інтерв'ю** замість 20+ — за вашим уточненням.
+- **Три рівні попиту розведені явно:** ринок 10 000 → усна готовність 600+ → ціль 600.
+  У чернетці була одна цифра, подана як підтверджений попит, і це запрошувало питання
+  «як 10 інтерв'ю підтверджують 10 000 на місяць?».
+- **«verbally indicated» залишено свідомо:** та сама аудиторія питає про це в DD, і там чесна
+  відповідь — «усно, LOI немає». Заявка має говорити те саме.
+- **Прибрано «280+ OEM leads in outreach»** — це активність, не тракшен, і воно запрошує
+  питання «скільки відповіли?».
 
 ## Q24. Хто з команди бере участь і які рішення може ухвалювати
 
@@ -118,8 +137,15 @@
 >
 > All three are co-founders, so decisions taken in the programme do not need external approval.
 
-[ЗАПОВНИТИ: скільки годин на тиждень реалістично виділяє кожен. Не обіцяти того, чого не буде —
-це перевіряється на другому тижні програми.]
+**Час, який команда вкладає у FLY BY:**
+
+> Time committed to Fly By: CTO 40+ hours per week, CEO 20 hours per week, Chief Scientist
+> 20 hours per week. All three are available for the two weekly workshops and the individual
+> milestone work.
+
+⚠️ Будьте готові до питання, **чому CEO на 20 годинах**, а CTO на 40+. Для акселератора це
+помітна асиметрія, особливо коли CEO веде раунд. Відповідь має бути в одному реченні —
+[ЗАПОВНИТИ: чим зайняті решта годин і чому це не конфлікт]. Не виправдовуватись, просто назвати.
 
 ⚠️ **Виправити в оригінальних матеріалах (сайт, дек, біо).** Там стоїть «Owns the map-matching,
 IMU fusion and autopilot integration **outright**». Поряд із «All IP in-house» це читається як
@@ -141,6 +167,13 @@ IP assignments. Чинне формулювання: **«Leads map-matching, IMU
 > platform, validation against a defined military use case, and design-in with Ukrainian UAV
 > manufacturers. Those need access, not only capital — and access is the one thing we cannot
 > buy with the round.
+>
+> Our measured 15 m median puts us in the same accuracy band as existing systems, so accuracy
+> alone is not our argument. What differentiates us is what we are building next: a fix fast
+> enough for jet-powered platforms at 600 km/h, holding accuracy without error accumulating
+> along the route, on a passive module that emits nothing. Knowing where competing systems
+> disappoint — from the manufacturers who integrate them and from the crews who fly them — is
+> what tells us which of those problems to solve first.
 >
 > Defence Builder brings exactly that: direct links to military users, manufacturer partners
 > inside the ecosystem, experience with procurement and certification, and founders who have
@@ -219,7 +252,7 @@ IP assignments. Чинне формулювання: **«Leads map-matching, IMU
 ## Що звірити перед відправкою
 
 1. **Конверсія з MSPO** — скільки з 9 зустрічей мають наступний крок із датою.
-2. **Години на тиждень** від кожного учасника — перед тим, як ставити «Так».
+2. **Одне речення** про те, чому CEO на 20 годинах, — питання прозвучить.
 3. **Демо-відео** — перевірити на назви підрозділів, позивні, впізнавану місцевість. Форма це
    прямо забороняє.
 4. Прибрати з чернетки службовий рядок «Відповідь склав Claude…».
