@@ -5,47 +5,35 @@
 
 ---
 
-## ⚠️ Спершу: три розбіжності між документами
+## Вхідні дані — зафіксовано
 
-Defence Builder, інвестор із DD і Deviro — це перетинне коло людей. Числа мають збігатися.
+| Показник | Чинне значення |
+|---|---|
+| Потреба ринку | **~10 000 од./міс** (20+ інтерв'ю, Лип–Сер 2026) |
+| Виробники усно готові купувати | **600+ од./міс** — усні домовленості, письмових LOI немає |
+| Ціль першого етапу | **600 од./міс** |
+| Раунд для цієї заявки | **$500K pre-seed** |
+| Нічний канал | **у дорожній карті** → Q18 йде за Варіантом А |
+| Метрика точності | CEP ≈ медіанна радіальна похибка, тому **≤5 m CEP** і «15 m median» сумісні |
 
-| Показник | DD-опитувальник інвестора | Чернетка Defence Builder | Що робити |
-|---|---|---|---|
-| Обсяг попиту | **600 од./міс** | **10 000 од./міс** | Різниця в 16 разів. Це, найімовірніше, «наш пайплайн» проти «ринкова потреба». Розвести явно в обох документах |
-| Раунд | **$1M** | **$500K pre-seed** | Або раунд перерозмірили, або це транші. Одна версія скрізь |
-| Метрика точності | **15 m RMSE** | **≤5 m CEP** | Див. нижче — тут насправді все гаразд, крім RMSE |
+⚠️ Одне лишається звірити: в інвесторському DD фігурує **$1M**, тут — **$500K**. Аудиторії
+перетинаються. Або це різні транші й так і сказати, або привести до однієї суми.
 
-**Про метрику — добра новина.** CEP (circular error probable) — це радіус, що містить 50%
-вимірів, тобто фактично **медіанна радіальна похибка**. Отже «15 m median» у деку і «CEP»
-у заявці — **сумісні**. Неузгоджений лише **RMSE** в інвесторських матеріалах. Тобто
-виправляти треба одну цифру в одному місці, а не три документи.
-
----
+⚠️ І в інвесторських матеріалах виправити **RMSE** на медіану — це єдина реальна неузгодженість
+у метриці, і вона в одному місці.
 
 ## Q18. Контекст взаємодії та головні висновки
 
 > ⚠️ З чернетки прибрати службову фразу «Відповідь склав Claude…» — вона не для форми.
 
-### Рішення щодо пункту 3 (нічний режим): **залишаємо, але дописуємо наслідок**
+### Пункт 3 про нічний режим — залишаємо
 
-**Чому залишаємо.** Питання просить *learnings*, а не презентацію. Незручний висновок
-викликає більше довіри за чотири зручні — він доводить, що customer discovery був справжній,
-а не підтверджував те, що ви й так хотіли почути. Вони все одно спитають про нічний режим;
-краще, щоб ви назвали це першими.
+Нічний канал у дорожній карті, тому пункт працює на вас, а не проти: ви знайшли найбільший
+незакритий гап ринку і вже поставили його в план. Але в чернетці пункт 3 **не мав наслідку**,
+тоді як пункти 1, 2 і 4 його мають. Через це він читався як «знайшли і нічого не зробили».
+Нижче наслідок дописаний.
 
-**Чому в поточному вигляді це самоціль у свої ворота.** Пункти 1, 2 і 4 мають наслідок
-(«This set our target…», «so our channel is OEM design-in»). **У пункту 3 наслідку немає.**
-Через це він читається як «ми з'ясували, де справжній ринок, і нічого з цим не зробили».
-Плюс він тихо суперечить пункту про попит: якщо денні рішення вже є за прийнятною ціною,
-то звідки попит на 10 000 одиниць.
-
-**Фікс — одне речення.** Дописати, що з цим зроблено.
-
-⚠️ **Перед відправкою перевірити:** чи нічний канал реально в дорожній карті? У деку вересня
-2026 роадмап — це 600 км/год і робота з камерою борту, **нічний режим там не згадано взагалі**.
-Якщо його в плані немає — беріть Варіант Б.
-
-### Варіант А (рекомендований) — якщо нічний канал у роадмапі
+### Фінальний текст
 
 > In July 2026, through Defence Builder, we met a military end-user expert, and then interviewed
 > 20+ Ukrainian UAV manufacturers and operators (Jul–Aug 2026).
@@ -59,25 +47,12 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 >    opens the first, and that became our accuracy target.
 > 3. Daylight solutions exist at acceptable prices, so daylight alone is not a defensible
 >    position. Night is the unserved gap — existing systems are expensive and do not meet their
->    declared specs. We moved the night channel from a later phase into a funded milestone;
->    closing it is one of the reasons we are applying.
+>    declared specs. The night channel is now in our roadmap, and closing it is one of the
+>    reasons we are applying.
 > 4. Units buy integrated systems from manufacturers, so our channel is OEM design-in rather
 >    than direct sales.
 >
 > Together these findings reshaped both our roadmap and our business model.
-
-### Варіант Б — якщо нічного каналу в плані поки немає
-
-Замінити пункт 3 на:
-
-> 3. Daylight solutions exist at acceptable prices, so daylight alone is not a defensible
->    position. Night is the unserved gap — existing systems are expensive and do not meet their
->    declared specs. We have not committed to a night channel yet: we first need to establish
->    what sensor and what unit cost would make it viable, and that assessment is one of the
->    things we want to do inside the programme.
-
-Це теж чесно і теж сильно — «ми знайшли гап і ще не знаємо, чи можемо його взяти» виглядає
-краще, ніж обіцянка без плану. Чого робити **не можна** — залишити пункт 3 без жодного наслідку.
 
 ### Що ще змінив у чернетці
 
@@ -92,20 +67,16 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 
 ## Business & Traction — до трьох ключових результатів
 
-> ⚠️ Розвести «ринкова потреба» і «наш пайплайн». Зараз 10 000 од./міс подані так, ніби це
-> підтверджений попит на нас. Крім того, **20 інтерв'ю не можуть «підтвердити» 10 000 од./міс** —
-> це екстраполяція. Рецензент, який знає ринок, це помітить і знеціннить усю відповідь.
-
 > **Customer discovery.** 20+ structured interviews with Ukrainian UAV manufacturers and
-> operators (Jul–Aug 2026). The manufacturers we spoke to described a combined requirement in
-> the order of 10,000 GPS-denied navigation units per month across the sector; our own
-> near-term pipeline within that is [ЗАПОВНИТИ: 600] units/month. The interviews also validated
-> a two-tier pricing model and set our ≤5 m CEP accuracy target.
+> operators (Jul–Aug 2026) established a sector-wide requirement in the order of 10,000
+> GPS-denied navigation units per month. Within that, manufacturers have verbally indicated
+> readiness to purchase 600+ units per month; 600 units/month is our first-stage target. The
+> interviews also validated a two-tier pricing model and set our ≤5 m CEP accuracy target.
 >
 > **Industry pipeline.** 9 meetings with European UAV manufacturers and navigation suppliers at
 > MSPO 2026 (September), with technical follow-ups in progress — including an inbound proposal
 > from an IMU/INS supplier to explore integration. [ЗАПОВНИТИ: скільки з 9 мають наступний крок
-> із датою]
+> із датою — одне речення додає цьому пункту вагу]
 >
 > **Flight-test partnership.** Partner test range secured and prototype units in flight testing,
 > measured at 15 m median error under live jamming and spoofing with GPS excluded from the
@@ -113,34 +84,46 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 
 **Що змінив і чому:**
 
-- **«confirmed demand» → «described a combined requirement in the order of»**. Це те саме
-  за змістом, але захищене від питання «як 20 інтерв'ю підтверджують 10 000?».
-- **Прибрав «280+ OEM leads in outreach».** Ліди в аутрічі — не тракшен, це активність.
-  Цей рядок запрошує питання «а скільки відповіли?», на яке немає хорошої відповіді.
-  Якщо є конверсія — назвати її; якщо ні — рядок шкодить, бо розбавляє два сильні пункти.
-- **Додав вимірювану цифру в пункт про польоти.** Це єдиний пункт із трьох, де є результат,
-  а не активність. Він був найсильнішим і найменш розкритим.
-
----
+- **Три рівні попиту розведені явно:** ринок 10 000 → усна готовність 600+ → ціль першого
+  етапу 600. У чернетці була одна цифра 10 000, подана як підтверджений попит — це запрошувало
+  питання «як 20 інтерв'ю підтверджують 10 000 на місяць?».
+- **«verbally indicated» залишено свідомо.** Та сама аудиторія питає про це в DD, і там
+  чесна відповідь — «усно, LOI немає». Заявка має говорити те саме, інакше розбіжність
+  спливе саме тоді, коли перевірятимуть.
+- **Прибрав «280+ OEM leads in outreach».** Ліди в аутрічі — активність, не тракшен. Рядок
+  запрошує питання «скільки відповіли?» і розбавляє два сильні пункти.
+- **Додав виміряну цифру в польотний пункт** — це єдиний із трьох, де є результат, а не процес.
 
 ## Q24. Хто з команди бере участь і які рішення може ухвалювати
 
-> Питання про те, чи є в кімнаті людина, яка може сказати «так» без узгоджень. Відповідь,
-> у якій фігурує «ми порадимось із командою», знижує оцінку.
+> Питання про те, чи є в кімнаті людина, яка може сказати «так» без узгоджень. Відповідь
+> у стилі «ми порадимось із командою» знижує оцінку. Усі троє — співзасновники, тож право
+> вирішувати є; важливо показати, хто саме в програмі і за що відповідає.
 
-> **Ievgen Lavrishko, CEO and co-founder**, will participate throughout the programme and is
-> the decision-maker. He can commit the company without further approval on: product roadmap
-> and milestone priorities, pricing and commercial model, partnerships and OEM agreements,
-> hiring, and fundraising terms.
+> **Ievgen Lavrishko — CEO and co-founder** — participates throughout the programme and is the
+> decision-maker. He can commit the company without further approval on product roadmap and
+> milestone priorities, pricing and commercial model, partnerships and OEM agreements, hiring,
+> and fundraising terms. 20+ years in geospatial; built a national-scale cartography company
+> (2016–2023) before founding GIS-POINT.
 >
-> **[ЗАПОВНИТИ: Andriy Nedvyha, CTO]** will join the technical sessions and the milestone work
-> on integration and flight testing, and owns technical decisions on architecture, autopilot
-> integration and the test programme.
+> **Andriy Nedvyha — CTO and co-founder** — joins the technical sessions and the milestone work
+> on integration and flight testing. Owns technical decisions on architecture, autopilot
+> integration and the test programme. 10+ years in scalable software; leads map-matching, IMU
+> fusion and autopilot integration.
 >
-> [ЗАПОВНИТИ: підтвердити, чи справді CTO бере участь, і скільки годин на тиждень кожен
-> реалістично виділяє. Не обіцяти того, чого не буде — це перевіряється на другому тижні.]
+> **Dr. Oleksandr Prokhorchuk — Chief Scientist and co-founder** — available for sessions on
+> navigation performance and the military use case. PhD, 30+ years in navigation and UAV
+> systems; built and exited a prior UAV company; Chair of the All-Ukrainian AeroGeodetic
+> Association.
+>
+> All three are co-founders, so decisions taken in the programme do not need external approval.
 
----
+[ЗАПОВНИТИ: скільки годин на тиждень реалістично виділяє кожен. Не обіцяти того, чого не буде —
+це перевіряється на другому тижні програми.]
+
+⚠️ **Правка формулювання.** В англійському біо CTO стоїть «Owns the map-matching, IMU fusion and
+autopilot integration **outright**». Поряд із «All IP in-house» це читається як «CTO особисто
+володіє цією IP» — і саме так це прочитає юрист на DD. Скрізь замінити на **«Leads …»**.
 
 ## Why Defence Builder Accelerator
 
@@ -185,7 +168,7 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 > 3. Validate one defined use case with military users and report measured accuracy against the
 >    ≤5 m CEP target, including the conditions under which it was measured.
 > 4. Sign 3–5 LOIs or MoUs with Ukrainian UAV manufacturers.
-> 5. Close the [ЗАПОВНИТИ: $500K / $1M] pre-seed round.
+> 5. Close the $500K pre-seed round.
 
 **Що змінив:**
 
@@ -194,7 +177,8 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 - П.3: **«report measured accuracy against the target»** замість «with measured accuracy against
   the target». Ви зобов'язуєтесь провести вимір і назвати результат — це у вашій владі.
   Зобов'язатись у конкретну цифру — ні.
-- П.5: звірити суму з тим, що пішло інвестору ($1M у DD проти $500K тут).
+- П.5: сума зафіксована — **$500K**. Звірити з інвесторським DD, де фігурує $1M: або різні
+  транші й так і сказати, або привести до однієї суми.
 
 ---
 
@@ -233,9 +217,12 @@ Defence Builder, інвестор із DD і Deviro — це перетинне 
 
 ## Що звірити перед відправкою
 
-1. **Сума раунду** — $500K тут проти $1M в інвесторському DD. Одна версія.
-2. **Обсяг попиту** — 10 000/міс (ринок) проти 600/міс (пайплайн). Розвести явно в обох документах.
-3. **Метрика** — CEP і медіана сумісні; виправити **RMSE** в інвесторських матеріалах.
-4. **Нічний режим** — чи є в роадмапі. Від цього залежить Варіант А чи Б у Q18.
-5. **CTO в програмі** — підтвердити участь і години.
-6. **Конверсія з MSPO** — скільки з 9 зустрічей мають наступний крок із датою.
+1. **$500K тут проти $1M в інвесторському DD** — аудиторії перетинаються. Одна версія або явне
+   пояснення про транші.
+2. **RMSE → медіана** в інвесторських матеріалах. CEP і медіана сумісні, тож правка одна.
+3. **Біо CTO:** «Owns … outright» → «Leads …».
+4. **Конверсія з MSPO** — скільки з 9 зустрічей мають наступний крок із датою.
+5. **Години на тиждень** від кожного учасника — перед тим, як ставити «Так».
+6. **Демо-відео** — перевірити на назви підрозділів, позивні, впізнавану місцевість. Форма це
+   прямо забороняє.
+7. Прибрати з чернетки службовий рядок «Відповідь склав Claude…».
