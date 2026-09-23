@@ -1,6 +1,6 @@
 # FLY BY / GIS-Point Ltd — Response to Due Diligence Questionnaire
 
-**Stage:** pre-seed · **Round:** $1M · **Date:** [FILL: date]
+**Stage:** pre-seed · **Round:** $500K · **Date:** [FILL: date]
 **Prepared by:** Ievgen Lavrishko, CEO, GIS-Point Ltd (Companies House No. 15059660)
 
 > **Working instructions — delete this block before sending.**
@@ -94,15 +94,20 @@ allocated. If FLY BY is the only activity, say so in one sentence. **(A)**
 
 ### 3.1 Accuracy result — test conditions and provenance
 
-**Before answering, reconcile the metric.** Our September 2026 deck states *15 m **median***
-error under jamming and spoofing; this questionnaire refers to a *15 m **RMSE*** result. Same
-number, different statistic. Establish which label is correct and state the transition
-explicitly — "the figure you saw described as RMSE is [X]; the deck figure is the median of
-the same run" — rather than silently substituting one for the other.
+**Correction to the metric label.** Your questionnaire refers to a *15 m **RMSE*** result.
+**The correct statistic is the median: 15 m median horizontal error.** CEP, which appears in
+our other material, is the radius containing 50% of fixes and is therefore equivalent to the
+median radial error — so "median" and "≤5 m CEP" are consistent with each other, and "RMSE"
+is the label that was wrong. State the correction plainly here rather than letting the two
+figures sit side by side in your file.
+
+[FILL: confirm with the CTO that the underlying run was computed as a median and not as an
+RMSE before sending this. If it was in fact an RMSE, the correction runs the other way and the
+deck needs fixing instead.]
 
 - Metric and figure: **15 m median horizontal error under jamming and spoofing**, best fix 3 m,
-  target 5 m on a map base under 12 months old. [FILL: add the RMSE for the same run if it
-  exists, so both statistics are on the table]. **(A)**
+  target 5 m on a map base under 12 months old. [FILL: if an RMSE for the same run exists, give
+  it too so both statistics are on the table]. **(A)**
 - Operating envelope in which this was achieved: **110–1500 m AGL, up to 110 m/s (≈400 km/h)**;
   below 150 m AGL the solution runs on visual odometry. **(A)**
 - Number of flights: [FILL]. Total distance: [FILL] km. Total duration: [FILL]. **(A)**
@@ -315,9 +320,9 @@ which changes the applicable route]. **(A/C)**
 | M4 | [FILL] | [FILL] | [FILL] |
 
 - Monthly burn: [FILL]. Runway after M4: [FILL] months. **(A)**
-- If the round slips or only part of $1M is raised: [FILL: state the minimum viable amount, which
-  milestones survive at that amount, and what is cut. Investors read the absence of this answer
-  as the absence of the plan]. **(A)**
+- If the round slips or only part of the $500K is raised: [FILL: state the minimum viable amount,
+  which milestones survive at that amount, and what is cut. Investors read the absence of this
+  answer as the absence of the plan]. **(A)**
 
 **6.3 DIANA, DASA, EU4UA**
 
@@ -348,6 +353,11 @@ which changes the applicable route]. **(A/C)**
 ---
 
 ## 8. Financing
+
+> **Correction to the premise of this question.** Your questionnaire refers to a $1M round.
+> **The round is $500K pre-seed.** [FILL: one sentence on why — e.g. the round was resized to
+> the milestones in 6.2, or $500K is the first tranche of a larger raise. Say which; a number
+> that moves without explanation is read as a number that will move again.]
 
 - Committed so far: [FILL: amount and from whom, or "no commitments to date"]. **(A)**
 - Founder contribution: [FILL: cash and/or documented sweat equity]. **(A)**

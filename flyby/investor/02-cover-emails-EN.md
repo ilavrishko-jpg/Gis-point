@@ -26,10 +26,11 @@ away. Silence after a DD list reads as "they have nothing to answer with".
 > Two things I will flag now rather than let you find them:
 >
 > 1. Our public one-pager and the figures your questionnaire quotes are not stated on the same
->    basis — [FILL: briefly, e.g. "median vs RMSE for accuracy, and a per-frame latency figure
->    that reflects a different configuration"]. We are reconciling both to a single set of
->    numbers with their measurement conditions, and the corrected one-pager will come with the
->    response.
+>    basis: the accuracy figure you have as an RMSE is a **median**, and the per-frame latency
+>    you have (716 ms) has been superseded by 100–200 ms in our September 2026 build. Both are
+>    corrected in the response, with measurement conditions attached.
+> 3. The round is **$500K pre-seed**, not the $1M your questionnaire refers to.
+>    [FILL: one line on why — resized to milestones, or first tranche.]
 > 2. On the [FILL: 51.95 m / 564 km] benchmark comparison — [FILL: our test is not directly
 >    comparable and we will say so explicitly in the response].
 >
