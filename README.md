@@ -7,4 +7,4 @@
 ## 🛩️ Flyby — пакет для виходу на розробника БпЛА
 Матеріали для першого контакту, технічної зустрічі (ТТХ-матриця) і follow-up.
 Канонічні ТТХ: [`flyby/00-FACTS.md`](./flyby/00-FACTS.md) — єдине джерело цифр.
-Матеріали: [`flyby/sales/`](./flyby/sales/) · [`flyby/investor/`](./flyby/investor/).
+Матеріали: [`flyby/sales/`](./flyby/sales/) · [`flyby/investor/`](./flyby/investor/) · [`flyby/accelerator/`](./flyby/accelerator/).
