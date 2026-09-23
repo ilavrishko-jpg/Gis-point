@@ -94,12 +94,17 @@ allocated. If FLY BY is the only activity, say so in one sentence. **(A)**
 
 ### 3.1 Accuracy result — test conditions and provenance
 
-**Before answering, reconcile the metric.** Our public one-pager states *17 m median error* at
-~200 m AGL; this questionnaire refers to a *15 m RMSE* result. Median and RMSE are different
-statistics and these are different numbers. State which figure comes from which run, under
-which metric, or present a single figure consistently. Do not blend them.
+**Before answering, reconcile the metric.** Our September 2026 deck states *15 m **median***
+error under jamming and spoofing; this questionnaire refers to a *15 m **RMSE*** result. Same
+number, different statistic. Establish which label is correct and state the transition
+explicitly — "the figure you saw described as RMSE is [X]; the deck figure is the median of
+the same run" — rather than silently substituting one for the other.
 
-- Metric and figure: [FILL: e.g. "median X m / RMSE Y m", stated separately]. **(A)**
+- Metric and figure: **15 m median horizontal error under jamming and spoofing**, best fix 3 m,
+  target 5 m on a map base under 12 months old. [FILL: add the RMSE for the same run if it
+  exists, so both statistics are on the table]. **(A)**
+- Operating envelope in which this was achieved: **110–1500 m AGL, up to 110 m/s (≈400 km/h)**;
+  below 150 m AGL the solution runs on visual odometry. **(A)**
 - Number of flights: [FILL]. Total distance: [FILL] km. Total duration: [FILL]. **(A)**
 - Airframe(s): [FILL: type, MTOW, fixed-wing/multirotor]. **(A)**
 - Terrain types covered: [FILL]. Altitudes: [FILL] m AGL. Seasons: [FILL]. **(A)**
@@ -107,8 +112,10 @@ which metric, or present a single figure consistently. Do not blend them.
   **(A)**
 - Who ran the tests: [FILL]. Who witnessed them: [FILL — if no independent witness, say
   "internal team only, no independent witness"]. **(A)**
-- EW conditions: [FILL — **answer the actual question**: real front-line EW / test-range
-  emitter / GNSS denied by configuration rather than by jamming / no EW present]. **(A)**
+- EW conditions: measured in flight in Ukraine under live jamming and spoofing, with GPS
+  excluded from the solution. [FILL — **then answer the precise question they asked**: was this
+  front-line EW or a test-range emitter? Whose emitter? "Live jamming" and "front-line EW" are
+  not the same claim and they will press on the difference]. **(A)**
 
 > If there was no independent witness, say so and propose the remedy: an independently witnessed
 > test is in scope for this round at milestone [FILL: M#], with [FILL: proposed witness].
@@ -166,8 +173,11 @@ which metric, or present a single figure consistently. Do not blend them.
   output) or **throughput** (one frame processed every N ms). These are different and the
   distinction matters for the autopilot. **(A)**
 
-  > Our public one-pager states 300 ms; this questionnaire refers to 716 ms current and 200 ms
-  > target. Reconcile before sending, and correct the one-pager.
+  > You were previously given 716 ms current / 200 ms target. Our September 2026 deck states
+  > **100–200 ms** as achieved. If that is genuine progress, present it as news with a date and
+  > an explanation of what produced it. If the 716 ms figure applied to a different configuration
+  > or different hardware, say exactly that. Unexplained, it reads as figures that move
+  > depending on the audience.
 
 - Path from [FILL] ms to 200 ms: [FILL: the specific levers — algorithmic changes, resolution or
   search-window reduction, hardware acceleration, change of compute platform — with expected
