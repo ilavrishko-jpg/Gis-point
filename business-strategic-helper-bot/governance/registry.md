@@ -13,6 +13,8 @@
 | priorities-quarterly-theme | Виконання | active | Топ-5 + №1, тема кварталу |
 | kpi-scorecard | Виконання | active | KPI / «розумні числа» |
 | cash-acceleration | Гроші | active | CCC, «Сила одного» |
+| senior-cfo-market-sizing | Гроші + Стратегія | proposed | CFO: обсяг ринку TAM/SAM/SOM по країнах і галузях, шлях до цільової виручки, вартість юнітів; база знань GIS-Point |
+| gtm-hypothesis-prioritization | Стратегія + Гроші | proposed | Формування, скоринг і портфель GTM-гіпотез, підбір/збирання оферу |
 | skill-author | Мета | active | Бот пише собі навички |
 | agent-architect | Мета | active | Бот вирішує про нових агентів |
 
