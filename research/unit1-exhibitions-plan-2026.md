@@ -82,3 +82,17 @@ RPUG 2027 (весна), TopoDOT UC (тра, Orlando), Leica Reality Capture UC (
 
 ### Верифікувати вручну
 Дати Terrasolid NA UC (verticalaspect.com), GISAA (gisaa.org), дні ROW-треку TxDOT (txdot.gov).
+
+## Портрет виставок Unit 1 (зафіксовано, ревізія 02.10.2026)
+
+**Tier 1 (must-go):** (а) великі geospatial/surveying-виставки (INTERGEO-тип); (б) галузеві виставки власників інфраструктури з geo-потребою — rail/utilities/energy (InnoTrans-тип). Критерії: ядро аудиторії = ICP, покупці на полі, пул для 30+ розмов, expo-floor, 1:1-механіка.
+
+**Tier 2 (якщо лягає в маршрут):**
+- Національні geo-асоціаційні дні (AGI GeoCom, GeoBuzz, Kortdage)
+- Scan-to-BIM / digital construction (BIM World)
+- Дрон-виставки цивільного профілю (DroneX)
+- EO/space downstream (Space Tech Expo)
+- **Галузеві data-user групи (ERPUG-тип)** — нішеві юзер-групи навколо одного класу asset-даних: road profile (ERPUG/RPUG), pipeline (PODS), rail asset mgmt (IAM4RAIL), utility GIS (екс-GeoConX→IMGIS). 50–300 людей, single-track, data providers + asset owners в одній залі; низький обсяг компенсується чистотою ICP і 1:1
+- **Вендорські user conferences** (Trimble Dimensions, Terrasolid UC, Esri національні/галузеві, TopoDOT, Leica RC, FME) — аудиторія = фірми з нашим стеком; більшість сидить у лют–чер
+
+**Анти-портрет:** академічні, policy-форуми, чисте «залізо» без data-секцій, defence (це FLY BY), конференції без floor і matchmaking.
