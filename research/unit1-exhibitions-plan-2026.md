@@ -96,3 +96,33 @@ RPUG 2027 (весна), TopoDOT UC (тра, Orlando), Leica Reality Capture UC (
 - **Вендорські user conferences** (Trimble Dimensions, Terrasolid UC, Esri національні/галузеві, TopoDOT, Leica RC, FME) — аудиторія = фірми з нашим стеком; більшість сидить у лют–чер
 
 **Анти-портрет:** академічні, policy-форуми, чисте «залізо» без data-секцій, defence (це FLY BY), конференції без floor і matchmaking.
+
+## Ревізія 3 (06.10.2026) — GeoFlo-тип + defence/БпЛА/інвест трек
+
+### Додано — US geo
+| Подія | Дата | Місто | Примітка |
+|---|---|---|---|
+| GeoFlo Summit | 12.11 | Largo FL (UF/IFAS Extension, Tampa Bay) | Безкоштовно, реєстрація до 06.11; Tampa Bay geo-спільнота + survey-фірми (Altitude, GPI, HBK, George F. Young, CFB). Тип зафіксовано в портреті: регіональні geo-саміти |
+
+### Додано — defence/БпЛА/інвестиції (FLY BY)
+| Подія | Дата | Місто | Фокус |
+|---|---|---|---|
+| Slush 2026 💰 | 18–19.11 | Helsinki | ~13k, defence/dual-use вертикаль; pitch «Defence Ecosystem of Innovators» 18.11 (FiBAN+EUDIS) |
+| EDTH — European Defense Tech Hackathon 💰 | 13–15.11 | Amsterdam | скаутинг фондів Lakestar/Expeditions-типу |
+| EDIF — European Defence Innovation Forum 💰 | 11–12.11 (вторин.) | The Hague | стартапи+інвестори+MoD, EUDIS |
+| I/ITSEC | 30.11–04.12 | Orlando FL | ~17k, 500+ експ.; DoD+прайми, UAS/simulation |
+| Modern Warfare Week (GSOF) | 16–19.11 | Fort Bragg NC | SOF + small-UAS procurement |
+| NATO Edge (NCIA) | 17–19.11 | Izmir TR | 200+ експ., C4ISR, NATO-закупівлі |
+| Berlin Security Conference | 03–04.11 | Berlin | ~2 000, policy+procurement |
+| Regional Defence & Security Summit 💰 | 21.10 (вторин.) | Sofia BG | CEE інвест-партнерства |
+| AUVSI Defense | 09–10.11 (вторин.) | Washington DC | UAS × DoD |
+| Counter UAS Technology USA | 30.11–02.12 | Arlington VA | C-UAS програм-менеджери |
+| (підтверджені раніше) Future Forces 21–23.10 Prague · GDA 20–22.10 Warsaw · Uncrewed & Autonomous 02–03.12 London · Stockholm drone-кластер 03–04.12 | | | |
+
+### Ключові маршрути ревізії 3
+- **Інвест-тур FLY BY 11–19.11:** EDIF Hague → EDTH Amsterdam → Slush Helsinki (defence-pitch 18.11). NIF/DIANA-доступ — через Slush/EDIF.
+- **US-тур №2 розширено:** Dimensions Vegas 9–11.11 → red-eye → GeoFlo Largo FL 12.11 (або GeoFlo — другій людині разом з AUVSI Defense DC 9–10.11).
+- **Defence-US:** I/ITSEC Orlando 30.11–04.12 (або Counter UAS Arlington — одне з двох).
+
+### Промахи (в календар 2027)
+Resilience Conference London (05–06.10 — головна defence-інвест подія Європи), AUSA DC (12–14.10), Defense TechConnect (вер), European Rotors (переїхав у Lyon FR), Amsterdam Drone Week (був у березні; наступний цикл 2027/28).
