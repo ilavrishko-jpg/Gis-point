@@ -126,3 +126,35 @@ RPUG 2027 (весна), TopoDOT UC (тра, Orlando), Leica Reality Capture UC (
 
 ### Промахи (в календар 2027)
 Resilience Conference London (05–06.10 — головна defence-інвест подія Європи), AUSA DC (12–14.10), Defense TechConnect (вер), European Rotors (переїхав у Lyon FR), Amsterdam Drone Week (був у березні; наступний цикл 2027/28).
+
+## Ревізія 4 (08.10.2026) — вікно 05.11–10.12, схід США + FLY BY захід
+
+### Geo/GIS/LiDAR/surveying · схід (нові)
+| Подія | Дата | Місто | Бал | Статус |
+|---|---|---|---|---|
+| Delaware Assoc. of Surveyors Annual Conf | 11–12.11 | Rehoboth Beach, DE | 3.2 | підтв. (delsurvey.com верифікувати) |
+| ElevateUAV Summit (Drone Nerds) | 17–18.11 | Hallandale Beach (Miami), FL | 3.0 | підтв. |
+| Geography 2050 (AGS) | 19–20.11 | New York, NY | 2.5 | підтв. |
+| UF/FL-ASPRS Fall Geospatial Workshop | ~поч. лис (оч.) | Apopka, FL | 3.6* | ⚠ моніторити asprs.org (FALL2026) |
+| Esri Mid-Atlantic UC | ~гру (існування під питанням) | Philadelphia, PA | — | ⚠ можливо discontinued; перевірити esri.com |
+
+### FLY BY ONS · схід (нові до наявних MWW/CUAS/I-ITSEC/GEOGala/AUVSI)
+| Подія | Дата | Місто | Фокус | Бал |
+|---|---|---|---|---|
+| MassChallenge Dual-Use Symposium | 05.11 | Boston, MA | DoD PM + прайми + DIANA-екосистема; counter-UAS у фокус-темах | 4.0 |
+| Baird Defense & Government Conf (9-та) | 17.11 (вторин.) | Washington, DC | ~2 000; капітал/M&A/прайми; INVITE через Baird | 3.8 |
+| Defense Tech DC #021 | 24.11 | Washington, DC | фаундери+VC-мітап, безкошт. (#022 — 15.12) | 3.3 |
+| SFA Spacepower Conference | 08–10.12 | Orlando, FL | USSF + індустрія, відкрита реєстрація | 3.4 |
+| DSI SOF & Irregular Warfare Symposium | 09–10.12 | Tampa, FL | SOF = ранній адоптер GPS-denied nav; + тур SOFWERX | 3.6 |
+| DoD Applied Innovation Workshop | 30.11–04.12 | Washington, DC | DoD-дослідницький; лише друга людина | 2.5 |
+
+Дії-дедлайни: xTech|Search 10 — заявка до 19.10 (xtech.army.mil, фінали бер-2027 Маямі); MassChallenge — реєструватися зараз; SOFWERX OSB Networking (05.11 Tampa) — заявки закрились 08.10.
+
+### FLY BY ONS · захід
+| Подія | Дата | Місто | Фокус | Бал |
+|---|---|---|---|---|
+| Stanford PNT Symposium (20-й) | 12–13.11 | SLAC / Menlo Park, CA | ⭐⭐ ВСЯ assured-PNT спільнота (AF/SF PNT-програми, FAA/DOT, alt-PNT вендори); відкрита реєстрація, ~200–300 | 4.5 |
+| Reagan National Defense Forum + сателіти | 04–05.12 | Simi Valley / LA, CA | ⭐⭐ SecDef-рівень + Anduril/Palantir + a16z/FF-кола; сам форум invite-only → віртуальна реєстрація або сателітні події LA того тижня | 4.3 |
+| (моніторинг) El Segundo/SF defense-tech Luma-мітапи | анонс за 2–6 тиж | LA/SF | фонди Gundo-сцени | — |
+
+Негативи заходу: a16z AD Summit — лише DC/Q1; FF/8VC/Shield публічних самітів нема (вони на RNDF); DIU/AFWERX — без публічних подій у вікні (шлях = CSO-соліситейшн); дрон-експо всі у вересні. ION ITM/PTTI (гол. alt-PNT конф.) — 25–28.01.2027, Anaheim.
