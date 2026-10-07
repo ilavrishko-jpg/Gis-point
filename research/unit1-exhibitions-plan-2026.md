@@ -158,3 +158,21 @@ Resilience Conference London (05–06.10 — головна defence-інвест
 | (моніторинг) El Segundo/SF defense-tech Luma-мітапи | анонс за 2–6 тиж | LA/SF | фонди Gundo-сцени | — |
 
 Негативи заходу: a16z AD Summit — лише DC/Q1; FF/8VC/Shield публічних самітів нема (вони на RNDF); DIU/AFWERX — без публічних подій у вікні (шлях = CSO-соліситейшн); дрон-експо всі у вересні. ION ITM/PTTI (гол. alt-PNT конф.) — 25–28.01.2027, Anaheim.
+
+## Ревізія 5 (08.10.2026) — EU-трек FLY BY · 23.10–05.11
+
+| Подія | Дата | Місто | Фокус | Access | Бал |
+|---|---|---|---|---|---|
+| German-Baltic Defence Industry Conf (BDC) ⭐ якір | 29.10 | Vilnius, LT | Drone warfare & autonomous systems; нім.+балт. MoD/індустрія; B2B-matchmaking (b2match, рег. до 28.10) | відкрито, квиток | 4.3 |
+| Euronaval (30-та, біенале) | 03–06.11 | Paris, FR | ~26 000 / 480 експ.; прайми (Thales, Naval Group, Saab); unmanned/USV-UAV контент | trade-рег. | 3.9 |
+| Defence in Space Conf (DiSC) | 27–28.10 | London, UK | MilSatCom/space ISR + PNT-аудиторія (RIN); БЕЗКОШТОВНО | відкрито | 3.4 |
+| Berlin Security Conference (25-та) | 03–04.11 | Berlin, DE | ~2 000; policy+procurement (конфлікт з Euronaval) | відкрито | 3.3 |
+| International Fighter Conf | 03–05.11 ⚠верифік. | München, DE | air-OEM/ВПС лідершип, UAS-teaming | платно | 3.2 |
+| Global MilSatCom | 02–05.11 | London, UK | MoD space/satcom + NATO; resilient-PNT наратив | платно | 3.0 |
+| IAMD Technology (10-та) | 02–04.11 ⚠оц. | London, UK | air defence/counter-UAS суміжність | платно | 2.9 |
+
+Перед вікном (зчіпка): Engaged Investments Prague 21–22.10 — defence/dual-use інвест-трек з EUDIS+Cassini matchmaking, ~80 пітчів; поєднується з Future Forces (21–23.10). Після вікна: EDIF The Hague 11–12.11 — найкращий інвест-фіт сезону, радимо розширення.
+
+Хребет треку: [Prague 21–23.10: Engaged Investments + Future Forces] → London 27–28.10 (DiSC, безкошт.) → Vilnius 29.10 (BDC + B2B) → 03–06.11 Paris (Euronaval) АБО Berlin (BSC) → [ext. 11–12.11 Hague EDIF].
+
+Негативи вікна: DPRTE 2026 був у березні; DWT Unbemannte Systeme — вересень; NATO-Industry Forum 2026 → липень Анкара; EDA Annual — січень; DIANA Demo Days — всі пройшли; Amsterdam Drone Week — березень; Балтія поза BDC — порожньо (EDW/DIANA Tallinn — вересень, EUDIS-хакатон Рига 15–17.10).
