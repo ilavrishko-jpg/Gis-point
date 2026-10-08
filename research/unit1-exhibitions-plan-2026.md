@@ -225,3 +225,40 @@ ASPRS Potomac annual dinner (~поч.-сер. грудня, McLean VA) · Defenc
 
 ### Якорі січня 2027
 SpaceCom Orlando ~12–14.01 · ION PTTI 25–28.01 Anaheim (гол. alt-PNT) · EDA Annual Conference 28.01 Brussels · DIANA cohort-2027 kickoff · MAPPS Winter (TBD) · Geo Week 16–18.02 Denver
+
+## Ревізія 8 (08.10.2026) — календар «кімнат» LiDAR/survey/mobile-mapping/aerial компаній
+
+### ⚠ Корекція
+Geo Week 2027 — НЕ Denver: переїхав у Salt Lake City, 23–25.02.2027 (Salt Palace). У 2026 було 238 експонентів з 25 країн — головна US-подія класу. RIEGL User Group Meeting — всередині Geo Week.
+
+### Решта 2026
+| Подія | Дата | Місто | Чому |
+|---|---|---|---|
+| ⭐ EAASI Partners Summit | 17–20.11 | Alicante, ES | Європейська асоціація aerial-survey індустрії: ~100–110 власників/екзеків аерознімальних фірм з 24+ країн — найщільніша кімната класу в Європі (спонсори RIEGL, Teledyne Optech, Diamond Aircraft). ⚠ Іспанія — раніше виключена для Unit 1-туру; вирішити окремо |
+
+Негативи: ELMF не існує (злитий у Geo Week назавжди); DJI AirWorks dormant; Pecora не планується; європейської mobile-mapping конференції в Q4 нема (MMT — біенале, 2025 Сямень).
+
+### Січень–березень 2027
+| Подія | Дата | Місто | Чому |
+|---|---|---|---|
+| TRB Annual Meeting | 10–14.01 | Washington DC | ~13 000; mobile-mapping/pavement-data фірми (ERPUG-клас) + DOT-замовники |
+| MAPPS Winter Conference | ~сер.-кін. січ (TBD) | resort, US | власники приватних geo-фірм США; моніторити mapps.org |
+| ⭐ Geo Week + ASPRS | 23–25.02 | Salt Lake City, UT | головна подія класу; RIEGL UGM всередині |
+| DGI 2027 | 23–25.02 | London | defence-geospatial (конфлікт з Geo Week) |
+| MAPPS Federal Programs | ~бер (TBD) | Washington DC | федеральні контракти |
+| Vexcel User Group | ~бер (оц.) | TBA | аерокамерні оператори |
+
+### Квітень–червень 2027
+| Подія | Дата | Місто | Чому |
+|---|---|---|---|
+| ⭐ 60th Photogrammetric Week (PhoWo) | 06–09.04 | Stuttgart, DE | історичний збір фотограметрії/aerial-survey, біенале, вендор-виставка |
+| Geospatial World Forum | ~20–22.04 (оц.) | Amsterdam | 1 500+ senior geo-екзеків |
+| YellowScan LiDAR Convention | ~кві (оц.) | France | дрон-LiDAR оператори |
+| FIG Working Week | 23–27.05 | Stavanger, NO | світова федерація surveyors, 1 000–1 500 |
+| TopoDOT UC 2027 | ~сер. трав (оц.) | Orlando, FL | mobile-mapping extraction: DOT + сервісні фірми, що аутсорсять |
+| GEO Business | 23–24.06 (оц.) | London | найбільше UK survey-шоу (6 200+, 100+ експ.) |
+
+### Якорі H2 2027
+Commercial UAV Expo Americas 07–09.09 Vegas · ISPRS Geospatial Week 19–24.09 Warsaw · INTERGEO 12–14.10 Frankfurt (2028 — München).
+
+Негативи-2027: HxGN LIVE dormant; Commercial UAV Expo Europe 2027 скоріше не буде (наст. 2028); FARO/Phase One/Wingtra/Quantum — без standalone UC, лише роадшоу/стенди.
