@@ -186,3 +186,23 @@ Resilience Conference London (05–06.10 — головна defence-інвест
 EU-трек розширено до 20.11. Оновлений хребет:
 [Prague 21–23.10: Engaged Investments + Future Forces] → London 27–28.10 (DiSC) → Vilnius 29.10 (BDC, якір) → 03–06.11 Paris Euronaval АБО Berlin BSC → 11–12.11 The Hague (EDIF, інвестори) → 13–15.11 Amsterdam (EDTH, опц.) → 20.11 London (UK-UA Defence Tech Forum) → [18–19.11 Slush Helsinki конфліктує з вікном 16–19.11 — ділити людей: Slush 18–19.11 ↔ підготовка Лондона].
 Примітка: UK-UA Forum (20.11) і Slush (18–19.11 Helsinki) сумісні одним маршрутом: Helsinki 18–19 → вечірній переліт → London 20.11.
+
+## Ревізія 6 (08.10.2026) — центр+схід США, 15–30.11
+
+Висновок: конференційний сезон центру США = вер–жов; у вікні 15–30.11 лише GIS Day-формати.
+
+### Нове у вікні
+| Подія | Дата | Місто | Лід-щільність | Статус |
+|---|---|---|---|---|
+| Texas A&M GIS Day («найбільший GIS Day штату», career fair + industry panel) | ~16–20.11 | College Station, TX | 10–25 комерц. фірм | ⚠ оцінка; gisday.tamu.edu |
+| Indiana GIS Day (statewide, Indiana GIO) | 18.11 | Indianapolis, IN | 10–20 фірм-експонентів | дата підтв., агенда TBD |
+| UT Austin GIS Day (стикується з ATX GIS Day) | 18.11 | Austin, TX | низька | підтв. |
+| KU / OU / UW-Milwaukee GIS Days | ~18–19.11 | Lawrence KS / Norman OK / Milwaukee WI | низька-середня | ⚠ оцінки |
+
+### Корекції
+- **Terrasolid NA UC «Memphis, листопад» — НЕ підтверджується:** жодного анонсу TerraCon 2026; минулі едиції — Kansas City, трав–чер (BAAM.Tech). Єдина Terrasolid-подія 2026 — тренінг у Відні 2–4.11. Прибрано з плану; моніторити baamtech.regfox.com / terrasolid.com.
+- International WorkBoat Show: 2–4.12 (не 3–5), New Orleans — гідрографічна суміжність.
+- Дистриб'юторські події (Seiler/Frontier Precision) анонсуються за 4–6 тижнів — перевірити календарі наприкінці жовтня.
+
+### Підсумкове ранжування «де найбільше лідів» 15–30.11 (центр+схід)
+1. SHRUG Tallahassee 18–19.11 (3.3) · 2. ElevateUAV Miami 17–18.11 (3.0) · 3. GISAA Gulf Shores ~16–19.11 (3.1, ⚠) · 4. Fall NEARC Portland ME 15–18.11 (3.1) · 5. TAMU GIS Day ~16–20.11 (⚠) · 6. Indiana GIS Day 18.11 · далі — дрібні GIS Days. Дужки вікна: Dimensions 9–11.11 (5.0) і I/ITSEC 30.11+ (3.8) лишаються найщільнішими.
