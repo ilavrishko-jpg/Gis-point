@@ -206,3 +206,22 @@ EU-трек розширено до 20.11. Оновлений хребет:
 
 ### Підсумкове ранжування «де найбільше лідів» 15–30.11 (центр+схід)
 1. SHRUG Tallahassee 18–19.11 (3.3) · 2. ElevateUAV Miami 17–18.11 (3.0) · 3. GISAA Gulf Shores ~16–19.11 (3.1, ⚠) · 4. Fall NEARC Portland ME 15–18.11 (3.1) · 5. TAMU GIS Day ~16–20.11 (⚠) · 6. Indiana GIS Day 18.11 · далі — дрібні GIS Days. Дужки вікна: Dimensions 9–11.11 (5.0) і I/ITSEC 30.11+ (3.8) лишаються найщільнішими.
+
+## Ревізія 7 (08.10.2026) — хвіст 01–15.12 (обидва ICP)
+
+### Нові
+| Подія | Дата | Місто | ICP | Примітка |
+|---|---|---|---|---|
+| AGU Annual Meeting 2026 | 07–11.12 | San Francisco, CA | geo/EO | ~25 000; цього року на тиждень раніше звичного → у вікні; великий вендор-флор (EO/LiDAR), але аудиторія академічна — для партнерств з вендорами, не для прямих survey-лідів |
+| AUSA LANDEURO | 03–04.12 | Wiesbaden, DE | FLY BY | US Army Europe & Africa HQ + союзні land forces + єврооборонка (~100 експ. у 2025); сильна C-UAS/GPS-denied релевантність. ⚠ Лоб-у-лоб з GEOGala (03.12) і Stockholm-кластером (03–04.12) |
+| GPN GIS Leadership Academy | 07–11.12 | Nashville, TN | geo | десятки GIS-керівників, тренінг-формат; нішевий нетворк |
+
+### Зняті з плану (верифіковано)
+- Esri Mid-Atlantic UC 2026 — едиції 2026 не існує (сторінка Esri досі з контентом 2023; останній слід — 2024)
+- DJI AirWorks — у США dormant з 2022
+
+### Watchlist (анонси за 2–6 тижнів)
+ASPRS Potomac annual dinner (~поч.-сер. грудня, McLean VA) · Defence Transformation London (оч. ~02–04.12, co-located з Uncrewed & Autonomous) · lu.ma year-end defence-tech NYC/SF (рескан ~15.11) · DIU Blue UAS Refresh (цикл стартує у грудні — релевантно для позиціонування ONS у Blue List)
+
+### Якорі січня 2027
+SpaceCom Orlando ~12–14.01 · ION PTTI 25–28.01 Anaheim (гол. alt-PNT) · EDA Annual Conference 28.01 Brussels · DIANA cohort-2027 kickoff · MAPPS Winter (TBD) · Geo Week 16–18.02 Denver
