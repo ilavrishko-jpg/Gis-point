@@ -176,3 +176,13 @@ Resilience Conference London (05–06.10 — головна defence-інвест
 Хребет треку: [Prague 21–23.10: Engaged Investments + Future Forces] → London 27–28.10 (DiSC, безкошт.) → Vilnius 29.10 (BDC + B2B) → 03–06.11 Paris (Euronaval) АБО Berlin (BSC) → [ext. 11–12.11 Hague EDIF].
 
 Негативи вікна: DPRTE 2026 був у березні; DWT Unbemannte Systeme — вересень; NATO-Industry Forum 2026 → липень Анкара; EDA Annual — січень; DIANA Demo Days — всі пройшли; Amsterdam Drone Week — березень; Балтія поза BDC — порожньо (EDW/DIANA Tallinn — вересень, EUDIS-хакатон Рига 15–17.10).
+
+### Доповнення EU-треку (08.10.2026): UK-UA Defence Tech Forum
+
+| Подія | Дата | Місто | Фокус | Access | Бал |
+|---|---|---|---|---|---|
+| ⭐ 6th UK-UA Defence Tech Forum «Innovation and iteration: delivering technology to the end-user at scale and speed» | 20.11 | London (RUSI) | UK-Ukraine 100-Year Partnership × UK Defence Industrial Strategy; UK MoD/прайми/інвестори, орієнтовані саме на укр. defence-tech; офіційна підтримка Посольства України | реєстрація (RUSI) | 4.4 |
+
+EU-трек розширено до 20.11. Оновлений хребет:
+[Prague 21–23.10: Engaged Investments + Future Forces] → London 27–28.10 (DiSC) → Vilnius 29.10 (BDC, якір) → 03–06.11 Paris Euronaval АБО Berlin BSC → 11–12.11 The Hague (EDIF, інвестори) → 13–15.11 Amsterdam (EDTH, опц.) → 20.11 London (UK-UA Defence Tech Forum) → [18–19.11 Slush Helsinki конфліктує з вікном 16–19.11 — ділити людей: Slush 18–19.11 ↔ підготовка Лондона].
+Примітка: UK-UA Forum (20.11) і Slush (18–19.11 Helsinki) сумісні одним маршрутом: Helsinki 18–19 → вечірній переліт → London 20.11.
