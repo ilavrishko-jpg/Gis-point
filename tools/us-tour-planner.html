@@ -1,0 +1,267 @@
+<title>Осінній US-тур · планер</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F2F3EE; --ink:#1B2420; --ink-soft:#4C5A53; --muted:#78857D;
+  --line:#D9DDD3; --surface:#FBFCF8; --surface-2:#E9ECE3;
+  --green:#2E6B4F; --green-soft:#DCE9DF;
+  --copper:#B4552B; --copper-soft:#F3E0D4;
+  --warn:#9A6A00; --warn-soft:#F4E9CC;
+  --shadow:0 1px 2px rgba(27,36,32,.05),0 5px 14px rgba(27,36,32,.05);
+  --display:"Archivo",-apple-system,"Segoe UI",sans-serif;
+  --body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#131A16; --ink:#E9EDE8; --ink-soft:#A9B5AD; --muted:#7E8B83;
+  --line:#2A342E; --surface:#1A231E; --surface-2:#212C25;
+  --green:#6DB893; --green-soft:#1E332A;
+  --copper:#E08553; --copper-soft:#3A2418;
+  --warn:#D9AE45; --warn-soft:#33290F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.3);}}
+:root[data-theme="dark"]{
+  --paper:#131A16; --ink:#E9EDE8; --ink-soft:#A9B5AD; --muted:#7E8B83;
+  --line:#2A342E; --surface:#1A231E; --surface-2:#212C25;
+  --green:#6DB893; --green-soft:#1E332A;
+  --copper:#E08553; --copper-soft:#3A2418;
+  --warn:#D9AE45; --warn-soft:#33290F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+header{padding:26px 0 16px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin:0 0 8px;font-weight:500}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(22px,4.5vw,30px);margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--ink-soft);margin:0;font-size:13.5px;max-width:72ch}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 4px}
+.preset{font-family:var(--mono);font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 13px;border-radius:999px;cursor:pointer}
+.preset:hover{border-color:var(--green)}
+.preset:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:16px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
+.kpi .l{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-weight:700;font-size:21px;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.gantt{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow-x:auto;margin-top:8px}
+.ghead,.grow{display:grid;grid-template-columns:230px repeat(27,minmax(22px,1fr));min-width:880px}
+.ghead{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:2}
+.ghead .cell{font-family:var(--mono);font-size:9.5px;color:var(--muted);text-align:center;padding:7px 0 5px;border-left:1px solid transparent}
+.ghead .cell.mon{color:var(--ink-soft);font-weight:500}
+.ghead .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 12px;text-align:left}
+.grow{border-bottom:1px solid var(--line);position:relative}
+.grow:last-child{border-bottom:none}
+.grow .name{display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:13.5px}
+.grow .name input{width:16px;height:16px;accent-color:var(--green);cursor:pointer;flex:none}
+.grow .name .t{line-height:1.2}
+.grow .name .c{display:block;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.grow .day{border-left:1px dashed color-mix(in srgb,var(--line) 55%,transparent)}
+.grow .day.wknd{background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+.grow .day.tg{background:var(--warn-soft)}
+.bar{position:absolute;top:50%;transform:translateY(-50%);height:16px;border-radius:4px;background:var(--green);opacity:.92;cursor:pointer}
+.bar.off{background:transparent;border:1.5px dashed var(--muted);opacity:.6}
+.bar.cf{background:repeating-linear-gradient(45deg,var(--green),var(--green) 5px,var(--warn) 5px,var(--warn) 9px)}
+.bar .bl{position:absolute;left:50%;top:-15px;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--ink-soft);white-space:nowrap;display:none}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:10px 2px 0;font-family:var(--mono);font-size:10.5px;color:var(--muted);align-items:center}
+.sw{display:inline-block;width:14px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 10px}
+@media(max-width:760px){.panel{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.card h2{font-family:var(--display);font-size:14px;font-weight:700;margin:0 0 9px}
+.card table{width:100%;border-collapse:collapse;font-size:13px}
+.card td{padding:4px 0;color:var(--ink-soft)}
+.card td:last-child{text-align:right;font-family:var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.card tr.tot td{border-top:1px solid var(--line);padding-top:7px;font-weight:600;color:var(--ink)}
+#route{font-size:13px;color:var(--ink-soft)}
+#route .leg{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed var(--line)}
+#route .leg:last-child{border-bottom:none}
+#route .leg b{color:var(--ink);font-weight:600}
+#route .leg span{font-family:var(--mono);font-size:11.5px;white-space:nowrap;color:var(--muted)}
+.mapbtn{display:inline-block;margin-top:11px;font-family:var(--mono);font-size:12px;font-weight:500;background:var(--ink);color:var(--paper);padding:9px 15px;border-radius:8px;text-decoration:none}
+.mapbtn:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.warnbox{background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:9px 13px;font-size:13px;margin-top:10px}
+.modew{display:flex;gap:7px;align-items:center;margin:4px 0 0;font-size:13px;color:var(--ink-soft)}
+.modew select{font-family:var(--mono);font-size:12px;padding:5px 8px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+footer{padding:14px 0 30px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="kicker">GIS-Point · US-тур · 09.11–05.12.2026</p>
+  <h1>Осінній US-тур · планер</h1>
+  <p class="sub">Вмикай/вимикай події галочками або пресетами — календар, бюджет, ліди, дні й авто-маршрут перераховуються одразу. Оцінки орієнтовні (економ-стандарт, 1 особа); помаранчева штриховка на барі = конфлікт дат з іншою увімкненою подією. №19 — Лондон (EU-трек): авто-маршрут і вартість перельоту для нього орієнтовні.</p>
+</header>
+
+<div class="presets" role="group" aria-label="Пресети треків">
+  <button class="preset" data-p="t1">Трек 1 · один заїзд</button>
+  <button class="preset" data-p="t2">Трек 2 · до Дня подяки (південь)</button>
+  <button class="preset" data-p="t3">Трек 3 · після (Orlando+DC)</button>
+  <button class="preset" data-p="t23">Треки 2+3</button>
+  <button class="preset" data-p="all">Все (мій список)</button>
+  <button class="preset" data-p="none">Очистити</button>
+</div>
+<div class="modew"><label for="mode">Переміщення:</label>
+  <select id="mode"><option value="auto">авто ≤800 км, далі переліт</option><option value="car">все машиною</option></select>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">Бюджет</div><div class="v" id="kCost">—</div><div class="s" id="kCostS"></div></div>
+  <div class="kpi"><div class="l">Ліди</div><div class="v" id="kLeads">—</div><div class="s">орієнтовно</div></div>
+  <div class="kpi"><div class="l">Днів у дорозі</div><div class="v" id="kDays">—</div><div class="s" id="kTrips"></div></div>
+  <div class="kpi"><div class="l">Подій</div><div class="v" id="kEv">—</div><div class="s" id="kConf"></div></div>
+  <div class="kpi"><div class="l">За кермом</div><div class="v" id="kDrive">—</div><div class="s" id="kDist"></div></div>
+</div>
+
+<div class="gantt" id="gantt" aria-label="Діаграма Ганта подій"></div>
+<div class="legend">
+  <span><span class="sw" style="background:var(--green)"></span>увімкнено</span>
+  <span><span class="sw" style="border:1.5px dashed var(--muted)"></span>вимкнено</span>
+  <span><span class="sw" style="background:repeating-linear-gradient(45deg,var(--green),var(--green) 4px,var(--warn) 4px,var(--warn) 7px)"></span>конфлікт дат</span>
+  <span><span class="sw" style="background:var(--warn-soft)"></span>Thanksgiving 26.11</span>
+</div>
+
+<div class="panel">
+  <div class="card"><h2>Кошторис</h2>
+    <table id="budget"></table>
+  </div>
+  <div class="card"><h2>Авто-маршрут</h2>
+    <div id="route"></div>
+    <a class="mapbtn" id="maplink" href="#" target="_blank" rel="noopener">Відкрити в Google Maps →</a>
+    <div class="warnbox" id="warns" hidden></div>
+  </div>
+</div>
+
+<footer>Оцінки: трансатлантика $850/RT · готелі за містом · прокат $68/д + паливо · добові $70/д · переліт між містами ~$260 з таксі. Вибір зберігається у твоєму браузері. Дані верифіковано 07.10.2026.</footer>
+</div>
+
+<script>
+"use strict";
+const EV=[
+ {id:2, n:"GeoFlo Summit", c:"Largo / Tampa Bay, FL", s:"2026-11-12", e:"2026-11-12", fee:0,   lo:15,hi:25, h:140, lat:27.91, lon:-82.79, note:""},
+ {id:4, n:"Fall NEARC",    c:"Portland, ME",          s:"2026-11-15", e:"2026-11-18", fee:280, lo:15,hi:25, h:150, lat:43.66, lon:-70.26, note:""},
+ {id:5, n:"GISAA",         c:"Gulf Shores, AL",       s:"2026-11-16", e:"2026-11-19", fee:275, lo:10,hi:15, h:140, lat:30.25, lon:-87.70, note:"дати оц."},
+ {id:6, n:"Modern Warfare Week", c:"Fort Bragg, NC",  s:"2026-11-16", e:"2026-11-19", fee:750, lo:10,hi:20, h:120, lat:35.14, lon:-78.99, note:""},
+ {id:7, n:"Central PA GIS Day", c:"Harrisburg, PA",   s:"2026-11-18", e:"2026-11-18", fee:40,  lo:5, hi:10, h:130, lat:40.27, lon:-76.88, note:""},
+ {id:8, n:"SHRUG GIS Workshop", c:"Tallahassee, FL",  s:"2026-11-18", e:"2026-11-19", fee:120, lo:15,hi:25, h:130, lat:30.44, lon:-84.28, note:""},
+ {id:10,n:"Counter UAS USA",c:"Arlington, VA",        s:"2026-11-30", e:"2026-12-02", fee:2600,lo:10,hi:15, h:200, lat:38.88, lon:-77.10, note:"дорогий вхід"},
+ {id:11,n:"I/ITSEC",       c:"Orlando, FL",           s:"2026-11-30", e:"2026-12-04", fee:75,  lo:30,hi:50, h:220, lat:28.43, lon:-81.40, note:"expo-бейдж"},
+ {id:14,n:"ElevateUAV Summit", c:"Hallandale Beach (Miami), FL", s:"2026-11-17", e:"2026-11-18", fee:150, lo:10,hi:20, h:180, lat:25.98, lon:-80.14, note:"дрон-оператори; Gulfstream Park"},
+ {id:15,n:"TxGIS Day", c:"College Station, TX", s:"2026-11-16", e:"2026-11-20", fee:0, lo:10,hi:25, h:130, lat:30.61, lon:-96.34, note:"найбільший GIS Day штату; воркшопи"},
+ {id:16,n:"NY Venture Summit (youngStartup)", c:"New York, NY", s:"2026-11-18", e:"2026-11-19", fee:900, lo:10,hi:20, h:260, lat:40.75, lon:-74.00, note:"інвестори; Javits Center; FLY BY"},
+ {id:17,n:"Indiana GIS Day", c:"Indianapolis, IN", s:"2026-11-18", e:"2026-11-18", fee:0, lo:5,hi:15, h:130, lat:39.77, lon:-86.16, note:"безкоштовно, statewide"},
+ {id:18,n:"Stanford PNT Symposium (20-й)", c:"Menlo Park (SLAC), CA", s:"2026-11-12", e:"2026-11-13", fee:50, lo:10,hi:20, h:280, lat:37.42, lon:-122.20, note:"⭐ alt-PNT ядро: AF/SF PNT-програми, FAA/DOT; FLY BY"},
+ {id:19,n:"UK-UA Defence Tech Forum (6-й)", c:"London (RUSI), UK", s:"2026-11-20", e:"2026-11-20", fee:300, lo:15,hi:25, h:250, lat:51.50, lon:-0.13, note:"⭐ UK MoD/прайми під укр. defence-tech; FLY BY; EU-трек"},
+ {id:12,n:"USGIF GEOGala", c:"Tysons Corner, VA",     s:"2026-12-03", e:"2026-12-03", fee:550, lo:15,hi:25, h:200, lat:38.92, lon:-77.23, note:"black-tie"},
+];
+const START=new Date("2026-11-09T00:00:00"), NDAYS=27, TG="2026-11-26";
+const HOME={n:"Tampa Intl Airport",c:"Tampa, FL",lat:27.98,lon:-82.53};
+const PRESETS={t1:[2,4,6,8,11,12],t2:[2,5,8],t3:[11,12],t23:[2,5,8,11,12],all:EV.map(x=>x.id),none:[]};
+const d2i=s=>Math.round((new Date(s+"T00:00:00")-START)/86400000);
+const fmtD=s=>{const d=new Date(s+"T00:00:00");return String(d.getDate()).padStart(2,"0")+"."+String(d.getMonth()+1).padStart(2,"0");};
+const mi=(a,b)=>{const R=3959,r=x=>x*Math.PI/180,dla=r(b.lat-a.lat),dlo=r(b.lon-a.lon);const h=Math.sin(dla/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dlo/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h))*1.22);};
+let sel=new Set(PRESETS.all);
+try{const s=localStorage.getItem("ustour-sel");if(s)sel=new Set(JSON.parse(s));}catch(e){}
+const $=id=>document.getElementById(id);
+const money=x=>"$"+Math.round(x).toLocaleString("en-US");
+
+function buildGantt(){
+ const g=$("gantt");let h='<div class="ghead"><div class="lbl">Подія</div>';
+ for(let i=0;i<NDAYS;i++){const d=new Date(START.getTime()+i*86400000);const dow=d.getDay();
+  h+='<div class="cell'+(dow===1?" mon":"")+'">'+(dow===1||d.getDate()===1||i===0?d.getDate()+"."+(d.getMonth()+1):d.getDate())+'</div>';}
+ h+='</div>';
+ for(const ev of EV){
+  h+='<div class="grow" data-id="'+ev.id+'"><div class="name"><input type="checkbox" aria-label="'+ev.n+'"'+(sel.has(ev.id)?" checked":"")+'><span class="t">'+ev.id+'. '+ev.n+'<span class="c">'+ev.c+' · '+fmtD(ev.s)+(ev.e!==ev.s?"–"+fmtD(ev.e):"")+(ev.note?" · ⚠ "+ev.note:"")+'</span></span></div>';
+  for(let i=0;i<NDAYS;i++){const d=new Date(START.getTime()+i*86400000);const dow=d.getDay();const iso=d.toISOString().slice(0,10);
+   h+='<div class="day'+((dow===0||dow===6)?" wknd":"")+(iso===TG?" tg":"")+'"></div>';}
+  const a=d2i(ev.s),b=d2i(ev.e);
+  const left="calc(230px + ("+a+" * (100% - 230px) / "+NDAYS+"))";
+  const width="calc("+(b-a+1)+" * (100% - 230px) / "+NDAYS+" - 3px)";
+  h+='<div class="bar" data-bar="'+ev.id+'" style="left:'+left+';width:'+width+'" title="'+ev.n+'"></div></div>';
+ }
+ g.innerHTML=h;
+ g.querySelectorAll("input").forEach(cb=>cb.addEventListener("change",e=>{const id=+e.target.closest(".grow").dataset.id;e.target.checked?sel.add(id):sel.delete(id);refresh();}));
+ g.querySelectorAll(".bar").forEach(b=>b.addEventListener("click",()=>{const id=+b.dataset.bar;sel.has(id)?sel.delete(id):sel.add(id);refresh();}));
+}
+
+function refresh(){
+ try{localStorage.setItem("ustour-sel",JSON.stringify([...sel]));}catch(e){}
+ const mode=$("mode").value;
+ const list=EV.filter(e=>sel.has(e.id)).sort((a,b)=>a.s<b.s?-1:1);
+ // conflicts
+ const conf=new Set();
+ for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
+  if(d2i(list[i].e)>=d2i(list[j].s)&&d2i(list[j].e)>=d2i(list[i].s)){conf.add(list[i].id);conf.add(list[j].id);}}
+ document.querySelectorAll(".grow").forEach(r=>{const id=+r.dataset.id,bar=r.querySelector(".bar");
+  bar.classList.toggle("off",!sel.has(id));bar.classList.toggle("cf",sel.has(id)&&conf.has(id));
+  r.querySelector("input").checked=sel.has(id);});
+ // blocks (gap >5 days => fly home between)
+ const blocks=[];let cur=null;
+ for(const ev of list){
+  if(!cur||d2i(ev.s)-d2i(cur.end)>5){cur={evs:[ev],start:ev.s,end:ev.e};blocks.push(cur);}
+  else{cur.evs.push(ev);if(ev.e>cur.end)cur.end=ev.e;}
+ }
+ // costs
+ let fees=0,loL=0,hiL=0;list.forEach(e=>{fees+=e.fee;loL+=e.lo;hiL+=e.hi;});
+ let hotel=0,days=0,driveMi=0,flights=0,legsHtml="",warn=[];
+ const legCost={car:0,fly:0};
+ for(const b of blocks){
+  const nights=d2i(b.end)-d2i(b.start)+2; // arrive day before, leave day after end
+  days+=nights+1;
+  // hotel: event-city nights at event rate, idle at 140
+  let hn=0;
+  b.evs.forEach(e=>{hn+=(d2i(e.e)-d2i(e.s)+1)*e.h;});
+  const covered=b.evs.reduce((s,e)=>s+d2i(e.e)-d2i(e.s)+1,0);
+  hotel+=hn+Math.max(0,nights-covered)*140;
+  // legs within block
+  let prev=HOME;
+  for(const e of b.evs){
+   const dist=mi(prev,e);
+   if(dist>5){
+    const byCar=(mode==="car")||dist<=500;
+    if(byCar){driveMi+=dist;legCost.car+=dist*0.16;legsHtml+='<div class="leg"><div><b>'+prev.c+'</b> → <b>'+e.c+'</b></div><span>🚗 '+Math.round(dist*1.61)+' км · ~'+(dist/58).toFixed(1)+' год</span></div>';}
+    else{legCost.fly+=260;legsHtml+='<div class="leg"><div><b>'+prev.c+'</b> → <b>'+e.c+'</b></div><span>✈ ~$260</span></div>';}
+   }
+   prev=e;
+  }
+ }
+ const transat=blocks.length*850;
+ const rentalDays=driveMi>0?days:Math.min(days,4);
+ const rental=rentalDays*68;
+ const perdiem=days*70;
+ const total=fees+hotel+transat+legCost.car+legCost.fly+rental+perdiem;
+ // KPIs
+ $("kCost").textContent=list.length?money(total):"—";
+ $("kCostS").textContent=list.length?("внески "+money(fees)):"";
+ $("kLeads").textContent=list.length?(loL+"–"+hiL):"—";
+ $("kDays").textContent=list.length?days:"—";
+ $("kTrips").textContent=blocks.length?(blocks.length+" заїзд(и), "+blocks.length+"× трансатлантика"):"";
+ $("kEv").textContent=list.length;
+ $("kConf").textContent=conf.size?("⚠ конфліктів: "+conf.size/1):"без конфліктів";
+ $("kDrive").textContent=driveMi?("~"+Math.round(driveMi/58)+" год"):"0";
+ $("kDist").textContent=driveMi?("~"+Math.round(driveMi*1.61).toLocaleString()+" км"):"";
+ // budget table
+ $("budget").innerHTML=
+  "<tr><td>Внески за участь</td><td>"+money(fees)+"</td></tr>"+
+  "<tr><td>Трансатлантика ("+blocks.length+"×$850)</td><td>"+money(transat)+"</td></tr>"+
+  "<tr><td>Готелі</td><td>"+money(hotel)+"</td></tr>"+
+  "<tr><td>Прокат авто ("+rentalDays+" д) + паливо</td><td>"+money(rental+legCost.car)+"</td></tr>"+
+  "<tr><td>Внутрішні перельоти</td><td>"+money(legCost.fly)+"</td></tr>"+
+  "<tr><td>Добові ($70 × "+days+")</td><td>"+money(perdiem)+"</td></tr>"+
+  "<tr class='tot'><td>Разом</td><td>"+(list.length?money(total):"—")+"</td></tr>";
+ // route + map link
+ $("route").innerHTML=legsHtml||'<div class="leg"><div>Обери події — маршрут зʼявиться тут.</div></div>';
+ const pts=[HOME,...list].map(p=>encodeURIComponent(p.c.replace(/ \/ /g," ")));
+ $("maplink").href="https://www.google.com/maps/dir/"+pts.join("/");
+ // warnings
+ const w=[];
+ if(conf.size)w.push("Конфлікти дат: події зі штриховкою перетинаються — одна людина не встигне на всі повні дні.");
+ if(sel.has(11)&&sel.has(10))w.push("№10 і №11 йдуть одночасно (30.11–02.12) — обрати одне.");
+ if(sel.has(11)&&sel.has(12))w.push("I/ITSEC + GEOGala: виїзд з Орландо 02.12 увечері, 03.12 вдень дорога у Tysons (~1 340 км) — GEOGala ввечері. Щільно, але реально.");
+ if(sel.has(2))w.push("GeoFlo: безкоштовна реєстрація закривається 06.11.");
+ $("warns").hidden=!w.length;$("warns").innerHTML=w.map(x=>"⚠ "+x).join("<br>");
+}
+document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>{sel=new Set(PRESETS[b.dataset.p]);refresh();}));
+$("mode").addEventListener("change",refresh);
+buildGantt();refresh();
+</script>
