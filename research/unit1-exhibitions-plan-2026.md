@@ -262,3 +262,29 @@ Geo Week 2027 — НЕ Denver: переїхав у Salt Lake City, 23–25.02.20
 Commercial UAV Expo Americas 07–09.09 Vegas · ISPRS Geospatial Week 19–24.09 Warsaw · INTERGEO 12–14.10 Frankfurt (2028 — München).
 
 Негативи-2027: HxGN LIVE dormant; Commercial UAV Expo Europe 2027 скоріше не буде (наст. 2028); FARO/Phase One/Wingtra/Quantum — без standalone UC, лише роадшоу/стенди.
+
+## Ревізія 9 (09.10.2026) — лід-аналіз SHRUG / Central PA GIS Day / TxGIS Day
+
+Вердикти: TxGIS Day 4/5 > SHRUG 3/5 > Central PA 2/5.
+
+### Іменні цільові ліди (підтверджені учасники/спонсори 2022–2026)
+| Компанія | Де ловити | Профіль | Цінність |
+|---|---|---|---|
+| Dewberry | SHRUG (спонсор 2025) | великий AE, LiDAR/RS практика, FEMA flood mapping | ⭐⭐ аутсорсить класифікацію LiDAR |
+| SAM LLC (Surveying And Mapping) | SHRUG (Platinum 2022), ймовірно TxGIS | один з найбільших US geo-survey, aerial LiDAR + mobile mapping, Austin HQ | ⭐⭐ |
+| GeoDecisions (Gannett Fleming) | Central PA (експонент 2023, спонсор 2025) | GIS-консалтинг, Harrisburg HQ | ⭐ |
+| EBA Engineering | Central PA (спонсор 2025) | civil eng + власний survey/LiDAR | ⭐ |
+| Freese and Nichols | TxGIS career fair 2025 | TX engineering з GIS | ⭐ |
+| Horizon Land Surveying | TxGIS career fair 2025 | TX survey-фірма | ⭐ класичний профіль аутсорсу |
+| Texian Geospatial | TxGIS (спонсор 2026) | TX geo/survey services | ⭐ |
+| DRMP | SHRUG-спільнота (список розсилки) | Orlando eng, survey/geomatics + LiDAR | ⭐ |
+| Fugro | Central PA (експонент 2022) | глобальний геодата-гігант | умовно (власні prod-центри) |
+
+### Склад аудиторій
+SHRUG: ~60–65% держ / 15–20% академія / 15–20% комерція (вендор-хол обмежений 7 Platinum-будками). Central PA: ~50% держ / 25–30% студенти (вкл. 150–200 школярів) / ~20% комерція. TxGIS: ~55–60% студенти / 25–30% комерція в industry day (24 компанії на career fair 2025).
+
+### Ключовий інсайт по TxGIS
+Кожна фірма на career fair = GIS-capacity-constrained (вони там, бо не можуть найняти) → прямий хук для пітчу аутсорсу. Дістати повний список 24 компаній: TAMU Career Center / HireAggies.
+
+### Next steps
+1) Відкрити в браузері sponsor-сторінки (shrug-gis.org/sponsors, summits.harrisburgu.edu/gis/exhibitors, txgisday.org) — там лого-ростери, недоступні проксі. 2) Запросити у TAMU список career-fair компаній. 3) Моніторити архів SHRUG-L (жов–лис) — спонсорські анонси з іменними контактами.
