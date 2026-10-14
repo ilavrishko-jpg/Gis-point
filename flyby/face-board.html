@@ -1,0 +1,922 @@
+<title>Оргструктура FLY BY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --paper: #EDF1EF; --surface: #FFFFFF; --surface-2: #F5F8F6;
+    --ink: #0F1A19; --ink-2: #354745; --muted: #5E7370;
+    --line: #C6D1CE; --line-soft: #DCE4E1;
+    --nav: #14625D; --nav-soft: #E0EDEB;
+    --beacon: #A85C0C; --beacon-soft: #F6E9D8; --alert: #9C332D;
+    --f-display: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --wrap: 1140px; --r: 3px;
+  }
+  :root:not([data-theme="light"]) { color-scheme: light dark; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0B1312; --surface: #131D1C; --surface-2: #172322;
+      --ink: #E2EAE8; --ink-2: #BCCBC8; --muted: #8BA29E;
+      --line: #263533; --line-soft: #1E2B2A;
+      --nav: #4FB3AA; --nav-soft: #142F2D;
+      --beacon: #DE9E52; --beacon-soft: #2A2015; --alert: #D9776F;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0B1312; --surface: #131D1C; --surface-2: #172322;
+    --ink: #E2EAE8; --ink-2: #BCCBC8; --muted: #8BA29E;
+    --line: #263533; --line-soft: #1E2B2A;
+    --nav: #4FB3AA; --nav-soft: #142F2D;
+    --beacon: #DE9E52; --beacon-soft: #2A2015; --alert: #D9776F;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 20px; }
+  h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; font-weight: 600; }
+  p { margin: 0; }
+  table { border-collapse: collapse; }
+  .eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  header.masthead { border-bottom: 1px solid var(--line); background: var(--surface); }
+  .masthead .wrap { padding-block: 28px 22px; }
+  .mast-grid { display: flex; flex-wrap: wrap; gap: 28px 40px; align-items: flex-end; justify-content: space-between; }
+  h1 { font-size: clamp(30px, 5.2vw, 46px); line-height: 1.04; letter-spacing: -.015em; margin-top: 10px; }
+  .lede { color: var(--ink-2); max-width: 58ch; margin-top: 12px; font-size: 15.5px; }
+  .facts { display: grid; gap: 7px; font-size: 13px; min-width: 260px; }
+  .fact { display: flex; gap: 12px; align-items: baseline; border-bottom: 1px dotted var(--line); padding-bottom: 6px; }
+  .fact dt { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); flex: 0 0 78px; }
+  .fact dd { margin: 0; color: var(--ink-2); }
+
+  .deck { position: sticky; top: 0; z-index: 20; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+  .deck .wrap { padding-block: 12px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+  .progress { font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .deck-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  button { font: inherit; cursor: pointer; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 11px; font-size: 13px; }
+  button:hover { border-color: var(--nav); }
+  button[aria-pressed="true"] { background: var(--nav); border-color: var(--nav); color: #fff; }
+  :focus-visible { outline: 2px solid var(--nav); outline-offset: 2px; }
+
+  .roster { border-bottom: 1px solid var(--line); background: var(--surface); }
+  .roster .wrap { padding-block: 16px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: flex-end; }
+  .roster-field { display: grid; gap: 4px; }
+  .roster-field label { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .roster-field input { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 9px; width: 200px; max-width: 100%; }
+  .roster-note { color: var(--muted); font-size: 12.5px; max-width: 34ch; }
+
+  section { border-bottom: 1px solid var(--line-soft); }
+  .sec-head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin-bottom: 16px; }
+  .sec-head h2 { font-size: 21px; letter-spacing: -.01em; }
+  .sec-head h3 { font-size: 17px; }
+  .sec-head .note { color: var(--muted); font-size: 13px; max-width: 62ch; }
+
+  /* org chart */
+  .org .wrap { padding-block: 28px; }
+  .orgchart { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .col { background: var(--surface); padding: 14px 16px; display: grid; gap: 10px; align-content: start; border-top: 3px solid var(--nav); }
+  .col.is-open { border-top-color: var(--beacon); }
+  .col-name { font-family: var(--f-display); font-size: 16.5px; font-weight: 600; }
+  .col-count { font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
+  .zlist { display: flex; flex-wrap: wrap; gap: 5px; }
+  .zchip { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .04em; border: 1px solid var(--nav); color: var(--nav); background: var(--nav-soft); border-radius: 2px; padding: 3px 7px; }
+  .zchip.is-deputy { border-color: var(--line); color: var(--muted); background: transparent; border-style: dashed; }
+  .zchip.is-free { border-color: var(--beacon); color: var(--beacon); background: transparent; }
+  .col-empty { color: var(--muted); font-size: 13px; }
+
+  /* zone cards */
+  .zones .wrap { padding-block: 28px; }
+  .zonegrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .zcard { background: var(--surface); padding: 15px 16px; display: grid; gap: 8px; align-content: start; }
+  .zc-top { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+  .zc-code { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .12em; background: var(--ink); color: var(--paper); padding: 3px 7px; border-radius: 2px; }
+  .zc-name { font-family: var(--f-display); font-size: 16.5px; font-weight: 600; }
+  .zc-about { color: var(--ink-2); font-size: 13px; }
+  .zc-nums { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+  .pickline { display: grid; gap: 4px; margin-top: 3px; }
+  .pickline > span { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 12.5px; padding: 4px 9px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip:hover { border-color: var(--nav); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--nav); border-color: var(--nav); color: #fff; font-weight: 500; }
+  .chip.sm { font-size: 12px; padding: 3px 8px; }
+  .chip.sm[aria-pressed="true"] { background: transparent; color: var(--nav); border-color: var(--nav); font-weight: 600; }
+
+  /* functions */
+  .fns .wrap { padding-block: 28px 10px; }
+  .zone { margin-bottom: 30px; }
+  .zone-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  .zone-head h3 { font-size: 18px; }
+  .zone-head .zone-owner { font-family: var(--f-mono); font-size: 12px; color: var(--nav); margin-left: auto; }
+  .zone-head .zone-owner[data-open="1"] { color: var(--beacon); }
+  .ftable { width: 100%; font-size: 13.5px; }
+  .ftable th, .ftable td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .ftable thead th { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .ftable td.code { font-family: var(--f-mono); font-size: 12px; white-space: nowrap; color: var(--ink); font-weight: 600; }
+  .ftable td.kpi { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); }
+  .ftable td.who { white-space: nowrap; }
+  .who-tag { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; border: 1px solid var(--muted); color: var(--muted); }
+  .who-tag.hire { border-color: var(--alert); color: var(--alert); }
+  .fname { font-weight: 500; }
+  .fwhat { color: var(--ink-2); font-size: 13px; }
+
+  .ref .wrap { padding-block: 30px; }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+  table.grid { width: 100%; min-width: 640px; font-size: 13.5px; }
+  table.grid th, table.grid td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  table.grid thead th { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); background: var(--surface-2); }
+  table.grid td.decide { font-weight: 600; color: var(--nav); }
+  table.grid td.decide.board-call { color: var(--alert); }
+  table.grid td.num { font-family: var(--f-mono); font-size: 13px; color: var(--alert); font-weight: 600; white-space: nowrap; }
+  table.grid tbody tr:last-child td { border-bottom: 0; }
+  .mono-cell { font-family: var(--f-mono); font-size: 12px; }
+  table.grid td.filled { font-weight: 500; }
+  table.grid td.blank { color: var(--beacon); font-family: var(--f-mono); font-size: 12px; }
+
+  .checks { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 18px; }
+  .check { background: var(--surface); padding: 11px 16px; display: flex; gap: 11px; align-items: flex-start; font-size: 13.5px; color: var(--ink-2); }
+  .check input { margin: 3px 0 0; width: 16px; height: 16px; accent-color: var(--nav); flex: 0 0 auto; }
+  .signline { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 18px; }
+  .sign { background: var(--surface); padding: 16px; display: grid; gap: 14px; }
+  .sign .who2 { font-family: var(--f-display); font-size: 15.5px; font-weight: 600; }
+  .sign .zones2 { font-size: 12.5px; color: var(--ink-2); min-height: 2.6em; }
+  .sign .rule { border-bottom: 1px solid var(--line); padding-top: 16px; }
+  .sign .rule-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+  .rows { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .row2 { background: var(--surface); padding: 13px 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 4px 22px; }
+  .row2 h4 { font-size: 15px; }
+  .row2 .between { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .08em; color: var(--nav); }
+  .row2 .fix { font-size: 13px; color: var(--ink-2); border-left: 2px solid var(--nav); padding-left: 12px; grid-row: 1 / span 2; grid-column: 2; }
+  .row2 .fix em { font-family: var(--f-mono); font-style: normal; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+
+  ol.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); counter-reset: r; }
+  ol.plain li { background: var(--surface); padding: 12px 16px; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; align-items: baseline; font-size: 13.5px; color: var(--ink-2); }
+  ol.plain li::before { counter-increment: r; content: counter(r); font-family: var(--f-mono); font-size: 12px; color: var(--nav); }
+  ol.plain li strong { color: var(--ink); }
+
+  ol.agenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  ol.agenda li { background: var(--surface); padding: 11px 16px; display: grid; grid-template-columns: 74px minmax(0, 1fr) minmax(0, 0.8fr); gap: 14px; align-items: baseline; font-size: 13.5px; }
+  ol.agenda .t { font-family: var(--f-mono); font-size: 12px; color: var(--nav); font-variant-numeric: tabular-nums; }
+  ol.agenda .out { color: var(--muted); font-size: 12.5px; }
+
+  .callout { border-left: 3px solid var(--nav); background: var(--surface); padding: 12px 16px; font-size: 13.5px; color: var(--ink-2); margin-top: 18px; }
+  .callout strong { color: var(--ink); }
+
+  footer { padding-block: 26px 40px; color: var(--muted); font-size: 12.5px; }
+  footer .wrap { display: grid; gap: 6px; }
+  .status { font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; }
+
+  @media (max-width: 860px) {
+    .row2 { grid-template-columns: 1fr; }
+    .row2 .fix { grid-column: 1; grid-row: auto; }
+    ol.agenda li { grid-template-columns: 60px minmax(0, 1fr); }
+    ol.agenda .out { grid-column: 2; }
+    .ftable thead { display: none; }
+    .ftable td { display: block; border-bottom: 0; padding: 2px 0; }
+    .ftable tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <div>
+        <p class="eyebrow">FLY BY / ONS · Організаційна структура · v2.0</p>
+        <h1>Оргструктура і зони</h1>
+        <p class="lede">
+          Одинадцять зон, 57 функцій. У кожної зони — <strong>один власник і один заступник</strong>.
+          Проставте власників на картках нижче: оргструктура і форма узгодження зберуться самі.
+          Документ описує функції, а не людей — імена вписуються за столом.
+        </p>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Продукт</dt><dd>Навігаційний модуль: софт + залізо + підписка на карти</dd></div>
+        <div class="fact"><dt>Канал</dt><dd>OEM design-in</dd></div>
+        <div class="fact"><dt>Стадія</dt><dd>pre-MVP, відкритий pre-seed</dd></div>
+        <div class="fact"><dt>Перегляд</dt><dd>раз на квартал</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<div class="roster">
+  <div class="wrap">
+    <div class="roster-field"><label for="p1">Партнер 1</label><input id="p1" data-owner="p1" value="Партнер 1" autocomplete="off"></div>
+    <div class="roster-field"><label for="p2">Партнер 2</label><input id="p2" data-owner="p2" value="Партнер 2" autocomplete="off"></div>
+    <div class="roster-field"><label for="p3">Партнер 3</label><input id="p3" data-owner="p3" value="Партнер 3" autocomplete="off"></div>
+    <p class="roster-note">Впишіть імена — вони підставляться в оргструктуру і у форму узгодження.</p>
+  </div>
+</div>
+
+<div class="deck">
+  <div class="wrap">
+    <span class="progress" id="progress"></span>
+    <div class="deck-actions">
+      <button id="copy">Скопіювати підсумок</button>
+      <button id="print">Друк / PDF форми</button>
+    </div>
+  </div>
+</div>
+
+<section class="org">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Оргструктура</h2>
+      <p class="note">Збирається автоматично з розподілу нижче. Суцільна плашка — зона у власності, пунктирна — де партнер заступник.</p>
+    </div>
+    <div class="orgchart" id="orgchart"></div>
+  </div>
+</section>
+
+<section class="zones">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Рівень 1 — одинадцять зон</h2>
+      <p class="note">Власник відповідає за результат зони. Заступник не робить роботу, але знає стан справ і ухвалює невідкладні рішення, коли власник недоступний.</p>
+    </div>
+    <div class="zonegrid" id="zonegrid"></div>
+  </div>
+</section>
+
+<section class="fns">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Рівень 2 — функції всередині зон</h2>
+      <p class="note">За замовчуванням усі функції зони — на її власникові. Колонка «Хто» показує, що рекомендовано закривати наймом або підрядником.</p>
+    </div>
+    <div id="fnlist"></div>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Форма узгодження</h2>
+      <p class="note">Заповнюється на сесії. Кнопка «Друк / PDF» вгорі віддає цей розділ разом з оргструктурою у вигляді, придатному для підпису.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="grid">
+        <thead><tr><th>Код</th><th>Зона</th><th>Власник</th><th>Заступник</th><th>Головне число зони</th></tr></thead>
+        <tbody id="signoff"></tbody>
+      </table>
+    </div>
+
+    <div class="sec-head" style="margin-top:26px"><h3>Що ми узгодили</h3></div>
+    <div class="checks" id="checks"></div>
+
+    <div class="sec-head" style="margin-top:26px"><h3>Підписи партнерів</h3></div>
+    <div class="signline" id="signs"></div>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Черга найму</h2>
+      <p class="note">За тригером, а не за датою: наймаємо, коли настала подія.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="grid">
+        <thead><tr><th>№</th><th>Роль</th><th>Закриває</th><th>Тригер найму</th></tr></thead>
+        <tbody id="hires"></tbody>
+      </table>
+    </div>
+    <div class="sec-head" style="margin-top:26px"><h3>Підрядники — беремо, не чекаючи раунду</h3></div>
+    <div class="tablewrap">
+      <table class="grid">
+        <thead><tr><th>Хто</th><th>Закриває</th><th>Чому зараз</th></tr></thead>
+        <tbody id="outs"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Матриця прав рішень</h2>
+      <p class="note">Власник зони вирішує самостійно в межах своєї зони і інформує решту. Партнерська рада — тільки там, де на кону спільна власність або перетин зон.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="grid">
+        <thead><tr><th>Рішення</th><th>Готує</th><th>Вирішує</th><th>Право вето</th></tr></thead>
+        <tbody id="matrix"></tbody>
+      </table>
+    </div>
+    <p class="callout">
+      <strong>Публічні ТТХ — правило репутації.</strong> Поки технічний гейт не пройдено, різниця між
+      цільовим і підтвердженим показником має бути видимою в усіх зовнішніх матеріалах, і підписує
+      цю цифру власник QA, а не автор матеріалу.
+    </p>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Прикордонні питання</h2>
+      <p class="note">Місця, де дві зони перетинаються і відповідальність природно розмивається.</p>
+    </div>
+    <div class="rows" id="borders"></div>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head"><h2>Рекомендації</h2><p class="note">Не рішення, а те, що варто врахувати за столом.</p></div>
+    <ol class="plain" id="recs"></ol>
+  </div>
+</section>
+
+<section class="ref">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Сесія узгодження — 90 хвилин</h2>
+      <p class="note">Три питання перед вибором зони: яку найризикованішу функцію зони я закрию особисто · що я не віддам нікому · чим готовий не займатися 12 місяців.</p>
+    </div>
+    <ol class="agenda" id="agenda"></ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Документ описує функції, а не людей. Імена вписуються на сесії узгодження і переглядаються раз на квартал.</p>
+    <p class="status" id="status">режим: локальний · зміни зберігаються у цьому браузері</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var PARTNERS = ["p1", "p2", "p3"];
+  var PICKS = [{ id: "p1" }, { id: "p2" }, { id: "p3" }, { id: "none", label: "—" }];
+
+  var ZONES = [
+    { id: "ker", code: "КЕР", name: "Керівництво і стратегія",
+      about: "Куди йдемо, як ухвалюємо рішення, як тримаємо ритм.",
+      nums: "Гейтів у строк, % · відкритих прикордонних питань",
+      fns: [
+        ["КЕР-1", "Стратегія, стадії і гейти", "Мапа стадій продукту, критерії go/no-go, план на одну сторінку.", "Гейтів у строк, %", "партнер"],
+        ["КЕР-2", "Операційний ритм", "Тижневий синк, огляд гейтів, квартальний перегляд цієї карти.", "Проведених синків, %", "партнер"],
+        ["КЕР-3", "Партнерська рада і кап-тейбл", "Частки, vesting, вхід і вихід партнера, регламент спірних рішень.", "Відкритих питань кап-тейблу", "партнер + юрист"],
+        ["КЕР-4", "Внутрішні інструменти і документообіг", "Трекер задач, єдине джерело правди, доступи, шаблони.", "Задач із власником і дедлайном, %", "партнер"]
+      ] },
+    { id: "soft", code: "SOFT", name: "Продукт IT (софт)",
+      about: "Алгоритми, ПЗ, інтеграція, релізи.",
+      nums: "CEP на еталонному маршруті, м · час інтеграції, год",
+      fns: [
+        ["SOFT-1", "Продукт: бачення, PRD, скоуп", "Що входить у реліз і що свідомо не входить; «шар, а не система», «no new button».", "Змін скоупу після заморозки (ціль 0)", "партнер"],
+        ["SOFT-2", "Алгоритми навігації", "Метчинг зображення по карті, фьюжн з IMU, холодний старт, бюджет похибки.", "CEP на еталонному маршруті, м", "партнер"],
+        ["SOFT-3", "Архітектура і технічний борг", "Межі модулів, дорогі до зміни рішення, реєстр боргу і план гасіння.", "Частка часу на борг, %", "партнер"],
+        ["SOFT-4", "Інтеграція в автопілоти, API", "ArduPilot/PX4, вихід confidence, поведінка при деградації сигналу.", "Час інтеграції на новій платформі, год", "партнер"],
+        ["SOFT-5", "Релізи, версіонування, прошивки", "Політика LTS, канали оновлень, відкат, сумісність версій.", "Невдалих оновлень, % (ціль 0)", "партнер"],
+        ["SOFT-6", "Інфраструктура, середовища, CI/CD", "Складання, автотести, стенд bench-інтеграції, відтворюваність збірки.", "Час від коміту до перевіреної збірки, хв", "підрядник"],
+        ["SOFT-7", "Документація і SDK для інтеграторів", "Інтеграційний гайд, приклади, довідник API, чек-лист монтажу.", "Питань від інтегратора на інтеграцію", "партнер"],
+        ["SOFT-8", "Безпека продукту", "Підписані прошивки, захищене завантаження, захист бортових даних і журналів.", "Критичних вразливостей > 30 днів", "партнер"]
+      ] },
+    { id: "hard", code: "HARD", name: "Продукт HARD (залізо)",
+      about: "Електроніка, оптика, механіка, вартість юніта.",
+      nums: "BOM на юніт, $ · маса і габарит · деградація CEP після ресурсних випробувань",
+      fns: [
+        ["HARD-1", "Обчислювальний модуль і схемотехніка", "Вибір платформи, плата, живлення, інтерфейси до автопілота.", "Споживання, Вт; маса, г", "найм №1"],
+        ["HARD-2", "Оптика і сенсорний тракт", "Камера, об'єктив, поле зору, робота вночі, схема калібрування.", "Робоча освітленість; стабільність калібрування", "найм №1"],
+        ["HARD-3", "Механіка, корпус, кріплення", "Корпус, віброзахист, жорстка база «камера + IMU», ресурс кріплення.", "Деградація CEP після 100 посадок, %", "найм №1"],
+        ["HARD-4", "BOM і вартість юніта", "Вибір компонентів під ціну, альтернативи, цільова собівартість.", "BOM на юніт, $", "найм №1"],
+        ["HARD-5", "Прототипування і КД", "Ітерації прототипів, конструкторська документація, передача у виробництво.", "Днів на ітерацію прототипу", "найм №1"]
+      ] },
+    { id: "data", code: "DATA", name: "Дані і картографія",
+      about: "Референсна база, актуальний шар, права на дані.",
+      nums: "Вік шару, дні · МБ на 1000 км² · покриття маршруту, %",
+      fns: [
+        ["DATA-1", "Референсна база", "Покриття, компактність, конвеєр збирання і оновлення, вимоги до якості шару.", "МБ на 1000 км²; покриття, %", "партнер"],
+        ["DATA-2", "Актуальний шар і виявлення змін", "Частота оновлення, зйомка, детекція змін на рухомій ділянці.", "Вік шару, дні; зйомка → борт, год", "найм №2"],
+        ["DATA-3", "Права на дані й ліцензії", "Джерела знімків, умови ліцензій, право перепродажу, SKU на країну.", "Функцій на даних без ліцензії (ціль 0)", "партнер + юрист"],
+        ["DATA-4", "Телеметрія з бортів", "Що повертається з поля і як потрапляє в поліпшення алгоритму й карти.", "Бортів, що віддають телеметрію, %", "партнер"],
+        ["DATA-5", "Зберігання і доставка карт на борт", "Формат, стиснення, оновлення шару на модулі, перевірка цілісності.", "Час завантаження шару на борт, хв", "партнер"]
+      ] },
+    { id: "qa", code: "QA", name: "Тестування і якість",
+      about: "Методика, польові випробування, валідація ТТХ, якість на потоці.",
+      nums: "Розбіжність заявлено/виміряно, % · придатних з першого разу, %",
+      fns: [
+        ["QA-1", "Методика вимірювання і лабораторні тести", "Як саме міряємо точність, повторюваність, умови, еталонні маршрути.", "Повторюваність результату, %", "партнер"],
+        ["QA-2", "Польові випробування", "Протокол польотів, у тому числі в умовах РЕБ; фіксація і розбір результатів.", "Валідованих польотів за квартал", "партнер"],
+        ["QA-3", "Валідація заявлених ТТХ", "Звірка того, що заявлено назовні, з тим, що підтверджено випробуваннями.", "Розбіжність заявлено/виміряно, %", "партнер"],
+        ["QA-4", "Якість на потоці", "Вхідний контроль компонентів, вихідний тест кожного юніта, простежуваність партій.", "Придатних з першого разу, %", "найм №3"],
+        ["QA-5", "Відповідність вимогам замовника", "Вимоги OEM до приймання, протоколи, документи на партію.", "Приймань з першого разу, %", "партнер"]
+      ] },
+    { id: "prod", code: "PROD", name: "Виробництво і поставки",
+      about: "Закупівля, збірка, калібрування, логістика.",
+      nums: "Юнітів/тиждень · lead time критичного компонента, тижні",
+      fns: [
+        ["PROD-1", "Закупівля і постачальники", "Критичні компоненти, два джерела на позицію, ціни, строки.", "Lead time критичного компонента, тижні", "найм №5"],
+        ["PROD-2", "Збірка і монтаж", "Виробничий маршрут: хто фізично збирає і де, оснащення.", "Юнітів/тиждень", "найм №3"],
+        ["PROD-3", "Калібрування і прошивка на виробництві", "Стенд калібрування, процедура, журнал параметрів кожного юніта.", "Час калібрування на юніт, хв", "найм №3"],
+        ["PROD-4", "Логістика і митний контур", "Доставка до замовника, режими, супровідні документи.", "Днів «готовий модуль → замовник»", "партнер"],
+        ["PROD-5", "Запас і планування", "Складський запас критичних позицій, планування під попит.", "Днів запасу по критичних позиціях", "найм №5"]
+      ] },
+    { id: "serv", code: "SERV", name: "Сервіс і підтримка",
+      about: "Життя продукту в полі: відновлення, SLA, навчання.",
+      nums: "Простій після відмови, год · повернень на завод за 12 міс",
+      fns: [
+        ["SERV-1", "Сервісна автономність", "Відновлення силами користувача, польова перекалібровка, відкат прошивки.", "Простій після відмови, год", "найм №4"],
+        ["SERV-2", "Технічна підтримка і SLA", "Канал звернень, час реакції, діагностичні журнали.", "Час першої відповіді, год", "найм №4"],
+        ["SERV-3", "RMA, ремонт, гарантія", "Порядок повернення, ремонтний фонд, аналіз причин відмов.", "Повернень на завод за 12 міс", "найм №4"],
+        ["SERV-4", "Навчання користувачів", "Інструкція оператора, коротке навчання підрозділу, типові помилки монтажу.", "Звернень на перші 100 модулів", "партнер"]
+      ] },
+    { id: "gtm", code: "GTM", name: "Продажі і ринок",
+      about: "Discovery, позиціонування, design-in, ціни.",
+      nums: "Підписаних LOI · інтеграцій у роботі",
+      fns: [
+        ["GTM-1", "Discovery і вимоги ринку", "Інтерв'ю з виробниками й операторами, ICP, сценарії, реєстр вимог.", "Інтерв'ю/тиждень", "партнер"],
+        ["GTM-2", "Позиціонування і матеріали", "Формулювання цінності, дек, сайт, виставки; межі заявленого назовні.", "Конверсія контакт → зустріч, %", "партнер"],
+        ["GTM-3", "OEM design-in і партнерства", "Воронка інтеграцій, вибір якорних партнерів, LOI/MoU, пілоти.", "Підписаних LOI; інтеграцій у роботі", "партнер"],
+        ["GTM-4", "Ціни й пакування", "Ціна модуля, підписка на карти, ліцензування ПЗ, межі знижок.", "Ціна/юніт; частка регулярної виручки, %", "партнер"],
+        ["GTM-5", "Експортні ринки і канали", "Партнери-інтегратори автопілотів, закордонні виробники, виставки.", "Зустрічей на нових ринках/квартал", "партнер"],
+        ["GTM-6", "CRM і пайплайн", "Єдина база контактів і угод, етапи воронки, регулярний огляд.", "Угод на кожному етапі воронки", "партнер"]
+      ] },
+    { id: "fin", code: "FIN", name: "Фінанси та інвестиції",
+      about: "Раунд, гранти, економіка, кеш, облік.",
+      nums: "Місяців runway · закрито $ від цілі раунду, %",
+      fns: [
+        ["FIN-1", "Фандрейзинг та стосунки з інвесторами", "Раунд, інструмент, пайплайн інвесторів, регулярний апдейт.", "Закрито $ від цілі, %", "партнер"],
+        ["FIN-2", "Non-dilutive фінансування", "Гранти, акселератори, оборонні програми; відсів за критеріями допуску.", "Заявок/квартал; отримано $", "партнер"],
+        ["FIN-3", "Юніт-економіка і фінмодель", "Собівартість і маржа, сценарії, модель для інвестора.", "Маржа на юніт, %", "партнер + консультант"],
+        ["FIN-4", "Кеш, бюджет, runway", "Платіжний календар, бюджет по зонах, контроль витрат.", "Burn/міс; місяців runway", "партнер"],
+        ["FIN-5", "Бухгалтерія і звітність", "Облік, звітність юрособи, банк, податки.", "Звітів у строк, %", "підрядник"]
+      ] },
+    { id: "leg", code: "LEG", name: "Юридичні, IP і комплаєнс",
+      about: "Структура, права, контракти, експортний контроль.",
+      nums: "Активів без оформлених прав · поставок без перевіреного статусу",
+      fns: [
+        ["LEG-1", "Корпоративна структура", "Юрособи, холдинг, SPV, стосунки з материнською компанією.", "Структура зафіксована: так / ні", "партнер + юрист"],
+        ["LEG-2", "IP: права на розробки", "Оформлення прав на код, алгоритми і дані, патенти і ноу-хау.", "Активів без оформлених прав (ціль 0)", "партнер + юрист"],
+        ["LEG-3", "Контракти і NDA", "Договори з клієнтами й підрядниками, умови поставки, шаблони.", "Угод без підписаного договору (ціль 0)", "партнер + юрист"],
+        ["LEG-4", "Експортний контроль і dual-use", "Ліцензії, обмеження щодо кінцевого користувача, вимоги юрисдикцій.", "Поставок без перевіреного статусу (ціль 0)", "партнер + юрист"],
+        ["LEG-5", "Захист інформації і OPSEC", "Що показуємо назовні, зберігання польових даних, доступи, режим на демо.", "Інцидентів розкриття (ціль 0)", "партнер"]
+      ] },
+    { id: "hr", code: "HR", name: "Найм і люди",
+      about: "План найму, скоркарти, онбординг, культура.",
+      nums: "Днів на закриття вакансії · % нових із результатом за 90 днів",
+      fns: [
+        ["HR-1", "План найму і пріоритети ролей", "Яка роль наступна, під який тригер, у який бюджет.", "Закритих ролей від плану, %", "партнер"],
+        ["HR-2", "Пошук, скоркарти, інтерв'ю", "Скоркарта ролі, канали пошуку, два інтерв'ю — на результат і на цінності.", "Днів на закриття вакансії", "партнер"],
+        ["HR-3", "Онбординг перших 90 днів", "План входу в роль, наставник, контрольні точки 30/60/90.", "Нових із результатом за 90 днів, %", "партнер"],
+        ["HR-4", "Компенсації і мотивація", "Вилки, перегляд, опціонний пул і правила його розподілу.", "Відхилених оферів, %", "партнер + рада"],
+        ["HR-5", "Цінності й культура", "Як ухвалюємо рішення, як сперечаємось, регулярне ретро.", "Ретро проведено: так / ні", "партнер"]
+      ] }
+  ];
+
+  var HIRES = [
+    ["1", "Інженер-конструктор (електроніка, оптика, механіка)", "уся зона HARD", "Пройдено перший технічний гейт або закрито раунд"],
+    ["2", "Картограф / data-інженер", "DATA-2, посилення DATA-1", "Перший пілот у замовника або закрито раунд"],
+    ["3", "Технолог виробництва", "PROD-2, PROD-3, QA-4", "Потреба понад 20 юнітів/міс"],
+    ["4", "Сервіс-інженер", "SERV-1, SERV-2, SERV-3", "Перші 50 модулів у полі"],
+    ["5", "Закупівля і логістика", "PROD-1, PROD-5", "Понад два критичні постачальники або старт експорту"]
+  ];
+
+  var OUTSOURCE = [
+    ["Бухгалтер", "FIN-5", "Щоб runway був числом у таблиці, а не оцінкою"],
+    ["Юрист: корпоративне право, IP, експортний контроль", "LEG-1…LEG-4, КЕР-3, DATA-3", "Ці функції блокують раунд і перші поставки, а не супроводжують їх"],
+    ["Фінансовий консультант", "FIN-3", "Незалежна перевірка моделі перед показом інвестору"],
+    ["DevOps на частину ставки", "SOFT-6", "Дешевше за втрачений час команди на ручні збірки"]
+  ];
+
+  var MATRIX = [
+    ["Форма продукту і його межі", "SOFT + HARD + GTM", "SOFT-1", "Власник GTM — на ринкову невідповідність", 0],
+    ["Цільовий сегмент", "GTM-1", "КЕР-1", "—", 0],
+    ["Заморозка скоупу релізу", "SOFT-1", "SOFT-1", "Власник GTM", 0],
+    ["Проходження технічного гейта", "QA-3", "КЕР-1 за поданням QA", "— гейт не переглядається під тиском строків", 0],
+    ["Публічна заява про ТТХ", "GTM-2", "QA-3", "Власник QA", 0],
+    ["Вибір компонента, що змінює BOM > 10%", "HARD-4", "HARD-4", "Власник FIN — за економікою", 0],
+    ["Ціна; знижка до 15%", "GTM-3", "GTM-4", "—", 0],
+    ["Знижка понад 25% або нестандартні умови", "GTM-4", "Партнерська рада", "—", 1],
+    ["Вибір якорного партнера для пілота", "GTM-3", "GTM-3", "Власник SOFT — за ризиком для ресурсу розробки", 0],
+    ["Витрата до $5 000", "будь-хто", "Власник зони", "—", 0],
+    ["Витрата понад $5 000", "Власник зони", "FIN-4", "—", 0],
+    ["Умови інвестора й оцінка компанії", "FIN-1", "Партнерська рада, одноголосно", "Кожен партнер", 1],
+    ["Найм із часткою або вхід партнера", "HR-1", "Партнерська рада, одноголосно", "Кожен партнер", 1],
+    ["Зупинка або зміна напрямку", "КЕР-1", "Партнерська рада, одноголосно", "Кожен партнер", 1]
+  ];
+
+  var BORDERS = [
+    ["QA ↔ GTM", "Заявлені ТТХ проти підтверджених", "Назовні йде лише підтверджена цифра, підписана власником QA."],
+    ["SOFT ↔ DATA", "Карта — частина алгоритму чи окремий продукт", "Дані повністю в DATA; SOFT формулює вимоги до шару."],
+    ["SOFT ↔ HARD", "Хто відповідає за точність: алгоритм чи механіка кріплення", "Бюджет похибки розписаний по внесках, кожен внесок має власника."],
+    ["HARD ↔ PROD", "Де закінчується конструювання і починається виробництво", "Межа — затверджена конструкторська документація: до неї HARD, після — PROD."],
+    ["QA ↔ PROD", "Вихідний контроль — це якість чи виробництво", "Методика за QA, виконання на потоці за PROD."],
+    ["SERV ↔ SOFT", "Хто відповідає за оновлення, що «поклало» модуль у полі", "Політика оновлень за SOFT; відновлення в полі за SERV."],
+    ["DATA ↔ LEG", "Права на дані", "Умови ліцензій перевіряє LEG, застосовує DATA; жодної функції на неперевірених даних."],
+    ["FIN ↔ GTM", "Хто називає ціну інвестору і хто — клієнту", "Ціна для клієнта за GTM-4; цифри для інвестора з однієї версії моделі FIN-3."],
+    ["КЕР ↔ усі", "Що робимо, коли зона не рухається", "Зона без руху два квартали — переприсвоєння, без переходу на особистості."],
+    ["Партнери ↔ материнська компанія", "Спільні ресурси, час і гроші", "Договір між юрособами або зафіксована квота годин і ціна години."]
+  ];
+
+  var RECS = [
+    "<strong>Одна людина — 3–4 зони, не більше.</strong> Одинадцять зон на трьох — це вже щільно; п'ять зон на одному означає, що дві з них не рухаються.",
+    "<strong>Не давайте одній людині SOFT і HARD одночасно.</strong> Це два різні цикли: тижневі ітерації проти місячних, і вони конкурують за той самий час.",
+    "<strong>QA має бути не в того, хто розробляє.</strong> Інакше валідація ТТХ перетворюється на самоперевірку — і це перше, що помітить інтегратор.",
+    "<strong>Три ключові числа розведіть мінімум на двох людей:</strong> виручка (GTM-3), економіка (FIN-3), кеш (FIN-4).",
+    "<strong>Зона без заступника — ризик.</strong> Заступник не робить роботу, але знає стан справ і може ухвалити невідкладне рішення.",
+    "<strong>HARD і PROD зараз майже повністю під найм.</strong> Партнер, який візьме ці зони, найближчі місяці більше наймає і будує процес, ніж робить руками — це варто проговорити відкрито.",
+    "<strong>LEG закривається підрядником, але потребує партнера-замовника</strong> — того, хто ставить задачу юристу і приймає роботу.",
+    "<strong>Перегляд раз на квартал</strong>, 30 хвилин: що змінилось, що передаємо далі, що знімаємо."
+  ];
+
+  var CHECKS = [
+    "У кожної з 11 зон є один власник і один заступник.",
+    "Матриця прав рішень прийнята в поточному вигляді або з правками, зафіксованими на сесії.",
+    "Черга найму і склад підрядників підтверджені.",
+    "Усі прикордонні питання закриті або мають дату рішення.",
+    "Призначено дату наступного перегляду карти."
+  ];
+
+  var AGENDA = [
+    ["0–10", "Правила: одна зона — одне ім'я; «спільно» не приймається; «не знаю» — у парковку з датою", "Формат узгоджено"],
+    ["10–20", "Кожен відповідає на три питання вибору зони", "Заявки озвучені"],
+    ["20–50", "Розподіл 11 зон: власник і заступник", "Форма, розділ 1"],
+    ["50–65", "Прохід по функціях у спірних зонах", "Уточнення"],
+    ["65–75", "Черга найму і підрядники", "Підтверджено"],
+    ["75–85", "Прикордонні питання і матриця рішень", "Рішення або дати"],
+    ["85–90", "Підписи, дата наступного перегляду", "Форма, розділи 2–4"]
+  ];
+
+  // ---------- state ----------
+  var zoneState = {};
+  ZONES.forEach(function (z) { zoneState[z.id] = { owner: "none", deputy: "none" }; });
+  var roster = { p1: "Партнер 1", p2: "Партнер 2", p3: "Партнер 3" };
+  var checks = {};
+  var db = null;
+
+  function label(id) {
+    if (roster[id]) return roster[id];
+    return id === "none" ? "—" : id;
+  }
+  function assignedName(id) {
+    return id && id !== "none" ? label(id) : null;
+  }
+
+  var LS = "flyby-org-v1";
+  function saveLocal() {
+    if (db) return;
+    try { localStorage.setItem(LS, JSON.stringify({ zones: zoneState, roster: roster, checks: checks })); } catch (e) {}
+  }
+  function loadLocal() {
+    try {
+      var raw = localStorage.getItem(LS); if (!raw) return;
+      var v = JSON.parse(raw);
+      if (v.zones) Object.keys(v.zones).forEach(function (k) { if (zoneState[k]) zoneState[k] = v.zones[k]; });
+      if (v.roster) Object.keys(v.roster).forEach(function (k) { if (roster[k] !== undefined) roster[k] = v.roster[k]; });
+      if (v.checks) checks = v.checks;
+    } catch (e) {}
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  var gridEl = document.getElementById("zonegrid");
+  var orgEl = document.getElementById("orgchart");
+  var progressEl = document.getElementById("progress");
+  var statusEl = document.getElementById("status");
+
+  function chipRow(role, zoneId, current) {
+    var chips = el("div", "chips");
+    PICKS.forEach(function (o) {
+      var b = el("button", "chip" + (role === "deputy" ? " sm" : ""), label(o.id));
+      b.type = "button";
+      b.dataset.role = role;
+      b.dataset.zone = zoneId;
+      b.dataset.pick = o.id;
+      b.setAttribute("aria-pressed", current === o.id && o.id !== "none" ? "true" : "false");
+      chips.appendChild(b);
+    });
+    return chips;
+  }
+
+  function buildZones() {
+    gridEl.textContent = "";
+    ZONES.forEach(function (z) {
+      var card = el("div", "zcard");
+      card.dataset.zone = z.id;
+      var top = el("div", "zc-top");
+      top.appendChild(el("span", "zc-code", z.code));
+      top.appendChild(el("span", "zc-name", z.name));
+      card.appendChild(top);
+      card.appendChild(el("p", "zc-about", z.about));
+      card.appendChild(el("p", "zc-nums", z.nums));
+      card.appendChild(el("p", "zc-nums", z.fns.length + " функцій"));
+      var o = el("div", "pickline");
+      o.appendChild(el("span", null, "власник"));
+      o.appendChild(el("div", "owner-slot"));
+      card.appendChild(o);
+      var d = el("div", "pickline");
+      d.appendChild(el("span", null, "заступник"));
+      d.appendChild(el("div", "deputy-slot"));
+      card.appendChild(d);
+      gridEl.appendChild(card);
+    });
+  }
+
+  function buildFns() {
+    var host = document.getElementById("fnlist");
+    host.textContent = "";
+    ZONES.forEach(function (z) {
+      var sec = el("div", "zone");
+      sec.dataset.zone = z.id;
+      var head = el("div", "zone-head");
+      head.appendChild(el("span", "zc-code", z.code));
+      head.appendChild(el("h3", null, z.name));
+      head.appendChild(el("span", "zone-owner", ""));
+      sec.appendChild(head);
+
+      var t = el("table", "ftable");
+      var thead = el("thead");
+      var tr = el("tr");
+      ["Код", "Функція", "Головне число", "Хто"].forEach(function (h) { tr.appendChild(el("th", null, h)); });
+      thead.appendChild(tr); t.appendChild(thead);
+      var tb = el("tbody");
+      z.fns.forEach(function (f) {
+        var r = el("tr");
+        r.appendChild(el("td", "code", f[0]));
+        var td = el("td");
+        td.appendChild(el("div", "fname", f[1]));
+        td.appendChild(el("div", "fwhat", f[2]));
+        r.appendChild(td);
+        r.appendChild(el("td", "kpi", f[3]));
+        var w = el("td", "who");
+        var tag = el("span", "who-tag" + (f[4].indexOf("найм") === 0 ? " hire" : ""), f[4]);
+        w.appendChild(tag);
+        r.appendChild(w);
+        tb.appendChild(r);
+      });
+      t.appendChild(tb);
+      sec.appendChild(t);
+      host.appendChild(sec);
+    });
+  }
+
+  function paint() {
+    // zone cards
+    ZONES.forEach(function (z) {
+      var card = gridEl.querySelector('.zcard[data-zone="' + z.id + '"]');
+      if (!card) return;
+      var zs = zoneState[z.id];
+      var os = card.querySelector(".owner-slot");
+      os.textContent = ""; os.appendChild(chipRow("owner", z.id, zs.owner));
+      var ds = card.querySelector(".deputy-slot");
+      ds.textContent = ""; ds.appendChild(chipRow("deputy", z.id, zs.deputy));
+
+      var zo = document.querySelector('#fnlist .zone[data-zone="' + z.id + '"] .zone-owner');
+      if (zo) {
+        var name = assignedName(zs.owner);
+        zo.textContent = name ? "власник: " + name : "власник не визначений";
+        zo.dataset.open = name ? "0" : "1";
+      }
+    });
+
+    // org chart
+    orgEl.textContent = "";
+    PARTNERS.forEach(function (p) {
+      var col = el("div", "col");
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; });
+      var dep = ZONES.filter(function (z) { return zoneState[z.id].deputy === p; });
+      if (!owned.length) col.classList.add("is-open");
+      col.appendChild(el("p", "col-name", label(p)));
+      col.appendChild(el("p", "col-count", "зон у власності: " + owned.length + " · заступник у: " + dep.length));
+      if (owned.length || dep.length) {
+        var list = el("div", "zlist");
+        owned.forEach(function (z) { list.appendChild(el("span", "zchip", z.code)); });
+        dep.forEach(function (z) { list.appendChild(el("span", "zchip is-deputy", z.code)); });
+        col.appendChild(list);
+      } else {
+        col.appendChild(el("p", "col-empty", "зони ще не призначені"));
+      }
+      orgEl.appendChild(col);
+    });
+    var free = ZONES.filter(function (z) { return zoneState[z.id].owner === "none"; });
+    var fcol = el("div", "col");
+    if (free.length) fcol.classList.add("is-open");
+    fcol.appendChild(el("p", "col-name", "Без власника"));
+    fcol.appendChild(el("p", "col-count", "зон: " + free.length + " з " + ZONES.length));
+    if (free.length) {
+      var fl = el("div", "zlist");
+      free.forEach(function (z) { fl.appendChild(el("span", "zchip is-free", z.code)); });
+      fcol.appendChild(fl);
+    } else {
+      fcol.appendChild(el("p", "col-empty", "усі зони розподілені"));
+    }
+    orgEl.appendChild(fcol);
+
+    // sign-off table
+    var so = document.getElementById("signoff");
+    so.textContent = "";
+    ZONES.forEach(function (z) {
+      var zs = zoneState[z.id];
+      var tr = el("tr");
+      tr.appendChild(el("td", "mono-cell", z.code));
+      tr.appendChild(el("td", null, z.name));
+      var on = assignedName(zs.owner);
+      tr.appendChild(el("td", on ? "filled" : "blank", on || "____________"));
+      var dn = assignedName(zs.deputy);
+      tr.appendChild(el("td", dn ? "filled" : "blank", dn || "____________"));
+      tr.appendChild(el("td", "kpi mono-cell", z.nums.split(" · ")[0]));
+      so.appendChild(tr);
+    });
+
+    // signatures
+    var sg = document.getElementById("signs");
+    sg.textContent = "";
+    PARTNERS.forEach(function (p) {
+      var box = el("div", "sign");
+      box.appendChild(el("p", "who2", label(p)));
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; }).map(function (z) { return z.code; });
+      box.appendChild(el("p", "zones2", owned.length ? "Беру зони: " + owned.join(", ") : "Зони ще не призначені"));
+      var r1 = el("div", "rule"); box.appendChild(r1);
+      box.appendChild(el("p", "rule-label", "дата"));
+      var r2 = el("div", "rule"); box.appendChild(r2);
+      box.appendChild(el("p", "rule-label", "підпис"));
+      sg.appendChild(box);
+    });
+
+    var assigned = ZONES.length - free.length;
+    var deputies = ZONES.filter(function (z) { return zoneState[z.id].deputy !== "none"; }).length;
+    progressEl.textContent = "зони з власником: " + assigned + " / " + ZONES.length + " · із заступником: " + deputies + " / " + ZONES.length;
+  }
+
+  function pushZone(id) {
+    saveLocal();
+    if (!db) return;
+    db.doc("org/" + id).set({ owner: zoneState[id].owner, deputy: zoneState[id].deputy }).catch(function () {});
+  }
+  function pushRoster() {
+    saveLocal();
+    if (!db) return;
+    db.doc("config/team").set({ names: roster }).catch(function () {});
+  }
+  function pushChecks() {
+    saveLocal();
+    if (!db) return;
+    db.doc("config/signoff").set({ checks: checks }).catch(function () {});
+  }
+
+  gridEl.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest(".chip") : null;
+    if (!b) return;
+    var zid = b.dataset.zone, role = b.dataset.role, pick = b.dataset.pick;
+    zoneState[zid][role] = pick;
+    if (role === "owner" && pick !== "none" && zoneState[zid].deputy === pick) zoneState[zid].deputy = "none";
+    if (role === "deputy" && pick !== "none" && zoneState[zid].owner === pick) zoneState[zid].owner = "none";
+    paint();
+    pushZone(zid);
+  });
+
+  var rosterTimer;
+  document.querySelectorAll("input[data-owner]").forEach(function (inp) {
+    inp.addEventListener("input", function () {
+      roster[inp.dataset.owner] = inp.value;
+      paint();
+      clearTimeout(rosterTimer);
+      rosterTimer = setTimeout(pushRoster, 700);
+    });
+  });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var lines = ["FLY BY — оргструктура і зони відповідальності, " + new Date().toISOString().slice(0, 10), ""];
+    ZONES.forEach(function (z) {
+      var zs = zoneState[z.id];
+      lines.push(z.code + " · " + z.name +
+        " → власник: " + (assignedName(zs.owner) || "не призначено") +
+        " · заступник: " + (assignedName(zs.deputy) || "не призначено"));
+    });
+    lines.push("");
+    PARTNERS.forEach(function (p) {
+      var owned = ZONES.filter(function (z) { return zoneState[z.id].owner === p; }).map(function (z) { return z.code; });
+      lines.push(label(p) + ": " + (owned.length ? owned.join(", ") : "—"));
+    });
+    var txt = lines.join("\n");
+    var btn = this;
+    var done = function (ok) { btn.textContent = ok ? "Скопійовано" : "Не вдалось"; setTimeout(function () { btn.textContent = "Скопіювати підсумок"; }, 1800); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () { done(true); }, function () { done(false); });
+    } else { done(false); }
+  });
+
+  // static tables
+  function fillTable(id, rows, opts) {
+    var tb = document.getElementById(id);
+    rows.forEach(function (r) {
+      var tr = document.createElement("tr");
+      r.forEach(function (cell, i) {
+        if (opts && opts.skip !== undefined && i >= opts.skip) return;
+        var td = document.createElement("td");
+        td.textContent = cell;
+        if (opts && opts.num === i) td.classList.add("num");
+        if (opts && opts.mono && opts.mono.indexOf(i) >= 0) td.classList.add("mono-cell");
+        if (opts && opts.decide === i) { td.classList.add("decide"); if (r[opts.flag]) td.classList.add("board-call"); }
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  fillTable("hires", HIRES, { num: 0, mono: [2] });
+  fillTable("outs", OUTSOURCE, { mono: [1] });
+  fillTable("matrix", MATRIX, { skip: 4, mono: [1, 2], decide: 2, flag: 4 });
+
+  BORDERS.forEach(function (b) {
+    var d = el("div", "row2");
+    var h = el("h4", null, b[1]);
+    d.appendChild(h);
+    d.appendChild(el("p", "between", b[0]));
+    var fix = el("div", "fix");
+    fix.appendChild(el("em", null, "рекомендоване рішення"));
+    fix.appendChild(document.createTextNode(b[2]));
+    d.appendChild(fix);
+    document.getElementById("borders").appendChild(d);
+  });
+
+  RECS.forEach(function (r) {
+    var li = document.createElement("li");
+    var span = document.createElement("span");
+    span.innerHTML = r;
+    li.appendChild(span);
+    document.getElementById("recs").appendChild(li);
+  });
+
+  CHECKS.forEach(function (c, i) {
+    var row = el("div", "check");
+    var cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = "chk-" + i;
+    cb.addEventListener("change", function () { checks["c" + i] = cb.checked; pushChecks(); });
+    var lab = document.createElement("label");
+    lab.setAttribute("for", cb.id);
+    lab.textContent = c;
+    row.appendChild(cb);
+    row.appendChild(lab);
+    document.getElementById("checks").appendChild(row);
+  });
+
+  AGENDA.forEach(function (a) {
+    var li = document.createElement("li");
+    li.appendChild(el("span", "t", a[0] + " хв"));
+    li.appendChild(el("span", null, a[1]));
+    li.appendChild(el("span", "out", a[2]));
+    document.getElementById("agenda").appendChild(li);
+  });
+
+  function applyChecks() {
+    CHECKS.forEach(function (c, i) {
+      var cb = document.getElementById("chk-" + i);
+      if (cb) cb.checked = !!checks["c" + i];
+    });
+  }
+
+  buildZones();
+  buildFns();
+  loadLocal();
+  document.querySelectorAll("input[data-owner]").forEach(function (inp) { inp.value = roster[inp.dataset.owner]; });
+  applyChecks();
+  paint();
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("db").then(function (d) {
+      if (!d) return;
+      db = d;
+      statusEl.textContent = "режим: спільний · зміни бачать усі партнери одразу";
+      db.collection("org").onSnapshot(function (snap) {
+        snap.docs.forEach(function (doc) {
+          var v = doc.data() || {};
+          if (!zoneState[doc.id]) return;
+          zoneState[doc.id].owner = v.owner || "none";
+          zoneState[doc.id].deputy = v.deputy || "none";
+        });
+        paint();
+      }, function () { statusEl.textContent = "режим: локальний · спільне збереження недоступне"; });
+      db.doc("config/team").onSnapshot(function (doc) {
+        var v = doc.exists ? doc.data() : null;
+        if (v && v.names) {
+          Object.keys(roster).forEach(function (k) { if (v.names[k]) roster[k] = v.names[k]; });
+          document.querySelectorAll("input[data-owner]").forEach(function (inp) {
+            if (document.activeElement !== inp) inp.value = roster[inp.dataset.owner];
+          });
+          paint();
+        }
+      }, function () {});
+      db.doc("config/signoff").onSnapshot(function (doc) {
+        var v = doc.exists ? doc.data() : null;
+        if (v && v.checks) { checks = v.checks; applyChecks(); }
+      }, function () {});
+    }, function () {});
+  }
+})();
+</script>
