@@ -288,3 +288,9 @@ SHRUG: ~60–65% держ / 15–20% академія / 15–20% комерці�
 
 ### Next steps
 1) Відкрити в браузері sponsor-сторінки (shrug-gis.org/sponsors, summits.harrisburgu.edu/gis/exhibitors, txgisday.org) — там лого-ростери, недоступні проксі. 2) Запросити у TAMU список career-fair компаній. 3) Моніторити архів SHRUG-L (жов–лис) — спонсорські анонси з іменними контактами.
+
+## Ревізія 10 (21.10.2026) — глибокий аналіз Stanford PNT Symposium: вердикт ПЕРЕГЛЯНУТО
+
+Факти 2022–2025: 2 дні, single track, ~160 осіб, Kavli/SLAC + банкет у Stanford Faculty Club; День 1 = студентські доповіді, День 2 = запрошені спікери (~половина Stanford). Спікери-індустрія: Lockheed PNT lead (2025), CEO Satelles (2024), Reliable Robotics, Zoox, NAVSYS, FEI; держ: директор DARPA (2023), NIST, Aerospace Corp, офіцери USAF. НЕ було: Xona/Anello/NextNav/TrustPoint, FAA/DHS програм-офісів, дрон-індустрії, VC. Експо-столів і постер-сесії нема; виступи лише за запрошенням. Афіліат-членство: Entry-tier $25K/рік «для стартапів» = місця на симпозіумі + щотижневий семінар + асоціація зі Stanford. Vision-nav контент мінімальний (vision-aided GNSS 2023, Zoox/Reliable Robotics 2025); центр ваги = GNSS/clocks/integrity/space.
+
+Вердикт для FLY BY ONS: ❌ НЕ летіти в 2026 як на разову подію — нуль інвесторів, нуль procurement, нуль дрон-кластера, без запрошення ти «1 зі 160». ✅ Правильна гра: (1) Zoom-участь безкоштовно цього року; (2) контакт зі Stanford NAV Lab (Grace Gao — працює саме над vision/learning-based nav) з ціллю доповіді у 2027; (3) розглянути Entry-афіліатство $25K як вхід в US assured-PNT істеблішмент; (4) для alt-PNT вендорів/клієнтів цільова подія — ION ITM/PTTI 25–28.01.2027 Anaheim (відкриті подачі, експо, вся сцена: Xona, Anello, Safran, NextNav). Бонус рішення: конфлікт 12.11 з GeoFlo зникає — флоридська петля 09–19.11 лишається цілою.
