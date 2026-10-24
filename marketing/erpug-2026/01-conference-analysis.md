@@ -8,7 +8,7 @@ against the official slides/proceedings before anything is published externally.
 
 ## 1. What was presented (session by session)
 
-### 1.1 Multi-purpose survey systems + same-day IRI certification (vendor/service-provider talk, speaker not identified ⚠)
+### 1.1 Multi-purpose survey systems + same-day IRI certification (most likely TopoDOT / Certainty 3D ⚠)
 - Core message: **one survey run should feed many analyses** — pavement condition, digital inputs for asset
   management, data assessment, geotechnical/geologic consent work, implementation assessment.
 - Economic framing: with tight public budgets, a system that delivers *several* analyses from the *same*
