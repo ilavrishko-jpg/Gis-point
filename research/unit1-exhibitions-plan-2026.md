@@ -294,3 +294,27 @@ SHRUG: ~60–65% держ / 15–20% академія / 15–20% комерці�
 Факти 2022–2025: 2 дні, single track, ~160 осіб, Kavli/SLAC + банкет у Stanford Faculty Club; День 1 = студентські доповіді, День 2 = запрошені спікери (~половина Stanford). Спікери-індустрія: Lockheed PNT lead (2025), CEO Satelles (2024), Reliable Robotics, Zoox, NAVSYS, FEI; держ: директор DARPA (2023), NIST, Aerospace Corp, офіцери USAF. НЕ було: Xona/Anello/NextNav/TrustPoint, FAA/DHS програм-офісів, дрон-індустрії, VC. Експо-столів і постер-сесії нема; виступи лише за запрошенням. Афіліат-членство: Entry-tier $25K/рік «для стартапів» = місця на симпозіумі + щотижневий семінар + асоціація зі Stanford. Vision-nav контент мінімальний (vision-aided GNSS 2023, Zoox/Reliable Robotics 2025); центр ваги = GNSS/clocks/integrity/space.
 
 Вердикт для FLY BY ONS: ❌ НЕ летіти в 2026 як на разову подію — нуль інвесторів, нуль procurement, нуль дрон-кластера, без запрошення ти «1 зі 160». ✅ Правильна гра: (1) Zoom-участь безкоштовно цього року; (2) контакт зі Stanford NAV Lab (Grace Gao — працює саме над vision/learning-based nav) з ціллю доповіді у 2027; (3) розглянути Entry-афіліатство $25K як вхід в US assured-PNT істеблішмент; (4) для alt-PNT вендорів/клієнтів цільова подія — ION ITM/PTTI 25–28.01.2027 Anaheim (відкриті подачі, експо, вся сцена: Xona, Anello, Safran, NextNav). Бонус рішення: конфлікт 12.11 з GeoFlo зникає — флоридська петля 09–19.11 лишається цілою.
+
+## Ревізія 11 (03.11.2026) — Stanford PNT 2026: люди, advisory-кандидати, партнери
+
+Агенда 2026 (12–13.11) станом на 03.11 не опублікована — SCPNT історично постить InfoPak за 1–2 дні до події; перевіряти scpnt.stanford.edu ~10–12.11. Соц-анонсів участі не індексується.
+
+### Advisory-shortlist (під ONS)
+| Кандидат | Роль | Фіт / реалістичність |
+|---|---|---|
+| Sherman Lo | Exec Director SCPNT, Sr Research Eng. GPS Lab | ⭐⭐ НАЙРЕАЛІСТИЧНІШИЙ: serial advisor (UrsaNav+, «co-founded two navigation security startups»), тема = assured nav/spoofing; він же господар події |
+| Todd Walter | Director GPS Lab, member National PNT Advisory Board | ⭐ Доведено бере advisory-місця (борд Xona з 2021); фіт непрямий (SBAS/integrity), але двері в PNTAB |
+| Grace Gao | Assoc. Prof., NAV Lab (vision/learning nav для UAV) | найкращий ТЕХНІЧНИЙ фіт, але advisory-треку не знайдено — заходити через sponsored research/студентів |
+| Michael O'Connor | CEO Satelles/Iridium STL | оператор comm-PNT, plausible advisor |
+| Tyler Reid | co-founder/CTO Xona (Stanford GPS Lab alum, ex-Ford AV) | сильний фіт (sensor fusion/GPS-denied), але Xona щойно підняла $250M Series D ($2.45B) — bandwidth |
+| Brad Parkinson | «батько GPS», ~91 рік | prestige-only, не операційний advisor |
+
+Прецедент: лідери GPS Lab історично беруть платні advisory-ролі (Per Enge → Polaris Wireless) — питати не соромно.
+
+### Інвестори
+Відсутні (2024/2025 ростери — нуль VC; вісь грошей = Industrial Affiliates). Єдиний «інвестороподібний» у спільноті — Steve Poizner (oneNav CEO, засновник SnapTrack → $1B exit Qualcomm), якщо приїде.
+
+### Alumni-мапа
+Xona Space Systems = ~7-8 Stanford-алюмні (Reid, Perkins; Chan у Nat'l PNT Advisory Board); симпозіум+афіліати = щорічний збір цього нетворку.
+
+Висновок: партнера/advisor-а там знайти РЕАЛЬНО (Lo → Walter → O'Connor/Reid), інвестора — ні. Стратегія лишається (рев.10): цього року Zoom + таргетований аутріч на Lo і Gao; фізично — 2027 зі слотом доповіді.
