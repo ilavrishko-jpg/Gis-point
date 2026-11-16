@@ -1,0 +1,32 @@
+{
+  "L_over_D": 4.285714285714286,
+  "volume_l": 6.874038293751491,
+  "wetted_area_m2": 0.22661788771764807,
+  "frontal_area_m2": 0.015393804002589986,
+  "boattail_max_deg": 11.000000000000087,
+  "base_ratio": 0.40519625403858145,
+  "nose_len_mm": 150.0,
+  "body_len_mm": 198.0,
+  "tail_len_mm": 252.0,
+  "base_dia_mm": 56.727475565401406,
+  "window": {
+    "x_mm": 252.0,
+    "dia_mm": 40.0,
+    "facet_len_mm": 123.26317092845761,
+    "facet_depth_mm": 5.007692762912313,
+    "ramp_deg": 8.0
+  },
+  "mount": "pylon",
+  "drag": {
+    "Mach": 0.149,
+    "q_Pa": 1322.6,
+    "Re_L": "1.82e+06",
+    "Cd_friction": 0.0742,
+    "Cd_base": 0.0071,
+    "Cd_installed": 0.1118,
+    "drag_N": 2.28,
+    "drag_power_W": 113.8,
+    "boundary_layer_at_window_mm": 6.21
+  },
+  "warnings": []
+}
