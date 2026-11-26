@@ -42,7 +42,7 @@ python transcribe.py запис.m4a --model large-v3
 python transcribe.py запис.m4a --model small
 
 # підказати імена й терміни, щоб вони писалися правильно
-python transcribe.py запис.m4a --prompt "GIS-Point, Scaling Up, Odoo, Ігор Лавришко"
+python transcribe.py запис.m4a --prompt "GIS-Point, Scaling Up, Odoo, імена учасників"
 
 # інша мова запису
 python transcribe.py запис.m4a --language en
